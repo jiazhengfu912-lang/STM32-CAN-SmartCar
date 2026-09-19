@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-19",
+  "scope": "BUILD_AND_HOST_SOFTWARE_ONLY",
+  "hardware_tested": false,
+  "results": [
+    {
+      "command": [
+        "python",
+        "-B",
+        "tools/build.py"
+      ],
+      "exit_code": 0,
+      "log": "01-build.log"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "tools/test.py"
+      ],
+      "exit_code": 0,
+      "log": "02-test.log"
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_first_heartbeat.cjs"
+      ],
+      "exit_code": 0,
+      "log": "03-test_first_heartbeat.log"
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_heartbeat_timing.cjs"
+      ],
+      "exit_code": 0,
+      "log": "04-test_heartbeat_timing.log"
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_timed_trial.cjs"
+      ],
+      "exit_code": 0,
+      "log": "05-test_timed_trial.log"
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_stop_busy.cjs"
+      ],
+      "exit_code": 0,
+      "log": "06-test_stop_busy.log"
+    }
+  ],
+  "keil_project_unchanged": true
+}

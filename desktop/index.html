@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SmartCar · 驾驶台</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a class="brand" href="/">SC<span>01</span></a><div><div class="eyebrow">CAN DRIVE / WIRELESS CONTROL</div><h1>小车驾驶台</h1></div><div id="connection" class="connection">● 等待连接</div></header>
+<main>
+<section class="overview"><div><span class="eyebrow">VEHICLE STATE</span><h2 id="state">离线</h2><p id="detail">连接设备后，先检查反馈，再主动使能。</p></div><button id="stop" class="stop">停止并禁止驱动 <kbd>Space</kbd></button></section>
+<div class="layout">
+<section class="panel drive"><div class="section-title"><h3>手动驾驶</h3><span>01 / CONTROL</span></div>
+<p class="muted">按住方向行驶，松开回零；切换窗口即禁止驱动。</p>
+<div class="actions"><button id="arm" disabled>使能驱动</button><button id="clear" class="secondary" disabled>清除故障</button></div>
+<div class="pad"><button data-move="forward" class="forward" disabled aria-label="前进">↑<small>前进</small></button><button data-move="left" class="left" disabled aria-label="左转">←<small>左转</small></button><div class="hub">CAN<br><span>双轮差速</span></div><button data-move="right" class="right" disabled aria-label="右转">→<small>右转</small></button><button data-move="back" class="back" disabled aria-label="后退">↓<small>后退</small></button></div>
+<label class="speed-label" for="speed">轮速限幅 <strong><span id="limit">5</span> rpm</strong></label><input id="speed" type="range" min="1" max="20" value="5"><p class="muted small">首次使用低速验证方向。禁止驱动为零电流滑停，不是机械抱闸。</p>
+<label for="trialDuration">架空试验时长</label><select id="trialDuration"><option value="6">6 秒</option><option value="20">20 秒</option></select>
+<button id="trial" class="secondary" disabled>架空：前进定时试验</button><button id="trialBack" class="secondary" disabled>架空：后退定时试验</button><p class="muted small">仅限 5 / 10 / 12 rpm，先选时长、使能，再点击；到时自动禁止驱动，随时可停止。</p>
+</section>
+<section class="panel live"><div class="section-title"><h3>实时轮速</h3><span>02 / TELEMETRY</span></div><div class="metrics"><div><span>左轮 · 实际</span><strong id="left">—</strong><small>rpm</small></div><div><span>右轮 · 实际</span><strong id="right">—</strong><small>rpm</small></div><div><span>反馈年龄</span><strong id="age">—</strong><small>ms</small></div></div>
+<div class="legend"><span class="cyan">● 左轮</span><span class="amber">● 右轮</span><span>实线实际 / 虚线目标</span></div><canvas id="chart" aria-label="最近约 30 秒轮速曲线"></canvas>
+<div class="readings"><span id="current">反馈电流：—</span><a href="/api/record.csv" download="smartcar-telemetry.csv">导出 CSV ↗</a></div><p class="muted small">界面显示减速后轮速；CSV 保留电机轴 rpm 与原始电流单位。断线数据不作为实时值展示。</p></section>
+</div>
+<section class="panel upgrade"><div><div class="section-title"><h3>无线固件更新</h3><span>03 / OTA</span></div><p class="muted">禁止驱动并停稳后更新。断电恢复使用完整重传。</p></div><div class="upload"><label for="firmware" class="file-label">选择 .ota 固件包</label><input id="firmware" type="file" accept=".ota"><button id="install">上传并升级</button></div><div id="upgradeStatus" class="upgrade-status" aria-live="polite">等待选择固件</div></section>
+<div id="notice" role="status" aria-live="polite">尚未连接硬件 · 不显示模拟数据</div>
+</main><footer><span>SMARTCAR / V1</span><span>本地控制台 · STM32 + ESP32</span><span>保持实物断电开关可触及</span></footer>
+<script src="/app.js"></script></body></html>

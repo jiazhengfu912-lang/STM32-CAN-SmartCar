@@ -1,0 +1,184 @@
+test_all_single_bit_errors_recover (__main__.CStreamTests.test_all_single_bit_errors_recover) ... ok
+test_bytewise_and_sync_overlap (__main__.CStreamTests.test_bytewise_and_sync_overlap) ... ok
+test_duplicate_delivered_for_business_layer (__main__.CStreamTests.test_duplicate_delivered_for_business_layer) ... ok
+test_empty_and_max_payload (__main__.CStreamTests.test_empty_and_max_payload) ... ok
+test_every_split_and_concatenation (__main__.CStreamTests.test_every_split_and_concatenation) ... ok
+test_gap_expires_before_new_bytes (__main__.CStreamTests.test_gap_expires_before_new_bytes) ... ok
+test_oversize_and_version_rejected (__main__.CStreamTests.test_oversize_and_version_rejected) ... ok
+test_seeded_random_stream (__main__.CStreamTests.test_seeded_random_stream) ... ok
+test_timeout_boundary (__main__.CStreamTests.test_timeout_boundary) ... ok
+test_timeout_recovers_frame_behind_damaged_length (__main__.CStreamTests.test_timeout_recovers_frame_behind_damaged_length) ... ok
+test_timeout_tick_wrap (__main__.CStreamTests.test_timeout_tick_wrap) ... ok
+test_crc_known_answer (__main__.InteropTests.test_crc_known_answer) ... ok
+test_invalid_encode_capacity_and_payload (__main__.InteropTests.test_invalid_encode_capacity_and_payload) ... ok
+test_sequence_gap_duplicate_wrap_and_reset_ambiguity (__main__.InteropTests.test_sequence_gap_duplicate_wrap_and_reset_ambiguity) ... ok
+test_telemetry_and_csv_reject_bad_payload (__main__.InteropTests.test_telemetry_and_csv_reject_bad_payload) ... ok
+test_wire_layout_and_both_encoders (__main__.InteropTests.test_wire_layout_and_both_encoders) ... ok
+test_all_single_bit_errors_recover (__main__.PythonStreamTests.test_all_single_bit_errors_recover) ... ok
+test_bytewise_and_sync_overlap (__main__.PythonStreamTests.test_bytewise_and_sync_overlap) ... ok
+test_duplicate_delivered_for_business_layer (__main__.PythonStreamTests.test_duplicate_delivered_for_business_layer) ... ok
+test_empty_and_max_payload (__main__.PythonStreamTests.test_empty_and_max_payload) ... ok
+test_every_split_and_concatenation (__main__.PythonStreamTests.test_every_split_and_concatenation) ... ok
+test_gap_expires_before_new_bytes (__main__.PythonStreamTests.test_gap_expires_before_new_bytes) ... ok
+test_oversize_and_version_rejected (__main__.PythonStreamTests.test_oversize_and_version_rejected) ... ok
+test_seeded_random_stream (__main__.PythonStreamTests.test_seeded_random_stream) ... ok
+test_timeout_boundary (__main__.PythonStreamTests.test_timeout_boundary) ... ok
+test_timeout_recovers_frame_behind_damaged_length (__main__.PythonStreamTests.test_timeout_recovers_frame_behind_damaged_length) ... ok
+test_timeout_tick_wrap (__main__.PythonStreamTests.test_timeout_tick_wrap) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.094s
+
+OK
+test_body_corruption_rejected (__main__.GuardTests.test_body_corruption_rejected) ... ok
+test_complete_app_without_commit_is_rejected (__main__.GuardTests.test_complete_app_without_commit_is_rejected) ... ok
+test_current_built_images (__main__.GuardTests.test_current_built_images) ... ok
+test_every_interrupted_metadata_prefix (__main__.GuardTests.test_every_interrupted_metadata_prefix) ... ok
+test_every_metadata_bit_flip (__main__.GuardTests.test_every_metadata_bit_flip) ... ok
+test_invalid_stack_or_reset_even_with_image_crc (__main__.GuardTests.test_invalid_stack_or_reset_even_with_image_crc) ... ok
+test_layout_matches_firmware_and_linkers (__main__.GuardTests.test_layout_matches_firmware_and_linkers) ... ok
+test_legitimate_vectors_do_not_hide_partial_image (__main__.GuardTests.test_legitimate_vectors_do_not_hide_partial_image) ... ok
+test_lengths_and_available_prevent_out_of_bounds (__main__.GuardTests.test_lengths_and_available_prevent_out_of_bounds) ... ok
+test_valid_and_maximum_image (__main__.GuardTests.test_valid_and_maximum_image) ... ok
+test_wrong_target_format_or_magic_even_with_header_crc (__main__.GuardTests.test_wrong_target_format_or_magic_even_with_header_crc) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.027s
+
+OK
+test_conflicting_duplicate_is_rejected (__main__.OtaTests.test_conflicting_duplicate_is_rejected) ... ok
+test_crc_or_vectors_rejected_at_end (__main__.OtaTests.test_crc_or_vectors_rejected_at_end) ... ok
+test_early_end_does_not_commit (__main__.OtaTests.test_early_end_does_not_commit) ... ok
+test_erase_or_write_failure_keeps_record_invalid (__main__.OtaTests.test_erase_or_write_failure_keeps_record_invalid) ... ok
+test_every_partial_commit_is_rejected_after_reboot (__main__.OtaTests.test_every_partial_commit_is_rejected_after_reboot) ... ok
+test_interruption_after_each_data_block (__main__.OtaTests.test_interruption_after_each_data_block) ... ok
+test_invalid_begin_never_touches_storage (__main__.OtaTests.test_invalid_begin_never_touches_storage) ... ok
+test_invalidate_failure_prevents_erase (__main__.OtaTests.test_invalidate_failure_prevents_erase) ... ok
+test_lost_begin_ack_does_not_erase_again (__main__.OtaTests.test_lost_begin_ack_does_not_erase_again) ... ok
+test_lost_data_ack_only_compares_and_returns_128 (__main__.OtaTests.test_lost_data_ack_only_compares_and_returns_128) ... ok
+test_lost_end_ack_does_not_commit_twice (__main__.OtaTests.test_lost_end_ack_does_not_commit_twice) ... ok
+test_malformed_packets_do_not_write (__main__.OtaTests.test_malformed_packets_do_not_write) ... ok
+test_maximum_size_and_odd_final_byte (__main__.OtaTests.test_maximum_size_and_odd_final_byte) ... ok
+test_offset_overflow_order_and_alignment (__main__.OtaTests.test_offset_overflow_order_and_alignment) ... ok
+test_old_block_after_next_block_is_not_last_duplicate (__main__.OtaTests.test_old_block_after_next_block_is_not_last_duplicate) ... ok
+test_stale_session_and_busy_session (__main__.OtaTests.test_stale_session_and_busy_session) ... ok
+test_success_and_reset_permission (__main__.OtaTests.test_success_and_reset_permission) ... ok
+test_timeout_tick_wrap_and_query_does_not_keep_alive (__main__.OtaTests.test_timeout_tick_wrap_and_query_does_not_keep_alive) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.027s
+
+OK
+test_abort_closes_and_preserves_old (__main__.CacheTests.test_abort_closes_and_preserves_old) ... ok
+test_bad_vectors_with_matching_crc (__main__.CacheTests.test_bad_vectors_with_matching_crc) ... ok
+test_complete_replacement (__main__.CacheTests.test_complete_replacement) ... ok
+test_corrupt_body_keeps_old_ready (__main__.CacheTests.test_corrupt_body_keeps_old_ready) ... ok
+test_corruption_after_publication_detected (__main__.CacheTests.test_corruption_after_publication_detected) ... ok
+test_invalid_records_and_trailing_data (__main__.CacheTests.test_invalid_records_and_trailing_data) ... ok
+test_maximum_and_odd_images (__main__.CacheTests.test_maximum_and_odd_images) ... ok
+test_only_sixty_percent_does_not_publish (__main__.CacheTests.test_only_sixty_percent_does_not_publish) ... ok
+test_orphan_complete_part_never_ready (__main__.CacheTests.test_orphan_complete_part_never_ready) ... ok
+test_overshoot_poisoned_until_abort (__main__.CacheTests.test_overshoot_poisoned_until_abort) ... ok
+test_partial_upload_keeps_old_ready (__main__.CacheTests.test_partial_upload_keeps_old_ready) ... ok
+test_publish_and_reopen (__main__.CacheTests.test_publish_and_reopen) ... ok
+test_rename_failure_not_success (__main__.CacheTests.test_rename_failure_not_success) ... ok
+test_size_limits (__main__.CacheTests.test_size_limits) ... ok
+test_zero_version_rejected (__main__.CacheTests.test_zero_version_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.100s
+
+OK
+test_dropped_acks_retransmit_identically_without_rewrite (__main__.SenderTests.test_dropped_acks_retransmit_identically_without_rewrite) ... ok
+test_enter_ack_loss_recovers_from_boot_identity (__main__.SenderTests.test_enter_ack_loss_recovers_from_boot_identity) ... ok
+test_invalid_crc_never_sends_enter_or_begin (__main__.SenderTests.test_invalid_crc_never_sends_enter_or_begin) ... ok
+test_invalid_vector_never_sends_enter_or_begin (__main__.SenderTests.test_invalid_vector_never_sends_enter_or_begin) ... ok
+test_invalid_version_or_session_never_sends (__main__.SenderTests.test_invalid_version_or_session_never_sends) ... ok
+test_no_app_identity_does_not_report_success (__main__.SenderTests.test_no_app_identity_does_not_report_success) ... ok
+test_no_boot_identity_cannot_erase (__main__.SenderTests.test_no_boot_identity_cannot_erase) ... ok
+test_reply_session_reserved_and_version_checked (__main__.SenderTests.test_reply_session_reserved_and_version_checked) ... ok
+test_reset_ack_loss_requires_fresh_app_and_query (__main__.SenderTests.test_reset_ack_loss_requires_fresh_app_and_query) ... ok
+test_silent_link_has_bounded_identical_retries (__main__.SenderTests.test_silent_link_has_bounded_identical_retries) ... ok
+test_success_versions_and_boundaries (__main__.SenderTests.test_success_versions_and_boundaries) ... ok
+test_transport_io_error_stops (__main__.SenderTests.test_transport_io_error_stops) ... ok
+test_write_rejection_not_retried_as_timeout (__main__.SenderTests.test_write_rejection_not_retried_as_timeout) ... ok
+test_wrong_offset_stops_before_commit (__main__.SenderTests.test_wrong_offset_stops_before_commit) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.017s
+
+OK
+PASS: real drive core safety boundaries and 999 PI cycles
+PASS: angle speed wrap, reverse, warmup and stale recovery
+PASS: IMU calibration, odometry, navigation and safety (HOST ONLY)
+test_armed_cannot_upload (__main__.ConsoleTests.test_armed_cannot_upload)
+车辆处于使能状态时不能开始上传与安装。 ... ok
+test_bad_image_never_contacts_device (__main__.ConsoleTests.test_bad_image_never_contacts_device)
+损坏包在主机端即被拒绝，不能触发擦除。 ... ok
+test_busy_does_not_queue (__main__.ConsoleTests.test_busy_does_not_queue)
+正在安装或发送指令时拒绝新运动请求，不建立延迟队列。 ... ok
+test_control_inflight_does_not_starve_telemetry (__main__.ConsoleTests.test_control_inflight_does_not_starve_telemetry)
+控制锁被占用时仍读取遥测，避免持续心跳使网页误判数据过期。 ... ok
+test_control_trace_distinguishes_sent_from_rejected (__main__.ConsoleTests.test_control_trace_distinguishes_sent_from_rejected)
+记录实际转发的序号与拒绝原因，不能把本机发送当成STM32已接收。 ... ok
+test_session_owner_and_disarm (__main__.ConsoleTests.test_session_owner_and_disarm)
+未使能及其他页面不能驱动车辆；停止后原控制权失效。 ... ok
+test_single_poll_failure_keeps_original_sample_time (__main__.ConsoleTests.test_single_poll_failure_keeps_original_sample_time)
+一次读取失败不伪造新样本，也不提前丢弃仍在有效期内的上一帧。 ... ok
+test_stale_and_invalid_requests_never_forward (__main__.ConsoleTests.test_stale_and_invalid_requests_never_forward)
+过期、超限和非整数速度不能进入串口转发。 ... ok
+test_upload_and_install_pause_telemetry (__main__.ConsoleTests.test_upload_and_install_pause_telemetry)
+上传及安装仍暂停轮询，避免与长时间升级操作竞争网关。 ... ok
+test_verified_upload_then_install (__main__.ConsoleTests.test_verified_upload_then_install)
+确认上传完成后才请求安装，并保留可显示的最终结果。 ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.003s
+
+OK
+test_persistent_control_and_state (__main__.HttpTests.test_persistent_control_and_state)
+连续请求保留同一个socket，并保证错误响应不破坏后续消息边界。 ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.548s
+
+OK
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c: In function 'send_frame':
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:37:29: error: 'tx_head' undeclared (first use in this function); did you mean 'rx_head'?
+   37 |     size_t n; unsigned used=tx_head-tx_tail;
+      |                             ^~~~~~~
+      |                             rx_head
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:37:29: note: each undeclared identifier is reported only once for each function it appears in
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:37:37: error: 'tx_tail' undeclared (first use in this function); did you mean 'rx_tail'?
+   37 |     size_t n; unsigned used=tx_head-tx_tail;
+      |                                     ^~~~~~~
+      |                                     rx_tail
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:38:24: error: 'CAR_MSG_TELEMETRY' undeclared (first use in this function)
+   38 |     int optional=type==CAR_MSG_TELEMETRY || type==CAR_MSG_IMU || type==CAR_MSG_DIAGNOSTIC;
+      |                        ^~~~~~~~~~~~~~~~~
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:38:51: error: 'CAR_MSG_IMU' undeclared (first use in this function)
+   38 |     int optional=type==CAR_MSG_TELEMETRY || type==CAR_MSG_IMU || type==CAR_MSG_DIAGNOSTIC;
+      |                                                   ^~~~~~~~~~~
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:38:72: error: 'CAR_MSG_DIAGNOSTIC' undeclared (first use in this function)
+   38 |     int optional=type==CAR_MSG_TELEMETRY || type==CAR_MSG_IMU || type==CAR_MSG_DIAGNOSTIC;
+      |                                                                        ^~~~~~~~~~~~~~~~~~
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:39:63: error: 'tx_dropped' undeclared (first use in this function)
+   39 |     if (used>=4U || (optional && used>=2U)) { if (optional) ++tx_dropped; else ++io_errors; return; }
+      |                                                               ^~~~~~~~~~
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:40:18: error: 'tx_frames' undeclared (first use in this function)
+   40 |     n=car_encode(tx_frames[tx_head%4],CAR_MAX_FRAME,type,seq,p,size);
+      |                  ^~~~~~~~~
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:42:5: error: 'tx_sizes' undeclared (first use in this function)
+   42 |     tx_sizes[tx_head%4]=(uint16_t)n; ++tx_head; poll_tx();
+      |     ^~~~~~~~
+D:\STM32-CAN-SmartCar\out\uart_tx_race\test.c:42:49: error: implicit declaration of function 'poll_tx' [-Wimplicit-function-declaration]
+   42 |     tx_sizes[tx_head%4]=(uint16_t)n; ++tx_head; poll_tx();
+      |                                                 ^~~~~~~
+Traceback (most recent call last):
+  File "D:\STM32-CAN-SmartCar\tests\test_uart_tx_race.py", line 60, in <module>
+    subprocess.run(['C:/msys64/ucrt64/bin/gcc.exe',str(c),'-o',str(exe)],check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\16647\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['C:/msys64/ucrt64/bin/gcc.exe', 'D:\\STM32-CAN-SmartCar\\out\\uart_tx_race\\test.c', '-o', 'D:\\STM32-CAN-SmartCar\\out\\uart_tx_race\\test.exe']' returned non-zero exit status 1.

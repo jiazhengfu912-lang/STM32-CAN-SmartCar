@@ -2,7 +2,7 @@
 #define ANGLE_SPEED_H
 #include <stdint.h>
 typedef struct {
-    uint32_t position,last_rx,position_history[4],time_history[4];
+    uint32_t position,last_rx,position_history[4],time_history[4],discontinuities;
     uint16_t angle;
     uint8_t initialized,count,index,valid;
     int16_t rpm;

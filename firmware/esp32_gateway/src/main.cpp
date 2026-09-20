@@ -33,6 +33,9 @@ struct Ack { uint16_t sequence; uint8_t data[16]; };
 static QueueHandle_t ack_queue;
 static QueueHandle_t control_queue;
 static uint8_t telemetry_data[40];
+static uint8_t imu_data[CAR_IMU_SIZE];
+static uint32_t imu_seen;
+static bool imu_valid;
 static uint32_t telemetry_seen;
 static bool telemetry_valid;
 static char last_install_id[33], last_install_json[512];
@@ -123,6 +126,14 @@ static void from_stm(void *, uint8_t type, uint16_t seq, const uint8_t *data, ui
         portENTER_CRITICAL(&status_lock);
         memcpy(telemetry_data, data, 40); telemetry_seen = millis(); telemetry_valid = true;
         portEXIT_CRITICAL(&status_lock);
+    }
+    if (type == CAR_MSG_IMU && size == CAR_IMU_SIZE && data[0] == 1) {
+        portENTER_CRITICAL(&status_lock);
+        memcpy(imu_data,data,CAR_IMU_SIZE); imu_seen=millis(); imu_valid=true;
+        portEXIT_CRITICAL(&status_lock);
+        // 诊断流只读透传，USB拥塞时丢帧，不拖住UART接收；序号可识别缺测。
+        if (data[31] && Serial.availableForWrite() >= int(size+CAR_FRAME_OVERHEAD))
+            send_frame(Serial,type,seq,data,size);
     }
     if (type == 0x71 && size == 16) {
         Ack ack; ack.sequence = seq; memcpy(ack.data, data, 16);
@@ -408,11 +419,13 @@ static int signed16(const uint8_t *p) { return int16_t(uint16_t(p[0]) | uint16_t
 /** 提供最新运动快照和数据年龄；没有新反馈时显式标记为不可用。 */
 static esp_err_t telemetry_handler(httpd_req_t *req)
 {
-    uint8_t p[40]; uint32_t age; bool valid;
+    uint8_t p[40],im[CAR_IMU_SIZE]; uint32_t age,im_age; bool valid,im_valid;
     portENTER_CRITICAL(&status_lock);
     memcpy(p, telemetry_data, 40); age = millis() - telemetry_seen; valid = telemetry_valid;
+    memcpy(im,imu_data,CAR_IMU_SIZE); im_age=millis()-imu_seen; im_valid=imu_valid;
     portEXIT_CRITICAL(&status_lock);
-    char body[768];
+    char body[1200],hex[CAR_IMU_SIZE*2+1];
+    for (unsigned i=0;i<CAR_IMU_SIZE;i++) snprintf(hex+2*i,3,"%02x",im[i]);
     snprintf(body, sizeof(body),
         "{\"valid\":%s,\"age_ms\":%lu,\"uptime_ms\":%lu,\"version\":%lu,"
         "\"state\":%u,\"fault\":%u,\"feedback_mask\":%u,\"target_left\":%d,\"target_right\":%d,"
@@ -422,6 +435,9 @@ static esp_err_t telemetry_handler(httpd_req_t *req)
         (unsigned long)get32(p+4), p[8], p[9], p[10], signed16(p+12), signed16(p+14),
         signed16(p+16), signed16(p+18), signed16(p+20), signed16(p+22), signed16(p+24), signed16(p+26),
         (unsigned long)get32(p+28), (unsigned long)get32(p+32), (unsigned long)get32(p+36));
+    size_t used=strlen(body);
+    snprintf(body+used-1,sizeof(body)-used+1,",\"imu_transport_valid\":%s,\"imu_age_ms\":%lu,\"imu_wire\":\"%s\"}",
+             im_valid && im_age<500 ? "true":"false",(unsigned long)im_age,hex);
     return respond(req, "200 OK", body);
 }
 
@@ -429,17 +445,19 @@ static esp_err_t telemetry_handler(httpd_req_t *req)
 static esp_err_t control_handler(httpd_req_t *req)
 {
     if (!authorized(req)) return req->content_len <= 64 ? ESP_OK : ESP_FAIL;
-    if (req->content_len != 16) { respond(req,"400 Bad Request","{\"error\":\"control_size\"}"); return ESP_FAIL; }
-    uint8_t p[16]; size_t n=0;
-    while(n<sizeof(p)) {
-        int count=httpd_req_recv(req,reinterpret_cast<char *>(p)+n,sizeof(p)-n);
+    bool navigation=!strcmp(req->uri,"/navigation");
+    size_t size=navigation ? CAR_NAV_SIZE:16;
+    if (req->content_len != size) { respond(req,"400 Bad Request","{\"error\":\"control_size\"}"); return ESP_FAIL; }
+    uint8_t p[CAR_NAV_SIZE]; size_t n=0;
+    while(n<size) {
+        int count=httpd_req_recv(req,reinterpret_cast<char *>(p)+n,size-n);
         if(count<=0) return ESP_FAIL; n+=size_t(count);
     }
-    if(p[0]>3 || p[1] || p[2] || p[3]) return respond(req,"400 Bad Request","{\"error\":\"control_argument\"}");
+    if((navigation ? (p[0]<1 || p[0]>8 || p[1]!=1):(p[0]>4 || p[1])) || p[2] || p[3]) return respond(req,"400 Bad Request","{\"error\":\"control_argument\"}");
     if(xSemaphoreTake(uart_owner,0)!=pdTRUE) return respond(req,"409 Conflict","{\"error\":\"uart_busy\"}");
     static uint16_t sequence=40000;
     uint16_t expected=sequence=0x8000U|((sequence+1U)&0x7FFFU); xQueueReset(control_queue);
-    bool sent=send_frame(stm32,0x40,expected,p,sizeof(p)), found=false; Ack ack;
+    bool sent=send_frame(stm32,navigation ? CAR_MSG_NAVIGATION:0x40,expected,p,size), found=false; Ack ack;
     uint32_t started=millis();
     while(sent && millis()-started<200U) {
         if(xQueueReceive(control_queue,&ack,pdMS_TO_TICKS(5))==pdTRUE && ack.sequence==expected) { found=true; break; }
@@ -477,9 +495,12 @@ static void start_server()
     install_uri.handler = install_handler;
     httpd_uri_t control_uri = {};
     control_uri.uri="/control"; control_uri.method=HTTP_POST; control_uri.handler=control_handler;
+    httpd_uri_t navigation_uri = {};
+    navigation_uri.uri="/navigation"; navigation_uri.method=HTTP_POST; navigation_uri.handler=control_handler;
     httpd_uri_t telemetry_uri = {};
     telemetry_uri.uri="/telemetry"; telemetry_uri.method=HTTP_GET; telemetry_uri.handler=telemetry_handler;
-    if (httpd_register_uri_handler(server, &control_uri)!=ESP_OK ||
+    if (httpd_register_uri_handler(server, &navigation_uri)!=ESP_OK ||
+        httpd_register_uri_handler(server, &control_uri)!=ESP_OK ||
         httpd_register_uri_handler(server, &telemetry_uri)!=ESP_OK ||
         httpd_register_uri_handler(server, &status_uri) != ESP_OK ||
         httpd_register_uri_handler(server, &cache_uri) != ESP_OK ||
@@ -493,6 +514,7 @@ static void start_server()
 void setup()
 {
     Serial.setRxBufferSize(512);
+    Serial.setTxBufferSize(512);
     stm32.setRxBufferSize(512);
     Serial.begin(115200);
     stm32.begin(115200, SERIAL_8N1, 16, 17);

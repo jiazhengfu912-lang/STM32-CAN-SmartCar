@@ -1,4 +1,13 @@
 #include "main.h"
+/** I2C2专用单主机总线，PB10/PB11开漏，外部上拉到3.3V。 */
+void HAL_I2C_MspInit(I2C_HandleTypeDef *i2c)
+{
+    GPIO_InitTypeDef p={0}; if (i2c->Instance!=I2C2) return;
+    __HAL_RCC_GPIOB_CLK_ENABLE(); __HAL_RCC_I2C2_CLK_ENABLE();
+    p.Pin=GPIO_PIN_10|GPIO_PIN_11; p.Mode=GPIO_MODE_AF_OD; p.Pull=GPIO_NOPULL;
+    p.Speed=GPIO_SPEED_FREQ_HIGH; HAL_GPIO_Init(GPIOB,&p);
+    HAL_NVIC_SetPriority(I2C2_EV_IRQn,2,0); HAL_NVIC_SetPriority(I2C2_ER_IRQn,2,0);
+}
 /** 开启基础时钟并仅保留 SWD 调试端口，释放 JTAG 引脚。 */
 void HAL_MspInit(void)
 {

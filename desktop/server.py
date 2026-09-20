@@ -14,6 +14,11 @@ import time
 import http.client
 from urllib.parse import urlsplit
 import uuid
+import math
+try:
+    from .imu_protocol import decode_imu
+except ImportError:
+    from imu_protocol import decode_imu
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'firmware/stm32_bootloader'))
@@ -36,7 +41,7 @@ class Gateway:
     def request(self, path, data=None, headers=None, timeout=1):
         """复用有限超时的 HTTP 连接；失败即丢弃连接，不重发可能已执行的命令。"""
         if not self.url: raise ValueError('尚未配置 ESP32 地址，请先运行 tools/configure.py')
-        if path=='/control' and data is not None and len(data)==16 and data[0]==2:
+        if path=='/control' and data is not None and len(data)==16 and data[0] in (2,4):
             return self.send_speed(data)
         channel='telemetry' if path=='/telemetry' else 'control' 
         h={'Authorization':'Bearer '+self.token,'Content-Type':'application/octet-stream'}
@@ -77,7 +82,7 @@ class Console:
         """初始化控制会话、有限记录缓存和同源请求令牌。"""
         self.gateway=gateway; self.lock=threading.Lock(); self.csrf=secrets.token_hex(24)
         self.session=0; self.sequence=0; self.owner=None; self.rows=[]
-        self.control_trace=[]
+        self.control_trace=[]; self.imu_rows=[]; self.last_imu_sample=None; self.nav_config={}
         self.data_lock=threading.Lock(); self.latest={'valid':False,'error':'尚未连接设备'}
         self.upgrade={'state':'idle'}; self.running=True; self.last_sample=None; self.received_at=0
 
@@ -90,6 +95,14 @@ class Console:
                 try:
                     data=self.gateway.request('/telemetry',timeout=.2)
                     with self.data_lock:
+                        wire=data.pop('imu_wire',None)
+                        try:
+                            data['imu']=decode_imu(bytes.fromhex(wire),data.get('imu_age_ms',0),data.get('imu_transport_valid',False)) if wire else {'valid':False,'position_valid':False}
+                        except (ValueError,TypeError): data['imu']={'valid':False,'position_valid':False,'error':'IMU 编码错误'}
+                        im=data['imu']; im_stamp=(im.get('uptime_ms'),im.get('sequence'))
+                        if wire and im_stamp!=self.last_imu_sample:
+                            self.last_imu_sample=im_stamp; self.imu_rows.append({'pc_time':time.time(),**im})
+                            if len(self.imu_rows)>36000: del self.imu_rows[:1000]
                         self.latest=data; self.received_at=time.monotonic()
                         stamp=(data.get('uptime_ms'),data.get('session'))
                         if data.get('valid') and stamp!=self.last_sample:
@@ -108,14 +121,15 @@ class Console:
         event={'pc_time':time.time(),'op':command.get('op'),'phase':'rejected'}
         try:
             op=command.get('op'); owner=command.get('owner')
-            if type(op)!=int or op not in (0,1,2,3) or not isinstance(owner,str) or not 1<=len(owner)<=64:
+            if type(op)!=int or op not in (0,1,2,3,4) or not isinstance(owner,str) or not 1<=len(owner)<=64:
                 raise ValueError('控制请求格式错误')
             if abs(time.time()*1000-float(command.get('at',0)))>250: raise ValueError('控制请求已过期')
             left=command.get('left',0); right=command.get('right',0)
             if type(left)!=int or type(right)!=int or not -720<=left<=720 or not -720<=right<=720:
                 raise ValueError('轮速超限')
             if op in (1,3) and (left or right): raise ValueError('解锁和清故障必须使用零目标')
-            if op==2 and (self.owner!=owner or not self.session): raise ValueError('当前页面没有控制权')
+            if op in (2,4) and (self.owner!=owner or not self.session): raise ValueError('当前页面没有控制权')
+            if op==4 and (left or right): raise ValueError('导航心跳不得携带轮速')
             if op==1:
                 if self.owner is not None and self.owner!=owner: raise ValueError('另一页面占用控制权，请先停止')
                 self.session=secrets.randbelow(0xFFFFFFFE)+1; self.sequence=0
@@ -135,6 +149,35 @@ class Console:
         finally:
             event['duration_ms']=(time.monotonic()-started)*1000
             # 仅保留有限诊断，不存页面身份或认证令牌；UDP返回仍不是送达确认。
+            with self.data_lock:
+                self.control_trace.append(event)
+                if len(self.control_trace)>2000: del self.control_trace[:200]
+            self.lock.release()
+
+    def navigation(self, command):
+        """发送一次导航/配置请求；不重发动作，导航心跳仍由当前浏览器提供。"""
+        if not self.lock.acquire(blocking=False): raise ValueError('设备忙，请停止操作后重试')
+        event={'pc_time':time.time(),'kind':'navigation','phase':'rejected'}
+        try:
+            op=command.get('op'); owner=command.get('owner'); args=command.get('args',[])
+            if type(op)!=int or not 1<=op<=8 or not isinstance(owner,str) or not 1<=len(owner)<=64:
+                raise ValueError('导航请求格式错误')
+            if abs(time.time()*1000-float(command.get('at',0)))>250: raise ValueError('导航请求已过期')
+            if not isinstance(args,list) or len(args)>5 or any(type(x) not in (int,float) or not math.isfinite(x) for x in args):
+                raise ValueError('导航参数格式错误')
+            if op in (3,4) and (self.owner!=owner or not self.session): raise ValueError('当前页面没有控制权')
+            if op not in (3,4) and self.owner is not None: raise ValueError('请先停止并禁止驱动')
+            args=args+[0]*(5-len(args)); self.sequence+=1
+            payload=struct.pack('<BB2xII5f',op,1,self.session,self.sequence,*args)
+            event.update(op=op,args=args,sequence=self.sequence,session=self.session,phase='sending')
+            result=self.gateway.request('/navigation',payload,timeout=.4)
+            event.update(phase='returned',result=result.get('result'))
+            if result.get('result')!=0: raise ValueError('STM32 拒绝导航请求：'+str(result))
+            if op in (5,6,7,8): self.nav_config[str(op)]=args
+            return result
+        except Exception as error:
+            event['error']=str(error); raise
+        finally:
             with self.data_lock:
                 self.control_trace.append(event)
                 if len(self.control_trace)>2000: del self.control_trace[:200]
@@ -204,13 +247,17 @@ class Handler(BaseHTTPRequestHandler):
                 elapsed=int((time.monotonic()-app.received_at)*1000)
                 if 'age_ms' in telemetry: telemetry['age_ms']+=elapsed
                 if elapsed>=500 or telemetry.get('age_ms',0)>=500: telemetry['valid']=False
-                result={'telemetry':telemetry,'upgrade':dict(app.upgrade),'csrf':app.csrf}
+                im=dict(telemetry.get('imu',{'valid':False,'position_valid':False}))
+                im['age_ms']=im.get('age_ms',500)+elapsed
+                if im['age_ms']>=500: im['valid']=False; im['position_valid']=False
+                telemetry['imu']=im
+                result={'telemetry':telemetry,'upgrade':dict(app.upgrade),'csrf':app.csrf,'nav_config':dict(app.nav_config)}
             self.reply(result); return
-        if self.path=='/api/record.csv':
-            with app.data_lock: rows=list(app.rows)
+        if self.path in ('/api/record.csv','/api/imu.csv'):
+            with app.data_lock: rows=list(app.imu_rows if self.path=='/api/imu.csv' else app.rows)
             out=io.StringIO(newline='')
             if rows:
-                writer=csv.DictWriter(out,fieldnames=list(rows[0]),extrasaction='ignore'); writer.writeheader(); writer.writerows(rows)
+                writer=csv.DictWriter(out,fieldnames=list(dict.fromkeys(key for row in rows for key in row if key!='imu')),extrasaction='ignore'); writer.writeheader(); writer.writerows(rows)
             self.reply(out.getvalue().encode('utf-8-sig'),'text/csv'); return
         if self.path=='/api/control_trace':
             with app.data_lock: trace=list(app.control_trace)
@@ -232,6 +279,7 @@ class Handler(BaseHTTPRequestHandler):
             if len(body)!=size: raise ValueError('请求不完整')
             body_complete=True
             if self.path=='/api/control': result=app.control(json.loads(body))
+            elif self.path=='/api/navigation': result=app.navigation(json.loads(body))
             elif self.path=='/api/upgrade': result=app.install(body)
             else: self.reply({'error':'not found'},status=404); return
             self.reply(result)

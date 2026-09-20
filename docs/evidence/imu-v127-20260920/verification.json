@@ -1,0 +1,30 @@
+{
+  "version": 127,
+  "base_version": 125,
+  "hardware_tested": false,
+  "flashed": false,
+  "motion_commands_sent": false,
+  "existing_backend_restarted": false,
+  "physical_acceptance": "NOT_RUN",
+  "stm32_build": "PASS",
+  "esp32_build": "PASS",
+  "host_tests": "PASS",
+  "browser_mock_tests": "PASS",
+  "app_bytes": 22152,
+  "app_limit": 47104,
+  "static_ram_bytes": 10856,
+  "ram_limit": 20480,
+  "pi_changed": false,
+  "startup_algorithm_changed": false,
+  "bootloader_changed": false,
+  "initial_build_version": 126,
+  "initial_test_failure": "UART harness still expected synchronous sender; adapted to async queue and rerun passed",
+  "known_limits": [
+    "Relative position drifts; no absolute reference",
+    "Geometry/axes/calibration/origin required after reset",
+    "Outer gains default zero; tuning and physical acceptance pending",
+    "36:1 drivetrain only",
+    "EIDE/Keil IDE and CubeMX regeneration not executed",
+    "I2C interrupt path and full main-loop timing need physical validation"
+  ]
+}

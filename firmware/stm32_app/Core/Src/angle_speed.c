@@ -6,8 +6,11 @@ void angle_speed_update(angle_speed *s,uint16_t angle,int direction,uint32_t now
     int32_t delta;
     if (angle>=8192U) return;
     if (!s->initialized || now-s->last_rx>=50U) {
+        ++s->discontinuities;
         s->initialized=1; s->count=0; s->index=0; s->valid=0;
     } else {
+        /* 最大轮速下40ms已接近半圈，定位不能继续信任位置展开；原测速策略保留。 */
+        if (now-s->last_rx>=40U) ++s->discontinuities;
         delta=(int32_t)angle-s->angle;
         if (delta>4096) delta-=8192;
         if (delta<-4096) delta+=8192;

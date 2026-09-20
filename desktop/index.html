@@ -17,6 +17,22 @@
 <div class="legend"><span class="cyan">● 左轮</span><span class="amber">● 右轮</span><span>实线实际 / 虚线目标</span></div><canvas id="chart" aria-label="最近约 30 秒轮速曲线"></canvas>
 <div class="readings"><span id="current">反馈电流：—</span><a href="/api/record.csv" download="smartcar-telemetry.csv">导出 CSV ↗</a></div><p class="muted small">界面显示减速后轮速；CSV 保留电机轴 rpm 与原始电流单位。断线数据不作为实时值展示。</p></section>
 </div>
+<section class="panel navigation"><div class="section-title"><h3>姿态与相对定位</h3><span>IMU / ODOMETRY</span></div>
+<p id="imuState">IMU 等待连接</p><p id="attitude">姿态：—</p><p id="position">位置：—</p>
+<canvas id="track" aria-label="相对原点的等比例米制轨迹" style="width:100%;height:260px"></canvas>
+<div class="actions"><button id="calibrate" class="secondary">静止校准 5 秒</button><button id="origin" class="secondary">停稳后设为原点</button></div>
+<div class="actions"><button id="navForward" disabled>5 rpm 直行保持</button><button id="navBack" disabled>5 rpm 后退保持</button><button id="turnLeft" disabled>左转 90°</button><button id="turnRight" disabled>右转 90°</button></div>
+<p class="muted small">动作最长 15 秒，保持页面前台；随时点击停止。坐标会累积误差，不代表绝对定位。</p>
+<details><summary>停稳配置与诊断（重启后重新设置）</summary>
+<p>安装方向：车体 X向前、Y向左、Z向上。填传感器轴编号 ±1/±2/±3，必须为右手坐标。</p>
+<label>车体X <input id="axisX" type="number" min="-3" max="3" value="1"></label><label>车体Y <input id="axisY" type="number" min="-3" max="3" value="2"></label><label>车体Z <input id="axisZ" type="number" min="-3" max="3" value="3"></label><button id="axes">确认安装方向</button>
+<p>有效几何尺寸，单位 mm；当前轮速链固定减速比36，实测不符时需重新适配。</p>
+<label>左轮直径 <input id="wheelLeft" type="number" min="20" max="500" placeholder="实测"></label><label>右轮直径 <input id="wheelRight" type="number" min="20" max="500" placeholder="实测"></label><label>轮距 <input id="wheelTrack" type="number" min="50" max="1000" placeholder="实测"></label><button id="geometry">应用几何参数</button>
+<p>外环初始为观察模式（P=0、阻尼=0），转角控制需先完成实测调参。</p>
+<label>航向P <input id="navKp" type="number" min="0" max="5" step="0.1" value="0"></label><label>角速度阻尼 <input id="navKd" type="number" min="0" max="2" step="0.05" value="0"></label>
+<label>角速度限幅 rad/s <input id="navMax" type="number" min="0.01" max="1" step="0.05" value="0.6"></label><label>变化率 rad/s² <input id="navSlew" type="number" min="0.01" max="2" step="0.1" value="1"></label><label>陀螺仪权重 <input id="navWeight" type="number" min="0" max="1" step="0.01" value="0.98"></label><button id="tuning">应用外环参数</button>
+<div class="actions"><button id="diagnostic">开启 50 Hz USB 诊断</button><button id="diagnosticOff">关闭 USB 诊断</button><a href="/api/imu.csv" download="smartcar-imu.csv">导出网页采样 CSV</a></div>
+<p class="muted small">网页CSV约10Hz；高频数据需USB采集工具。应用参数不会使能或开始运动。</p></details></section>
 <section class="panel upgrade"><div><div class="section-title"><h3>无线固件更新</h3><span>03 / OTA</span></div><p class="muted">禁止驱动并停稳后更新。断电恢复使用完整重传。</p></div><div class="upload"><label for="firmware" class="file-label">选择 .ota 固件包</label><input id="firmware" type="file" accept=".ota"><button id="install">上传并升级</button></div><div id="upgradeStatus" class="upgrade-status" aria-live="polite">等待选择固件</div></section>
 <div id="notice" role="status" aria-live="polite">尚未连接硬件 · 不显示模拟数据</div>
 </main><footer><span>SMARTCAR / V1</span><span>本地控制台 · STM32 + ESP32</span><span>保持实物断电开关可触及</span></footer>

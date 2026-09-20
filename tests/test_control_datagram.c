@@ -21,5 +21,8 @@ int main(void)
     memcpy(packet,good,52);packet[44]=0;assert(!control_datagram_decode(packet,52,token,output));
     memcpy(packet,good,52);packet[48]=0xd1;packet[49]=2;assert(!control_datagram_decode(packet,52,token,output));
     packet[48]=0xd0;assert(control_datagram_decode(packet,52,token,output));
+    memcpy(packet,good,52);packet[36]=4;assert(!control_datagram_decode(packet,52,token,output));
+    memset(packet+48,0,4);assert(control_datagram_decode(packet,52,token,output));
+    packet[36]=5;assert(!control_datagram_decode(packet,52,token,output));
     return 0;
 }

@@ -1,4 +1,4 @@
-"""提取实际收发函数，在HAL发送持锁窗口注入接收中断，验证不丢重挂。"""
+"""提取实际收发函数，在HAL发送持锁窗口注入接收中断，验证队列寿命、超时及不丢重挂。"""
 from pathlib import Path
 import subprocess
 
@@ -20,6 +20,9 @@ stub=r'''
 #include <stddef.h>
 #include <assert.h>
 #define CAR_MAX_FRAME 268
+#define CAR_MSG_TELEMETRY 0x10
+#define CAR_MSG_DIAGNOSTIC 0x11
+#define CAR_MSG_IMU 0x12
 #define HAL_OK 0
 #define HAL_BUSY 1
 #define HAL_UART_STATE_READY 0
@@ -31,6 +34,10 @@ static uint8_t rx_byte=42,rx_ring[512];
 static uint16_t rx_head,rx_tail;
 static uint32_t io_errors,mask,tick;
 static int deferred,stuck,polls,aborts;
+static uint8_t tx_frames[4][CAR_MAX_FRAME],tx_active;
+static uint16_t tx_sizes[4];
+static unsigned tx_head,tx_tail;
+static uint32_t tx_started,tx_dropped;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *uart);
 static uint32_t __get_PRIMASK(void){return mask;}
 static void __disable_irq(void){mask=1;}
@@ -48,15 +55,21 @@ test=r'''
 int main(void){
  send_frame(1,1,0,0);
  assert(io_errors==0 && rx_head==1 && rx_ring[0]==42 && huart1.RxState==1);
- assert(mask==0 && polls>0 && huart1.gState==0);
- stuck=1;send_frame(1,2,0,0);
- assert(io_errors==1 && aborts==1 && huart1.gState==0 && mask==0);
+ assert(mask==0 && polls==0 && huart1.gState==1 && tx_active);
+ send_frame(0x12,2,0,0);send_frame(0x12,3,0,0);
+ assert(tx_head-tx_tail==2 && tx_dropped==1);
+ send_frame(0x71,4,0,0);send_frame(0x71,5,0,0);
+ assert(tx_head-tx_tail==4 && io_errors==0);
+ huart1.gState=0;poll_tx();assert(tx_tail==1 && tx_active && rx_head==2);
+ tick+=31;poll_tx();assert(io_errors==1 && aborts==1 && mask==0);
+ while(tx_head!=tx_tail){huart1.gState=0;poll_tx();}
+ assert(!tx_active && polls==0);
  return 0;
 }
 '''
 out=root/'out/uart_tx_race';out.mkdir(exist_ok=True)
 c=out/'test.c';exe=out/'test.exe'
-c.write_text(stub+function('HAL_UART_RxCpltCallback')+function('send_frame')+test,encoding='utf-8')
+c.write_text(stub+function('HAL_UART_RxCpltCallback')+function('poll_tx')+function('send_frame')+test,encoding='utf-8')
 subprocess.run(['C:/msys64/ucrt64/bin/gcc.exe',str(c),'-o',str(exe)],check=True)
 subprocess.run([str(exe)],check=True)
-print('PASS: RX during TX lock, CAN draining, bounded TX timeout')
+print('PASS: RX during TX lock, async queue, ACK capacity, bounded TX timeout')

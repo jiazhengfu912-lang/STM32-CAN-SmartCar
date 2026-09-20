@@ -1,0 +1,121 @@
+
+.PythonStreamTests.test_seeded_random_stream) ... ok
+test_timeout_boundary (__main__.PythonStreamTests.test_timeout_boundary) ... ok
+test_timeout_recovers_frame_behind_damaged_length (__main__.PythonStreamTests.test_timeout_recovers_frame_behind_damaged_length) ... ok
+test_timeout_tick_wrap (__main__.PythonStreamTests.test_timeout_tick_wrap) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.091s
+
+OK
+
+st_lengths_and_available_prevent_out_of_bounds (__main__.GuardTests.test_lengths_and_available_prevent_out_of_bounds) ... ok
+test_valid_and_maximum_image (__main__.GuardTests.test_valid_and_maximum_image) ... ok
+test_wrong_target_format_or_magic_even_with_header_crc (__main__.GuardTests.test_wrong_target_format_or_magic_even_with_header_crc) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.027s
+
+OK
+
+_last_duplicate) ... ok
+test_stale_session_and_busy_session (__main__.OtaTests.test_stale_session_and_busy_session) ... ok
+test_success_and_reset_permission (__main__.OtaTests.test_success_and_reset_permission) ... ok
+test_timeout_tick_wrap_and_query_does_not_keep_alive (__main__.OtaTests.test_timeout_tick_wrap_and_query_does_not_keep_alive) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.027s
+
+OK
+
+ial_upload_keeps_old_ready) ... ok
+test_publish_and_reopen (__main__.CacheTests.test_publish_and_reopen) ... ok
+test_rename_failure_not_success (__main__.CacheTests.test_rename_failure_not_success) ... ok
+test_size_limits (__main__.CacheTests.test_size_limits) ... ok
+test_zero_version_rejected (__main__.CacheTests.test_zero_version_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.097s
+
+OK
+
+cess_versions_and_boundaries) ... ok
+test_transport_io_error_stops (__main__.SenderTests.test_transport_io_error_stops) ... ok
+test_write_rejection_not_retried_as_timeout (__main__.SenderTests.test_write_rejection_not_retried_as_timeout) ... ok
+test_wrong_offset_stops_before_commit (__main__.SenderTests.test_wrong_offset_stops_before_commit) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.016s
+
+OK
+
+
+PASS: real drive core safety boundaries and 999 PI cycles
+
+
+PASS: angle speed wrap, reverse, warmup and stale recovery
+
+
+PASS: IMU calibration, odometry, navigation and safety (HOST ONLY)
+
+PASS: real MPU driver BUSY/5ms timeout/retry/identity/DATA_RDY (HAL stub only)
+
+Tests.test_decode_independent_age_and_finite)
+�˶����߲��������IMU��Ч����������������־�� ... ok
+test_navigation_owner_and_validation (__main__.ImuTests.test_navigation_owner_and_validation)
+�������ÿ���Ȩ���Ƿ����󲻵�ת����ֹͣ������������������ ... ok
+test_timestamp_wrap_crc_and_invalid_samples (__main__.ImuTests.test_timestamp_wrap_crc_and_invalid_samples)
+��ʱ�������Լ�����ʵ���䣬CRC��֡����Ϊ��Ч������ ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+
+PASS: only STOP retries busy; fresh timestamps; 3 attempt bound; no motion retries
+
+PASS: forward/reverse 6 second bound, manual cancel, speed and state gates
+PASS: 20 second bound, duration captured once, invalid duration rejected
+
+PASS: slow requests stay within lease; hidden/stale/stopped/upgrading pages do not renew.
+
+PASS: immediate zero heartbeat; late ARM after STOP cannot restart heartbeat; no hardware commands.
+
+PASS: navigation heartbeat, manual takeover, stale display, late start after stop (HOST ONLY)
+
+ConsoleTests.test_stale_and_invalid_requests_never_forward)
+���ڡ����޺ͷ������ٶȲ��ܽ��봮��ת���� ... ok
+test_upload_and_install_pause_telemetry (__main__.ConsoleTests.test_upload_and_install_pause_telemetry)
+�ϴ�����װ����ͣ��ѯ�������볤ʱ�����������������ء� ... ok
+test_verified_upload_then_install (__main__.ConsoleTests.test_verified_upload_then_install)
+ȷ���ϴ���ɺ������װ������������ʾ�����ս���� ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.003s
+
+OK
+
+test_persistent_control_and_state (__main__.HttpTests.test_persistent_control_and_state)
+����������ͬһ��socket������֤������Ӧ���ƻ�������Ϣ�߽硣 ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.533s
+
+OK
+
+PASS: RX during TX lock, async queue, ACK capacity, bounded TX timeout
+
+e_and_separate_channels)
+ͬͨ������ TCP��ң�ⲻ������ƹ�������ʹ�õ����ӡ� ... ok
+test_speed_does_not_wait_for_http_ack (__main__.GatewayTests.test_speed_does_not_wait_for_http_ack)
+UDP ֻ���͵�ǰ�ٶȰ�һ�Σ����ѷ��ͳɹ�αװ�� STM32 Ӧ�� ... ok
+test_udp_failure_is_not_retried_or_fallback (__main__.GatewayTests.test_udp_failure_is_not_retried_or_fallback)
+����ʧ���������أ����������ٶȣ�Ҳ��͵͵�˻����� HTTP�� ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.072s
+
+OK
+
+
+

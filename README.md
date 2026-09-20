@@ -1,10 +1,10 @@
 # STM32-CAN-SmartCar
 
-**开发中 · 当前源码 v125 · 整体实物验收未完成。**
+**开发中 · 当前源码 v127（IMU软件集成，未上板） · 整体实物验收未完成。**
 
-[当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
+[MPU6050升级与操作](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
 
-双轮差速小车：**手动无线驾驶 + 实时遥测 + STM32 OTA**。不包含巡线、自动导航、LoRa 业务、第三电机或执行器控制。
+双轮差速小车：**手动无线驾驶 + 实时遥测 + STM32 OTA**。v127新增MPU6050姿态、直行纠偏、相对转角与轮式里程计的软件实现，尚未安装或实物验收；不包含巡线、目标点导航、LoRa业务、第三电机或执行器控制。
 
 源自独立项目 `STM32-CAN-Line-Following-Car` 的 HAL/CMSIS 驱动、硬件映射和已验证 OTA 模块。新项目完全独立，构建不引用原仓库；原项目及未提交修改保留。
 
@@ -50,7 +50,7 @@ python -B desktop/server.py
 
 构建生成：
 
-- `out/SmartCar-v125.ota`：32 字节元数据 + App，供网页 OTA 上传；文件名版本取自 `DRIVE_VERSION`。
+- `out/SmartCar-v127.ota`：32 字节元数据 + App，供网页 OTA 上传；文件名版本取自 `DRIVE_VERSION`。
 - `out/SmartCar-factory.bin`：首次通过 SWD 安装的 Bootloader + App + 有效记录，起始地址 `0x08000000`，不覆盖参数页。**本项目没有自动执行烧录命令。**
 - `out/app/app.hex`、`out/boot/boot.hex`：分区镜像。仅下载 App HEX 不会同步有效记录；正式升级使用 OTA 包，首次安装使用 factory 镜像。
 - `out/build_report.json`、`out/test_report.json`、`out/tests.log`：构建和测试证据。

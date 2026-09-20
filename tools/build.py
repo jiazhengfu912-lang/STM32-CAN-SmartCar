@@ -16,7 +16,7 @@ HAL = APP / 'Drivers/STM32F1xx_HAL_Driver'
 ARM = Path(os.environ.get('ARM_BIN', r'D:\Keil_v5\ARM\ARMCLANG\bin'))
 INCLUDES = [APP/'Core/Inc', HAL/'Inc', APP/'Drivers/CMSIS/Include',
             APP/'Drivers/CMSIS/Device/ST/STM32F1xx/Include', ROOT/'protocol', BOOT]
-HAL_NAMES = ['hal', 'hal_can', 'hal_uart', 'hal_dma', 'hal_rcc', 'hal_rcc_ex',
+HAL_NAMES = ['hal', 'hal_can', 'hal_uart', 'hal_i2c', 'hal_dma', 'hal_rcc', 'hal_rcc_ex',
              'hal_gpio', 'hal_cortex', 'hal_flash', 'hal_flash_ex', 'hal_pwr']
 APP_SOURCES = list((APP/'Core/Src').glob('*.c')) + [HAL/'Src'/f'stm32f1xx_{n}.c' for n in HAL_NAMES] + [
     ROOT/'protocol/car_protocol.c', BOOT/'update_request.c', BOOT/'ota_receiver.c']

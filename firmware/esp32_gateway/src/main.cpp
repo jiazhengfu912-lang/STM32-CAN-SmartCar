@@ -453,7 +453,7 @@ static esp_err_t control_handler(httpd_req_t *req)
         int count=httpd_req_recv(req,reinterpret_cast<char *>(p)+n,size-n);
         if(count<=0) return ESP_FAIL; n+=size_t(count);
     }
-    if((navigation ? (p[0]<1 || p[0]>8 || p[1]!=1):(p[0]>4 || p[1])) || p[2] || p[3]) return respond(req,"400 Bad Request","{\"error\":\"control_argument\"}");
+    if((navigation ? (p[0]<1 || p[0]>9 || p[1]!=1):(p[0]>4 || p[1])) || p[2] || p[3]) return respond(req,"400 Bad Request","{\"error\":\"control_argument\"}");
     if(xSemaphoreTake(uart_owner,0)!=pdTRUE) return respond(req,"409 Conflict","{\"error\":\"uart_busy\"}");
     static uint16_t sequence=40000;
     uint16_t expected=sequence=0x8000U|((sequence+1U)&0x7FFFU); xQueueReset(control_queue);

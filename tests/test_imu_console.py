@@ -59,6 +59,8 @@ class ImuTests(unittest.TestCase):
         command={'op':3,'args':[5],'owner':'test','at':time.time()*1000}
         with self.assertRaises(ValueError):app.navigation(command)
         app.control({'op':1,'owner':'test','at':time.time()*1000})
+        app.navigation({**command,'op':9,'args':[1,.5,3,.05]});self.assertEqual(gateway.calls[-1][1][0],9)
+        with self.assertRaises(ValueError):app.navigation({**command,'op':9,'owner':'other'})
         app.navigation(command);path,payload=gateway.calls[-1]
         self.assertEqual(path,'/navigation');self.assertEqual(len(payload),32)
         self.assertEqual(struct.unpack_from('<f',payload,12)[0],5)

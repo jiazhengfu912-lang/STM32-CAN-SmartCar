@@ -16,8 +16,8 @@ function fixture(fetch){
 async function main(){
  const calls=[];
  const {context,elements}=fixture(async(path,options)=>{calls.push({path,body:JSON.parse(options.body)});return {ok:true,json:async()=>({result:0,state:1})};});
- await vm.runInContext('navigation(4,[90])',context);await new Promise(setImmediate);
- assert.equal(calls[0].path,'/api/navigation');assert.equal(calls[0].body.op,4);
+ await vm.runInContext('navigation(9,[1,.5,3,.05])',context);await new Promise(setImmediate);
+ assert.equal(calls[0].path,'/api/navigation');assert.equal(calls[0].body.op,9);
  assert.equal(calls[1].path,'/api/control');assert.equal(calls[1].body.op,4);assert.equal(calls[1].body.left,0);
  await vm.runInContext('command(2)',context);assert.equal(calls[2].body.op,4);
  vm.runInContext("direction('forward')",context);await vm.runInContext('command(2)',context);assert.equal(calls.at(-1).body.op,2);

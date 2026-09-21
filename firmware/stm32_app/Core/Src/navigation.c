@@ -16,7 +16,7 @@ void navigation_init(navigation *s)
 void navigation_cancel(navigation *s, uint8_t reason)
 {
     if (s->mode) s->result=reason;
-    s->mode=NAV_IDLE; s->correction=0; s->settled=0;
+    s->mode=NAV_IDLE; s->correction=0; s->settled=0; s->linear=0;
 }
 /** 普通速度命令接管并取消导航；导航心跳仅续租，不重置动作参考。 */
 uint8_t navigation_drive_command(navigation *s,drive_state *d,uint8_t op,uint32_t session,
@@ -54,17 +54,22 @@ uint8_t navigation_command(navigation *s, imu_state *imu, drive_state *d,
                           angle_speed w[2], const uint8_t p[32], uint32_t now)
 {
     float a[5]; unsigned i; uint8_t result,op=p[0];
-    if (p[1]!=1 || p[2] || p[3] || op<1 || op>NAV_DIAGNOSTIC) return CONTROL_ARGUMENT;
+    if (p[1]!=1 || p[2] || p[3] || op<1 || op>NAV_GOTO) return CONTROL_ARGUMENT;
     for (i=0;i<5;i++) { uint32_t bits=u32(p+12+4*i); memcpy(&a[i],&bits,4); if (!isfinite(a[i])) return CONTROL_ARGUMENT; }
-    if (op==NAV_START_STRAIGHT || op==NAV_START_TURN) {
+    if (op==NAV_START_STRAIGHT || op==NAV_START_TURN || op==NAV_GOTO) {
         if (!s->configured || !s->axes_confirmed || !s->valid || s->discontinuous || !sensors(imu,w,now) || s->mode) return CONTROL_STATE;
         if (op==NAV_START_STRAIGHT && (fabsf(a[0])<1 || fabsf(a[0])>10)) return CONTROL_ARGUMENT;
         if (op==NAV_START_TURN && ((a[0]!=90 && a[0]!=-90) || s->kp<=0)) return CONTROL_ARGUMENT;
+        if (op==NAV_GOTO && (fabsf(a[0])>5 || fabsf(a[1])>5 || a[2]<1 || a[2]>5 || a[3]<0.03f || a[3]>0.10f || a[4]!=0 || s->kp<=0)) return CONTROL_ARGUMENT;
         result=drive_command(d,CMD_SPEED,u32(p+4),u32(p+8),0,0,now);
         if (result) return result;
         s->mode=op==NAV_START_STRAIGHT ? NAV_STRAIGHT:NAV_TURN; s->result=NAV_RUNNING;
         s->target=imu_wrap(s->heading+(s->mode==NAV_TURN ? a[0]*PI_F/180:0));
         s->base=s->mode==NAV_STRAIGHT ? a[0]:0; s->started_ms=now; s->settled=0; s->correction=0;
+        if (op==NAV_GOTO) {
+            s->mode=NAV_GOTO_ALIGN; s->goal_x=a[0]; s->goal_y=a[1]; s->cruise=a[2]; s->radius=a[3];
+            s->linear=0; s->progress=PI_F; s->progress_ms=now;
+        }
         return CONTROL_OK;
     }
     if (!navigation_stationary(d,now)) return CONTROL_STATE;
@@ -92,6 +97,37 @@ uint8_t navigation_command(navigation *s, imu_state *imu, drive_state *d,
     }
     return CONTROL_OK;
 }
+/** 坐标导航按转向、接近、停稳执行；无进展失败，不绕障也不续租心跳。 */
+static int goto_tick(navigation *s,const imu_state *imu,drive_state *d,uint32_t now,float dt,float *error)
+{
+    float dx=s->goal_x-s->x,dy=s->goal_y-s->y,distance=hypotf(dx,dy),metric,wanted;
+    uint8_t mode=s->mode;
+    *error=imu_wrap(atan2f(dy,dx)-s->heading);
+    if (distance<=s->radius) s->mode=NAV_GOTO_SETTLE;
+    else if (s->mode==NAV_GOTO_SETTLE || (s->mode==NAV_GOTO_DRIVE && fabsf(*error)>0.785398f)) s->mode=NAV_GOTO_ALIGN;
+    if (s->mode==NAV_GOTO_ALIGN) {
+        if (fabsf(*error)<0.139626f && fabsf(imu->gyro[2])<0.05236f) {
+            if (!s->settled) { s->settled=1; s->settled_ms=now; }
+            if (now-s->settled_ms>=300U) { s->mode=NAV_GOTO_DRIVE; s->settled=0; }
+        } else s->settled=0;
+    }
+    if (mode!=s->mode) { s->progress_ms=now; s->progress=s->mode==NAV_GOTO_ALIGN ? fabsf(*error):distance; s->settled=0; }
+    if (s->mode==NAV_GOTO_SETTLE) {
+        s->linear=0; s->correction=0; d->target[0]=d->target[1]=0;
+        if (d->rpm[0]>-18 && d->rpm[0]<18 && d->rpm[1]>-18 && d->rpm[1]<18 && fabsf(imu->gyro[2])<=0.05236f) {
+            if (!s->settled) { s->settled=1; s->settled_ms=now; }
+            if (now-s->settled_ms>=300U) { navigation_cancel(s,NAV_DONE); (void)drive_command(d,CMD_DISARM,0,0,0,0,now); }
+        } else s->settled=0;
+        return 0;
+    }
+    metric=s->mode==NAV_GOTO_ALIGN ? fabsf(*error):distance;
+    if (s->progress-metric> (s->mode==NAV_GOTO_ALIGN ? 0.05f:0.002f)) { s->progress=metric; s->progress_ms=now; }
+    if (now-s->progress_ms>=5000U) { navigation_cancel(s,NAV_NO_PROGRESS); (void)drive_command(d,CMD_DISARM,0,0,0,0,now); return 0; }
+    wanted=s->mode==NAV_GOTO_DRIVE ? fminf(s->cruise*PI_F*fminf(s->diameter[0],s->diameter[1])/60,0.6f*distance)*fmaxf(0,cosf(*error)):0;
+    s->linear+=clamp(wanted-s->linear,0.05f*fminf(dt,0.02f));
+    if (s->mode==NAV_GOTO_ALIGN) s->linear=0;
+    return 1;
+}
 /** 更新增量里程计与外环；内部计算不调用命令入口，不延长用户心跳期限。 */
 void navigation_tick(navigation *s, const imu_state *imu, drive_state *d,const angle_speed w[2],uint32_t now)
 {
@@ -114,8 +150,9 @@ void navigation_tick(navigation *s, const imu_state *imu, drive_state *d,const a
     if (!s->mode) return;
     if (d->state!=DRIVE_ARMED) { navigation_cancel(s,NAV_DRIVE_LOST); return; }
     if (!fresh || !s->valid) { navigation_cancel(s,NAV_SENSOR_LOST); drive_fault(d,FAULT_IMU); return; }
-    if (now-s->started_ms>=15000U) { navigation_cancel(s,NAV_TIMEOUT); (void)drive_command(d,CMD_DISARM,0,0,0,0,now); return; }
+    if (now-s->started_ms>=(s->mode>=NAV_GOTO_ALIGN ? 120000U:15000U)) { navigation_cancel(s,NAV_TIMEOUT); (void)drive_command(d,CMD_DISARM,0,0,0,0,now); return; }
     error=imu_wrap(s->target-s->heading);
+    if (s->mode>=NAV_GOTO_ALIGN && !goto_tick(s,imu,d,now,dt,&error)) return;
     if (s->mode==NAV_TURN) {
         if (fabsf(error)<=0.034907f && fabsf(imu->gyro[2])<=0.05236f) {
             if (!s->settled) { s->settled=1; s->settled_ms=now; }
@@ -124,8 +161,8 @@ void navigation_tick(navigation *s, const imu_state *imu, drive_state *d,const a
     }
     rate=clamp(s->kp*error-s->kd*imu->gyro[2],s->max_rate);
     s->correction+=clamp(rate-s->correction,s->slew*(dt>0.02f ? 0.02f:dt));
-    left=s->base-s->correction*s->track*30/(PI_F*s->diameter[0]);
-    right=s->base+s->correction*s->track*30/(PI_F*s->diameter[1]);
+    left=(s->mode>=NAV_GOTO_ALIGN ? s->linear*60/(PI_F*s->diameter[0]):s->base)-s->correction*s->track*30/(PI_F*s->diameter[0]);
+    right=(s->mode>=NAV_GOTO_ALIGN ? s->linear*60/(PI_F*s->diameter[1]):s->base)+s->correction*s->track*30/(PI_F*s->diameter[1]);
     scale=fmaxf(fabsf(left),fabsf(right)); if (scale>10) { left*=10/scale; right*=10/scale; }
     for (i=0;i<2;i++) {
         int16_t target=(int16_t)((i ? right:left)*36.0f);

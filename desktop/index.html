@@ -21,8 +21,15 @@
 <p id="imuState">IMU 等待连接</p><p id="attitude">姿态：—</p><p id="position">位置：—</p>
 <canvas id="track" aria-label="相对原点的等比例米制轨迹" style="width:100%;height:260px"></canvas>
 <div class="actions"><button id="calibrate" class="secondary">静止校准 5 秒</button><button id="origin" class="secondary">停稳后设为原点</button></div>
-<div class="actions"><button id="navForward" disabled>5 rpm 直行保持</button><button id="navBack" disabled>5 rpm 后退保持</button><button id="turnLeft" disabled>左转 90°</button><button id="turnRight" disabled>右转 90°</button></div>
-<p class="muted small">动作最长 15 秒，保持页面前台；随时点击停止。坐标会累积误差，不代表绝对定位。</p>
+<div class="actions"><div><strong>驶向相对坐标（无障碍场地）</strong>
+<label>X / m <input id="goalX" type="number" min="-5" max="5" step="0.05" value="1"></label>
+<label>Y / m <input id="goalY" type="number" min="-5" max="5" step="0.05" value="0"></label>
+<label>轮速 / rpm <input id="goalSpeed" type="number" min="1" max="5" value="3"></label>
+<label>到达半径 / m <input id="goalRadius" type="number" min="0.03" max="0.10" step="0.01" value="0.05"></label>
+<button id="gotoStart" disabled>开始驶向坐标</button><button id="gotoCancel">取消并停车</button>
+<p id="gotoStatus">坐标导航：缺少有效定位</p><p>先配置、校准、设原点并使能。保持页面前台；无避障能力，估计到位不代表实际精度达标。</p></div>
+<button id="navForward" disabled>5 rpm 直行保持</button><button id="navBack" disabled>5 rpm 后退保持</button><button id="turnLeft" disabled>左转 90°</button><button id="turnRight" disabled>右转 90°</button></div>
+<p class="muted small">直行/转角最长15秒，坐标导航最长120秒，保持页面前台；随时点击停止。坐标会累积误差，不代表绝对定位。</p>
 <details><summary>停稳配置与诊断（重启后重新设置）</summary>
 <p>安装方向：车体 X向前、Y向左、Z向上。填传感器轴编号 ±1/±2/±3，必须为右手坐标。</p>
 <label>车体X <input id="axisX" type="number" min="-3" max="3" value="1"></label><label>车体Y <input id="axisY" type="number" min="-3" max="3" value="2"></label><label>车体Z <input id="axisZ" type="number" min="-3" max="3" value="3"></label><button id="axes">确认安装方向</button>

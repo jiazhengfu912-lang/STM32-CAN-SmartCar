@@ -121,3 +121,8 @@ python -B tools/capture_imu.py --port COM3 --seconds 60 --metadata out/本轮参
 软件验证入口：`python -B tools/test.py`（包含新C/HAL替身/Python/Node测试）；`uv run --with playwright python -B tests/test_imu_browser.py`使用隔离静态服务与全部API替身；`python -B tools/build.py`构建STM32，ESP32按README命令构建。EIDE源列表已补齐原缺少的angle_speed与新增模块；本轮没有声称EIDE/Keil IDE或CubeMX重新生成流程已实际运行。
 
 本轮软件证据见[验收记录](ACCEPTANCE.md)。实际安装需STM32与网关配套更新，本机桌面服务也需用户按现有方式重启加载；本轮未重启现有后台。
+
+
+## v128 后续扩展
+
+已增加[单目标相对坐标导航](COORDINATE_NAVIGATION.md)，新增op9及mode3–5；v127原阶段记录保持历史含义。本次仅离线软件验证，未烧录或实车验收。

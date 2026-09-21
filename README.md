@@ -1,10 +1,10 @@
 # STM32-CAN-SmartCar
 
-**开发中 · 当前源码 v127（IMU软件集成，未上板） · 整体实物验收未完成。**
+**开发中 · 当前源码 v128（坐标导航，未上板） · 整体实物验收未完成。**
 
-[MPU6050升级与操作](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
+[坐标导航说明](docs/COORDINATE_NAVIGATION.md) · [MPU6050升级与操作](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
 
-双轮差速小车：**手动无线驾驶 + 实时遥测 + STM32 OTA**。v127新增MPU6050姿态、直行纠偏、相对转角与轮式里程计的软件实现，尚未安装或实物验收；不包含巡线、目标点导航、LoRa业务、第三电机或执行器控制。
+双轮差速小车：**手动无线驾驶 + 实时遥测 + STM32 OTA**。v128新增单目标相对坐标导航：转向、接近、到位停稳，并增加网页输入、取消及状态显示。v127已完成安装和通信检查，但MPU6050采集仍失败；用户报告主控供电异常，硬件待修。v128仅通过离线测试、理想模型仿真和构建，未烧录或实车验收；不包含避障、路径搜索、巡线、LoRa业务、第三电机或执行器控制。
 
 源自独立项目 `STM32-CAN-Line-Following-Car` 的 HAL/CMSIS 驱动、硬件映射和已验证 OTA 模块。新项目完全独立，构建不引用原仓库；原项目及未提交修改保留。
 

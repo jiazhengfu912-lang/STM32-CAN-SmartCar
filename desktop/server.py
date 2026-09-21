@@ -160,13 +160,13 @@ class Console:
         event={'pc_time':time.time(),'kind':'navigation','phase':'rejected'}
         try:
             op=command.get('op'); owner=command.get('owner'); args=command.get('args',[])
-            if type(op)!=int or not 1<=op<=8 or not isinstance(owner,str) or not 1<=len(owner)<=64:
+            if type(op)!=int or not 1<=op<=9 or not isinstance(owner,str) or not 1<=len(owner)<=64:
                 raise ValueError('导航请求格式错误')
             if abs(time.time()*1000-float(command.get('at',0)))>250: raise ValueError('导航请求已过期')
             if not isinstance(args,list) or len(args)>5 or any(type(x) not in (int,float) or not math.isfinite(x) for x in args):
                 raise ValueError('导航参数格式错误')
-            if op in (3,4) and (self.owner!=owner or not self.session): raise ValueError('当前页面没有控制权')
-            if op not in (3,4) and self.owner is not None: raise ValueError('请先停止并禁止驱动')
+            if op in (3,4,9) and (self.owner!=owner or not self.session): raise ValueError('当前页面没有控制权')
+            if op not in (3,4,9) and self.owner is not None: raise ValueError('请先停止并禁止驱动')
             args=args+[0]*(5-len(args)); self.sequence+=1
             payload=struct.pack('<BB2xII5f',op,1,self.session,self.sequence,*args)
             event.update(op=op,args=args,sequence=self.sequence,session=self.session,phase='sending')

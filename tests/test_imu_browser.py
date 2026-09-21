@@ -32,7 +32,7 @@ def main():
                     if path=='control':
                         if data['op']==1:state['state']=1
                         if data['op']==0:state['state']=0;state.get('imu',{})['mode']=0
-                    elif data['op'] in (3,4):state['imu']['mode']=data['op']-2
+                    elif data['op'] in (3,4,9):state['imu']['mode']=3 if data['op']==9 else data['op']-2
                     result={'result':0,'state':state['state']}
                 else:request.abort();return
                 request.fulfill(status=200,content_type='application/json',body=json.dumps(result))
@@ -48,10 +48,14 @@ def main():
                           'roll_rad':.1,'pitch_rad':-.1,'yaw_rad':.5,'heading_rad':.5,'x_m':.4,'y_m':.1}
             page.wait_for_function("!document.getElementById('arm').disabled")
             page.locator('#arm').click();page.wait_for_function("!document.getElementById('turnLeft').disabled")
-            page.locator('#turnLeft').click()
-            page.wait_for_function('navMode===2');page.wait_for_timeout(250)
+            page.locator('#goalX').fill('1');page.locator('#goalY').fill('0.5')
+            # 在同一浏览器事件中检查空闲并点击真实DOM，避免心跳恰好抢占。
+            page.wait_for_function("() => {if(pending!==0)return false;document.getElementById('gotoStart').click();return true;}")
+            page.wait_for_function('navMode===3');page.wait_for_timeout(250)
             assert any(c['path']=='control' and c['op']==4 for c in commands)
             assert len([c for c in commands if c['path']=='navigation'])==1
+            assert next(c for c in commands if c['path']=='navigation')['args']==[1,0.5,3,0.05]
+            assert '距目标' in page.locator('#gotoStatus').inner_text()
             state['imu']['valid']=False
             page.wait_for_function("document.getElementById('attitude').textContent==='姿态：—'")
             assert any(c['path']=='control' and c['op']==0 for c in commands)

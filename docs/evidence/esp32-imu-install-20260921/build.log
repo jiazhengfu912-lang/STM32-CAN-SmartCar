@@ -1,0 +1,109 @@
+Processing esp32dev (platform: espressif32@6.12.0; board: esp32dev; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32dev.html
+PLATFORM: Espressif 32 (6.12.0) > Espressif ESP32 Dev Module
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b 
+ - tool-esptoolpy @ 2.40900.250804 (4.9.0) 
+ - toolchain-xtensa-esp32 @ 8.4.0+2021r2-patch5
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 33 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- LittleFS @ 2.0.0
+|-- WiFi @ 2.0.0
+Building in release mode
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\src\firmware\esp32_gateway\cache_store.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\src\firmware\esp32_gateway\control_datagram.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\src\firmware\esp32_gateway\ota_sender.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\src\firmware\esp32_gateway\src\main.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\src\firmware\stm32_bootloader\boot_guard.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\src\protocol\car_protocol.c.o
+Building D:\STM32-CAN-SmartCar\out\esp32\esp32dev\bootloader.bin
+Generating partitions D:\STM32-CAN-SmartCar\out\esp32\esp32dev\partitions.bin
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\lib95e\FS\FS.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\lib95e\FS\vfs_api.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libe42\LittleFS\LittleFS.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFi.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiAP.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiClient.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiGeneric.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiMulti.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiSTA.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiScan.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiServer.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\WiFi\WiFiUdp.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\Esp.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\FirmwareMSC.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\FunctionalInterrupt.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\HWCDC.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\HardwareSerial.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\IPAddress.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\IPv6Address.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\MD5Builder.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\Print.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\Stream.cpp.o
+esptool.py v4.9.0
+Creating esp32 image...
+Merged 1 ELF section
+Successfully created esp32 image.
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\StreamString.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\Tone.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\USB.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\USBCDC.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\USBMSC.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\WMath.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\WString.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\base64.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\cbuf.cpp.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-adc.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-bt.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-cpu.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-dac.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-gpio.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-i2c-slave.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-i2c.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-ledc.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-matrix.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-misc.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-psram.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-rgb-led.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-rmt.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-sigmadelta.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-spi.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-time.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-timer.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-tinyusb.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-touch.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\esp32-hal-uart.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\firmware_msc_fat.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\libb64\cdecode.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\libb64\cencode.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\main.cpp.o
+Archiving D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libe42\libLittleFS.a
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\stdlib_noniso.c.o
+Archiving D:\STM32-CAN-SmartCar\out\esp32\esp32dev\lib95e\libFS.a
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\wiring_pulse.c.o
+Compiling D:\STM32-CAN-SmartCar\out\esp32\esp32dev\FrameworkArduino\wiring_shift.c.o
+Indexing D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libe42\libLittleFS.a
+Indexing D:\STM32-CAN-SmartCar\out\esp32\esp32dev\lib95e\libFS.a
+Archiving D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\libWiFi.a
+Indexing D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libd62\libWiFi.a
+Archiving D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libFrameworkArduino.a
+Indexing D:\STM32-CAN-SmartCar\out\esp32\esp32dev\libFrameworkArduino.a
+Linking D:\STM32-CAN-SmartCar\out\esp32\esp32dev\firmware.elf
+Retrieving maximum program size D:\STM32-CAN-SmartCar\out\esp32\esp32dev\firmware.elf
+Checking size D:\STM32-CAN-SmartCar\out\esp32\esp32dev\firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [===       ]  28.6% (used 93608 bytes from 327680 bytes)
+Flash: [======    ]  61.2% (used 802161 bytes from 1310720 bytes)
+Building D:\STM32-CAN-SmartCar\out\esp32\esp32dev\firmware.bin
+esptool.py v4.9.0
+Creating esp32 image...
+Merged 27 ELF sections
+Successfully created esp32 image.
+========================= [SUCCESS] Took 80.91 seconds =========================

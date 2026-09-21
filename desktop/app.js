@@ -6,6 +6,7 @@ const samples=[];
 let trialTimer=null,trialSpeed=0;
 let navMode=0,navGrace=0,imuLatest={},trackOrigin=null,lastImuUptime=null;
 const track=[];
+let goal=null;
 
 /** 显示操作结果，不把请求成功等同于实物已经完成运动。 */
 function notice(text){$('notice').textContent=text;}
@@ -84,15 +85,17 @@ function timedTrial(heading='forward'){
 
 /** 发送一次导航动作或停稳配置，不重复启动目标；请求不确定即停车。 */
 async function navigation(op,args=[]){
-  if(pending||upgrading||document.hidden||!csrf)return;
-  const motion=op===3||op===4,startedEpoch=epoch;
+  if(pending){notice('请求处理中，请稍后再次点击开始。');return;}
+  if(upgrading||document.hidden||!csrf)return;
+  const motion=op===3||op===4||op===9,startedEpoch=epoch;
   if(motion&&(!armed||!imuLatest.position_valid||trialTimer!==null||navMode))return;
   if(!motion&&armed){notice('请先停止并禁止驱动。');return;}
   clearTimeout(heartbeatTimer);heartbeatTimer=null;pending++;
   try{
     await post('/api/navigation',{op,args,owner,at:Date.now()});
     if(startedEpoch!==epoch){if(motion)stop();return;}
-    if(motion){move='';navMode=op===3?1:2;navGrace=Date.now()+400;}
+    if(op===9)goal={x:args[0],y:args[1],origin:trackOrigin};
+    if(motion){move='';navMode=op===9?3:(op===3?1:2);navGrace=Date.now()+400;}
     notice(motion?'导航动作已接受，保持页面前台；停止按钮可随时取消。':'请求已接受，以设备校准/定位状态为准。');
   }catch(error){notice(error.message);if(motion)stop();}
   finally{pending--;}
@@ -119,11 +122,12 @@ function showImu(im){
   $('imuState').textContent=fresh?`校准：${['未校准','静止校准中','已校准','校准失败'][im.calibration]} · ${im.age_ms} ms · ${im.discontinuous?'定位不连续，请停稳后设原点':'数据连续'} · 动作结果 ${im.result}`:'IMU 离线 / 数据过期';
   $('attitude').textContent=fresh&&im.attitude_valid?`Roll ${(im.roll_rad*180/Math.PI).toFixed(1)}° / Pitch ${(im.pitch_rad*180/Math.PI).toFixed(1)}° / 相对 Yaw ${(im.yaw_rad*180/Math.PI).toFixed(1)}°`:'姿态：—';
   $('position').textContent=pos?`X ${im.x_m.toFixed(3)} m / Y ${im.y_m.toFixed(3)} m / 朝向 ${(im.heading_rad*180/Math.PI).toFixed(1)}°`:'位置：—（需几何参数、安装方向、校准和原点）';
+  $('gotoStatus').textContent=pos?`阶段：${['待命','直行保持','相对转角','转向目标','驶向目标','到位停稳'][im.mode]||'未知'} · 结果：${['无','运行中','完成','已取消','传感器失效','超时','驱动退出','无进展'][im.result]||'未知'}${goal&&goal.origin===trackOrigin?' · 距目标 '+Math.hypot(goal.x-im.x_m,goal.y-im.y_m).toFixed(3)+' m':''}`:'坐标导航：缺少有效定位';
   const origin=im?`${im.version}:${im.origin_id}`:null;
   if(pos&&(origin!==trackOrigin||(lastImuUptime!==null&&im.uptime_ms<lastImuUptime))){track.length=0;trackOrigin=origin;}
   if(fresh)lastImuUptime=im.uptime_ms;
   track.push(pos?{valid:true,x:im.x_m,y:im.y_m}:{valid:false});if(track.length>3000)track.shift();drawTrack();
-  for(const id of ['navForward','navBack','turnLeft','turnRight'])$(id).disabled=!pos||!armed||pending>0||!!navMode;
+  for(const id of ['navForward','navBack','turnLeft','turnRight','gotoStart'])$(id).disabled=!pos||!armed||pending>0||!!navMode;
   if(navMode&&(!fresh||!pos||(Date.now()>navGrace&&im.mode===0)))stop();
 }
 
@@ -178,6 +182,8 @@ async function install(){
 /** 注册按住驾驶、失焦停车和空格停车事件；不提供锁定持续运动。 */
 function bind(){
   $('arm').onclick=()=>command(1);$('clear').onclick=()=>command(3);$('stop').onclick=stop;$('install').onclick=install;
+  $('gotoStart').onclick=()=>{const a=['goalX','goalY','goalSpeed','goalRadius'].map(id=>Number($(id).value));if(a.some(x=>!Number.isFinite(x))||Math.abs(a[0])>5||Math.abs(a[1])>5||a[2]<1||a[2]>5||a[3]<0.03||a[3]>0.1){notice('坐标±5m，轮速1–5rpm，到达半径0.03–0.10m。');return;}void navigation(9,a);};
+  $('gotoCancel').onclick=stop;
   $('calibrate').onclick=()=>navigation(1);
   $('origin').onclick=()=>navigation(2);
   $('navForward').onclick=()=>navigation(3,[5]);$('navBack').onclick=()=>navigation(3,[-5]);

@@ -99,5 +99,61 @@ static void test_navigation(void)
     assert(!navigation_command(&n,&im,&d,w,packet,4022));fresh(&im,&d,w,19022);navigation_tick(&n,&im,&d,w,19022);
     assert(n.result==NAV_TIMEOUT && d.state==DRIVE_DISARMED);
 }
+/** 使用生产外环与理想差速车模型验证四象限目标及终止条件；不是实车精度证据。 */
+static void test_goto(void)
+{
+    const float goals[][2]={{.3f,0},{0,.3f},{-.3f,0},{0,-.3f},{.3f,.3f},{0,0}};
+    unsigned g,i;FILE *csv=fopen("out/goto-simulation.csv","w");assert(csv);
+    fprintf(csv,"case,time_ms,x,y,heading,mode,result,left,right\n");
+    for(g=0;g<sizeof(goals)/sizeof(goals[0]);g++) {
+        navigation n;imu_state im;drive_state d;angle_speed w[2]={{0},{0}};uint32_t now=1000,seq=2;float pos[2]={0,0};
+        navigation_init(&n);imu_init(&im);drive_init(&d);fresh(&im,&d,w,now);
+        n.configured=n.axes_confirmed=n.valid=1;n.diameter[0]=n.diameter[1]=.1f;n.track=.3f;n.kp=2;n.kd=.1f;n.last_ms=now;
+        assert(!drive_command(&d,CMD_ARM,123,1,0,0,now));request(NAV_GOTO,seq,goals[g][0],goals[g][1],3,.05f,0);
+        assert(!navigation_command(&n,&im,&d,w,packet,now));
+        assert(navigation_command(&n,&im,&d,w,packet,now)==CONTROL_STATE);
+        for(i=0;i<12000 && n.mode;i++) {
+            float vl=d.target[0]/36.0f*3.14159265f*.1f/60,vr=d.target[1]/36.0f*3.14159265f*.1f/60;
+            now+=10;im.gyro[2]=(vr-vl)/.3f;im.yaw=imu_wrap(im.yaw+im.gyro[2]*.01f);
+            pos[0]+=d.target[0]*8192.0f/6000;pos[1]+=d.target[1]*8192.0f/6000;
+            w[0].position=(uint32_t)(int32_t)pos[0];w[1].position=(uint32_t)(int32_t)pos[1];fresh(&im,&d,w,now);
+            d.rpm[0]=d.target[0];d.rpm[1]=d.target[1];
+            if(i%10==0)assert(!navigation_drive_command(&n,&d,4,123,++seq,0,0,now));
+            navigation_tick(&n,&im,&d,w,now);drive_tick(&d,now);
+            assert(abs(d.target[0])<=360 && abs(d.target[1])<=360);
+            if(i%10==0 || !n.mode)fprintf(csv,"%u,%u,%.6f,%.6f,%.6f,%u,%u,%d,%d\n",g,now,n.x,n.y,n.heading,n.mode,n.result,d.target[0],d.target[1]);
+        }
+        assert(n.result==NAV_DONE && d.state==DRIVE_DISARMED && !d.target[0] && !d.output[1]);
+        assert(navigation_drive_command(&n,&d,4,123,++seq,0,0,now)==CONTROL_STATE);
+        assert(hypotf(n.x-goals[g][0],n.y-goals[g][1])<=.05f);
+    }
+    fclose(csv);
+    {
+        navigation n;imu_state im;drive_state d;angle_speed w[2]={{0},{0}};uint32_t now=1000;
+        navigation_init(&n);imu_init(&im);drive_init(&d);fresh(&im,&d,w,now);
+        n.configured=n.axes_confirmed=n.valid=1;n.diameter[0]=n.diameter[1]=.1f;n.track=.3f;n.kp=2;n.last_ms=now;
+        assert(!drive_command(&d,CMD_ARM,123,1,0,0,now));
+        request(NAV_GOTO,2,6,0,3,.05f,0);assert(navigation_command(&n,&im,&d,w,packet,now)==CONTROL_ARGUMENT);
+        request(NAV_GOTO,2,1,0,3,.05f,0);assert(!navigation_command(&n,&im,&d,w,packet,now));
+        for(i=0;i<600 && n.mode;i++) { now+=10;fresh(&im,&d,w,now);navigation_tick(&n,&im,&d,w,now); }
+        assert(n.result==NAV_NO_PROGRESS && d.state==DRIVE_DISARMED);
+        fresh(&im,&d,w,now);assert(!drive_command(&d,CMD_ARM,123,3,0,0,now));
+        request(NAV_GOTO,4,1,0,3,.05f,0);assert(!navigation_command(&n,&im,&d,w,packet,now));
+        fresh(&im,&d,w,now+120000U);navigation_tick(&n,&im,&d,w,now+120000U);
+        assert(n.result==NAV_TIMEOUT && !n.mode);
+        now+=120000U;assert(!drive_command(&d,CMD_ARM,123,5,0,0,now));
+        request(NAV_GOTO,6,1,0,3,.05f,0);assert(!navigation_command(&n,&im,&d,w,packet,now));
+        navigation_tick(&n,&im,&d,w,now+50);assert(n.result==NAV_SENSOR_LOST && d.fault==FAULT_IMU);
+        drive_init(&d);fresh(&im,&d,w,now);n.valid=1;n.discontinuous=0;
+        assert(!drive_command(&d,CMD_ARM,123,7,0,0,now));request(NAV_GOTO,8,1,0,3,.05f,0);
+        assert(!navigation_command(&n,&im,&d,w,packet,now));
+        fresh(&im,&d,w,now+301);drive_tick(&d,now+301);navigation_tick(&n,&im,&d,w,now+301);
+        assert(d.fault==FAULT_COMMAND && n.result==NAV_DRIVE_LOST && !d.output[0]);
+        drive_init(&d);fresh(&im,&d,w,now);assert(!drive_command(&d,CMD_ARM,123,9,0,0,now));
+        request(NAV_GOTO,10,1,0,3,.05f,0);assert(!navigation_command(&n,&im,&d,w,packet,now));
+        assert(!navigation_drive_command(&n,&d,CMD_DISARM,0,0,0,0,now));assert(n.result==NAV_CANCELLED && !n.mode);
+
+    }
+}
 /** 执行生产算法的离线边界测试，不代表实物精度。 */
-int main(void) { test_imu();test_navigation();puts("PASS: IMU calibration, odometry, navigation and safety (HOST ONLY)");return 0; }
+int main(void) { test_imu();test_navigation();test_goto();puts("PASS: IMU calibration, odometry, navigation and safety (HOST ONLY)");return 0; }

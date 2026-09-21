@@ -3,13 +3,15 @@
 #include "imu.h"
 #include "drive.h"
 #include "angle_speed.h"
-enum { NAV_IDLE, NAV_STRAIGHT, NAV_TURN };
-enum { NAV_NONE, NAV_RUNNING, NAV_DONE, NAV_CANCELLED, NAV_SENSOR_LOST, NAV_TIMEOUT, NAV_DRIVE_LOST };
-enum { NAV_CALIBRATE=1, NAV_ORIGIN, NAV_START_STRAIGHT, NAV_START_TURN, NAV_GEOMETRY, NAV_TUNING, NAV_AXES, NAV_DIAGNOSTIC };
+enum { NAV_IDLE, NAV_STRAIGHT, NAV_TURN, NAV_GOTO_ALIGN, NAV_GOTO_DRIVE, NAV_GOTO_SETTLE };
+enum { NAV_NONE, NAV_RUNNING, NAV_DONE, NAV_CANCELLED, NAV_SENSOR_LOST, NAV_TIMEOUT, NAV_DRIVE_LOST, NAV_NO_PROGRESS };
+enum { NAV_CALIBRATE=1, NAV_ORIGIN, NAV_START_STRAIGHT, NAV_START_TURN, NAV_GEOMETRY, NAV_TUNING, NAV_AXES, NAV_DIAGNOSTIC, NAV_GOTO };
 typedef struct {
     uint8_t configured, valid, discontinuous, mode, result, diagnostic, axes_confirmed;
     uint32_t previous[2], continuity[2], last_ms, imu_gaps, started_ms, settled_ms, origin_id;
     uint8_t settled;
+    uint32_t progress_ms;
+    float goal_x,goal_y,radius,cruise,linear,progress;
     float diameter[2], track, reduction, weight, x, y, heading, last_yaw;
     float kp,kd,max_rate,slew,correction,target,base;
 } navigation;

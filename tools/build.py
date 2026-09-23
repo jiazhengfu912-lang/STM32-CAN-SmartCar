@@ -14,11 +14,11 @@ APP = ROOT / 'firmware/stm32_app'
 BOOT = ROOT / 'firmware/stm32_bootloader'
 HAL = APP / 'Drivers/STM32F1xx_HAL_Driver'
 ARM = Path(os.environ.get('ARM_BIN', r'D:\Keil_v5\ARM\ARMCLANG\bin'))
-INCLUDES = [APP/'Core/Inc', HAL/'Inc', APP/'Drivers/CMSIS/Include',
+INCLUDES = [APP/'Core/Inc', APP/'BSP', HAL/'Inc', APP/'Drivers/CMSIS/Include',
             APP/'Drivers/CMSIS/Device/ST/STM32F1xx/Include', ROOT/'protocol', BOOT]
 HAL_NAMES = ['hal', 'hal_can', 'hal_uart', 'hal_i2c', 'hal_dma', 'hal_rcc', 'hal_rcc_ex',
              'hal_gpio', 'hal_cortex', 'hal_flash', 'hal_flash_ex', 'hal_pwr']
-APP_SOURCES = list((APP/'Core/Src').glob('*.c')) + [HAL/'Src'/f'stm32f1xx_{n}.c' for n in HAL_NAMES] + [
+APP_SOURCES = list((APP/'Core/Src').glob('*.c')) + sorted((APP/'BSP').glob('*.c')) + [HAL/'Src'/f'stm32f1xx_{n}.c' for n in HAL_NAMES] + [
     ROOT/'protocol/car_protocol.c', BOOT/'update_request.c', BOOT/'ota_receiver.c']
 BOOT_SOURCES = [BOOT/n for n in ['main.c','uart_service.c','boot_guard.c','ota_receiver.c','update_request.c','stm32_flash.c']] + [
     ROOT/'protocol/car_protocol.c',APP/'Core/Src/system_stm32f1xx.c']

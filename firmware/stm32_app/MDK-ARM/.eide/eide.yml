@@ -17,6 +17,10 @@ virtualFolder:
         - path: ../Core/Src/navigation.c
         - path: ../Core/Src/mpu6050.c
         - path: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c
+        - path: ../BSP/BSP_can.c
+        - path: ../BSP/BSP_i2c.c
+        - path: ../BSP/BSP_system.c
+        - path: ../BSP/BSP_uart.c
         - path: ../Core/Src/main.c
         - path: ../Core/Src/stm32f1xx_hal_msp.c
         - path: ../Core/Src/stm32f1xx_it.c
@@ -50,6 +54,7 @@ targets:
         - __MICROLIB
       incList:
         - ../Core/Inc
+        - ../BSP
         - ../Drivers/STM32F1xx_HAL_Driver/Inc
         - ../Drivers/CMSIS/Include
         - ../Drivers/CMSIS/Device/ST/STM32F1xx/Include

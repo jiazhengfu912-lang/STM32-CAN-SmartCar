@@ -3,12 +3,13 @@ from pathlib import Path
 import subprocess
 
 root=Path(__file__).resolve().parents[1]
-source=(root/'firmware/stm32_app/Core/Src/smartcar.c').read_text(encoding='utf-8')
+source=(root/'firmware/stm32_app/Core/Src/smartcar.c').read_text(encoding='utf-8')+'\n'+(root/'firmware/stm32_app/BSP/BSP_uart.c').read_text(encoding='utf-8')
 
 
 def function(name):
     """从生产源文件提取完整函数，不维护测试专用算法副本。"""
-    start=source.index(name+'(');start=source.rfind('\n',0,start)+1
+    import re
+    start=re.search(r'^(?:static )?(?:void|int|uint32_t) '+name+r'\([^;]*?\)\s*\{',source,re.M).start()
     opening=source.index('{',start);depth=1;end=opening+1
     while depth:
         depth+=(source[end]=='{')-(source[end]=='}');end+=1
@@ -25,6 +26,8 @@ stub=r'''
 #define CAR_MSG_IMU 0x12
 #define HAL_OK 0
 #define HAL_BUSY 1
+#define HAL_UNLOCKED 0
+#define __HAL_UART_CLEAR_OREFLAG(u) ((void)(u))
 #define HAL_UART_STATE_READY 0
 #define HAL_UART_STATE_BUSY_TX 1
 typedef int HAL_StatusTypeDef;
@@ -43,6 +46,7 @@ static uint32_t __get_PRIMASK(void){return mask;}
 static void __disable_irq(void){mask=1;}
 static void __set_PRIMASK(uint32_t x){mask=x;if(!x&&deferred){deferred=0;HAL_UART_RxCpltCallback(&huart1);}}
 static uint32_t HAL_GetTick(void){return tick++;}
+static uint32_t BSP_System_Millis(void){return HAL_GetTick();}
 static size_t car_encode(uint8_t*a,size_t cap,uint8_t type,uint16_t seq,const uint8_t*p,uint16_t n){(void)a;(void)cap;(void)type;(void)seq;(void)p;(void)n;return 28;}
 static int HAL_UART_Receive_IT(UART_HandleTypeDef*u,uint8_t*p,int n){(void)p;(void)n;if(u->Lock)return HAL_BUSY;u->RxState=1;return HAL_OK;}
 static int start_tx(UART_HandleTypeDef*u){u->Lock=1;u->RxState=0;if(mask)deferred=1;else HAL_UART_RxCpltCallback(u);u->gState=1;u->Lock=0;return HAL_OK;}
@@ -64,12 +68,18 @@ int main(void){
  tick+=31;poll_tx();assert(io_errors==1 && aborts==1 && mask==0);
  while(tx_head!=tx_tail){huart1.gState=0;poll_tx();}
  assert(!tx_active && polls==0);
+ huart1.RxState=HAL_UART_STATE_READY;huart1.Lock=HAL_UNLOCKED;
+ assert(BSP_UART_RecoverRx()==1 && rx_tail==rx_head && huart1.RxState==1);
+ assert(BSP_UART_RecoverRx()==0);
+ { uint8_t byte;assert(!BSP_UART_Read(&byte));HAL_UART_RxCpltCallback(&huart1);
+   assert(BSP_UART_Read(&byte) && byte==42 && !BSP_UART_Read(&byte)); }
+ assert(BSP_UART_Errors()==io_errors);
  return 0;
 }
 '''
 out=root/'out/uart_tx_race';out.mkdir(exist_ok=True)
 c=out/'test.c';exe=out/'test.exe'
-c.write_text(stub+function('HAL_UART_RxCpltCallback')+function('poll_tx')+function('send_frame')+test,encoding='utf-8')
+c.write_text(stub+function('HAL_UART_RxCpltCallback')+function('BSP_UART_TxReady')+function('BSP_UART_Transmit')+function('BSP_UART_AbortTx')+function('BSP_UART_RecoverRx')+function('BSP_UART_Read')+function('BSP_UART_Errors')+function('poll_tx')+function('send_frame')+test,encoding='utf-8')
 subprocess.run(['C:/msys64/ucrt64/bin/gcc.exe',str(c),'-o',str(exe)],check=True)
 subprocess.run([str(exe)],check=True)
 print('PASS: RX during TX lock, async queue, ACK capacity, bounded TX timeout')

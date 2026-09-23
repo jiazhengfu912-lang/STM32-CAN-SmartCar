@@ -337,7 +337,7 @@
               <MiscControls>-Oz -Wall</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB,__MICROLIB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Include;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../../../protocol;../../stm32_bootloader</IncludePath>
+              <IncludePath>../Core/Inc;../BSP;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Include;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../../../protocol;../../stm32_bootloader</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -435,6 +435,26 @@
               <FileName>system_stm32f1xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/system_stm32f1xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../BSP/BSP_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../BSP/BSP_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_system.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../BSP/BSP_system.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../BSP/BSP_uart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_hal.c</FileName>

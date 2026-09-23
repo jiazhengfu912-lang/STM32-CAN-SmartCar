@@ -764,3 +764,12 @@ P右轮反转0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.03
 主机测试通过；真实浏览器隔离API替身测试坐标输入、op9/心跳、缺测停车及移动布局通过。修正了点击动作恰逢心跳在途时无提示的问题，现在明确提示稍后再点，不排队或自动重发。STM32 App23632/47104字节、静态RAM10888/20480字节；Bootloader3744字节；ESP32构建通过。保持App地址0x08004000及原Bootloader布局。构建通过不代表安装成功或实物验收。
 
 [功能和参数说明](COORDINATE_NAVIGATION.md) · [仿真CSV](evidence/coordinate-v128-20260921/simulation.csv) · [SVG](evidence/coordinate-v128-20260921/simulation.svg) · [结果JSON](evidence/coordinate-v128-20260921/summary.json) · [测试日志](evidence/coordinate-v128-20260921/tests.log) · [文件校验](evidence/coordinate-v128-20260921/SHA256.json)。
+
+
+## 2026-09-23：v130 BSP分层（仅离线验证）
+
+当前PCB硬件操作迁入BSP_can/BSP_uart/BSP_i2c/BSP_system；业务层保留电机映射、协议优先级、采样/超时策略、校准及导航。P右轮反转0.45→0.45/其余0.30→0.30，I稳态0.010→0.010/启动0.030→0.030，10ms周期；轮速PI、起步、姿态和导航算法未修改。控制心跳300ms、电机反馈100ms、IMU50ms保护保持。
+
+主机测试通过，覆盖BSP层依赖边界、CAN帧/邮箱/错误、I2C忙线/5ms超时/重试、UART发送持锁竞争/接收恢复及原有控制测试。测试夹具曾因I2C宏与新MSP参数同名导致类型冲突，修正替身命名后通过，未修改实机引脚或降低检查标准。最终构建v130 App24024/47104字节、静态RAM10896/20480字节、Bootloader3744字节；v129为未安装中间构建。MDK/EIDE源列表及构建入口已同步；CubeMX再生成未执行。
+
+本轮未连接设备、未烧录、未发运动命令。没有本版实物CSV或波形，不用仿真或前版图代替；硬件供电维修及BSP实物回归均待验证。详细边界见[BSP说明](BSP.md)，[构建/测试与仿真一致性报告](evidence/bsp-v130-20260923/verification.json)、[测试日志](evidence/bsp-v130-20260923/tests.log)、[SHA256](evidence/bsp-v130-20260923/SHA256.json)。

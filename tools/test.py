@@ -32,6 +32,7 @@ def main():
     run([ROOT/'out/test_angle_speed.exe'])
     run([GCC,*flags,app/'Core/Src/imu.c',app/'Core/Src/navigation.c',app/'Core/Src/drive.c',app/'Core/Src/angle_speed.c',ROOT/'tests/test_imu_navigation.c','-lm','-o',ROOT/'out/test_imu_navigation.exe'])
     run([ROOT/'out/test_imu_navigation.exe'])
+    run([sys.executable,'-B',ROOT/'tests/test_bsp.py'])
     run([sys.executable,'-B',ROOT/'tests/test_mpu6050.py'])
     run([sys.executable,'-B',ROOT/'tests/test_imu_console.py'])
     for name in ['stop_busy','timed_trial','heartbeat_timing','first_heartbeat','navigation_ui']:

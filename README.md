@@ -1,10 +1,10 @@
 # STM32-CAN-SmartCar
 
-**开发中 · 当前源码 v128（坐标导航，未上板） · 整体实物验收未完成。**
+**开发中 · 当前源码 v130（BSP分层，未上板） · 整体实物验收未完成。**
 
-[坐标导航说明](docs/COORDINATE_NAVIGATION.md) · [MPU6050升级与操作](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
+[BSP分层说明](docs/BSP.md) · [坐标导航说明](docs/COORDINATE_NAVIGATION.md) · [MPU6050升级与操作](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
 
-双轮差速小车：**手动无线驾驶 + 实时遥测 + STM32 OTA**。v128新增单目标相对坐标导航：转向、接近、到位停稳，并增加网页输入、取消及状态显示。v127已完成安装和通信检查，但MPU6050采集仍失败；用户报告主控供电异常，硬件待修。v128仅通过离线测试、理想模型仿真和构建，未烧录或实车验收；不包含避障、路径搜索、巡线、LoRa业务、第三电机或执行器控制。
+双轮差速小车：**手动无线驾驶 + 实时遥测 + STM32 OTA**。v128新增单目标相对坐标导航：转向、接近、到位停稳，并增加网页输入、取消及状态显示。v127已完成安装和通信检查，但MPU6050采集仍失败；用户报告主控供电异常，硬件待修。v128坐标导航与v130 BSP分层仅通过离线验证和构建，未烧录或实车验收；不包含避障、路径搜索、巡线、LoRa业务、第三电机或执行器控制。
 
 源自独立项目 `STM32-CAN-Line-Following-Car` 的 HAL/CMSIS 驱动、硬件映射和已验证 OTA 模块。新项目完全独立，构建不引用原仓库；原项目及未提交修改保留。
 

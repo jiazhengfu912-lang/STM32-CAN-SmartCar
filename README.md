@@ -1,10 +1,12 @@
 # STM32-CAN-SmartCar
 
-**开发中 · 当前源码 v130（BSP分层，未上板） · 整体实物验收未完成。**
+**开发中 · 当前源码 v131（ICM-42688-P驱动，未上板） · 整体实物验收未完成。**
 
-[BSP分层说明](docs/BSP.md) · [坐标导航说明](docs/COORDINATE_NAVIGATION.md) · [MPU6050升级与操作](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
+[ICM-42688-P驱动与接线](docs/ICM42688_UPGRADE.md) · [BSP分层说明](docs/BSP.md) · [坐标导航说明](docs/COORDINATE_NAVIGATION.md) · [MPU6050历史升级记录](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)
 
 双轮差速小车：**手动无线驾驶 + 实时遥测 + STM32 OTA**。v128新增单目标相对坐标导航：转向、接近、到位停稳，并增加网页输入、取消及状态显示。v127已完成安装和通信检查，但MPU6050采集仍失败；用户报告主控供电异常，硬件待修。v128坐标导航与v130 BSP分层仅通过离线验证和构建，未烧录或实车验收；不包含避障、路径搜索、巡线、LoRa业务、第三电机或执行器控制。
+
+2026-10-10：用户已改用ICM-42688-P，v131沿用I²C2 PB10/PB11重写驱动，包含身份识别、复位/配置读回、100Hz采样与ICM数据换算，主机回归和构建通过，未安装。STM32最后确认运行v127，当前主控通信、供电维修、ICM真实采样与导航精度仍待验证，旧MPU记录仅用于历史追溯。
 
 源自独立项目 `STM32-CAN-Line-Following-Car` 的 HAL/CMSIS 驱动、硬件映射和已验证 OTA 模块。新项目完全独立，构建不引用原仓库；原项目及未提交修改保留。
 
@@ -50,7 +52,7 @@ python -B desktop/server.py
 
 构建生成：
 
-- `out/SmartCar-v127.ota`：32 字节元数据 + App，供网页 OTA 上传；文件名版本取自 `DRIVE_VERSION`。
+- `out/SmartCar-v131.ota`：32 字节元数据 + App，供网页 OTA 上传；文件名版本取自 `DRIVE_VERSION`，本版未安装。
 - `out/SmartCar-factory.bin`：首次通过 SWD 安装的 Bootloader + App + 有效记录，起始地址 `0x08000000`，不覆盖参数页。**本项目没有自动执行烧录命令。**
 - `out/app/app.hex`、`out/boot/boot.hex`：分区镜像。仅下载 App HEX 不会同步有效记录；正式升级使用 OTA 包，首次安装使用 factory 镜像。
 - `out/build_report.json`、`out/test_report.json`、`out/tests.log`：构建和测试证据。

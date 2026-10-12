@@ -72,5 +72,14 @@ class ImuTests(unittest.TestCase):
         app.control({'op':0,'owner':'test','at':time.time()*1000})
         with self.assertRaises(ValueError):app.control({'op':4,'owner':'test','at':time.time()*1000})
 
+    def test_sensor_temperature_and_raw_compatibility(self):
+        """按芯片身份换算温度，保持旧MPU记录可解码，未知身份不产生假温度。"""
+        p=self.payload();struct.pack_into('<h',p,22,-3312);p[106]=0x47
+        r=decode_imu(p);self.assertAlmostEqual(r['temperature_c'],0)
+        self.assertEqual(r['ax'],-8192);self.assertEqual(r['temperature_raw'],-3312)
+        p[106]=0x68;struct.pack_into('<h',p,22,-340)
+        self.assertAlmostEqual(decode_imu(p)['temperature_c'],35.53)
+        p[106]=0;self.assertIsNone(decode_imu(p)['temperature_c'])
+
 
 if __name__=='__main__':unittest.main(verbosity=2)

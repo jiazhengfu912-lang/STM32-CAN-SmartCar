@@ -25,5 +25,6 @@ def decode_imu(payload, transport_age=0, transport_valid=True):
                 mode=mode, uptime_ms=uptime, sample_ms=sample, sequence=sequence, age_ms=age,
                 result=payload[30], diagnostic=payload[31], state=payload[104], fault=payload[105],
                 identity=payload[106], version=struct.unpack_from('<I', payload, 108)[0],
-                temperature_c=raw[3]/340+36.53)
+                temperature_c=(raw[3]/132.48+25 if payload[106]==0x47 else
+                               raw[3]/340+36.53 if payload[106]==0x68 else None))
     return data

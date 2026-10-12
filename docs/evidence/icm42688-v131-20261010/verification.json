@@ -1,0 +1,99 @@
+{
+  "result": "PASS_OFFLINE_HARDWARE_PENDING",
+  "version": 131,
+  "source_before": 130,
+  "head_before": "f8f41ae0a58e22b1769a0f7815c549bd47ae604a",
+  "date": "2026-10-10",
+  "scope": "DRIVER_IMPLEMENTATION_HOST_INJECTION_AND_BUILD_ONLY",
+  "tests": "PASS",
+  "build": {
+    "result": "PASS",
+    "scope": "BUILD_ONLY",
+    "app_bytes": 24304,
+    "app_limit": 47104,
+    "boot_bytes": 3744,
+    "version": 131,
+    "hardware_tested": false
+  },
+  "static_ram_bytes": 10896,
+  "hardware_tested": false,
+  "installed": false,
+  "gateway_queried": false,
+  "motion_commands_sent": false,
+  "software_downloaded": false,
+  "hardware_csv_available": false,
+  "waveforms_scope": "HOST INJECTION ONLY; not physical measurements",
+  "unchanged_source_hashes": {
+    "firmware/stm32_app/Core/Src/drive.c": true,
+    "firmware/stm32_app/Core/Src/navigation.c": true,
+    "firmware/stm32_app/BSP/BSP_i2c.c": true
+  },
+  "coordinate_csv_identical_to_archived_v128": true,
+  "trace_rows": 7113,
+  "trace_scenarios": {
+    "sample-and-calibration": 5365,
+    "address-69": 183,
+    "wrap": 193,
+    "wrong-identity": 300,
+    "config-mismatch": 300,
+    "reset-not-done": 300,
+    "busy-and-timeout": 7,
+    "invalid-sample": 221,
+    "calibration-data-gap": 243,
+    "sda-low": 1
+  },
+  "motor_pi_before_after": {
+    "p_right_reverse": [
+      0.45,
+      0.45
+    ],
+    "p_other": [
+      0.3,
+      0.3
+    ],
+    "i_steady_per_10ms": [
+      0.01,
+      0.01
+    ],
+    "i_startup_per_10ms": [
+      0.03,
+      0.03
+    ]
+  },
+  "algorithm_changed": [
+    "sensor identity/reset/configuration/readback/DRDY",
+    "sensor raw byte order and temperature/gyro conversion",
+    "hardware UI filter approx19.2Hz",
+    "invalidate calibration/bias on sensor recovery"
+  ],
+  "algorithm_unchanged": [
+    "motor PI",
+    "motor startup",
+    "attitude complementary fusion and stationary calibration",
+    "odometry and navigation",
+    "BSP hardware operations"
+  ],
+  "protections_unchanged_ms": {
+    "command_heartbeat": 300,
+    "motor_feedback": 100,
+    "imu_sample": 50,
+    "i2c_transaction": 5,
+    "i2c_retry": 1000
+  },
+  "failures_preserved": {
+    "attempt-01.log": "test fixture compilation error, corrected whitespace",
+    "attempt-02.log": "dedicated test PASS",
+    "injected_faults": "kept in driver-trace.csv and driver-failures charts"
+  },
+  "limitations": [
+    "No sensor/board communication, axis, drift or hardware protection verification",
+    "Polling register mode; no FIFO/history recovery; MCU completion timestamps",
+    "Current STM32 offline and power repair not reverified"
+  ],
+  "artifact_sha256": {
+    "out/app/app.bin": "355aba404bce61c6353559f12690e7d169d63d6d7f17fd2d6ee5b428a2f25118",
+    "out/app/app.hex": "bfd6e1c5cfe87e865d4e2c38ade717104cf01757ce3229d2fc5d01ecfcb200f5",
+    "out/boot/boot.bin": "a74182bab582db81162e7863b4e4748270b073cf9718d6aa0fdc66805a7ff106",
+    "out/SmartCar-v131.ota": "13fbb0f8541b93cf048f105a7d419b8cb2ae9f1cbc4173891262749d69922c7e"
+  }
+}

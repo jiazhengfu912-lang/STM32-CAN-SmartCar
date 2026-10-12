@@ -6,7 +6,7 @@
 #include <string.h>
 static uint8_t raw[14],packet[32];
 /** 写入大端传感器测试数据，不模拟HAL行为。 */
-static void be(unsigned i,int16_t x) { raw[i*2]=(uint8_t)((uint16_t)x>>8); raw[i*2+1]=(uint8_t)x; }
+static void be(unsigned i,int16_t x) { unsigned n=i<3 ? i+1:(i==3 ? 0:i);raw[n*2]=(uint8_t)((uint16_t)x>>8); raw[n*2+1]=(uint8_t)x; }
 /** 写入协议中的小端32位字段。 */
 static void le(uint8_t *p,uint32_t n) { unsigned i; for(i=0;i<4;i++) p[i]=(uint8_t)(n>>(8*i)); }
 /** 构造一次新导航指令。 */
@@ -27,9 +27,9 @@ static void test_imu(void)
 {
     imu_state im; unsigned i; int8_t bad[3]={1,1,3},left[3]={1,2,-3},ok[3]={2,-1,3};
     imu_init(&im);assert(!imu_axes(&im,bad));assert(!imu_axes(&im,left));assert(imu_axes(&im,ok));
-    be(0,-8192);be(1,0);be(2,0);be(3,-340);be(4,0);be(5,0);be(6,0);
+    be(0,-8192);be(1,0);be(2,0);be(3,-3312);be(4,0);be(5,0);be(6,0);
     imu_sample(&im,raw,0xfffffff0U,1);assert(im.raw[0]==-8192 && im.accel[1]==1);
-    imu_sample(&im,raw,4,1);assert(im.interval_ms==20);assert(fabsf(im.temperature-35.53f)<0.01f);
+    imu_sample(&im,raw,4,1);assert(im.interval_ms==20);assert(fabsf(im.temperature)<0.01f);
     imu_sample(&im,raw,4,1);assert(im.sequence==2);
     imu_init(&im);memset(raw,0,sizeof(raw));be(2,8192);be(6,65);
     imu_sample(&im,raw,10,1);assert(imu_calibrate(&im,10));

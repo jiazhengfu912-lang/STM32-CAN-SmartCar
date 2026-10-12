@@ -42,7 +42,7 @@ int imu_calibrate(imu_state *s, uint32_t now)
     memset(s->sum,0,sizeof(s->sum)); memcpy(s->reference,s->accel,sizeof(s->reference)); return 1;
 }
 
-/** 解码新采样并转换为车体坐标；单位为g、rad/s、摄氏度及rad。 */
+/** 解码ICM-42688-P新采样并转换为车体坐标；单位为g、rad/s、摄氏度及rad。 */
 void imu_sample(imu_state *s, const uint8_t raw[14], uint32_t now, int stationary)
 {
     unsigned i; uint32_t dt=now-s->sample_ms; float norm,roll,pitch,alpha,t;
@@ -51,13 +51,17 @@ void imu_sample(imu_state *s, const uint8_t raw[14], uint32_t now, int stationar
         s->interval_ms=dt; if (dt>s->max_interval_ms) s->max_interval_ms=dt;
         if (dt>=50U) { ++s->gaps; s->attitude_ready=0; if (s->calibration==IMU_CALIBRATING) s->calibration=IMU_CAL_FAILED; }
     }
-    for (i=0;i<7;i++) s->raw[i]=(int16_t)((uint16_t)raw[2*i]<<8|raw[2*i+1]);
+    /* ICM线序为temp,ax,ay,az,gx,gy,gz；遥测继续使用ax,ay,az,temp,gx,gy,gz。 */
+    for (i=0;i<7;i++) {
+        unsigned n=i<3 ? i+1:(i==3 ? 0:i);
+        s->raw[i]=(int16_t)((uint16_t)raw[2*n]<<8|raw[2*n+1]);
+    }
     for (i=0;i<3;i++) {
         int axis=s->axes[i],n=(axis<0 ? -axis:axis)-1; float sign=axis<0 ? -1.0f:1.0f;
         s->accel[i]=sign*s->raw[n]/8192.0f;
-        s->gyro[i]=sign*s->raw[n+4]/65.5f*(PI_F/180.0f);
+        s->gyro[i]=sign*s->raw[n+4]*(500.0f/32768.0f)*(PI_F/180.0f);
     }
-    s->temperature=s->raw[3]/340.0f+36.53f;
+    s->temperature=s->raw[3]/132.48f+25.0f;
     norm=sqrtf(s->accel[0]*s->accel[0]+s->accel[1]*s->accel[1]+s->accel[2]*s->accel[2]);
     if (s->calibration==IMU_CALIBRATING) {
         int still=stationary && norm>0.9f && norm<1.1f;

@@ -13,6 +13,7 @@ typedef struct {
 void imu_init(imu_state *s);
 int imu_axes(imu_state *s, const int8_t axes[3]);
 int imu_calibrate(imu_state *s, uint32_t now);
+/* 输入ICM-42688-P从TEMP_DATA1开始的14字节大端数据。 */
 void imu_sample(imu_state *s, const uint8_t raw[14], uint32_t now, int stationary);
 int imu_fresh(const imu_state *s, uint32_t now);
 float imu_wrap(float angle);

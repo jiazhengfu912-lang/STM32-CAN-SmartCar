@@ -1,7 +1,7 @@
 #ifndef SMARTCAR_DRIVE_H
 #define SMARTCAR_DRIVE_H
 #include <stdint.h>
-#define DRIVE_VERSION 130U
+#define DRIVE_VERSION 131U
 #define DRIVE_LIMIT_RPM 720 /* 电机轴转速；36:1 减速后为轮速 20 rpm。 */
 #define DRIVE_COMMAND_MS 300U
 #define DRIVE_FEEDBACK_MS 100U

@@ -6,9 +6,9 @@ root=Path(__file__).resolve().parents[1]
 bsp=root/'firmware/stm32_app/BSP'
 for p in bsp.glob('*.[ch]'):
     text=p.read_text(encoding='utf-8')
-    assert not re.search(r'#include "(?:drive|navigation|imu|mpu6050|car_protocol|ota_receiver)\.h"',text),p
+    assert not re.search(r'#include "(?:drive|navigation|imu|icm42688|car_protocol|ota_receiver)\.h"',text),p
     assert not re.search(r'\b(?:drive_fault|drive_command|imu_sample|car_encode)\s*\(',text),p
-for name in ('smartcar','mpu6050'):
+for name in ('smartcar','icm42688'):
     text=(root/f'firmware/stm32_app/Core/Src/{name}.c').read_text(encoding='utf-8')
     assert not re.search(r'\b(?:HAL_|__HAL_|GPIO[A-G]|IWDG|SCB|NVIC_|__disable_irq)',text),name
 source=(bsp/'BSP_can.c').read_text(encoding='utf-8')

@@ -1,0 +1,25 @@
+{
+  "part": "ICM-42688-P",
+  "document": "DS-000347",
+  "local_revision": "1.2",
+  "local_revision_date": "2020-04-19",
+  "local_pages": 109,
+  "local_pdf_sha256": "4d7c04e3e86f37defe27c20a82b9fcd9d4ddbd3b9d68a525c2d49595d52cf97a",
+  "online_cross_check_revision": "1.6",
+  "online_product_listing_revision": "1.9 (full document not read)",
+  "interface": "I2C2 PB10/PB11 100kHz",
+  "who_am_i": 71,
+  "i2c_addresses": [
+    104,
+    105
+  ],
+  "gyro_range_dps": 500,
+  "accel_range_g": 4,
+  "odr_hz": 100,
+  "ui_filter_order": 2,
+  "ui_filter_bw_hz_approx": 19.2,
+  "temperature_formula": "raw / 132.48 + 25",
+  "gyro_formula_rad_s": "raw * (500 / 32768) * pi / 180",
+  "accel_formula_g": "raw / 8192",
+  "hardware_tested": false
+}

@@ -6,7 +6,7 @@
 #include "drive.h"
 #include "angle_speed.h"
 #include "navigation.h"
-#include "mpu6050.h"
+#include "icm42688.h"
 #include "car_protocol.h"
 #include "ota_receiver.h"
 #include "update_request.h"
@@ -206,7 +206,7 @@ void SmartCar_EarlyInit(void) { BSP_System_EarlyInit(); }
 /** 外设初始化后配置接收过滤器和状态机，不启用任何电机运动。 */
 void SmartCar_Init(void)
 {
-    drive_init(&drive); imu_init(&imu); navigation_init(&nav); mpu6050_init(); car_receiver_init(&receiver,on_frame,0);
+    drive_init(&drive); imu_init(&imu); navigation_init(&nav); icm42688_init(); car_receiver_init(&receiver,on_frame,0);
     /* 电机ID属于应用协议；BSP只执行指定过滤与硬件接收。 */
     if (!BSP_CAN_Start(0x201,0x202) || !BSP_UART_ReceiveStart()) {
         /* 初始化失败不继续业务循环，等待已开启的看门狗复位。 */
@@ -233,12 +233,12 @@ static void send_imu(uint32_t now)
     p[30]=nav.result; p[31]=nav.diagnostic;
     put_float(p+32,imu.roll); put_float(p+36,imu.pitch); put_float(p+40,imu.yaw);
     put_float(p+44,nav.x); put_float(p+48,nav.y); put_float(p+52,nav.heading);
-    put_float(p+56,imu.gyro[2]); ota_put32(p+60,mpu_status.errors);
-    ota_put32(p+64,mpu_status.timeouts); ota_put32(p+68,imu.gaps);
+    put_float(p+56,imu.gyro[2]); ota_put32(p+60,icm_status.errors);
+    ota_put32(p+64,icm_status.timeouts); ota_put32(p+68,imu.gaps);
     ota_put32(p+72,control_interval_max); ota_put32(p+76,imu.max_interval_ms);
     ota_put32(p+80,control_late); ota_put32(p+84,tx_dropped); ota_put32(p+88,nav.origin_id);
     for (i=0;i<2;i++) { put16(p+92+2*i,drive.target[i]); put16(p+96+2*i,drive.rpm[i]); put16(p+100+2*i,drive.output[i]); }
-    p[104]=drive.state; p[105]=drive.fault; p[106]=mpu_status.identity;
+    p[104]=drive.state; p[105]=drive.fault; p[106]=icm_status.identity;
     ota_put32(p+108,DRIVE_VERSION);
     send_frame(CAR_MSG_IMU,telemetry_seq++,p,sizeof(p));
 }
@@ -270,7 +270,7 @@ void SmartCar_Poll(void)
         car_receiver_feed(&receiver,byte,BSP_System_Millis());
     }
     now=BSP_System_Millis(); car_receiver_poll(&receiver,now);
-    mpu6050_poll(&imu,now,navigation_stationary(&drive,now));
+    icm42688_poll(&imu,now,navigation_stationary(&drive,now));
     if (now-telemetry>=100U) { telemetry=now; send_telemetry(); }
     if (now-imu_sent>=(nav.diagnostic ? 20U:100U)) { imu_sent=now; send_imu(now); }
     if (now-identity>=1000U) { identity=now; send_identity(); }

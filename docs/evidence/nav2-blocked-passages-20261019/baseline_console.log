@@ -1,0 +1,136 @@
+{"wall_s": 1.0919263160003538, "event": "launch_started", "pid": 18461, "partition": "smartcar-replan-e71118527989462c8af21af64d681e01"}
+{"wall_s": 15.399556051000218, "event": "ready", "states": {"bt_navigator": "active", "amcl": "active", "smoother_server": "active", "planner_server": "active", "controller_server": "active", "behavior_server": "active", "waypoint_follower": "active", "velocity_smoother": "active", "map_server": "active"}}
+{"wall_s": 15.402136933000293, "event": "goal_accepted"}
+{"wall_s": 175.40308695900058, "event": "failure", "error": "目标执行超时"}
+{"wall_s": 175.40697437200015, "event": "cancel_on_exit"}
+{"wall_s": 175.42487228000027, "event": "shutdown_signal", "signal": "SIGINT", "process_group": 18461}
+{"wall_s": 177.06067356200037, "event": "shutdown_signal", "signal": "SIGINT", "process_group": 18462}
+{
+  "result": "FAIL",
+  "scope": "SIMULATION_ONLY",
+  "case": "two_doors",
+  "started_utc": "2026-10-19T07:46:39.990057+00:00",
+  "domain_id": 89,
+  "ign_partition": "smartcar-replan-e71118527989462c8af21af64d681e01",
+  "goal": [
+    1.03,
+    -2.92,
+    0.0
+  ],
+  "goal_send_count": 1,
+  "checks": {
+    "blockers_present_before_goal": true,
+    "startup_ready": true
+  },
+  "firmware_source_version": 131,
+  "pi_exercised": false,
+  "pi_changed": false,
+  "not_verified": [
+    "physical vehicle",
+    "moving obstacles",
+    "arbitrary routes",
+    "multi-goal GUI"
+  ],
+  "obstacle": {
+    "x": 4.5,
+    "y": 0.0,
+    "dx": 1.2,
+    "dy": 1.85,
+    "dz": 0.6
+  },
+  "blockers": [
+    {
+      "name": "blocked_left",
+      "shape": "sphere",
+      "x": -2.9082,
+      "y": 0.2833,
+      "z": 0.5,
+      "radius": 0.5
+    },
+    {
+      "name": "blocked_right",
+      "shape": "box",
+      "x": 3.0925,
+      "y": 0.8227,
+      "z": 0.5,
+      "size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "reopen_requested": false,
+  "source_sha256": {
+    "ros2_ws/tools/verify_replanning.py": "122d28c845c55f1cbd701c9b2d22ad2b2b9388432b2f4817a8a161567eafb1a5",
+    "ros2_ws/tools/verify_navigation.py": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml": "c2366b36a4d12b1bc29d3b003651f9a6bb797dd013a01c2517364d5be2778556",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "e7b9eda3db4a9c445a8b969d307438b7c0c290c61177eec14a07f3b9b2aa6883"
+  },
+  "bt_override_sha256": "ac3cc08e144859b1efc4c5a9103b906114efe21f53b564276a2702ce0c7fc8d7",
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false",
+    "bt_xml:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/nav2-blocked-passages-20261019/before/navigate_recovery.xml",
+    "world:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/nav2-blocked-passages-20261019/baseline_two_doors_01/test_world.sdf",
+    "initial_x:=-2.99",
+    "initial_y:=1.91"
+  ],
+  "lifecycle_states": {
+    "bt_navigator": "active",
+    "amcl": "active",
+    "smoother_server": "active",
+    "planner_server": "active",
+    "controller_server": "active",
+    "behavior_server": "active",
+    "waypoint_follower": "active",
+    "velocity_smoother": "active",
+    "map_server": "active"
+  },
+  "error": "目标执行超时",
+  "shutdown": {
+    "process_group": 18461,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "truth_bridge_shutdown": {
+    "process_group": 18462,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "paths_received": 141,
+  "duration_wall_s": 177.3457752559998,
+  "raw_sha256": {
+    "velocity.csv": "89bbaadba4bcd576c79bfb4262e560eac8537e6967a98571d1ce7e31efa5049b",
+    "world_pose.csv": "f0aa154bce95031b020d820fa43339442c54c6f06b5314293def96cb700fff43",
+    "scan.jsonl": "9256fe2d2fcdb22eb7734cdbdb9ae4b2e33802745963477e6a45d242b665ce77",
+    "launch.log": "f7b1335020a20829bc099252529fa353584e81869fb50a2745353cdc10d3ab48",
+    "exception.log": "60aa676dd18c57738cc0bf58af8bcdf412ff73446cd4e9c64321cee37b6a249f",
+    "test_world.sdf": "2eeae2a7911a39b622afbe47528fc20d639ae2b1a85bb158cb94ccd33361ec9c",
+    "safety.jsonl": "04d480775117c0f7dc20acfd57b5aa1c8a2ad199942f4f3c0e524dc0ce777771",
+    "odom.csv": "9cf41f1710f7e2bd4194a3c50fca7777cdd16105b3a7acb7a09274bea12abdbe",
+    "truth_bridge.log": "1e617962bd78643a1e9ead28987fdb8d15017ad594477cb8ae2de3a8de3aec98",
+    "amcl.jsonl": "18a76c1f74ef69932b828203e96b189fa3676bc5eb78062e7377095326a5b8fc",
+    "behavior_tree.jsonl": "b4015e6e69a339cb9f309f75687271d9d1dbf5ea022980efbd87490169d3a269",
+    "clock.jsonl": "d070ce6ed7ebed9d29332c7305f763a5da253efb4e506f5e9aba9ee1d0f340df",
+    "feedback.jsonl": "64ad34a6881b3223b49ca8848399ae23d6b96bf304f6011f97628a4d753e5d8c",
+    "global_costmap_costmap.jsonl": "b1195622746d51e5361791ac6b6d57af78fc64af3e74b076162224dac26b0825",
+    "local_costmap_costmap.jsonl": "eb474844da6bf33b42d39ef5bfc193b08e998779feb5c7210b35c2b2bfceba52",
+    "plans.jsonl": "353c0c8657adaf5fc4819872ead9e8291685d86157e90f485f8560f3ef0658a3",
+    "world_pose.jsonl": "156261496014573f9d7441e4dd45d1c905d3f1e1a0906d7c3da1b4b39d4dac5c",
+    "map.jsonl": "c433a57934ada58d46f4a2645b1bac3f850bb986e3fa24b5a301cd960b2dfa12",
+    "events.jsonl": "ccfab07649725b9b283aa21b36bf56c530cf78af964b3f29f5c8daaa52bb10a3",
+    "obstacle_memory.csv": "88517de222933ba5f5942eb681547f3bc20834d48dc4f00dfdde0bc1dc08b24a"
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "result": "FAIL",
+  "scope": "SIMULATION_ONLY",
+  "case": "two_doors",
+  "started_utc": "2026-10-19T07:51:27.603710+00:00",
+  "domain_id": 90,
+  "ign_partition": "smartcar-replan-9c092b4d57634905ad3d7e103b9177a6",
+  "goal": [
+    1.03,
+    -2.92,
+    0.0
+  ],
+  "goal_send_count": 2,
+  "checks": {
+    "blockers_present_before_goal": true,
+    "startup_ready": true,
+    "stopped": true,
+    "single_goal_only": true,
+    "expected_action_result": true,
+    "both_blockers_observed": true,
+    "blockers_retained_until_abort": true,
+    "new_goal_after_removal_succeeded": false,
+    "reopened_stopped": true,
+    "removed_blocker_cleared_by_scan": false
+  },
+  "firmware_source_version": 131,
+  "pi_exercised": false,
+  "pi_changed": false,
+  "not_verified": [
+    "physical vehicle",
+    "moving obstacles",
+    "arbitrary routes",
+    "multi-goal GUI"
+  ],
+  "obstacle": {
+    "x": 4.5,
+    "y": 0.0,
+    "dx": 1.2,
+    "dy": 1.85,
+    "dz": 0.6
+  },
+  "blockers": [
+    {
+      "name": "blocked_left",
+      "shape": "sphere",
+      "x": -2.9082,
+      "y": 0.2833,
+      "z": 0.5,
+      "radius": 0.5
+    },
+    {
+      "name": "blocked_right",
+      "shape": "box",
+      "x": 3.0925,
+      "y": 0.8227,
+      "z": 0.5,
+      "size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "reopen_requested": true,
+  "action_type": "NavigateToPose",
+  "source_sha256": {
+    "ros2_ws/tools/verify_replanning.py": "bd021ed3f522309bae08f888892286619c95bf77a166ce4c424a48f4e4c63983",
+    "ros2_ws/tools/verify_navigation.py": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml": "c2366b36a4d12b1bc29d3b003651f9a6bb797dd013a01c2517364d5be2778556",
+    "ros2_ws/src/smartcar_nav2/config/navigate_through_recovery.xml": "0c869e8b78530b398af4fee458133158463b4e6c2f2cda025c95a8e9c58594e5",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "e7b9eda3db4a9c445a8b969d307438b7c0c290c61177eec14a07f3b9b2aa6883"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false",
+    "world:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/nav2-blocked-passages-20261019/after_two_doors_02/test_world.sdf",
+    "initial_x:=-2.99",
+    "initial_y:=1.91"
+  ],
+  "lifecycle_states": {
+    "map_server": "active",
+    "amcl": "active",
+    "controller_server": "active",
+    "planner_server": "active",
+    "smoother_server": "active",
+    "bt_navigator": "active",
+    "waypoint_follower": "active",
+    "behavior_server": "active",
+    "velocity_smoother": "active"
+  },
+  "action_status": 6,
+  "stop_samples": 44,
+  "final_world_pose": [
+    0.5517195977819691,
+    2.8038866117441814,
+    1.5876338113320527
+  ],
+  "removed_right_wall_s": 75.88120672399964,
+  "reopened_action_status": 6,
+  "shutdown": {
+    "process_group": 19711,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "truth_bridge_shutdown": {
+    "process_group": 19712,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "paths_received": 28,
+  "duration_wall_s": 107.91972508099934,
+  "raw_sha256": {
+    "velocity.csv": "86cc22d85d1acf4392376b3172215f1fc351388b53a54d5ff7f9911ceca44277",
+    "world_pose.csv": "bcff4bf1827a5c4389a859d812fb53d75b49cf389aeda1de852275f06f9709e4",
+    "scan.jsonl": "0badcd8228a48098629ef16e25444b38038889d1813757dddec97a7f0a2f13da",
+    "launch.log": "b27758dcc065d2bacf9b8d1edf9f8e87b37b036a9a1fd911c11f1bdf202cd7b1",
+    "test_world.sdf": "2eeae2a7911a39b622afbe47528fc20d639ae2b1a85bb158cb94ccd33361ec9c",
+    "safety.jsonl": "53b044545713acf85b516edcfcd24d6bce6c60eadd41652a35b943f6b2d11397",
+    "gazebo_remove.log": "46eeeedc969f106320d874ff0cb0c5c1ea169952665865f64b8f5318d626c8a3",
+    "odom.csv": "3984be351954f49d4440b1493e8cee9ce001ebfb880b6da87192e85e2afb39da",
+    "truth_bridge.log": "ede2aa6fe49ad3f31049aa55beac4336e79479ac059970b191b7ad3ec4283b11",
+    "amcl.jsonl": "c5b10467b2763e497436aaefc1656786bb7f7b7ee98020877b10110293647ab2",
+    "behavior_tree.jsonl": "8b78785f1752cc4ce5e08ef01f2f909731df2a606d8b0977c26d021a499b8959",
+    "clock.jsonl": "47bdbc2fc4ea7efc8f6509a7f3876ad130bcf4def43948806a73af0d939c6355",
+    "feedback.jsonl": "2e264ef15403e4156917932c93a2e297f9603b01ac8a29d3b8dc3d3efb8bd065",
+    "global_costmap_costmap.jsonl": "df0294fefbb892f06bbd9219b38fde0459d7c9e1eaebe8df81524f36461ebcaf",
+    "local_costmap_costmap.jsonl": "b7916b24b91f5b776b579a79bc664dca1758bd4d394d443058e9b8aa374f9395",
+    "plans.jsonl": "ed5b7db1c2a6f97e58f57d5958fa842f0b08dc626a0600b33fad51cf73bd71ab",
+    "world_pose.jsonl": "78106cf9321dd7a10d216fde41bde996527e73739b47d91b10ee835e0a5231a2",
+    "map.jsonl": "1f98b3262f14367d767d571408b4e88eee63e46f369a2ad55f575efbaae8c7aa",
+    "events.jsonl": "d825bfd8cc0d2d9ccadfd839fc1276485df148a81d456bb20e8919558e0d42e7",
+    "obstacle_memory.csv": "2379eb1116bc7bf1f4323315ec088f51691f508a3a92fd3b1579f2898f40c6e1"
+  }
+}

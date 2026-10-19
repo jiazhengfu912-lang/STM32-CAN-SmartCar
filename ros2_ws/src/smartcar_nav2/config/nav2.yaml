@@ -238,7 +238,9 @@ global_costmap:
         cost_scaling_factor: 4.0
         inflation_radius: 0.45
       always_send_full_costmap: true
-      footprint: '[[-0.14, -0.16], [0.25, -0.16], [0.25, 0.16], [-0.14, 0.16]]'
+      # NavFn 仅检查栅格中心的内切半径，矩形会放行车头/转弯不能通过的窄缝。
+      # 全局规划采用覆盖矩形及近障转向保护的保守圆，局部碰撞检查仍用真实矩形。
+      robot_radius: 0.35
       footprint_padding: 0.02
       transform_tolerance: 0.5
 map_server:

@@ -1,0 +1,229 @@
+diff --git a/docs/ACCEPTANCE.md b/docs/ACCEPTANCE.md
+index c56bf57..acc66d3 100644
+--- a/docs/ACCEPTANCE.md
++++ b/docs/ACCEPTANCE.md
+@@ -1,5 +1,70 @@
+ # SmartCar 验收记录与调参波形 · 更新至 2026-10-19
+ 
++## 2026-10-19：双通道封堵后的障碍记忆与有限恢复（仅仿真）
++
++用户手动堵住两处出口后，小车反复往返。只读现场规划日志记录6次全局整图清空；隔离仿真按现场球体/方块位置复现：原BT约44.04墙钟秒已看到两障碍，之后5次全局清空令视野外障碍格归零，再次选择旧通路，160秒仍未结束后验收器取消。不能把用户取消或验收器超时写成导航自行ABORTED。根因不只是局部地图，而是自动恢复清空全局障碍记忆，以及内层重试反复绕过外层有限恢复预算。
++
++单目标和连续多目标树均改为不自动清空两图，规划/跟踪失败统一进入最多4次外层恢复（等待、碰撞检查下转向、等待、短距离后退）。启动器显式绑定两棵树，避免连续多目标仍回落到系统旧树。全局圆形轮廓0.35m、局部矩形、NavFn A*、RPP、扫描marking/clearing、速度及停机保护不变；移走障碍后通过新射线正常清除，不靠关闭clearing或长期重放旧扫描来保存障碍。
++
++**STM32源码v131：P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，10ms按电机轴rpm误差累计，D=0。**固件PI、起步、IMU及相对导航算法未改、未运行。上层规划/跟踪算法未换，恢复/失败处理策略改变。下面为本轮真实Gazebo/ROS记录，未平滑、补点或删异常，长缺口断线；不是实车波形。
++
++![修改前：全局清图后视野外已知堵路障碍格归零，路线反复切换](evidence/nav2-blocked-passages-20261019/baseline_two_doors_01/obstacle_memory.png)
++
++图中P/I未改、采用旧清图恢复策略；红线对应真实日志中的全局清空。统计范围为障碍中心±0.7m、静态底图原为空闲而实际全局图为致命值100的格子，排除已知墙格；仍可能含定位/栅格误差，不是物体分割或尺寸测量。两障碍在仿真中一直保持存在。
++
++![修改后：两处记忆保留到无路可走；移除右箱体并重新观察后，旧格正常清除](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.png)
++
++图中P/I未改、新恢复策略不清图。初始(-2.99,1.91,0)，目标map(1.03,-2.92,0)，球体/方块按用户世界位置建模并设为静态。先发一次目标，两障碍逐渐被扫描确认，均保留到ABORTED且持续停车；随后明确移走右箱体，显式发观察目标(3,2.7)重新看到通道，再显式发原目的地，SUCCEEDED并停稳。三个目标各有明确操作，不自动续跑已失败任务；整轮全局和局部清空调用均0。
++
++![同轮完整速度、门控、封堵失败停车及恢复通路后的到达停车](evidence/nav2-blocked-passages-20261019/after_two_doors_04/velocity.png)
++
++图中P/I、固件和保护均未改，仅上层恢复算法改变。两次停车各有42个新鲜样本，窗口约1.46秒，满足|vx|<0.02m/s、|wz|<0.03rad/s、窗口位移<0.02m且新鲜安全命令为零；移除后到达窗口角速度最大约0.01066rad/s。无法看到旧障碍位置时会保留旧格，不能要求删除Gazebo物体后机器人立即凭空知道空闲。
++
++![连续多目标动作入口也保留堵路信息，有限恢复后ABORTED并停车](evidence/nav2-blocked-passages-20261019/after_through_01/velocity.png)
++
++此图P/I未改，使用新多目标恢复树；实际ROS动作入口包含已到达起点和封堵后的目的地，不代表任意GUI队列通过。两处记忆保留，0次整图清空，停止检查通过。
++
++全部失败保留：一次AMCL生命周期服务应答超时，未发目标；一次移除箱体后因柜子遮挡而未充分重观测，直接重发远目标仍失败；重新观察后导航成功的一轮，以及普通绕行回归的一轮，固定3墙钟秒采集尚含减速尾段，停车检查FAIL。最终验收改为最多等15墙钟秒寻找上述连续静止窗口，**增加采集等待，没有改控制/故障超时或放宽静止阈值**。各轮实际结果保持原样，详见完整说明。
++
++三包构建、39个pytest通过（colcon45项含6个CTest包装，0错误/失败/跳过）。用户原场景和窗口未重启/改动，已保存恢复模板和手动启动脚本。未连接或烧录硬件、未实现实车桥，未提交/推送/合并。用户下一轮手动GUI验证、其它地图/移动障碍/长期运行仍需各自记录。
++
++![同一新恢复策略下，中途遇到单箱体仍能自动绕行、到达和停车](evidence/nav2-blocked-passages-20261019/after_detour_02/velocity.png)
++
++此图P/I未改，恢复算法改变但NavFn/RPP与保护不变。普通绕行回归PASS，原目标SUCCEEDED、实际轨迹改道、清图次数0，47个连续新鲜样本约1.46秒满足停车判据，新鲜安全命令为零。该窗口角速度最大约0.01554rad/s；未以动作成功直接代替停稳证据。[本轮绕行结果](evidence/nav2-blocked-passages-20261019/after_detour_02/result.json)。
++
++[本轮工况、全部尝试及恢复场景步骤](evidence/nav2-blocked-passages-20261019/README.md) · [双门封堵/移除后重新观察结果](evidence/nav2-blocked-passages-20261019/after_two_doors_04/result.json) · [连续多目标入口结果](evidence/nav2-blocked-passages-20261019/after_through_01/result.json) · [障碍记忆CSV](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.csv) · [原始速度CSV](evidence/nav2-blocked-passages-20261019/after_two_doors_04/velocity.csv) · [记忆SVG](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.svg) · [软件测试](evidence/nav2-blocked-passages-20261019/ros_tests.log) · [SHA256](evidence/nav2-blocked-passages-20261019/SHA256.json)。
++
++---
++
++## 2026-10-19：导航途中遇障重规划与转向空间修复（仅仿真）
++
++用户报告遇障停住后Goal failed。原配置实测在约1.21秒内已经生成绕行路径，但路径从箱体侧面窄缝通过，门控累计569条`OBSTACLE_NEAR_TURN`，控制器多次`Failed to make progress`；180秒未结束后验收器取消。**这次基线没有等到顶层ABORTED，不把主动取消写成Goal failed。**首次测试因验收器未启动世界位姿记录桥，60秒未就绪且未发目标，也完整保留。
++
++全局规划由矩形轮廓改为半径0.35m保守圆，保留0.02m padding；覆盖局部带padding矩形的约0.3245m最大转弯半径及半个0.05m栅格余量。NavFn A*、RPP、每秒重规划、局部矩形、速度、碰撞预测、近障保护与所有超时不变。算法没有换成其它规划/控制器，改变的是规划碰撞空间；可能改走更长路线或排除只适合固定姿态的窄缝。
++
++**STM32 v131，P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，10ms按电机轴rpm误差累计，D=0。**固件轮速PI、起步、IMU和相对导航均未改、未在Gazebo执行。下面波形直接来自本轮Gazebo/ROS实收点，未平滑/补点/删异常，长缺口断线；不是实物轮速波形。
++
++![修改前：新路径存在但近障转向门控长期阻止运动，保留180秒超时](evidence/nav2-replanning-20261019/baseline_detour_02/velocity.png)
++
++图中P/I同上未改，全局为原矩形。控制器持续请求速度而保护输出基本为零，证明仅“生成新路径”不足以完成绕行；原因是规划预留空间小于执行转向要求。原始扫描、代价图、路径、故障与超时取消记录均保留。
++
++![修改后：自动改道、到达与持续停车，原始速度和保护状态](evidence/nav2-replanning-20261019/after_detour_01/velocity.png)
++
++图中P/I同上未改，采用保守圆形全局轮廓，局部矩形及保护不变。在office_loop中向map(4.5,0,0)只发一次目标，车辆x约0.45m时插入中心(2,0)、0.4×0.5×0.6m箱体，约2.67墙钟秒收到绕行路径；该延迟包括运行负载，不是上限。车辆经左门→上方两间房→右门绕过，返回SUCCEEDED，最终世界位姿约(4.4532,0.0693,0.0981rad)，86条连续停车样本通过；该轮无近障转向门控阻塞。启动和并行负载中的扫描过期告警原样保留，未调整保护阈值。前后运行部分时间在不同ROS域/随机Gazebo分区并行，不能当同负载性能比较。
++
++![同轮新旧规划路径和完整实收车辆轨迹，坐标范围与修改前一致](evidence/nav2-replanning-20261019/after_detour_01/trajectory.png)
++
++图中P/I同上未改，修改全局规划轮廓的原因是让规划器选择有转弯空间的路线。橙色原路径、绿色首条绕行路径来自map，蓝色世界轨迹仅用于验收，按AMCL近似对齐；不从两者差标定定位误差。离线模型轮廓到箱体最小间隙约0.625m，不是实车间隙/接触传感器实测。
++
++![目标被障碍完全占据：有限恢复后ABORTED并停车](evidence/nav2-replanning-20261019/after_blocked_01/velocity.png)
++
++图中P/I未改、采用同一修改后配置，向同一目标只发一次，随后以1.2×1.85×0.6m箱体占住目标；原有恢复后返回ABORTED，70条持续停车样本通过。此工况是目标占据，不能推广为所有完全封路；目标距离超出局部4m窗口，局部图没有箱体格属于窗口范围，实际全局图已标记障碍。
++
++三包构建通过，34个pytest通过（colcon39项含5个CTest包装，0错误/失败/跳过）；新增全局转弯空间与双代价图扫描输入回归。全部自建进程退出，未打开用户RViz、未连接硬件、未提交/推送/合并。移动障碍、多目标GUI、其它门口/地图、长期运行与实车仍待各自验收。
++
++[工况/限制和全部尝试](evidence/nav2-replanning-20261019/README.md) · [修改后结果](evidence/nav2-replanning-20261019/after_detour_01/result.json) · [目标占据结果](evidence/nav2-replanning-20261019/after_blocked_01/result.json) · [原始世界位姿CSV](evidence/nav2-replanning-20261019/after_detour_01/world_pose.csv) · [原始速度CSV](evidence/nav2-replanning-20261019/after_detour_01/velocity.csv) · [速度SVG](evidence/nav2-replanning-20261019/after_detour_01/velocity.svg) · [软件测试](evidence/nav2-replanning-20261019/ros_tests.log) · [证据SHA256](evidence/nav2-replanning-20261019/SHA256.json)。
++
++---
+ 
+ ## 2026-10-18—19：ROS 2 仿真、SLAM 与 Nav2 迁入同一仓库
+ 
+diff --git a/docs/PROGRESS.md b/docs/PROGRESS.md
+index f882961..72ae5f6 100644
+--- a/docs/PROGRESS.md
++++ b/docs/PROGRESS.md
+@@ -10,11 +10,15 @@ v130完成[STM32 BSP分层](BSP.md)：按CAN/UART/I2C/System模块封装当前PC
+ 
+ 2026-10-18—19：新增 [ROS 2 上层工作空间](../ros2_ws/README.md)，把 Gazebo 仿真、二维 SLAM、AMCL/Nav2 与示例地图纳入同一仓库。三包构建、32 个软件用例和新目录实际单目标导航/到达停车通过；[原始证据与限制](evidence/ros2-integration-20261018/README.md)已归档。STM32/ESP32/协议/控制台未改，未实现或启用 ROS 实车桥；后续接入按[真实协议与分阶段路线](ROS2_HARDWARE_INTEGRATION.md)进行。本轮原固件全套主机回归因缺少新构建的 App 镜像中断，不把它写成全通过。
+ 
++2026-10-19：修复仿真全局规划轮廓与实际转向空间不匹配的问题。[本轮遇障重规划验收](evidence/nav2-replanning-20261019/README.md)记录原配置在箱体前被近障转向保护拦住、修改后中途插入箱体自动绕经相邻房间并抵达停车，以及目标区域被占据时失败停车。三包构建与34个pytest通过（colcon39项含包装）；未修改固件、降低保护或实现实车桥。全部修改仍在本地，未提交/推送/合并。
++
++2026-10-19后续：[双通道封堵验收](evidence/nav2-blocked-passages-20261019/README.md)确认自动全局清图会遗忘视野外已知堵塞。单目标和连续多目标现共用保留障碍、最多4轮的恢复策略；实际验证双门封堵后ABORTED并停车，以及移除箱体、重新观察后再发目标成功并停稳，清图调用0次。正常扫描清障、上一轮圆形全局轮廓和所有速度/保护保留。39个pytest通过（colcon45项含包装），全部本地修改未提交/推送/合并；现场场景与失败原始记录均保存。
++
+ 本页依据当前源码和已有 [验收记录](ACCEPTANCE.md) 整理，不把历史试验当作本次重新实测，不以主观百分比表示完成度。
+ 
+ | 模块/里程碑 | 当前进度 | 验证边界 |
+ |---|---|---|
+-| ROS 2 仿真、SLAM、Nav2 | 三包源码与地图入库，构建/单元测试/一次实际单目标仿真通过 | 实车桥待实现；更多场景、恢复与多目标待本仓库复测 |
++| ROS 2 仿真、SLAM、Nav2 | 三包、单目标、选定途中遇障改道和目标占据失败停车已验证 | 实车桥待实现；更多障碍、移动物体、多目标GUI与长期运行仍待验证 |
+ | STM32 HAL App、CubeMX、Keil/EIDE | 已实现并有构建记录 | CubeMX重新生成流程尚未实际回归 |
+ | 双轮CAN反馈、速度PI与状态机 | 已实现，已做架空调试 | 低速二次启动、超调和左右启动差未解决 |
+ | Bootloader与无线OTA | 已实现，历史记录包含多版无线安装 | 新版断电恢复完整矩阵仍待验收 |
+diff --git a/ros2_ws/src/smartcar_nav2/CMakeLists.txt b/ros2_ws/src/smartcar_nav2/CMakeLists.txt
+index 1271998..e3ef0a9 100644
+--- a/ros2_ws/src/smartcar_nav2/CMakeLists.txt
++++ b/ros2_ws/src/smartcar_nav2/CMakeLists.txt
+@@ -9,5 +9,7 @@ install(FILES scripts/gate_core.py DESTINATION lib/${PROJECT_NAME})
+ if(BUILD_TESTING)
+   find_package(ament_cmake_pytest REQUIRED)
+   ament_add_pytest_test(gate_core tests/test_gate_core.py)
++  ament_add_pytest_test(planning_clearance tests/test_planning_clearance.py)
++  ament_add_pytest_test(recovery_policy tests/test_recovery_policy.py)
+ endif()
+ ament_package()
+diff --git a/ros2_ws/src/smartcar_nav2/README.md b/ros2_ws/src/smartcar_nav2/README.md
+index 4b0dd4a..9f1325f 100644
+--- a/ros2_ws/src/smartcar_nav2/README.md
++++ b/ros2_ws/src/smartcar_nav2/README.md
+@@ -69,9 +69,21 @@ ros2 service call /navigation/stop std_srvs/srv/SetBool '{data: false}'
+ 3. 全局规划：NavFn A*，依据静态地图、实时障碍层及膨胀层，周期重规划。
+ 4. 障碍物检测与避障：C1二维扫描进入局部/全局ObstacleLayer，路径跟踪时的预测碰撞检查使用矩形车体轮廓。这里只检测占据位置，不识别“人/椅子”等语义类别，也无法检测扫描平面之外的全部障碍。
+ 5. 跟踪控制：Regulated Pure Pursuit控制器，Velocity Smoother平滑，最高前进0.30m/s、转速0.8rad/s；没有让键盘节点和导航抢同一速度入口。
+-6. 异常恢复：进展检查、控制失败检查，行为树最多4轮恢复，依次清理代价地图、碰撞检查下原地转动、等待、短距离后退。不可达时返回ABORTED；取消返回CANCELED。恢复不是保证任何堵塞都能走通。
++6. 异常恢复：进展检查、控制失败检查，规划和跟踪共用最多4轮恢复预算，依次等待新扫描、碰撞检查下原地转动、等待、短距离后退。自动恢复保留已观测代价图，不清空全局/局部地图。不可达时返回ABORTED；取消返回CANCELED。恢复不是保证任何堵塞都能走通。
+ 7. 到达结束：位置/朝向容差判定，动作返回SUCCEEDED并停车；导航基础节点仍保持运行，等待下一个目标。
+ 
++### 导航途中出现新障碍
++
++保持当前目标时，全局障碍层会接收新扫描，行为树每秒重规划一次。有可通行替代路线时，小车会换路继续前往原目标；目标被占据或没有可行路线时，会经过有限恢复后失败停车，需要用户重新发目标。
++
++全局 NavFn 使用半径0.35m、padding0.02m的保守圆形规划轮廓，局部碰撞检查仍使用原矩形。这让规划器预留转弯空间，避免选择随后被近障转向保护拦住的窄缝；因此可能绕更远，也可能拒绝只适合固定车身朝向通过的狭窄通道。不是实车标定参数，停车保护没有放宽。
++
++2026-10-19已在本仓库实际复现“生成绕行路径但被近障转向保护拦住”，并验证修改后中途插入箱体时自动经相邻房间绕行、抵达停车，以及目标被箱体占据时失败停车。[当轮原始数据与前后波形](../../../docs/evidence/nav2-replanning-20261019/README.md)包含失败、超时和缺测。重启导航后配置生效；用户已有RViz可保留，启动时使用`rviz:=false`避免重复打开。
++
++同日进一步修复“两处出口都堵住后反复往返”的恢复问题。单目标`NavigateToPose`、连续多目标`NavigateThroughPoses`均使用保留障碍信息的有限恢复树；`FollowWaypoints`逐个调用单目标，也使用同一策略。小车可以探索尚未观察到的另一条路线；确认所有出口都不可通行后，应失败停车，不通过清图把旧堵路信息抹掉后反复试走。[双门封堵的日志、波形与验证边界](../../../docs/evidence/nav2-blocked-passages-20261019/README.md)。
++
++雷达`marking/clearing`保持开启：暂时被遮挡的旧障碍仍保留，只有新扫描射线确认空间空闲才清除。障碍在视野外被移走时，需要重新观察该位置；已经失败的动作需要重新发目标。仅删除Gazebo物体不意味着机器人立即知道通路恢复。没有设置无限旧扫描重放，也没有关闭正常射线清障。
++
+ ```text
+ Nav2控制/恢复 → /nav/cmd_vel_raw → 速度平滑 → /nav/cmd_vel
+   → 导航检查门控 → /nav/safe_cmd_vel → 原cmd_guard → /sim/drive_cmd_vel → Gazebo
+diff --git a/ros2_ws/src/smartcar_nav2/config/nav2.yaml b/ros2_ws/src/smartcar_nav2/config/nav2.yaml
+index ec8b9c0..1b87f14 100644
+--- a/ros2_ws/src/smartcar_nav2/config/nav2.yaml
++++ b/ros2_ws/src/smartcar_nav2/config/nav2.yaml
+@@ -238,7 +238,9 @@ global_costmap:
+         cost_scaling_factor: 4.0
+         inflation_radius: 0.45
+       always_send_full_costmap: true
+-      footprint: '[[-0.14, -0.16], [0.25, -0.16], [0.25, 0.16], [-0.14, 0.16]]'
++      # NavFn 仅检查栅格中心的内切半径，矩形会放行车头/转弯不能通过的窄缝。
++      # 全局规划采用覆盖矩形及近障转向保护的保守圆，局部碰撞检查仍用真实矩形。
++      robot_radius: 0.35
+       footprint_padding: 0.02
+       transform_tolerance: 0.5
+ map_server:
+diff --git a/ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml b/ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml
+index d9e302c..142227a 100644
+--- a/ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml
++++ b/ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml
+@@ -1,31 +1,22 @@
+ 
+ <!--
+-  This Behavior Tree replans the global path periodically at 1 Hz and it also has
+-  recovery actions specific to planning / control as well as general system issues.
+-  This will be continuous if a kinematically valid planner is selected.
++  每秒重规划；自动恢复不清空代价地图，保留视野外已发现的堵路障碍。
++  障碍移走后仍由新鲜雷达射线清除。规划/跟踪失败统一进入有限恢复，
++  不以内层反复清图“成功”重置失败计数，四次恢复后向用户返回失败。
+ -->
+ <root main_tree_to_execute="MainTree">
+   <BehaviorTree ID="MainTree">
+     <RecoveryNode number_of_retries="4" name="NavigateRecovery">
+       <PipelineSequence name="NavigateWithReplanning">
+         <RateController hz="1.0">
+-          <RecoveryNode number_of_retries="1" name="ComputePathToPose">
+-            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+-            <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap"/>
+-          </RecoveryNode>
++          <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+         </RateController>
+-        <RecoveryNode number_of_retries="1" name="FollowPath">
+-          <FollowPath path="{path}" controller_id="FollowPath"/>
+-          <ClearEntireCostmap name="ClearLocalCostmap-Context" service_name="local_costmap/clear_entirely_local_costmap"/>
+-        </RecoveryNode>
++        <FollowPath path="{path}" controller_id="FollowPath"/>
+       </PipelineSequence>
+       <ReactiveFallback name="RecoveryFallback">
+         <GoalUpdated/>
+         <RoundRobin name="RecoveryActions">
+-          <Sequence name="ClearingActions">
+-            <ClearEntireCostmap name="ClearLocalCostmap-Subtree" service_name="local_costmap/clear_entirely_local_costmap"/>
+-            <ClearEntireCostmap name="ClearGlobalCostmap-Subtree" service_name="global_costmap/clear_entirely_global_costmap"/>
+-          </Sequence>
++          <Wait wait_duration="1"/>
+           <Spin spin_dist="1.57"/>
+           <Wait wait_duration="2"/>
+           <BackUp backup_dist="0.15" backup_speed="0.05"/>
+diff --git a/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py b/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py
+index f3115c5..4a0448b 100644
+--- a/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py
++++ b/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py
+@@ -20,8 +20,12 @@ def start(context):
+     value = lambda name: LaunchConfiguration(name).perform(context)
+     map_path = Path(value('map')).expanduser().resolve()
+     params = Path(value('params_file')).expanduser().resolve()
++    bt_xml = Path(value('bt_xml')).expanduser().resolve()
++    through_bt_xml = Path(value('through_poses_bt_xml')).expanduser().resolve()
+     if not map_path.is_file() or not params.is_file():
+         raise RuntimeError(f'Missing map YAML or Nav2 parameters: {map_path}, {params}')
++    if not bt_xml.is_file() or not through_bt_xml.is_file():
++        raise RuntimeError(f'Missing navigation behavior tree: {bt_xml}, {through_bt_xml}')
+     metadata = yaml.safe_load(map_path.read_text())
+     image = map_path.parent / metadata['image']
+     if not image.is_file() or not math.isfinite(float(metadata['resolution'])) or metadata['resolution'] <= 0:
+@@ -73,7 +77,9 @@ def start(context):
+         elif name == 'velocity_smoother':
+             remaps = [('cmd_vel', '/nav/cmd_vel_raw'), ('cmd_vel_smoothed', '/nav/cmd_vel')]
+         elif name == 'bt_navigator':
+-            extra = [{'default_nav_to_pose_bt_xml': str(share/'config/navigate_recovery.xml')}]
++            # 单目标与连续多目标均保留已观测的堵路信息，避免落回自动清图的默认树。
++            extra = [{'default_nav_to_pose_bt_xml': str(bt_xml),
++                      'default_nav_through_poses_bt_xml': str(through_bt_xml)}]
+         server = Node(package=package, executable=name, name=name, parameters=common+extra,
+                       remappings=remaps, output='screen')
+         actions.extend([server, RegisterEventHandler(OnProcessExit(target_action=server,
+@@ -103,6 +109,8 @@ def generate_launch_description():
+         DeclareLaunchArgument('world', default_value='office_loop'),
+         DeclareLaunchArgument('map', default_value=str(share/'maps/office_01/map.yaml')),
+         DeclareLaunchArgument('params_file', default_value=str(share/'config/nav2.yaml')),
++        DeclareLaunchArgument('bt_xml', default_value=str(share/'config/navigate_recovery.xml')),
++        DeclareLaunchArgument('through_poses_bt_xml', default_value=str(share/'config/navigate_through_recovery.xml')),
+         DeclareLaunchArgument('rviz', default_value='false', choices=['true', 'false']),
+         DeclareLaunchArgument('headless', default_value='false', choices=['true', 'false']),
+         DeclareLaunchArgument('initial_x', default_value='0.0'),

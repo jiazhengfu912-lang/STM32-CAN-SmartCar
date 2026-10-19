@@ -1,0 +1,163 @@
+{"wall_s": 1.0771995969989803, "event": "launch_started", "pid": 29651, "partition": "smartcar-replan-fae5d24b7b4f4b478dfec6f19c56b4ee"}
+{"wall_s": 13.85689416599962, "event": "ready", "states": {"smoother_server": "active", "behavior_server": "active", "waypoint_follower": "active", "map_server": "active", "amcl": "active", "velocity_smoother": "active", "controller_server": "active", "planner_server": "active", "bt_navigator": "active"}}
+{"wall_s": 15.903792017999876, "event": "lifecycle_manager_command", "cycle": 0, "manager": "navigation", "command": 3, "success": true, "duration_wall_s": 2.0451968330016825}
+{"wall_s": 16.26789866499894, "event": "lifecycle_manager_command", "cycle": 0, "manager": "localization", "command": 3, "success": true, "duration_wall_s": 0.3639424120010517}
+{"wall_s": 16.572827169999073, "event": "lifecycle_manager_command", "cycle": 0, "manager": "localization", "command": 0, "success": true, "duration_wall_s": 0.3047650099997554}
+{"wall_s": 20.17577357099981, "event": "lifecycle_manager_command", "cycle": 0, "manager": "navigation", "command": 0, "success": true, "duration_wall_s": 3.60178138000083}
+{"wall_s": 20.20492372499939, "event": "reset_reactivated", "cycle": 0, "states": {"map_server": "active", "amcl": "active", "controller_server": "active", "smoother_server": "active", "planner_server": "active", "behavior_server": "active", "bt_navigator": "active", "waypoint_follower": "active", "velocity_smoother": "active"}}
+{"wall_s": 22.584149068999977, "event": "lifecycle_manager_command", "cycle": 1, "manager": "navigation", "command": 3, "success": true, "duration_wall_s": 2.3790160120006476}
+{"wall_s": 22.941995852999753, "event": "lifecycle_manager_command", "cycle": 1, "manager": "localization", "command": 3, "success": true, "duration_wall_s": 0.35769167599937646}
+{"wall_s": 23.275466090999544, "event": "lifecycle_manager_command", "cycle": 1, "manager": "localization", "command": 0, "success": true, "duration_wall_s": 0.3333082379995176}
+{"wall_s": 27.022162901999764, "event": "lifecycle_manager_command", "cycle": 1, "manager": "navigation", "command": 0, "success": true, "duration_wall_s": 3.7465505780000967}
+{"wall_s": 27.049791996998465, "event": "reset_reactivated", "cycle": 1, "states": {"map_server": "active", "amcl": "active", "controller_server": "active", "smoother_server": "active", "planner_server": "active", "behavior_server": "active", "bt_navigator": "active", "waypoint_follower": "active", "velocity_smoother": "active"}}
+{"wall_s": 28.117572338998798, "event": "goal_accepted"}
+{"wall_s": 33.11376047599879, "event": "obstacle_request", "robot": [33.11368606199903, 0.45246765970641195, 0.017922575889381887, 0.02743784203198291], "box": {"x": 2.0, "y": 0.0, "dx": 0.4, "dy": 0.5, "dz": 0.6}}
+{"wall_s": 33.486197051999625, "event": "obstacle_inserted", "box": {"x": 2.0, "y": 0.0, "dx": 0.4, "dy": 0.5, "dz": 0.6}, "robot": [33.38263214299877, 0.49385139180231646, 0.019011165468256902, 0.025228596983487155]}
+{"wall_s": 157.77438286599863, "event": "goal_result", "status": 4}
+{"wall_s": 160.8265120299984, "event": "cancel_on_exit"}
+{"wall_s": 160.84166454799924, "event": "shutdown_signal", "signal": "SIGINT", "process_group": 29651}
+{"wall_s": 171.19460517399966, "event": "shutdown_signal", "signal": "SIGINT", "process_group": 29652}
+{
+  "result": "PASS",
+  "scope": "SIMULATION_ONLY",
+  "case": "detour",
+  "started_utc": "2026-10-19T09:48:00.061928+00:00",
+  "domain_id": 92,
+  "ign_partition": "smartcar-replan-fae5d24b7b4f4b478dfec6f19c56b4ee",
+  "goal": [
+    4.5,
+    0.0,
+    0.0
+  ],
+  "goal_send_count": 1,
+  "checks": {
+    "startup_ready": true,
+    "reset_startup_all_active": true,
+    "reset_does_not_resume_motion": true,
+    "stopped": true,
+    "obstacle_inserted_during_action": true,
+    "single_goal_only": true,
+    "expected_action_result": true,
+    "original_path_straight": true,
+    "new_path_detours": true,
+    "actual_vehicle_detours": true,
+    "reached_goal_area": true,
+    "no_automatic_full_map_clears": true
+  },
+  "firmware_source_version": 131,
+  "pi_exercised": false,
+  "pi_changed": false,
+  "not_verified": [
+    "physical vehicle",
+    "moving obstacles",
+    "arbitrary routes",
+    "multi-goal GUI"
+  ],
+  "obstacle": {
+    "x": 2.0,
+    "y": 0.0,
+    "dx": 0.4,
+    "dy": 0.5,
+    "dz": 0.6
+  },
+  "blockers": [],
+  "reopen_requested": false,
+  "action_type": "NavigateToPose",
+  "reset_cycles_requested": 2,
+  "source_sha256": {
+    "ros2_ws/tools/verify_replanning.py": "96d7fcdff9e88c9161abfeb932391a69e58a7fa4d2285fa4461967d1523f190e",
+    "ros2_ws/tools/verify_navigation.py": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml": "c2366b36a4d12b1bc29d3b003651f9a6bb797dd013a01c2517364d5be2778556",
+    "ros2_ws/src/smartcar_nav2/config/navigate_through_recovery.xml": "0c869e8b78530b398af4fee458133158463b4e6c2f2cda025c95a8e9c58594e5",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "ec0bbd3203a523ea50079f5e38eeda3718e1f22f636b00152039d8cd33a6bc2b",
+    "ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp": "6df46b4968dfe101c720003730eac7832f571ab5fe5ba10a3288521aa0e9f576",
+    "ros2_ws/src/smartcar_nav2/src/safe_costmap.hpp": "886d6dec8b80a39f6ce775657a3056d332719792c2e7f723da34e161f0f937d2",
+    "ros2_ws/src/smartcar_nav2/src/safe_planner_server.cpp": "e5932181caf4998ad28967ac7e9391a5c4538765a443e87722a815c18c2df57b"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false"
+  ],
+  "lifecycle_states": {
+    "smoother_server": "active",
+    "behavior_server": "active",
+    "waypoint_follower": "active",
+    "map_server": "active",
+    "amcl": "active",
+    "velocity_smoother": "active",
+    "controller_server": "active",
+    "planner_server": "active",
+    "bt_navigator": "active"
+  },
+  "reset_stop_evidence": {
+    "verified": true,
+    "samples": 27,
+    "duration_wall_s": 1.0165807630000927,
+    "max_linear_mps": 4.48988466614955e-19,
+    "max_angular_rps": 1.1108264247841329e-18,
+    "wait_wall_s": 1.0612882570003421
+  },
+  "inserted_wall_s": 33.48619395899914,
+  "action_status": 4,
+  "stop_evidence": {
+    "verified": true,
+    "samples": 43,
+    "duration_wall_s": 1.4594545090003521,
+    "max_linear_mps": 5.524469770534779e-11,
+    "max_angular_rps": 0.025419756227277518,
+    "wait_wall_s": 3.038692498999808
+  },
+  "stop_samples": 43,
+  "final_world_pose": [
+    4.471597579279644,
+    0.07731393124533241,
+    0.0989523764656585
+  ],
+  "first_detour_wall_s": 34.9086036789995,
+  "replan_latency_wall_s": 1.4224097200003598,
+  "global_clear_calls": 0,
+  "local_clear_calls": 0,
+  "shutdown": {
+    "process_group": 29651,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "truth_bridge_shutdown": {
+    "process_group": 29652,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "paths_received": 117,
+  "duration_wall_s": 171.48660656899847,
+  "raw_sha256": {
+    "velocity.csv": "d00f56f75d0cb22562abf1b07b1067384b2b16a0bcbe895c100e203354e535e0",
+    "world_pose.csv": "64dce7b31d97aa883dc1c0013357ae94d86bc08f9530a569e477c29c237785e1",
+    "scan.jsonl": "c2517253dc66f6c5afb108362e08df545769e38acea09a9fcd43a76eda16f014",
+    "launch.log": "3bdba755f9817547367bd2cea00bbc0ce5ea3e7c65ca49dab32718739ff65be6",
+    "safety.jsonl": "f5008447f88d38d43dc82c01fe9eed569478d63986e0271f0ffd9b26b6c814f2",
+    "gazebo_service.log": "91da5e6a7d1bfe27a55897af6ca62869e6ed8437b4013e9e278e9484f3801778",
+    "odom.csv": "51170ffb33785412415e12b919ecc14d9abb9195c8967b4b736d8308d004deb5",
+    "truth_bridge.log": "3ca4f5f0c216cb60829f487364a89f2f9b87c5062efaa163b8cd17983dcf98b5",
+    "amcl.jsonl": "e8ec1b0d534633ab51216a5454a4a41a098cd6c86227527a05aaa59ff41a84b4",
+    "behavior_tree.jsonl": "fed566eabcf9940357bbe222715e54353606d8962bcbdf36ba36294a280ce5bf",
+    "clock.jsonl": "2cce6b3133b96a405e707cab703562cccc1478acd60d0c87562c3b6e53b698cc",
+    "feedback.jsonl": "fd5b1c7ede15fe9c71b3e26e53ad5c4afb26d08c88a83ca776db74546944d939",
+    "global_costmap_costmap.jsonl": "5f8a838474838cfc5f69fa7eb9011f651023555994861d6e65963becaec9c8cf",
+    "local_costmap_costmap.jsonl": "03cf2f78ff3992054a76c5345749e0b78bc52813c5b685ed3c26b5602c9b5a39",
+    "plans.jsonl": "558af01aa3b72285707723a37d37cae0c0e0e4dd3eb6c805f3fa40c962f7f894",
+    "world_pose.jsonl": "f6790e5718ff49beec6fcc24b0ae946245cca0a3dbe72f7f9fe54948b266d55d",
+    "map.jsonl": "68e69f5c9cd747b84547b50a9b07e5512cbdbe952f1bc4d5cb88efa73b3b1f0e",
+    "events.jsonl": "d57e9a34534869d10fa6dd0229e3a9e5841ad0f9d5118528e9b4511e0e6c9d7e"
+  }
+}

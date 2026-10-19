@@ -1,0 +1,292 @@
+[New LWP 28715]
+[New LWP 28716]
+[New LWP 28717]
+[New LWP 28718]
+[New LWP 28719]
+[New LWP 28720]
+[New LWP 28721]
+[New LWP 28722]
+[New LWP 28723]
+[New LWP 28724]
+[New LWP 28725]
+[New LWP 28726]
+[New LWP 28727]
+[New LWP 28728]
+[New LWP 28730]
+[New LWP 28731]
+[New LWP 28738]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+futex_wait (private=0, expected=2, futex_word=0x5a683ee37898) at ../sysdeps/nptl/futex-internal.h:146
+146	../sysdeps/nptl/futex-internal.h: No such file or directory.
+
+Thread 18 (Thread 0x7678817fa640 (LWP 28738) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=-1881284079, cancel=true, abstime=0x7678817f8530, op=137, expected=0, futex_word=0x5a683f17ea34) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=-1881284079, abstime=0x7678817f8530, clockid=0, expected=0, futex_word=0x5a683f17ea34) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683f17ea34, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0x7678817f8530, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f29429d in __pthread_cond_wait_common (abstime=0x7678817f8530, clockid=1, mutex=0x5a683f17e9e0, cond=0x5a683f17ea08) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0x7678817f8530, clockid=1, mutex=0x5a683f17e9e0, cond=0x5a683f17ea08) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0x5a683f17ea08, mutex=0x5a683f17e9e0, clockid=1, abstime=0x7678817f8530) at ./nptl/pthread_cond_wait.c:679
+#6  0x000076788e7fbfbd in eprosima::fastdds::dds::detail::WaitSetImpl::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t const&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788e7fc1aa in eprosima::fastdds::dds::WaitSet::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t) const () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#8  0x000076788edd5a44 in rmw_fastrtps_shared_cpp::__rmw_wait(char const*, rmw_subscriptions_s*, rmw_guard_conditions_s*, rmw_services_s*, rmw_clients_s*, rmw_events_s*, rmw_wait_set_s*, rmw_time_s const*) () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#9  0x000076788ee2d887 in rmw_wait () from /opt/ros/humble/lib/librmw_fastrtps_cpp.so
+#10 0x000076788fdbb8d8 in rcl_wait () from /opt/ros/humble/lib/librcl.so
+#11 0x000076788fc2021c in rclcpp::Executor::wait_for_work(std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#12 0x000076788fc23133 in rclcpp::Executor::get_next_executable(rclcpp::AnyExecutable&, std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#13 0x000076788fc2a881 in rclcpp::executors::SingleThreadedExecutor::spin() () from /opt/ros/humble/lib/librclcpp.so
+#14 0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#15 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#16 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 17 (Thread 0x767881ffb640 (LWP 28731) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x5a683f106204) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0x5a683f106204) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683f106204, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f293a01 in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0x5a683f1061b0, cond=0x5a683f1061d8) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0x5a683f1061d8, mutex=0x5a683f1061b0) at ./nptl/pthread_cond_wait.c:627
+#5  0x000076788e7fc132 in eprosima::fastdds::dds::detail::WaitSetImpl::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t const&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x000076788e7fc1aa in eprosima::fastdds::dds::WaitSet::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t) const () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788edd5a44 in rmw_fastrtps_shared_cpp::__rmw_wait(char const*, rmw_subscriptions_s*, rmw_guard_conditions_s*, rmw_services_s*, rmw_clients_s*, rmw_events_s*, rmw_wait_set_s*, rmw_time_s const*) () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#8  0x000076788ee2d887 in rmw_wait () from /opt/ros/humble/lib/librmw_fastrtps_cpp.so
+#9  0x000076788fdbb8d8 in rcl_wait () from /opt/ros/humble/lib/librcl.so
+#10 0x000076788fc2021c in rclcpp::Executor::wait_for_work(std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#11 0x000076788fc23133 in rclcpp::Executor::get_next_executable(rclcpp::AnyExecutable&, std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#12 0x000076788fc2a881 in rclcpp::executors::SingleThreadedExecutor::spin() () from /opt/ros/humble/lib/librclcpp.so
+#13 0x000076788f48dadd in ?? () from /opt/ros/humble/lib/libnav2_util_core.so
+#14 0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#15 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#16 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 16 (Thread 0x7678827fc640 (LWP 28730) "controller_serv"):
+#0  futex_wait (private=0, expected=2, futex_word=0x5a683efa6650) at ../sysdeps/nptl/futex-internal.h:146
+#1  __GI___lll_lock_wait (futex=futex@entry=0x5a683efa6650, private=0) at ./nptl/lowlevellock.c:49
+#2  0x000076788f297fc2 in lll_mutex_lock_optimized (mutex=0x5a683efa6650) at ./nptl/pthread_mutex_lock.c:48
+#3  ___pthread_mutex_lock (mutex=0x5a683efa6650) at ./nptl/pthread_mutex_lock.c:93
+#4  0x000076788f0852c3 in tf2::BufferCore::addTransformableRequest(std::function<void (unsigned long, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >, tf2::TransformableResult)> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >) () from /opt/ros/humble/lib/libtf2.so
+#5  0x000076788ef622bc in tf2_ros::Buffer::waitForTransform(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::function<void (tf2_ros::TransformStampedFuture const&)>) () from /opt/ros/humble/lib/libtf2_ros.so
+#6  0x000076788847993a in ?? () from /opt/ros/humble/lib/liblayers.so
+#7  0x000076788848d218 in ?? () from /opt/ros/humble/lib/liblayers.so
+#8  0x000076788848143f in std::_Function_handler<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const>), message_filters::Subscriber<sensor_msgs::msg::LaserScan_<std::allocator<void> >, rclcpp_lifecycle::LifecycleNode>::subscribe(rclcpp_lifecycle::LifecycleNode*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, rmw_qos_profile_s, rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >)::{lambda(std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const>)#1}>::_M_invoke(std::_Any_data const&, std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const>&&) () from /opt/ros/humble/lib/liblayers.so
+#9  0x000076788848e9d2 in std::__detail::__variant::__gen_vtable_impl<std::__detail::__variant::_Multi_array<std::__detail::__variant::__deduce_visit_result<void> (*)(rclcpp::AnySubscriptionCallback<sensor_msgs::msg::LaserScan_<std::allocator<void> >, std::allocator<void> >::dispatch(std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > >, rclcpp::MessageInfo const&)::{lambda(auto:1&&)#1}&&, std::variant<std::function<void (sensor_msgs::msg::LaserScan_<std::allocator<void> > const&)>, std::function<void (sensor_msgs::msg::LaserScan_<std::allocator<void> > const&, rclcpp::MessageInfo const&)>, std::function<void (rclcpp::SerializedMessage const&)>, std::function<void (rclcpp::SerializedMessage const&, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> >, std::default_delete<sensor_msgs::msg::LaserScan_<std::allocator<void> > > >)>, std::function<void (std::unique_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> >, std::default_delete<sensor_msgs::msg::LaserScan_<std::allocator<void> > > >, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const>)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const> const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > >)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>, rclcpp::MessageInfo const&)> >&)>, std::integer_sequence<unsigned long, 8ul> >::__visit_invoke(rclcpp::AnySubscriptionCallback<sensor_msgs::msg::LaserScan_<std::allocator<void> >, std::allocator<void> >::dispatch(std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > >, rclcpp::MessageInfo const&)::{lambda(auto:1&&)#1}&&, std::variant<std::function<void (sensor_msgs::msg::LaserScan_<std::allocator<void> > const&)>, std::function<void (sensor_msgs::msg::LaserScan_<std::allocator<void> > const&, rclcpp::MessageInfo const&)>, std::function<void (rclcpp::SerializedMessage const&)>, std::function<void (rclcpp::SerializedMessage const&, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> >, std::default_delete<sensor_msgs::msg::LaserScan_<std::allocator<void> > > >)>, std::function<void (std::unique_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> >, std::default_delete<sensor_msgs::msg::LaserScan_<std::allocator<void> > > >, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const>)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const> const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > >)>, std::function<void (std::shared_ptr<sensor_msgs::msg::LaserScan_<std::allocator<void> > >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>, rclcpp::MessageInfo const&)> >&) () from /opt/ros/humble/lib/liblayers.so
+#10 0x00007678884942ff in ?? () from /opt/ros/humble/lib/liblayers.so
+#11 0x000076788fc2252c in rclcpp::Executor::execute_subscription(std::shared_ptr<rclcpp::SubscriptionBase>) () from /opt/ros/humble/lib/librclcpp.so
+#12 0x000076788fc22d2f in rclcpp::Executor::execute_any_executable(rclcpp::AnyExecutable&) () from /opt/ros/humble/lib/librclcpp.so
+#13 0x000076788fc2a890 in rclcpp::executors::SingleThreadedExecutor::spin() () from /opt/ros/humble/lib/librclcpp.so
+#14 0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#15 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#16 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 15 (Thread 0x767882ffd640 (LWP 28728) "controller_serv"):
+#0  futex_wait (private=0, expected=2, futex_word=0x5a683efa6700) at ../sysdeps/nptl/futex-internal.h:146
+#1  __GI___lll_lock_wait (futex=futex@entry=0x5a683efa6700, private=0) at ./nptl/lowlevellock.c:49
+#2  0x000076788f297fc2 in lll_mutex_lock_optimized (mutex=0x5a683efa6700) at ./nptl/pthread_mutex_lock.c:48
+#3  ___pthread_mutex_lock (mutex=0x5a683efa6700) at ./nptl/pthread_mutex_lock.c:93
+#4  0x000076788ef613f9 in ?? () from /opt/ros/humble/lib/libtf2_ros.so
+#5  0x000076788f086dcb in tf2::BufferCore::testTransformableRequests() () from /opt/ros/humble/lib/libtf2.so
+#6  0x000076788f08b810 in tf2::BufferCore::setTransformImpl(tf2::Transform const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) () from /opt/ros/humble/lib/libtf2.so
+#7  0x000076788f08be6a in tf2::BufferCore::setTransform(geometry_msgs::msg::TransformStamped_<std::allocator<void> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) () from /opt/ros/humble/lib/libtf2.so
+#8  0x000076788ef67fe1 in tf2_ros::TransformListener::subscription_callback(std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>, bool) () from /opt/ros/humble/lib/libtf2_ros.so
+#9  0x000076788ef6752a in std::_Function_handler<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>), std::_Bind<void (tf2_ros::TransformListener::*(tf2_ros::TransformListener*, std::_Placeholder<1>, bool))(std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>, bool)> >::_M_invoke(std::_Any_data const&, std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>&&) () from /opt/ros/humble/lib/libtf2_ros.so
+#10 0x000076788ef7cca2 in std::__detail::__variant::__gen_vtable_impl<std::__detail::__variant::_Multi_array<std::__detail::__variant::__deduce_visit_result<void> (*)(rclcpp::AnySubscriptionCallback<tf2_msgs::msg::TFMessage_<std::allocator<void> >, std::allocator<void> >::dispatch(std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > >, rclcpp::MessageInfo const&)::{lambda(auto:1&&)#1}&&, std::variant<std::function<void (tf2_msgs::msg::TFMessage_<std::allocator<void> > const&)>, std::function<void (tf2_msgs::msg::TFMessage_<std::allocator<void> > const&, rclcpp::MessageInfo const&)>, std::function<void (rclcpp::SerializedMessage const&)>, std::function<void (rclcpp::SerializedMessage const&, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> >, std::default_delete<tf2_msgs::msg::TFMessage_<std::allocator<void> > > >)>, std::function<void (std::unique_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> >, std::default_delete<tf2_msgs::msg::TFMessage_<std::allocator<void> > > >, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const> const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > >)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>, rclcpp::MessageInfo const&)> >&)>, std::integer_sequence<unsigned long, 8ul> >::__visit_invoke(rclcpp::AnySubscriptionCallback<tf2_msgs::msg::TFMessage_<std::allocator<void> >, std::allocator<void> >::dispatch(std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > >, rclcpp::MessageInfo const&)::{lambda(auto:1&&)#1}&&, std::variant<std::function<void (tf2_msgs::msg::TFMessage_<std::allocator<void> > const&)>, std::function<void (tf2_msgs::msg::TFMessage_<std::allocator<void> > const&, rclcpp::MessageInfo const&)>, std::function<void (rclcpp::SerializedMessage const&)>, std::function<void (rclcpp::SerializedMessage const&, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> >, std::default_delete<tf2_msgs::msg::TFMessage_<std::allocator<void> > > >)>, std::function<void (std::unique_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> >, std::default_delete<tf2_msgs::msg::TFMessage_<std::allocator<void> > > >, rclcpp::MessageInfo const&)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >)>, std::function<void (std::unique_ptr<rclcpp::SerializedMessage, std::default_delete<rclcpp::SerializedMessage> >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const>, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const> const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage const> const&, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > >)>, std::function<void (std::shared_ptr<tf2_msgs::msg::TFMessage_<std::allocator<void> > >, rclcpp::MessageInfo const&)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>)>, std::function<void (std::shared_ptr<rclcpp::SerializedMessage>, rclcpp::MessageInfo const&)> >&) () from /opt/ros/humble/lib/libtf2_ros.so
+#11 0x000076788ef7ecef in ?? () from /opt/ros/humble/lib/libtf2_ros.so
+#12 0x000076788fc2252c in rclcpp::Executor::execute_subscription(std::shared_ptr<rclcpp::SubscriptionBase>) () from /opt/ros/humble/lib/librclcpp.so
+#13 0x000076788fc22d2f in rclcpp::Executor::execute_any_executable(rclcpp::AnyExecutable&) () from /opt/ros/humble/lib/librclcpp.so
+#14 0x000076788fc2a890 in rclcpp::executors::SingleThreadedExecutor::spin() () from /opt/ros/humble/lib/librclcpp.so
+#15 0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#16 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#17 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 14 (Thread 0x7678837fe640 (LWP 28727) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x5a683ef34670) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0x5a683ef34670) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683ef34670, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f293a01 in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0x5a683ef34620, cond=0x5a683ef34648) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0x5a683ef34648, mutex=0x5a683ef34620) at ./nptl/pthread_cond_wait.c:627
+#5  0x000076788e7fc132 in eprosima::fastdds::dds::detail::WaitSetImpl::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t const&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x000076788e7fc1aa in eprosima::fastdds::dds::WaitSet::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t) const () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788edd5a44 in rmw_fastrtps_shared_cpp::__rmw_wait(char const*, rmw_subscriptions_s*, rmw_guard_conditions_s*, rmw_services_s*, rmw_clients_s*, rmw_events_s*, rmw_wait_set_s*, rmw_time_s const*) () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#8  0x000076788ee2d887 in rmw_wait () from /opt/ros/humble/lib/librmw_fastrtps_cpp.so
+#9  0x000076788fdbb8d8 in rcl_wait () from /opt/ros/humble/lib/librcl.so
+#10 0x000076788fc2021c in rclcpp::Executor::wait_for_work(std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#11 0x000076788fc23133 in rclcpp::Executor::get_next_executable(rclcpp::AnyExecutable&, std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#12 0x000076788fc24642 in rclcpp::Executor::spin_once_impl(std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#13 0x000076788fcba141 in ?? () from /opt/ros/humble/lib/librclcpp.so
+#14 0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#15 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#16 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 13 (Thread 0x767883fff640 (LWP 28726) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x5a683edc4ed0) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0x5a683edc4ed0) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683edc4ed0, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f293a01 in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0x5a683edc4e80, cond=0x5a683edc4ea8) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0x5a683edc4ea8, mutex=0x5a683edc4e80) at ./nptl/pthread_cond_wait.c:627
+#5  0x000076788e7fc132 in eprosima::fastdds::dds::detail::WaitSetImpl::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t const&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x000076788e7fc1aa in eprosima::fastdds::dds::WaitSet::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t) const () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788edd5a44 in rmw_fastrtps_shared_cpp::__rmw_wait(char const*, rmw_subscriptions_s*, rmw_guard_conditions_s*, rmw_services_s*, rmw_clients_s*, rmw_events_s*, rmw_wait_set_s*, rmw_time_s const*) () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#8  0x000076788ee2d887 in rmw_wait () from /opt/ros/humble/lib/librmw_fastrtps_cpp.so
+#9  0x000076788fdbb8d8 in rcl_wait () from /opt/ros/humble/lib/librcl.so
+#10 0x000076788fc2021c in rclcpp::Executor::wait_for_work(std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#11 0x000076788fc23133 in rclcpp::Executor::get_next_executable(rclcpp::AnyExecutable&, std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#12 0x000076788fc24642 in rclcpp::Executor::spin_once_impl(std::chrono::duration<long, std::ratio<1l, 1000000000l> >) () from /opt/ros/humble/lib/librclcpp.so
+#13 0x000076788fcba141 in ?? () from /opt/ros/humble/lib/librclcpp.so
+#14 0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#15 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#16 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 12 (Thread 0x767888df5640 (LWP 28725) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x76787c000c00) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0x76787c000c00) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x76787c000c00, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f293a01 in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0x76787c000bb0, cond=0x76787c000bd8) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0x76787c000bd8, mutex=0x76787c000bb0) at ./nptl/pthread_cond_wait.c:627
+#5  0x000076788e7fc132 in eprosima::fastdds::dds::detail::WaitSetImpl::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t const&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x000076788e7fc1aa in eprosima::fastdds::dds::WaitSet::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t) const () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788edd5a44 in rmw_fastrtps_shared_cpp::__rmw_wait(char const*, rmw_subscriptions_s*, rmw_guard_conditions_s*, rmw_services_s*, rmw_clients_s*, rmw_events_s*, rmw_wait_set_s*, rmw_time_s const*) () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#8  0x000076788edc1502 in ?? () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#9  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#10 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#11 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 11 (Thread 0x7678895f6640 (LWP 28724) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x5a683ebb85dc) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0x5a683ebb85dc) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683ebb85dc, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f293a01 in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0x5a683ebb8648, cond=0x5a683ebb85b0) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0x5a683ebb85b0, mutex=0x5a683ebb8648) at ./nptl/pthread_cond_wait.c:627
+#5  0x000076788e853e45 in eprosima::fastdds::rtps::FlowControllerImpl<eprosima::fastdds::rtps::FlowControllerSyncPublishMode, eprosima::fastdds::rtps::FlowControllerFifoSchedule>::run() () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#7  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#8  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 10 (Thread 0x767889df7640 (LWP 28723) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=<optimized out>, cancel=true, abstime=0x767889df5e40, op=265, expected=0, futex_word=0x76788ed66110) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=<optimized out>, abstime=0x767889df5e40, clockid=0, expected=0, futex_word=0x76788ed66110) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x76788ed66110, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x767889df5e40, private=<optimized out>) at ./nptl/futex-internal.c:139
+#3  0x000076788f29c970 in do_futex_wait (sem=sem@entry=0x76788ed66110, abstime=abstime@entry=0x767889df5e40, clockid=0) at ./nptl/sem_waitcommon.c:111
+#4  0x000076788f29ca13 in __new_sem_wait_slow64 (sem=0x76788ed66110, abstime=0x767889df5e40, clockid=0) at ./nptl/sem_waitcommon.c:183
+#5  0x000076788e8ee2fa in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x000076788e8eeb6c in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788e8ec347 in eprosima::fastdds::rtps::SharedMemChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#8  0x000076788e8ef98b in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#9  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#10 0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#11 0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 9 (Thread 0x76788a5f8640 (LWP 28722) "controller_serv"):
+#0  0x000076788f327814 in __libc_recvfrom (fd=13, buf=0x5a683eba3510, len=65500, flags=0, addr=..., addrlen=0x76788a5f70e8) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x000076788e734040 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x000076788e734406 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x000076788e72f13b in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#5  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#6  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 8 (Thread 0x76788adf9640 (LWP 28721) "controller_serv"):
+#0  0x000076788f327814 in __libc_recvfrom (fd=12, buf=0x5a683eb93520, len=65500, flags=0, addr=..., addrlen=0x76788adf80e8) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x000076788e734040 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x000076788e734406 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x000076788e72f13b in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#5  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#6  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 7 (Thread 0x76788b5fa640 (LWP 28720) "controller_serv"):
+#0  0x000076788f327814 in __libc_recvfrom (fd=11, buf=0x5a683eb83530, len=65500, flags=0, addr=..., addrlen=0x76788b5f90e8) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x000076788e734040 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x000076788e734406 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x000076788e72f13b in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#5  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#6  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 6 (Thread 0x76788bdfb640 (LWP 28719) "controller_serv"):
+#0  0x000076788f327814 in __libc_recvfrom (fd=10, buf=0x5a683eb73540, len=65500, flags=0, addr=..., addrlen=0x76788bdfa0e8) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x000076788e734040 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x000076788e734406 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x000076788e72f13b in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#5  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#6  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 5 (Thread 0x76788c5fc640 (LWP 28718) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=1052473152, cancel=true, abstime=0x76788c5fb520, op=137, expected=0, futex_word=0x5a683eb3935c) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=1052473152, abstime=0x76788c5fb520, clockid=0, expected=0, futex_word=0x5a683eb3935c) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683eb3935c, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0x76788c5fb520, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f29429d in __pthread_cond_wait_common (abstime=0x76788c5fb520, clockid=1, mutex=0x5a683eb38ea0, cond=0x5a683eb39330) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0x76788c5fb520, clockid=1, mutex=0x5a683eb38ea0, cond=0x5a683eb39330) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0x5a683eb39330, mutex=0x5a683eb38ea0, clockid=1, abstime=0x76788c5fb520) at ./nptl/pthread_cond_wait.c:679
+#6  0x000076788e646f61 in eprosima::fastrtps::rtps::ResourceEvent::event_service() () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#8  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#9  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 4 (Thread 0x76788cdfd640 (LWP 28717) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=-1931492192, cancel=true, abstime=0x76788cdfc520, op=137, expected=0, futex_word=0x5a683eb3e4c0) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=-1931492192, abstime=0x76788cdfc520, clockid=0, expected=0, futex_word=0x5a683eb3e4c0) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683eb3e4c0, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0x76788cdfc520, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f29429d in __pthread_cond_wait_common (abstime=0x76788cdfc520, clockid=1, mutex=0x5a683eb3e4c8, cond=0x5a683eb3e498) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0x76788cdfc520, clockid=1, mutex=0x5a683eb3e4c8, cond=0x5a683eb3e498) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0x5a683eb3e498, mutex=0x5a683eb3e4c8, clockid=1, abstime=0x76788cdfc520) at ./nptl/pthread_cond_wait.c:679
+#6  0x000076788e8e1701 in eprosima::fastdds::rtps::SharedMemWatchdog::run() () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#8  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#9  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 3 (Thread 0x76788d5fe640 (LWP 28716) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=<optimized out>, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0x5a683eb36008) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=<optimized out>, abstime=0x0, clockid=0, expected=0, futex_word=0x5a683eb36008) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683eb36008, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=<optimized out>) at ./nptl/futex-internal.c:139
+#3  0x000076788f29cb9f in do_futex_wait (sem=sem@entry=0x5a683eb36008, abstime=0x0, clockid=0) at ./nptl/sem_waitcommon.c:111
+#4  0x000076788f29cc38 in __new_sem_wait_slow64 (sem=0x5a683eb36008, abstime=0x0, clockid=0) at ./nptl/sem_waitcommon.c:183
+#5  0x000076788fc9a372 in rclcpp::SignalHandler::wait_for_signal() () from /opt/ros/humble/lib/librclcpp.so
+#6  0x000076788fc9b10e in rclcpp::SignalHandler::deferred_signal_handler() () from /opt/ros/humble/lib/librclcpp.so
+#7  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#8  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#9  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 2 (Thread 0x76788ddff640 (LWP 28715) "controller_serv"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x76788ddfe520, op=137, expected=0, futex_word=0x5a683eb47250) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x76788ddfe520, clockid=0, expected=0, futex_word=0x5a683eb47250) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0x5a683eb47250, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0x76788ddfe520, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x000076788f29429d in __pthread_cond_wait_common (abstime=0x76788ddfe520, clockid=1, mutex=0x5a683eb47200, cond=0x5a683eb47228) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0x76788ddfe520, clockid=1, mutex=0x5a683eb47200, cond=0x5a683eb47228) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0x5a683eb47228, mutex=0x5a683eb47200, clockid=1, abstime=0x76788ddfe520) at ./nptl/pthread_cond_wait.c:679
+#6  0x000076788f11b839 in ?? () from /lib/x86_64-linux-gnu/libspdlog.so.1
+#7  0x000076788f6dc253 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#8  0x000076788f294a83 in start_thread (arg=<optimized out>) at ./nptl/pthread_create.c:442
+#9  0x000076788f3268e0 in clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+
+Thread 1 (Thread 0x76788ee4e000 (LWP 28714) "controller_serv"):
+#0  futex_wait (private=0, expected=2, futex_word=0x5a683ee37898) at ../sysdeps/nptl/futex-internal.h:146
+#1  __GI___lll_lock_wait (futex=futex@entry=0x5a683ee37898, private=0) at ./nptl/lowlevellock.c:49
+#2  0x000076788f297fc2 in lll_mutex_lock_optimized (mutex=0x5a683ee37898) at ./nptl/pthread_mutex_lock.c:48
+#3  ___pthread_mutex_lock (mutex=0x5a683ee37898) at ./nptl/pthread_mutex_lock.c:93
+#4  0x0000767888469d63 in message_filters::Signal1<sensor_msgs::msg::LaserScan_<std::allocator<void> > >::removeCallback(std::shared_ptr<message_filters::CallbackHelper1<sensor_msgs::msg::LaserScan_<std::allocator<void> > > > const&) () from /opt/ros/humble/lib/liblayers.so
+#5  0x0000767888493d12 in ?? () from /opt/ros/humble/lib/liblayers.so
+#6  0x00007678884696f3 in nav2_costmap_2d::ObstacleLayer::~ObstacleLayer() () from /opt/ros/humble/lib/liblayers.so
+#7  0x0000767888469bcd in nav2_costmap_2d::ObstacleLayer::~ObstacleLayer() () from /opt/ros/humble/lib/liblayers.so
+#8  0x000076788f56295b in void class_loader::ClassLoader::onPluginDeletion<nav2_costmap_2d::Layer>(nav2_costmap_2d::Layer*) () from /opt/ros/humble/lib/libnav2_costmap_2d_core.so
+#9  0x000076788f5816c2 in ?? () from /opt/ros/humble/lib/libnav2_costmap_2d_core.so
+#10 0x000076788f5480a7 in nav2_costmap_2d::LayeredCostmap::~LayeredCostmap() () from /opt/ros/humble/lib/libnav2_costmap_2d_core.so
+#11 0x000076788f554144 in nav2_costmap_2d::Costmap2DROS::on_cleanup(rclcpp_lifecycle::State const&) () from /opt/ros/humble/lib/libnav2_costmap_2d_core.so
+#12 0x000076788fd5ae6d in ?? () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#13 0x000076788fd65bf2 in ?? () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#14 0x000076788fd5a78b in rclcpp_lifecycle::LifecycleNode::cleanup() () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#15 0x000076788faa4956 in nav2_controller::ControllerServer::on_cleanup(rclcpp_lifecycle::State const&) () from /opt/ros/humble/lib/libcontroller_server_core.so
+#16 0x000076788fd5ae6d in ?? () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#17 0x000076788fd65bf2 in ?? () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#18 0x000076788fd52ed0 in rclcpp_lifecycle::LifecycleNode::LifecycleNodeInterfaceImpl::on_change_state(std::shared_ptr<rmw_request_id_s>, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Request_<std::allocator<void> > >, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Response_<std::allocator<void> > >) () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#19 0x000076788fd54a96 in std::_Function_handler<void (std::shared_ptr<rmw_request_id_s>, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Request_<std::allocator<void> > >, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Response_<std::allocator<void> > >), std::_Bind<void (rclcpp_lifecycle::LifecycleNode::LifecycleNodeInterfaceImpl::*(rclcpp_lifecycle::LifecycleNode::LifecycleNodeInterfaceImpl*, std::_Placeholder<1>, std::_Placeholder<2>, std::_Placeholder<3>))(std::shared_ptr<rmw_request_id_s>, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Request_<std::allocator<void> > >, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Response_<std::allocator<void> > >)> >::_M_invoke(std::_Any_data const&, std::shared_ptr<rmw_request_id_s>&&, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Request_<std::allocator<void> > >&&, std::shared_ptr<lifecycle_msgs::srv::ChangeState_Response_<std::allocator<void> > >&&) () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#20 0x000076788fd63886 in ?? () from /opt/ros/humble/lib/librclcpp_lifecycle.so
+#21 0x000076788fc24806 in ?? () from /opt/ros/humble/lib/librclcpp.so
+#22 0x000076788fc229fa in rclcpp::Executor::execute_service(std::shared_ptr<rclcpp::ServiceBase>) () from /opt/ros/humble/lib/librclcpp.so
+#23 0x000076788fc22d66 in rclcpp::Executor::execute_any_executable(rclcpp::AnyExecutable&) () from /opt/ros/humble/lib/librclcpp.so
+#24 0x000076788fc2a890 in rclcpp::executors::SingleThreadedExecutor::spin() () from /opt/ros/humble/lib/librclcpp.so
+#25 0x000076788fc2ab03 in rclcpp::spin(std::shared_ptr<rclcpp::node_interfaces::NodeBaseInterface>) () from /opt/ros/humble/lib/librclcpp.so
+#26 0x00005a682bc0f3ff in ?? ()
+#27 0x000076788f229d90 in __libc_start_call_main (main=main@entry=0x5a682bc0f2d0, argc=argc@entry=8, argv=argv@entry=0x7ffcbcd64758) at ../sysdeps/nptl/libc_start_call_main.h:58
+#28 0x000076788f229e40 in __libc_start_main_impl (main=0x5a682bc0f2d0, argc=8, argv=0x7ffcbcd64758, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7ffcbcd64748) at ../csu/libc-start.c:392
+#29 0x00005a682bc0f625 in ?? ()
+[Inferior 1 (process 28714) detached]

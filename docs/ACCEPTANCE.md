@@ -1,5 +1,102 @@
 # SmartCar 验收记录与调参波形 · 更新至 2026-10-19
 
+## 2026-10-19：TF失败误报到达与Reset清理卡住（仅软件/仿真）
+
+现场约6m目标3.752秒即报告成功，前一刻map→odom变换落后0.776秒、超过0.5秒容差；随后Reset停在控制器清理。隔离复现确认两处问题：Nav2 1.1.20忽略到达检查的目标变换失败；tf2 0.25.23的TF到达与MessageFilter异步请求存在锁序反转，可冻结观测并阻塞清理。现场旧日志、真实GDB堆栈、基线和全部中间失败均保存。
+
+新增仓库本地控制/规划服务，目标TF失败停车并返回失败，禁止用默认零位姿判到达；代价图TF、扫描过滤与超时回调串行执行，清理先停止回调线程再析构资源。保留原MessageFilter、marking/clearing、NavFn/RPP、全部速度/到达/TF容差和门控保护；不覆盖系统ROS库。Reset重建代价图，显式新目标才会继续，不自动重发旧任务。
+
+**STM32源码v131：P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。**PI、启动、IMU与固件导航算法未改、未运行；上层修改TF错误处理、动作调度及回调执行策略。以下是本轮控制器真实输出/ROS仿真记录，不是实车左右轮速或电机输出。
+
+![同样合成故障输入下，修改前错误成功且发出非零速度，修改后失败且零输出](evidence/nav2-tf-reset-20261019/comparison/tf_fault.png)
+
+图中P/I未变、算法改动如上。车体合成位姿固定为零、目标5m，路径时间故意超前最新TF 3秒；复现相同失败路径，时间差不是现场0.776秒。原系统返回4，修复返回6并保持零命令。所有散点为真实命令/动作响应，没有驱动订阅者；不以此图证明物理运动性能。
+
+![Reset清理前后实收响应，对数轴；基线超时不算完成](evidence/nav2-tf-reset-20261019/comparison/lifecycle.png)
+
+图中P/I未变、改变回调串行策略。原第1次cleanup超过8秒无响应；最终版本5次空闲重复清理和第6次执行中清理均返回，重启后不续跑旧目标；显式有效目标、持续执行和取消通过。首次编译缺少头文件、首次封装第二轮配置超时完整保留，最终构建和40个pytest通过（colcon47项含7个包装，零错误/失败/跳过）。
+
+![两轮完整Reset/Startup后，中途插障碍仍绕行到达并持续停车](evidence/nav2-tf-reset-20261019/gazebo_detour_reset_01/velocity.png)
+
+图中P/I、NavFn/RPP及保护未改。office_loop目标(4.5,0,0)只发一次，车x约0.45m插入(2,0)处0.4×0.5×0.6m箱体。两轮Reset后九节点active、无目标时静止；原目标实际绕行成功，世界终点约(4.4716,0.0773,0.099rad)。43个连续新鲜样本约1.459秒满足|vx|<0.02m/s、|wz|<0.03rad/s、位移<0.02m、安全命令新鲜且为零。此样本后仅调整构造时释放旧代价图的顺序消除短暂日志重名；最终二进制另有下图及完整软件回归。
+
+![最终版本双门封堵：两个已观测障碍保留到ABORTED](evidence/nav2-tf-reset-20261019/gazebo_two_doors_01/obstacle_memory.png)
+
+图中P/I未改、TF/调度修改如上。球/方块位置和上一轮双门验收一致，静态且从启动前存在；Reset/Startup后只发一次目的地。两处均观测后没有归零，有限恢复返回ABORTED，整图清空调用0。计数仍为±0.7m区域内静态底图原空闲的致命格，非物体分割。
+
+![同轮失败后持续停车，保留完整控制器/安全输出/odom和门控](evidence/nav2-tf-reset-20261019/gazebo_two_doors_01/velocity.png)
+
+图中P/I和阈值未改，37个新鲜样本约1.443秒满足相同静止判据，最大线速度0.01858m/s、安全命令为零。全部点原样保留，无平滑、补点或删异常，长缺口断线。两轮Gazebo自建进程组仅SIGINT即退出，无遗留。未重启用户旧窗口、未连接硬件，实车桥未实现，未提交/推送/合并；用户手动GUI、任意路线/移动障碍/长期运行仍须分别验证。
+
+[本轮详细工况、失败与边界](evidence/nav2-tf-reset-20261019/README.md) · [汇总JSON](evidence/nav2-tf-reset-20261019/summary.json) · [故障注入结果](evidence/nav2-tf-reset-20261019/after_final/result.json) · [绕行结果](evidence/nav2-tf-reset-20261019/gazebo_detour_reset_01/result.json) · [双门结果](evidence/nav2-tf-reset-20261019/gazebo_two_doors_01/result.json) · [SHA256](evidence/nav2-tf-reset-20261019/SHA256.json)。
+
+---
+
+## 2026-10-19：双通道封堵后的障碍记忆与有限恢复（仅仿真）
+
+用户手动堵住两处出口后，小车反复往返。只读现场规划日志记录6次全局整图清空；隔离仿真按现场球体/方块位置复现：原BT约44.04墙钟秒已看到两障碍，之后5次全局清空令视野外障碍格归零，再次选择旧通路，160秒仍未结束后验收器取消。不能把用户取消或验收器超时写成导航自行ABORTED。根因不只是局部地图，而是自动恢复清空全局障碍记忆，以及内层重试反复绕过外层有限恢复预算。
+
+单目标和连续多目标树均改为不自动清空两图，规划/跟踪失败统一进入最多4次外层恢复（等待、碰撞检查下转向、等待、短距离后退）。启动器显式绑定两棵树，避免连续多目标仍回落到系统旧树。全局圆形轮廓0.35m、局部矩形、NavFn A*、RPP、扫描marking/clearing、速度及停机保护不变；移走障碍后通过新射线正常清除，不靠关闭clearing或长期重放旧扫描来保存障碍。
+
+**STM32源码v131：P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，10ms按电机轴rpm误差累计，D=0。**固件PI、起步、IMU及相对导航算法未改、未运行。上层规划/跟踪算法未换，恢复/失败处理策略改变。下面为本轮真实Gazebo/ROS记录，未平滑、补点或删异常，长缺口断线；不是实车波形。
+
+![修改前：全局清图后视野外已知堵路障碍格归零，路线反复切换](evidence/nav2-blocked-passages-20261019/baseline_two_doors_01/obstacle_memory.png)
+
+图中P/I未改、采用旧清图恢复策略；红线对应真实日志中的全局清空。统计范围为障碍中心±0.7m、静态底图原为空闲而实际全局图为致命值100的格子，排除已知墙格；仍可能含定位/栅格误差，不是物体分割或尺寸测量。两障碍在仿真中一直保持存在。
+
+![修改后：两处记忆保留到无路可走；移除右箱体并重新观察后，旧格正常清除](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.png)
+
+图中P/I未改、新恢复策略不清图。初始(-2.99,1.91,0)，目标map(1.03,-2.92,0)，球体/方块按用户世界位置建模并设为静态。先发一次目标，两障碍逐渐被扫描确认，均保留到ABORTED且持续停车；随后明确移走右箱体，显式发观察目标(3,2.7)重新看到通道，再显式发原目的地，SUCCEEDED并停稳。三个目标各有明确操作，不自动续跑已失败任务；整轮全局和局部清空调用均0。
+
+![同轮完整速度、门控、封堵失败停车及恢复通路后的到达停车](evidence/nav2-blocked-passages-20261019/after_two_doors_04/velocity.png)
+
+图中P/I、固件和保护均未改，仅上层恢复算法改变。两次停车各有42个新鲜样本，窗口约1.46秒，满足|vx|<0.02m/s、|wz|<0.03rad/s、窗口位移<0.02m且新鲜安全命令为零；移除后到达窗口角速度最大约0.01066rad/s。无法看到旧障碍位置时会保留旧格，不能要求删除Gazebo物体后机器人立即凭空知道空闲。
+
+![连续多目标动作入口也保留堵路信息，有限恢复后ABORTED并停车](evidence/nav2-blocked-passages-20261019/after_through_01/velocity.png)
+
+此图P/I未改，使用新多目标恢复树；实际ROS动作入口包含已到达起点和封堵后的目的地，不代表任意GUI队列通过。两处记忆保留，0次整图清空，停止检查通过。
+
+全部失败保留：一次AMCL生命周期服务应答超时，未发目标；一次移除箱体后因柜子遮挡而未充分重观测，直接重发远目标仍失败；重新观察后导航成功的一轮，以及普通绕行回归的一轮，固定3墙钟秒采集尚含减速尾段，停车检查FAIL。最终验收改为最多等15墙钟秒寻找上述连续静止窗口，**增加采集等待，没有改控制/故障超时或放宽静止阈值**。各轮实际结果保持原样，详见完整说明。
+
+三包构建、39个pytest通过（colcon45项含6个CTest包装，0错误/失败/跳过）。用户原场景和窗口未重启/改动，已保存恢复模板和手动启动脚本。未连接或烧录硬件、未实现实车桥，未提交/推送/合并。用户下一轮手动GUI验证、其它地图/移动障碍/长期运行仍需各自记录。
+
+![同一新恢复策略下，中途遇到单箱体仍能自动绕行、到达和停车](evidence/nav2-blocked-passages-20261019/after_detour_02/velocity.png)
+
+此图P/I未改，恢复算法改变但NavFn/RPP与保护不变。普通绕行回归PASS，原目标SUCCEEDED、实际轨迹改道、清图次数0，47个连续新鲜样本约1.46秒满足停车判据，新鲜安全命令为零。该窗口角速度最大约0.01554rad/s；未以动作成功直接代替停稳证据。[本轮绕行结果](evidence/nav2-blocked-passages-20261019/after_detour_02/result.json)。
+
+[本轮工况、全部尝试及恢复场景步骤](evidence/nav2-blocked-passages-20261019/README.md) · [双门封堵/移除后重新观察结果](evidence/nav2-blocked-passages-20261019/after_two_doors_04/result.json) · [连续多目标入口结果](evidence/nav2-blocked-passages-20261019/after_through_01/result.json) · [障碍记忆CSV](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.csv) · [原始速度CSV](evidence/nav2-blocked-passages-20261019/after_two_doors_04/velocity.csv) · [记忆SVG](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.svg) · [软件测试](evidence/nav2-blocked-passages-20261019/ros_tests.log) · [SHA256](evidence/nav2-blocked-passages-20261019/SHA256.json)。
+
+---
+
+## 2026-10-19：导航途中遇障重规划与转向空间修复（仅仿真）
+
+用户报告遇障停住后Goal failed。原配置实测在约1.21秒内已经生成绕行路径，但路径从箱体侧面窄缝通过，门控累计569条`OBSTACLE_NEAR_TURN`，控制器多次`Failed to make progress`；180秒未结束后验收器取消。**这次基线没有等到顶层ABORTED，不把主动取消写成Goal failed。**首次测试因验收器未启动世界位姿记录桥，60秒未就绪且未发目标，也完整保留。
+
+全局规划由矩形轮廓改为半径0.35m保守圆，保留0.02m padding；覆盖局部带padding矩形的约0.3245m最大转弯半径及半个0.05m栅格余量。NavFn A*、RPP、每秒重规划、局部矩形、速度、碰撞预测、近障保护与所有超时不变。算法没有换成其它规划/控制器，改变的是规划碰撞空间；可能改走更长路线或排除只适合固定姿态的窄缝。
+
+**STM32 v131，P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，10ms按电机轴rpm误差累计，D=0。**固件轮速PI、起步、IMU和相对导航均未改、未在Gazebo执行。下面波形直接来自本轮Gazebo/ROS实收点，未平滑/补点/删异常，长缺口断线；不是实物轮速波形。
+
+![修改前：新路径存在但近障转向门控长期阻止运动，保留180秒超时](evidence/nav2-replanning-20261019/baseline_detour_02/velocity.png)
+
+图中P/I同上未改，全局为原矩形。控制器持续请求速度而保护输出基本为零，证明仅“生成新路径”不足以完成绕行；原因是规划预留空间小于执行转向要求。原始扫描、代价图、路径、故障与超时取消记录均保留。
+
+![修改后：自动改道、到达与持续停车，原始速度和保护状态](evidence/nav2-replanning-20261019/after_detour_01/velocity.png)
+
+图中P/I同上未改，采用保守圆形全局轮廓，局部矩形及保护不变。在office_loop中向map(4.5,0,0)只发一次目标，车辆x约0.45m时插入中心(2,0)、0.4×0.5×0.6m箱体，约2.67墙钟秒收到绕行路径；该延迟包括运行负载，不是上限。车辆经左门→上方两间房→右门绕过，返回SUCCEEDED，最终世界位姿约(4.4532,0.0693,0.0981rad)，86条连续停车样本通过；该轮无近障转向门控阻塞。启动和并行负载中的扫描过期告警原样保留，未调整保护阈值。前后运行部分时间在不同ROS域/随机Gazebo分区并行，不能当同负载性能比较。
+
+![同轮新旧规划路径和完整实收车辆轨迹，坐标范围与修改前一致](evidence/nav2-replanning-20261019/after_detour_01/trajectory.png)
+
+图中P/I同上未改，修改全局规划轮廓的原因是让规划器选择有转弯空间的路线。橙色原路径、绿色首条绕行路径来自map，蓝色世界轨迹仅用于验收，按AMCL近似对齐；不从两者差标定定位误差。离线模型轮廓到箱体最小间隙约0.625m，不是实车间隙/接触传感器实测。
+
+![目标被障碍完全占据：有限恢复后ABORTED并停车](evidence/nav2-replanning-20261019/after_blocked_01/velocity.png)
+
+图中P/I未改、采用同一修改后配置，向同一目标只发一次，随后以1.2×1.85×0.6m箱体占住目标；原有恢复后返回ABORTED，70条持续停车样本通过。此工况是目标占据，不能推广为所有完全封路；目标距离超出局部4m窗口，局部图没有箱体格属于窗口范围，实际全局图已标记障碍。
+
+三包构建通过，34个pytest通过（colcon39项含5个CTest包装，0错误/失败/跳过）；新增全局转弯空间与双代价图扫描输入回归。全部自建进程退出，未打开用户RViz、未连接硬件、未提交/推送/合并。移动障碍、多目标GUI、其它门口/地图、长期运行与实车仍待各自验收。
+
+[工况/限制和全部尝试](evidence/nav2-replanning-20261019/README.md) · [修改后结果](evidence/nav2-replanning-20261019/after_detour_01/result.json) · [目标占据结果](evidence/nav2-replanning-20261019/after_blocked_01/result.json) · [原始世界位姿CSV](evidence/nav2-replanning-20261019/after_detour_01/world_pose.csv) · [原始速度CSV](evidence/nav2-replanning-20261019/after_detour_01/velocity.csv) · [速度SVG](evidence/nav2-replanning-20261019/after_detour_01/velocity.svg) · [软件测试](evidence/nav2-replanning-20261019/ros_tests.log) · [证据SHA256](evidence/nav2-replanning-20261019/SHA256.json)。
+
+---
 
 ## 2026-10-18—19：ROS 2 仿真、SLAM 与 Nav2 迁入同一仓库
 

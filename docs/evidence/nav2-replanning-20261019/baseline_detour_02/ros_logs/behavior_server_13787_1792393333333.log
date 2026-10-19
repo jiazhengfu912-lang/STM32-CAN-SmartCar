@@ -1,0 +1,29 @@
+[INFO] [1792393333.537218731] [behavior_server]: 
+	behavior_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792393340.336281371] [behavior_server]: Configuring
+[INFO] [1792393340.360665769] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[INFO] [1792393340.361280582] [behavior_server]: Configuring spin
+[INFO] [1792393340.375580913] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[INFO] [1792393340.379797960] [behavior_server]: Configuring backup
+[INFO] [1792393340.388557364] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[INFO] [1792393340.391390174] [behavior_server]: Configuring wait
+[INFO] [1792393342.190807439] [behavior_server]: Activating
+[INFO] [1792393342.190829249] [behavior_server]: Activating spin
+[INFO] [1792393342.190838706] [behavior_server]: Activating backup
+[INFO] [1792393342.190846134] [behavior_server]: Activating wait
+[INFO] [1792393342.190855410] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[INFO] [1792393451.439666755] [behavior_server]: Running spin
+[INFO] [1792393451.440713443] [behavior_server]: Turning 1.57 for spin behavior.
+[WARN] [1792393465.040868943] [behavior_server]: Exceeded time allowance before reaching the Spin goal - Exiting Spin
+[WARN] [1792393465.040930284] [behavior_server]: spin failed
+[WARN] [1792393465.040941889] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[INFO] [1792393465.137583095] [behavior_server]: Running wait
+[INFO] [1792393468.738302034] [behavior_server]: wait completed successfully
+[INFO] [1792393523.043522824] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792393523.043578776] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[INFO] [1792393523.043631607] [behavior_server]: Deactivating
+[INFO] [1792393523.043678486] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[INFO] [1792393523.067465051] [behavior_server]: Cleaning up
+[INFO] [1792393523.323605665] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.

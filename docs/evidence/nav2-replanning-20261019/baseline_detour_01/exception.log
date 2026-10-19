@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_replanning.py", line 289, in verify
+    tf_ok = all(buffer.can_transform(p, c, Time()) for p, c in
+TimeoutError: 60 秒内未就绪；生命周期：{'waypoint_follower': 'active', 'controller_server': 'active', 'planner_server': 'active', 'map_server': 'active', 'amcl': 'active', 'smoother_server': 'active', 'behavior_server': 'active', 'bt_navigator': 'active', 'velocity_smoother': 'active'}

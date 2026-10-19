@@ -20,8 +20,12 @@ def start(context):
     value = lambda name: LaunchConfiguration(name).perform(context)
     map_path = Path(value('map')).expanduser().resolve()
     params = Path(value('params_file')).expanduser().resolve()
+    bt_xml = Path(value('bt_xml')).expanduser().resolve()
+    through_bt_xml = Path(value('through_poses_bt_xml')).expanduser().resolve()
     if not map_path.is_file() or not params.is_file():
         raise RuntimeError(f'Missing map YAML or Nav2 parameters: {map_path}, {params}')
+    if not bt_xml.is_file() or not through_bt_xml.is_file():
+        raise RuntimeError(f'Missing navigation behavior tree: {bt_xml}, {through_bt_xml}')
     metadata = yaml.safe_load(map_path.read_text())
     image = map_path.parent / metadata['image']
     if not image.is_file() or not math.isfinite(float(metadata['resolution'])) or metadata['resolution'] <= 0:
@@ -29,13 +33,14 @@ def start(context):
     initial = {k: float(value('initial_'+k)) for k in ['x', 'y', 'yaw']}
     if not all(math.isfinite(v) for v in initial.values()):
         raise RuntimeError('Initial pose must be finite.')
-    servers = [('nav2_controller', 'controller_server'), ('nav2_smoother', 'smoother_server'),
-               ('nav2_planner', 'planner_server'), ('nav2_behaviors', 'behavior_server'),
+    servers = [('smartcar_nav2', 'controller_server'), ('nav2_smoother', 'smoother_server'),
+               ('smartcar_nav2', 'planner_server'), ('nav2_behaviors', 'behavior_server'),
                ('nav2_bt_navigator', 'bt_navigator'), ('nav2_waypoint_follower', 'waypoint_follower'),
                ('nav2_velocity_smoother', 'velocity_smoother')]
     for package, executable in servers + [('nav2_amcl', 'amcl'), ('nav2_map_server', 'map_server'),
                                            ('smartcar_nav2', 'navigation_gate.py')]:
-        path = Path(get_package_prefix(package))/'lib'/package/executable
+        binary = 'safe_'+executable if package == 'smartcar_nav2' and executable in ['controller_server', 'planner_server'] else executable
+        path = Path(get_package_prefix(package))/'lib'/package/binary
         if not os.access(path, os.X_OK):
             raise RuntimeError(f'Missing executable, install dependencies/rebuild before starting: {path}')
     # A second simulator or SLAM would mix clocks, scans and map->odom authorities.
@@ -73,8 +78,11 @@ def start(context):
         elif name == 'velocity_smoother':
             remaps = [('cmd_vel', '/nav/cmd_vel_raw'), ('cmd_vel_smoothed', '/nav/cmd_vel')]
         elif name == 'bt_navigator':
-            extra = [{'default_nav_to_pose_bt_xml': str(share/'config/navigate_recovery.xml')}]
-        server = Node(package=package, executable=name, name=name, parameters=common+extra,
+            # 单目标与连续多目标均保留已观测的堵路信息，避免落回自动清图的默认树。
+            extra = [{'default_nav_to_pose_bt_xml': str(bt_xml),
+                      'default_nav_through_poses_bt_xml': str(through_bt_xml)}]
+        binary = 'safe_'+name if package == 'smartcar_nav2' else name
+        server = Node(package=package, executable=binary, name=name, parameters=common+extra,
                       remappings=remaps, output='screen')
         actions.extend([server, RegisterEventHandler(OnProcessExit(target_action=server,
                         on_exit=[EmitEvent(event=Shutdown(reason=name+' exited'))]))])
@@ -103,6 +111,8 @@ def generate_launch_description():
         DeclareLaunchArgument('world', default_value='office_loop'),
         DeclareLaunchArgument('map', default_value=str(share/'maps/office_01/map.yaml')),
         DeclareLaunchArgument('params_file', default_value=str(share/'config/nav2.yaml')),
+        DeclareLaunchArgument('bt_xml', default_value=str(share/'config/navigate_recovery.xml')),
+        DeclareLaunchArgument('through_poses_bt_xml', default_value=str(share/'config/navigate_through_recovery.xml')),
         DeclareLaunchArgument('rviz', default_value='false', choices=['true', 'false']),
         DeclareLaunchArgument('headless', default_value='false', choices=['true', 'false']),
         DeclareLaunchArgument('initial_x', default_value='0.0'),

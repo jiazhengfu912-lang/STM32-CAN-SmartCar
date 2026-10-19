@@ -1,0 +1,159 @@
+Starting >>> smartcar_sim
+UpdateCTestConfiguration  from :/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/CTestConfiguration.ini
+Parse Config file:/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/CTestConfiguration.ini
+   Site: ubuntu2204
+   Build name: (empty)
+ Add coverage exclude regular expressions.
+Create new tag: 20261018-1535 - Experimental
+UpdateCTestConfiguration  from :/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/CTestConfiguration.ini
+Parse Config file:/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/CTestConfiguration.ini
+Test project /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: model
+
+1: Test command: /usr/bin/python3 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/model.xunit.xml" "--package-name" "smartcar_sim" "--output-file" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/ament_cmake_pytest/model.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_sim/tests/test_model.py" "-o" "cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/ament_cmake_pytest/model/.cache" "--junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/model.xunit.xml" "--junit-prefix=smartcar_sim"
+1: Test timeout computed to be: 60
+1: -- run_test.py: invoking following command in '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim':
+1:  - /usr/bin/python3 -u -m pytest /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_sim/tests/test_model.py -o cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/ament_cmake_pytest/model/.cache --junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/model.xunit.xml --junit-prefix=smartcar_sim
+1: ============================= test session starts ==============================
+1: platform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0
+1: cachedir: build/smartcar_sim/ament_cmake_pytest/model/.cache
+1: rootdir: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws
+1: plugins: launch-testing-1.0.15, ament-flake8-0.12.15, ament-lint-0.12.15, launch-testing-ros-0.19.14, ament-pep257-0.12.15, ament-copyright-0.12.15, ament-xmllint-0.12.15, cov-3.0.0, colcon-core-0.21.3
+1: collected 17 items
+1: 
+1: ../../src/smartcar_sim/tests/test_model.py .................             [100%]
+1: 
+1: - generated xml file: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/model.xunit.xml -
+1: ============================== 17 passed in 0.13s ==============================
+1: -- run_test.py: return code 0
+1: -- run_test.py: verify result file '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/model.xunit.xml'
+1/2 Test #1: model ............................   Passed    0.55 sec
+test 2
+    Start 2: worlds
+
+2: Test command: /usr/bin/python3 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/worlds.xunit.xml" "--package-name" "smartcar_sim" "--output-file" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/ament_cmake_pytest/worlds.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_sim/tests/test_worlds.py" "-o" "cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/ament_cmake_pytest/worlds/.cache" "--junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/worlds.xunit.xml" "--junit-prefix=smartcar_sim"
+2: Test timeout computed to be: 60
+2: -- run_test.py: invoking following command in '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim':
+2:  - /usr/bin/python3 -u -m pytest /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_sim/tests/test_worlds.py -o cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/ament_cmake_pytest/worlds/.cache --junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/worlds.xunit.xml --junit-prefix=smartcar_sim
+2: ============================= test session starts ==============================
+2: platform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0
+2: cachedir: build/smartcar_sim/ament_cmake_pytest/worlds/.cache
+2: rootdir: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws
+2: plugins: launch-testing-1.0.15, ament-flake8-0.12.15, ament-lint-0.12.15, launch-testing-ros-0.19.14, ament-pep257-0.12.15, ament-copyright-0.12.15, ament-xmllint-0.12.15, cov-3.0.0, colcon-core-0.21.3
+2: collected 3 items
+2: 
+2: ../../src/smartcar_sim/tests/test_worlds.py ...                          [100%]
+2: 
+2: - generated xml file: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/worlds.xunit.xml -
+2: ============================== 3 passed in 0.26s ===============================
+2: -- run_test.py: return code 0
+2: -- run_test.py: verify result file '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_sim/test_results/smartcar_sim/worlds.xunit.xml'
+2/2 Test #2: worlds ...........................   Passed    0.63 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Label Time Summary:
+pytest    =   1.18 sec*proc (2 tests)
+
+Total Test time (real) =   1.19 sec
+Finished <<< smartcar_sim [1.29s]
+Starting >>> smartcar_nav2
+Starting >>> smartcar_slam
+UpdateCTestConfiguration  from :/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/CTestConfiguration.ini
+Parse Config file:/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/CTestConfiguration.ini
+   Site: ubuntu2204
+   Build name: (empty)
+ Add coverage exclude regular expressions.
+Create new tag: 20261018-1535 - Experimental
+UpdateCTestConfiguration  from :/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/CTestConfiguration.ini
+Parse Config file:/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/CTestConfiguration.ini
+Test project /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: gate_core
+
+1: Test command: /usr/bin/python3 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/test_results/smartcar_nav2/gate_core.xunit.xml" "--package-name" "smartcar_nav2" "--output-file" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/ament_cmake_pytest/gate_core.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/tests/test_gate_core.py" "-o" "cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/ament_cmake_pytest/gate_core/.cache" "--junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/test_results/smartcar_nav2/gate_core.xunit.xml" "--junit-prefix=smartcar_nav2"
+1: Test timeout computed to be: 60
+UpdateCTestConfiguration  from :/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/CTestConfiguration.ini
+Parse Config file:/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/CTestConfiguration.ini
+   Site: ubuntu2204
+   Build name: (empty)
+ Add coverage exclude regular expressions.
+Create new tag: 20261018-1535 - Experimental
+UpdateCTestConfiguration  from :/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/CTestConfiguration.ini
+Parse Config file:/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/CTestConfiguration.ini
+Test project /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: map_validation
+
+1: Test command: /usr/bin/python3 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/test_results/smartcar_slam/map_validation.xunit.xml" "--package-name" "smartcar_slam" "--output-file" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/ament_cmake_pytest/map_validation.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_slam/tests/test_map_validation.py" "-o" "cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/ament_cmake_pytest/map_validation/.cache" "--junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/test_results/smartcar_slam/map_validation.xunit.xml" "--junit-prefix=smartcar_slam"
+1: Test timeout computed to be: 60
+1: -- run_test.py: invoking following command in '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2':
+1:  - /usr/bin/python3 -u -m pytest /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/tests/test_gate_core.py -o cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/ament_cmake_pytest/gate_core/.cache --junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/test_results/smartcar_nav2/gate_core.xunit.xml --junit-prefix=smartcar_nav2
+1: -- run_test.py: invoking following command in '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam':
+1:  - /usr/bin/python3 -u -m pytest /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_slam/tests/test_map_validation.py -o cache_dir=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/ament_cmake_pytest/map_validation/.cache --junit-xml=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/test_results/smartcar_slam/map_validation.xunit.xml --junit-prefix=smartcar_slam
+1: ============================= test session starts ==============================
+1: platform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0
+1: cachedir: build/smartcar_nav2/ament_cmake_pytest/gate_core/.cache
+1: rootdir: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws
+1: plugins: launch-testing-1.0.15, ament-flake8-0.12.15, ament-lint-0.12.15, launch-testing-ros-0.19.14, ament-pep257-0.12.15, ament-copyright-0.12.15, ament-xmllint-0.12.15, cov-3.0.0, colcon-core-0.21.3
+1: collected 8 items
+1: 
+1: ../../src/smartcar_nav2/tests/test_gate_core.py ........                 [100%]
+1: 
+1: - generated xml file: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/test_results/smartcar_nav2/gate_core.xunit.xml -
+1: ============================== 8 passed in 0.02s ===============================
+1: -- run_test.py: return code 0
+1: -- run_test.py: verify result file '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_nav2/test_results/smartcar_nav2/gate_core.xunit.xml'
+1/1 Test #1: gate_core ........................   Passed    0.54 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+pytest    =   0.54 sec*proc (1 test)
+
+Total Test time (real) =   0.54 sec
+Finished <<< smartcar_nav2 [0.59s]
+1: ============================= test session starts ==============================
+1: platform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0
+1: cachedir: build/smartcar_slam/ament_cmake_pytest/map_validation/.cache
+1: rootdir: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws
+1: plugins: launch-testing-1.0.15, ament-flake8-0.12.15, ament-lint-0.12.15, launch-testing-ros-0.19.14, ament-pep257-0.12.15, ament-copyright-0.12.15, ament-xmllint-0.12.15, cov-3.0.0, colcon-core-0.21.3
+1: collected 4 items
+1: 
+1: ../../src/smartcar_slam/tests/test_map_validation.py ....                [100%]
+1: 
+1: - generated xml file: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/test_results/smartcar_slam/map_validation.xunit.xml -
+1: ============================== 4 passed in 0.17s ===============================
+1: -- run_test.py: return code 0
+1: -- run_test.py: verify result file '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/build/smartcar_slam/test_results/smartcar_slam/map_validation.xunit.xml'
+1/1 Test #1: map_validation ...................   Passed    0.84 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+pytest    =   0.84 sec*proc (1 test)
+
+Total Test time (real) =   0.85 sec
+Finished <<< smartcar_slam [0.91s]
+
+Summary: 3 packages finished [2.48s]
+Summary: 36 tests, 0 errors, 0 failures, 0 skipped

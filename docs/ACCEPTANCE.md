@@ -1,4 +1,29 @@
-# SmartCar 验收记录与调参波形 · 更新至 2026-09-20
+# SmartCar 验收记录与调参波形 · 更新至 2026-10-19
+
+
+## 2026-10-18—19：ROS 2 仿真、SLAM 与 Nav2 迁入同一仓库
+
+本轮新增 `ros2_ws`，让原来独立目录中的 `smartcar_sim`、`smartcar_slam`、`smartcar_nav2`、office_01 栅格地图与底层固件一起版本管理；新增可移植环境、依赖/构建/测试入口、CI 和硬件接口说明。导航默认地图从安装包加载，不再固定开发机旧目录。原单包不完整打包入口停用，静态检查改为写新目录，避免覆盖历史证据。原固件、协议与电脑控制台未修改。
+
+**P 右反 0.45→0.45、其余 0.30→0.30；I 稳态 0.010→0.010、启动 0.030→0.030，每 10 ms 按电机轴 rpm 误差累加，D=0。** STM32 v131 轮速 PI、起步、IMU 与相对坐标导航算法均未改，也未在本轮 Gazebo 中执行；图上标注的参数仅用于追溯固件未变。本轮改动原因是整合上层源码并消除旧目录依赖，不是实车调参。
+
+三包本机编译通过；32 个 pytest 用例通过（colcon 合计 36 项含 CTest 包装）。在新仓库构建产物上实际启动无界面 Fortress 6.18.0、办公室场景、模拟 C1、AMCL 与 Nav2，域 88/随机 Gazebo 分区隔离。九个生命周期节点、地图/扫描/里程计/时钟和 TF 就绪后，发送 `map(1.5, 0, 0)`，返回 `SUCCEEDED`；里程计净位移 1.39869 m。配置位置容差为 0.15 m，成功不表示精确落在数值目标上。摄像头、GUI、实车均未参与。
+
+![ROS 2 迁入仓库后实际 Gazebo 单目标速度记录；仅仿真，非 STM32 实测](evidence/ros2-integration-20261018/runtime_01/velocity.png)
+
+图中保留启动、运行、减速和关闭阶段全部实收点，无平滑或补造。目标后检查到连续 1.46754 s / 68 个里程计样本低于 0.02 m/s 与 0.03 rad/s，位移 0.000674 m，末次新鲜安全速度为零；窗口保留减速尾段，线速度峰值 0.01470 m/s。图中速度来自 Gazebo 里程计与 ROS 命令，不能用于证明实物轮速 PI 性能。
+
+![同轮实际 Gazebo 原始里程计轨迹；非独立真值或实物轨迹](evidence/ros2-integration-20261018/runtime_01/trajectory.png)
+
+首轮静态检查将 Fortress 原生多顶层 GUI 配置误报为非法 XML，已修正检查器并保留首次 FAIL 与复测 PASS。实际运行保留 VMware/EGL 警告、唯一 goal checker 提示，以及成功后主动 SIGINT 关闭期间的 -2 退出记录；运行结果与关闭时间线可复核，测试自建进程组无遗留。
+
+**原固件全套主机回归本轮未全通过**：27 个协议用例通过，Boot Guard 的 `test_current_built_images` 因新克隆目录没有 `out/app/app.bin` 报错，后续套件未继续。没有借用历史镜像或跳过检查改成成功；本机未配置原 Keil 构建环境，未重新构建/安装固件。与基线核对的 576 个原有固件/协议/控制台文件保持一致。
+
+**结论：三包构建、软件测试与本轮实际单目标仿真通过；硬件桥、真实 C1、实车里程计/标定与运动尚未接通/验收。** 临时障碍、恢复、多目标、未知初始位置重定位、GUI 和长期稳定性没有在迁入仓库后重新验证；原工作空间历史结果不代替本轮证据。没有本轮实物 CSV/波形，未连接设备，也未降低硬件限速或停机保护。
+
+[本轮工况与完整说明](evidence/ros2-integration-20261018/README.md) · [结果 JSON](evidence/ros2-integration-20261018/runtime_01/result.json) · [原始里程计 CSV](evidence/ros2-integration-20261018/runtime_01/odom.csv) · [原始安全命令 CSV](evidence/ros2-integration-20261018/runtime_01/safe_cmd_vel.csv) · [速度 SVG](evidence/ros2-integration-20261018/runtime_01/velocity.svg) · [完整运行日志](evidence/ros2-integration-20261018/runtime_01/launch.log) · [失败的固件回归日志](evidence/ros2-integration-20261018/firmware_tests_full.log) · [摘要](evidence/ros2-integration-20261018/summary.json) · [证据校验](evidence/ros2-integration-20261018/SHA256.json)。
+
+---
 
 ## v127：MPU6050、导航外环与相对里程计的软件交付
 

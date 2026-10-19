@@ -1,0 +1,129 @@
+{
+  "result": "PASS",
+  "scope": "SIMULATION_ONLY",
+  "started_utc": "2026-10-19T05:42:39.649624+00:00",
+  "domain_id": 88,
+  "ros_localhost_only": 1,
+  "ign_partition": "smartcar-verify-0650f9c83e5046588b7e9c130a8fe47b",
+  "goal": {
+    "frame": "map",
+    "x_m": 1.5,
+    "y_m": 0.0,
+    "yaw_rad": 0.0
+  },
+  "checks": {
+    "startup_ready": true,
+    "goal_accepted": true,
+    "goal_succeeded": true,
+    "odom_and_command_stopped": true,
+    "actual_odom_moved": true
+  },
+  "lifecycle_states": {
+    "amcl": "active",
+    "planner_server": "active",
+    "bt_navigator": "active",
+    "velocity_smoother": "active",
+    "map_server": "active",
+    "smoother_server": "active",
+    "behavior_server": "active",
+    "waypoint_follower": "active",
+    "controller_server": "active"
+  },
+  "error": null,
+  "firmware": {
+    "pi_exercised": false,
+    "pi_changed": false,
+    "algorithm_changed": false,
+    "version": 131,
+    "p_i_before_after": "P right reverse .45 -> .45, others .30 -> .30; I steady .010 -> .010, start .030 -> .030 per 10 ms motor-rpm error; not exercised in Gazebo"
+  },
+  "not_verified": [
+    "STM32 hardware/PI",
+    "physical vehicle",
+    "obstacle avoidance",
+    "recovery behaviors",
+    "multi-goal navigation",
+    "arbitrary localization"
+  ],
+  "measurement": "Gazebo-generated ROS odometry, not external physical ground truth",
+  "verifier_sha256": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false"
+  ],
+  "readiness": {
+    "map_server_active": true,
+    "amcl_active": true,
+    "controller_server_active": true,
+    "smoother_server_active": true,
+    "planner_server_active": true,
+    "behavior_server_active": true,
+    "bt_navigator_active": true,
+    "waypoint_follower_active": true,
+    "velocity_smoother_active": true,
+    "scan_fresh": true,
+    "odom_fresh": true,
+    "gate_fresh": true,
+    "clock_progress_fresh": true,
+    "map_received": true,
+    "clock_advancing": true,
+    "action_server_ready": true,
+    "single_publishers": true,
+    "tf_map_odom": 1,
+    "tf_odom_base_footprint": 1,
+    "tf_base_footprint_laser_frame": 1,
+    "gate_ready": true
+  },
+  "initial_odom_position_m": {
+    "x": 3.9467569468090084e-10,
+    "y": 7.416436727779861e-29,
+    "z": 0.0
+  },
+  "action_status": 4,
+  "stop_evidence": {
+    "samples": 68,
+    "duration_wall_s": 1.467539261000013,
+    "max_linear_mps": 0.014696186440299464,
+    "max_angular_rps": 7.244645800371457e-10,
+    "displacement_m": 0.000673659434283686
+  },
+  "final_odom_position_m": {
+    "x": 1.3986332047570482,
+    "y": 0.012852381523051508,
+    "z": 0.0
+  },
+  "odom_displacement_m": 1.3986922549495198,
+  "shutdown": {
+    "process_group": 5630,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "sample_counts": {
+    "odom.csv": 718,
+    "safe_cmd_vel.csv": 372,
+    "safety_status.csv": 67,
+    "clock.csv": 14365,
+    "feedback.csv": 148
+  },
+  "duration_wall_s": 23.333994366000013,
+  "plots": [
+    "velocity.png",
+    "velocity.svg",
+    "trajectory.png",
+    "trajectory.svg"
+  ],
+  "raw_sha256": {
+    "odom.csv": "eaad2cec765b47e9cb760e458f056272a3d6cb81a01de5a94e743a3e36c6c757",
+    "safe_cmd_vel.csv": "39e8f62c009f6e2948b3070d03b167cda76932c12592da056a1092a758129994",
+    "safety_status.csv": "cb8e32ea8fde1efc3e8ba3eed59a7ea7707f67adddb38e8bcd4f97762540e785",
+    "clock.csv": "59fdadc4ed6afc3279ee1c782d2041a93a98fdfd6ac9ba3343f61f9cd4b2534f",
+    "feedback.csv": "f009f2a05ccb32ca718f1f946ee0b98a216c3e30f667f114729acf243521d405"
+  }
+}

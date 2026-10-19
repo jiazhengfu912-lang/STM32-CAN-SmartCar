@@ -1,0 +1,47 @@
+name: ROS 2 Humble software checks
+
+on:
+  push:
+    paths: ['ros2_ws/**', '.github/workflows/ros2.yml']
+  pull_request:
+    paths: ['ros2_ws/**', '.github/workflows/ros2.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+    container: ros:humble-ros-base-jammy
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install simulation and navigation dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            build-essential cmake python3-colcon-common-extensions \
+            python3-pytest python3-numpy python3-matplotlib python3-yaml python3-pil \
+            ros-humble-ament-cmake-pytest ros-humble-ros-gz \
+            ros-humble-robot-state-publisher ros-humble-joint-state-publisher-gui \
+            ros-humble-rviz2 ros-humble-rqt-image-view ros-humble-tf2-ros \
+            ros-humble-slam-toolbox ros-humble-navigation2 ros-humble-nav2-bringup \
+            ros-humble-nav2-rviz-plugins
+      - name: Build the three ROS packages
+        run: bash ros2_ws/tools/build.bash
+      - name: Run model, world, SLAM and navigation unit tests
+        run: bash ros2_ws/tools/test.bash
+      - name: Preserve build and test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: humble-software-checks
+          path: |
+            ros2_ws/log/
+            ros2_ws/build/*/test_results/
+          retention-days: 14
+
+# CI验证构建和软件测试；真实Gazebo运动/实车验收使用独立证据，不由此工作流代替。

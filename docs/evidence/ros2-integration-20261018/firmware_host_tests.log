@@ -1,0 +1,42 @@
+
+mTests) ... ok
+test_oversize_and_version_rejected (__main__.PythonStreamTests) ... ok
+test_seeded_random_stream (__main__.PythonStreamTests) ... ok
+test_timeout_boundary (__main__.PythonStreamTests) ... ok
+test_timeout_recovers_frame_behind_damaged_length (__main__.PythonStreamTests) ... ok
+test_timeout_tick_wrap (__main__.PythonStreamTests) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.075s
+
+OK
+
+test_body_corruption_rejected (__main__.GuardTests) ... ok
+test_complete_app_without_commit_is_rejected (__main__.GuardTests) ... ok
+test_current_built_images (__main__.GuardTests) ... ERROR
+test_every_interrupted_metadata_prefix (__main__.GuardTests) ... ok
+test_every_metadata_bit_flip (__main__.GuardTests) ... ok
+test_invalid_stack_or_reset_even_with_image_crc (__main__.GuardTests) ... ok
+test_layout_matches_firmware_and_linkers (__main__.GuardTests) ... ok
+test_legitimate_vectors_do_not_hide_partial_image (__main__.GuardTests) ... ok
+test_lengths_and_available_prevent_out_of_bounds (__main__.GuardTests) ... ok
+test_valid_and_maximum_image (__main__.GuardTests) ... ok
+test_wrong_target_format_or_magic_even_with_header_crc (__main__.GuardTests) ... ok
+
+======================================================================
+ERROR: test_current_built_images (__main__.GuardTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/tests/test_boot_guard.py", line 114, in test_current_built_images
+    app = (ROOT / "out/app/app.bin").read_bytes()
+  File "/usr/lib/python3.10/pathlib.py", line 1126, in read_bytes
+    with self.open(mode='rb') as f:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/out/app/app.bin'
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.023s
+
+FAILED (errors=1)
+

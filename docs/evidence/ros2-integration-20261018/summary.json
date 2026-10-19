@@ -1,0 +1,83 @@
+{
+  "scope": "ROS_SOURCE_INTEGRATION_AND_SIMULATION_ONLY",
+  "started_date_local": "2026-10-18",
+  "runtime_date_local": "2026-10-19",
+  "base_commit": "19d6c23d5f27f123485fc55d72b5523fad34d182",
+  "branch": "feat/ros2-simulation-navigation",
+  "firmware_source_version": 131,
+  "firmware_code_changed": false,
+  "hardware_connected": false,
+  "ros_build": {
+    "result": "PASS",
+    "packages": 3,
+    "log": "build_final.log"
+  },
+  "ros_unit_tests": {
+    "result": "PASS",
+    "pytest_cases": 32,
+    "colcon_entries_including_wrappers": 36,
+    "failures": 0,
+    "skips": 0,
+    "log": "ros_tests.log"
+  },
+  "static_attempts": [
+    {
+      "result": "FAIL",
+      "cause": "Fortress GUI XML fragment treated as single-root XML",
+      "report": "static_01/report.json"
+    },
+    {
+      "result": "PASS",
+      "report": "static_02/report.json"
+    }
+  ],
+  "runtime": {
+    "result": "PASS",
+    "report": "runtime_01/result.json",
+    "goal": {
+      "frame": "map",
+      "x_m": 1.5,
+      "y_m": 0.0,
+      "yaw_rad": 0.0
+    },
+    "checks": {
+      "startup_ready": true,
+      "goal_accepted": true,
+      "goal_succeeded": true,
+      "odom_and_command_stopped": true,
+      "actual_odom_moved": true
+    },
+    "odom_displacement_m": 1.3986922549495198,
+    "stop_evidence": {
+      "samples": 68,
+      "duration_wall_s": 1.467539261000013,
+      "max_linear_mps": 0.014696186440299464,
+      "max_angular_rps": 7.244645800371457e-10,
+      "displacement_m": 0.000673659434283686
+    }
+  },
+  "firmware_full_regression": {
+    "result": "INCOMPLETE_ERROR",
+    "cause": "out/app/app.bin is absent in fresh clone; original Keil toolchain not configured",
+    "protocol_tests_passed": 27,
+    "boot_guard_tests": 11,
+    "boot_guard_errors": 1,
+    "remaining_suites": "NOT_RUN",
+    "log": "firmware_tests_full.log"
+  },
+  "remote_ci": "NOT_RUN",
+  "not_verified": [
+    "STM32 hardware/PI",
+    "physical vehicle",
+    "obstacle avoidance",
+    "recovery behaviors",
+    "multi-goal navigation",
+    "arbitrary localization",
+    "GUI and camera after import",
+    "physical C1 integration",
+    "ROS hardware bridge",
+    "real odometry/time/TF/control ownership",
+    "long-term reliability"
+  ],
+  "reproduction": "python3 ros2_ws/tools/verify_navigation.py --output /absolute/path/to/new/directory"
+}

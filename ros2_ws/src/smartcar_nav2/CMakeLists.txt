@@ -26,5 +26,6 @@ if(BUILD_TESTING)
   ament_add_pytest_test(recovery_policy tests/test_recovery_policy.py)
   ament_add_pytest_test(controller_runtime tests/test_controller_runtime.py TIMEOUT 90
     ENV SMARTCAR_TEST_CONTROLLER=$<TARGET_FILE:safe_controller_server>)
+  ament_add_pytest_test(controller_benchmark tests/test_controller_benchmark.py)
 endif()
 ament_package()

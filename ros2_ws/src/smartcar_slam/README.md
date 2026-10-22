@@ -1,6 +1,6 @@
 # SmartCar 二维 SLAM
 
-在既有 Humble/Fortress 小车上使用 SLAM Toolbox，将 `/sim/scan` 与里程计 TF 组合为 `/map`，新增 `map → odom` 坐标变换。当前不启动自主导航。此包从既有仿真工程导入，原 SLAM 验收完整记录保留在原工作空间；本仓库的目录移植验收以 [本轮证据](../../../docs/evidence/ros2-integration-20261018/) 为准，软件测试与实际运行结果分别记录。
+在既有 Humble/Fortress 小车上使用 SLAM Toolbox，将 `/sim/scan` 与里程计 TF 组合为 `/map`，新增 `map → odom` 坐标变换。默认`slam.launch.py`/`mapping.launch.py`只负责建图；[自主探索建图](../../../docs/AUTONOMOUS_MAPPING.md)由`smartcar_nav2/exploration.launch.py`同时启动本包探索器与导航。此包从既有仿真工程导入，原 SLAM 验收完整记录保留在原工作空间；本仓库的目录移植验收以 [本轮证据](../../../docs/evidence/ros2-integration-20261018/) 为准，软件测试与实际运行结果分别记录。
 
 每个终端先在本仓库根目录执行，脚本自动设置工作空间路径：
 
@@ -21,7 +21,7 @@ source ros2_ws/tools/env.bash
 bash "$SMARTCAR_WS/tools/test.bash"
 ```
 
-`nav2_map_server` 在建图模式中仅用于地图保存，不会启动 Nav2 导航。
+单独SLAM入口中的`nav2_map_server`仅用于地图保存；自主探索入口还会启动Nav2规划、跟踪及独立图片保存服务。
 
 ## 已有仿真时，只接入 SLAM
 

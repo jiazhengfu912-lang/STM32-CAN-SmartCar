@@ -24,7 +24,8 @@ def arguments():
     """指定全新输出、障碍工况与隔离域，不接入实车或默认用户域。"""
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output', required=True, type=Path)
-    p.add_argument('--case', choices=['detour', 'blocked', 'two_doors'], default='detour')
+    p.add_argument('--case', choices=['straight', 'turn', 'detour', 'blocked', 'two_doors'], default='detour')
+    p.add_argument('--params-file', type=Path, help='本轮独立参数，不修改默认导航配置')
     p.add_argument('--reopen', action='store_true', help='双门封堵失败后移走右门箱体，并显式发送一个新目标')
     p.add_argument('--through-poses', action='store_true', help='使用连续多目标动作入口和对应行为树')
     p.add_argument('--reset-cycles', type=int, default=0, help='目标发送前通过真实生命周期管理器执行 Reset/Startup')
@@ -44,6 +45,9 @@ def arguments():
     if a.obstacle_x-.2-a.insert_x < .6:
         p.error('障碍插入时距车辆参考点须至少 0.6 m。')
     a.output = a.output.expanduser().resolve()
+    if a.params_file:
+        a.params_file = a.params_file.expanduser().resolve()
+        if not a.params_file.is_file():p.error('参数文件不存在。')
     if a.bt_xml:
         a.bt_xml = a.bt_xml.expanduser().resolve()
         if not a.bt_xml.is_file():
@@ -103,7 +107,8 @@ def verify(a, ws):
     report = {'result': 'FAIL', 'scope': 'SIMULATION_ONLY', 'case': a.case,
               'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'domain_id': a.domain_id, 'ign_partition': partition,
-              'goal': [1.03, -2.92, 0.] if two_doors else [4.5, 0., 0.], 'goal_send_count': 0, 'checks': {},
+              'goal': [1.03, -2.92, 0.] if two_doors else ([3., 2.7, math.pi/2] if a.case == 'turn' else [4.5, 0., 0.]),
+              'goal_send_count': 0, 'checks': {},
               'firmware_source_version': 131, 'pi_exercised': False, 'pi_changed': False,
               'not_verified': ['physical vehicle', 'moving obstacles', 'arbitrary routes', 'multi-goal GUI']}
     # 完全封堵工况把目标区域占满；不把全局另有通路的走廊封条称为无路可走。
@@ -130,6 +135,9 @@ def verify(a, ws):
     (a.output/'config').mkdir()
     for p in source_paths:
         (a.output/'config'/p.name).write_bytes(p.read_bytes())
+    if a.params_file:
+        (a.output/'config/nav2.yaml').write_bytes(a.params_file.read_bytes())
+        report['params_override_sha256'] = hashlib.sha256(a.params_file.read_bytes()).hexdigest()
     if a.bt_xml:
         report['bt_override_sha256'] = hashlib.sha256(a.bt_xml.read_bytes()).hexdigest()
         (a.output/'config/executed_bt.xml').write_bytes(a.bt_xml.read_bytes())
@@ -140,6 +148,9 @@ def verify(a, ws):
     process = truth_bridge = node = handle = None
     result_future = None
     launch_log = (a.output/'launch.log').open('w', buffering=1)
+    resource_pid = None
+    resource_poll = 0.
+    cpu_previous = None
 
     def stream(name):
         """逐条写入原始记录，异常和关闭过程也保留。"""
@@ -149,7 +160,9 @@ def verify(a, ws):
 
     def event(name, **values):
         """记录墙钟时间与真实操作结果。"""
-        item = {'wall_s': time.monotonic()-started, 'event': name, **values}
+        clock = latest.get('clock')
+        item = {'wall_s': time.monotonic()-started, 'sim_s': clock.clock.sec+clock.clock.nanosec*1e-9 if clock else None,
+                'event': name, **values}
         stream('events.jsonl').write(json.dumps(item, ensure_ascii=False)+'\n')
         print(json.dumps(item, ensure_ascii=False), flush=True)
 
@@ -243,9 +256,31 @@ def verify(a, ws):
 
     def spin():
         """持续采样并检查 launch 未提前退出。"""
+        nonlocal resource_pid, resource_poll, cpu_previous
         rclpy.spin_once(node, timeout_sec=.025)
         if process is not None and process.poll() is not None:
             raise RuntimeError('launch 提前退出：'+str(process.returncode))
+        now = time.monotonic()
+        if process is not None and now >= resource_poll:
+            resource_poll = now+1.
+            if resource_pid is None:
+                for entry in Path('/proc').iterdir():
+                    if not entry.name.isdigit():continue
+                    try:
+                        fields=(entry/'stat').read_text().rsplit(')',1)[1].split()
+                        command=(entry/'cmdline').read_bytes().split(b'\0')
+                        if int(fields[2]) == process.pid and command and command[0].endswith(b'/safe_controller_server'):
+                            resource_pid=int(entry.name);break
+                    except (OSError,ValueError):pass
+            if resource_pid is not None:
+                try:
+                    fields=Path(f'/proc/{resource_pid}/stat').read_text().rsplit(')',1)[1].split()
+                    cpu=(int(fields[11])+int(fields[12]))/os.sysconf('SC_CLK_TCK')
+                    percent=100*(cpu-cpu_previous[1])/(now-cpu_previous[0]) if cpu_previous else 0.
+                    cpu_previous=(now,cpu)
+                    csv_row('resources.csv',['pid','cpu_total_s','cpu_percent_one_core','rss_bytes','host_load1'],
+                            [resource_pid,cpu,percent,int(fields[21])*os.sysconf('SC_PAGE_SIZE'),os.getloadavg()[0]])
+                except (OSError,ValueError):pass
 
     def wait(future, timeout):
         """有界等待请求，始终处理采样订阅。"""
@@ -353,6 +388,7 @@ def verify(a, ws):
         clients = {n: node.create_client(GetState, '/'+n+'/get_state') for n in names}
         states, futures = {}, {}
         launch_args = ['ros2', 'launch', 'smartcar_nav2', 'navigation.launch.py', 'headless:=true', 'rviz:=false']
+        if a.params_file:launch_args.append('params_file:='+str(a.params_file))
         if a.bt_xml:
             launch_args.append(('through_poses_bt_xml' if a.through_poses else 'bt_xml')+':='+str(a.bt_xml))
         if two_doors:
@@ -444,7 +480,8 @@ def verify(a, ws):
         goal.pose.header.frame_id = 'map'; goal.pose.header.stamp = node.get_clock().now().to_msg()
         goal.pose.pose.position.x = report['goal'][0]
         goal.pose.pose.position.y = report['goal'][1]
-        goal.pose.pose.orientation.w = 1.
+        goal.pose.pose.orientation.z = math.sin(report['goal'][2]/2)
+        goal.pose.pose.orientation.w = math.cos(report['goal'][2]/2)
         if a.through_poses:
             final_pose = goal.pose
             goal = NavigateThroughPoses.Goal()
@@ -461,13 +498,19 @@ def verify(a, ws):
         until = time.monotonic()+a.goal_timeout
         while not result_future.done() and time.monotonic() < until:
             spin()
-            if not two_doors and inserted_at is None and latest['truth'][1] >= a.insert_x and paths:
+            if a.case in ['detour','blocked'] and inserted_at is None and latest['truth'][1] >= a.insert_x and paths:
                 event('obstacle_request', robot=latest['truth'], box=box)
                 gazebo_create()
                 inserted_at = time.monotonic()-started
                 report['inserted_wall_s'] = inserted_at
                 event('obstacle_inserted', box=box, robot=latest['truth'])
         if not result_future.done():
+            event('goal_timeout')
+            wait(handle.cancel_goal_async(), 3.)
+            report['stop_evidence'] = wait_stopped()
+            report['checks']['stopped'] = report['stop_evidence']['verified']
+            report['final_world_pose'] = latest['truth'][1:]
+            if result_future.done():report['action_status'] = result_future.result().status
             raise TimeoutError('目标执行超时')
         result = result_future.result()
         report['action_status'] = result.status
@@ -476,13 +519,16 @@ def verify(a, ws):
         report['stop_evidence'] = wait_stopped()
         report['checks']['stopped'] = report['stop_evidence']['verified']
         report['stop_samples'] = report['stop_evidence'].get('samples', 0)
-        if not two_doors:
+        if a.case in ['detour', 'blocked']:
             report['checks']['obstacle_inserted_during_action'] = inserted_at is not None
         report['checks']['single_goal_only'] = report['goal_send_count'] == 1
         if two_doors:
             report['checks']['single_goal_for_blocked_phase'] = report['checks'].pop('single_goal_only')
-        report['checks']['expected_action_result'] = result.status == (4 if a.case == 'detour' else 6)
+        report['checks']['expected_action_result'] = result.status == (6 if a.case in ['blocked','two_doors'] else 4)
         report['final_world_pose'] = latest['truth'][1:]
+        if a.case in ['straight','turn']:
+            report['checks']['reached_goal_area'] = math.hypot(latest['truth'][1]-report['goal'][0],latest['truth'][2]-report['goal'][1]) < .25
+            report['checks']['reached_goal_heading'] = abs(math.atan2(math.sin(latest['truth'][3]-report['goal'][2]),math.cos(latest['truth'][3]-report['goal'][2]))) < .3
         if a.case == 'detour' and inserted_at is not None:
             before = [p for p in paths if p['wall_s'] < inserted_at]
             after = [p for p in paths if p['wall_s'] >= inserted_at]

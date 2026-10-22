@@ -1,6 +1,6 @@
 # SmartCar Nav2 自主导航
 
-ROS 2 Humble / Gazebo Fortress，使用已保存的二维地图、C1 雷达和轮式里程计。导航模式启动 AMCL，不启动 SLAM Toolbox；AMCL 独占 map→odom，地图固定不再继续建图。
+ROS 2 Humble / Gazebo Fortress，使用已保存的二维地图、C1 雷达和轮式里程计。默认已知地图导航启动AMCL，AMCL独占map→odom，地图固定。陌生环境使用独立的[自主探索入口](../../../docs/AUTONOMOUS_MAPPING.md)，由SLAM替代AMCL/map_server，自动选择目标、避障移动和保存地图。
 
 ## 安装与构建
 

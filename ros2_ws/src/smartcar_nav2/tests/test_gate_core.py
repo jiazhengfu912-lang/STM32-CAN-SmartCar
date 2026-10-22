@@ -78,3 +78,30 @@ def test_turn_checks_swept_radius_and_clear_side():
     assert gate.output(1.1)[2] == 'OBSTACLE_NEAR_TURN'
     gate.points = [(0., .6)]
     assert gate.output(1.1)[2] == 'READY'
+
+
+def test_map_authority_is_exclusive_for_mapping_and_localization():
+    """建图允许SLAM唯一发布，但不能以换来源为由允许AMCL或多图源混入。"""
+    check=module.map_authority_ok
+    assert check('slam',['slam_toolbox'],['slam_toolbox','planner_server'])
+    assert check('amcl',['map_server'],['amcl','map_server'])
+    assert not check('slam',['slam_toolbox'],['slam_toolbox','amcl'])
+    assert not check('slam',['slam_toolbox','map_server'],['slam_toolbox'])
+    assert not check('slam',['map_server'],['map_server'])
+    assert not check('amcl',['map_server'],['map_server','slam_toolbox'])
+
+
+def test_slam_startup_uses_live_map_and_tf_without_one_shot_pose():
+    """晚于首个pose订阅时仍可就绪，但缺地图、过期/非法TF必须停车。"""
+    check=module.slam_localization_ok
+    identity=[0.,0.,0.,0.,0.,0.,1.]
+    assert check(20.,19.,12.,11.9,identity)
+    assert not check(20.,None,12.,11.9,identity)
+    assert not check(20.,9.,12.,11.9,identity)
+    assert not check(20.,21.,12.,11.9,identity)
+    assert not check(20.,19.,None,11.9,identity)
+    assert not check(20.,19.,12.,10.4,identity)
+    assert not check(20.,19.,12.,13.1,identity)
+    assert not check(20.,19.,12.,11.9,[0.]*7)
+    for bad in [math.inf,math.nan,-math.inf]:
+        assert not check(20.,19.,12.,11.9,[bad,*identity[1:]])

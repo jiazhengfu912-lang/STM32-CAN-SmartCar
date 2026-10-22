@@ -2,6 +2,25 @@
 import math
 
 
+def map_authority_ok(source, publishers, nodes):
+    """建图和已知地图分别要求唯一地图发布者，并拒绝两套定位同时运行。"""
+    if source=='slam':
+        return publishers==['slam_toolbox'] and not {'amcl','map_server'}.intersection(nodes)
+    if source=='amcl':
+        return publishers==['map_server'] and 'slam_toolbox' not in nodes
+    return False
+
+
+def slam_localization_ok(now, map_time, sim_time, tf_stamp, values):
+    """用持续有效的SLAM地图/TF确认定位，避免静止时漏收一次性pose而死等。"""
+    if map_time is None or sim_time is None or len(values)!=7:
+        return False
+    if not all(math.isfinite(v) for v in [now,map_time,sim_time,tf_stamp,*values]):
+        return False
+    return (0<=now-map_time<=10. and -1.<=sim_time-tf_stamp<=1.5 and
+            abs(sum(v*v for v in values[3:])-1.)<=.01)
+
+
 class NavigationGate:
     def __init__(self):
         self.command = (0., 0.)

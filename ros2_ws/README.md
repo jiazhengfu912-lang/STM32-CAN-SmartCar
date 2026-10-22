@@ -81,6 +81,18 @@ ros2 run smartcar_slam save_map.py --output-dir "$SMARTCAR_WS/maps/my_office_01"
 
 YAML/PGM 供定位导航使用；`.posegraph/.data` 用于以后恢复 SLAM 图结构继续建图。仓库附带的 office_01 没有原图结构，不能直接用它恢复原来的建图任务。
 
+**陌生环境自主探索建图（无需键盘或人工目标）**：
+
+```bash
+ros2 launch smartcar_nav2 exploration.launch.py world:=office_loop rviz:=true
+```
+
+先退出旧导航/建图启动，避免重复模拟时钟和定位发布者。该模式从空白地图自动选择前沿目标，采用建图专用慢速RPP，经原门控保护行驶；结束后停车并保存栅格和SLAM图结构。默认新建`~/smartcar_maps/explore_日期_时间`；暂停、显式继续、结束保存、部分地图原因及实际验证范围见[完整说明](../docs/AUTONOMOUS_MAPPING.md)。当前只驱动Gazebo，实车桥尚未实现。
+
+全新场景亲自验收使用`world:=discovery_lab rviz:=true headless:=false max_sim_seconds:=1800`，布局、完整命令及完成判据见[用户验收步骤](../docs/DISCOVERY_LAB_ACCEPTANCE.md)。
+
+探索效率优化及同场景对比方法见[说明](../docs/EXPLORATION_SPEED.md)：收益/时间选点、附近区域补盲、减少转向和固定等待，自主模式专用SLAM匹配配置及未知区导出修复。建图运动和保护边界保持。
+
 **在保存地图上自主导航**：
 
 ```bash
@@ -113,6 +125,8 @@ python3 ros2_ws/tools/verify_navigation.py \
 本轮已在新仓库完成该测试；详细工况与限制见 [证据说明](../docs/evidence/ros2-integration-20261018/README.md)。此脚本不验证临时障碍、多目标或 STM32。
 
 ## 验证范围
+
+DWB、RPP、MPPI 的隔离对比入口与统计口径见 [控制器对比说明](../docs/CONTROLLER_BENCHMARK.md)。该测试会主动运行新建的仿真并发目标，生成独立参数副本及CSV/HTML报表，不切换用户窗口中的控制器。
 
 - `tools/test.bash` 验证模型/软件逻辑，不等于实际 Gazebo 运行、完成导航或实车验收。
 - 仿真只读观察器为 `check_runtime.py`、`check_slam.py` 和 `check_navigation.py`；各自使用条件见包内 README。带 `--motion`、`--drive-square` 的测试会主动运动，必须按对应场地要求单独运行。

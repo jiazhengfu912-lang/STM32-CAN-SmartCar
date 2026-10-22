@@ -2,7 +2,10 @@
 
 本仓库同时保存 **STM32/ESP32 底层控制** 和 **ROS 2 Humble 上层仿真、二维 SLAM、Nav2 导航**。
 新增的 [`ros2_ws/`](ros2_ws/README.md) 可在 Ubuntu 22.04 / Gazebo Fortress 中编译运行，
-支持键盘驾驶、C1 雷达仿真、建图保存、AMCL 定位、单点/多点导航、规划、碰撞检查与恢复。
+支持键盘驾驶、C1 雷达仿真、[自主探索建图](docs/AUTONOMOUS_MAPPING.md)、建图保存、AMCL 定位、单点/多点导航、规划、碰撞检查与恢复。
+
+亲自验证陌生环境自动建图：[全新discovery_lab场景及启动步骤](docs/DISCOVERY_LAB_ACCEPTANCE.md)。
+自主探索的目标选择、转向和等待优化见[效率优化说明](docs/EXPLORATION_SPEED.md)。
 ROS 2 当前仍通过 Gazebo 驱动车辆；**尚未接通实车 ROS 底盘接口**。
 上下层使用同一仓库管理，不把 Nav2 编译进 STM32。
 

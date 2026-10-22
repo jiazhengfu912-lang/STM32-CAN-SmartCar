@@ -29,6 +29,9 @@ def arguments():
     parser.add_argument('--domain-id', type=int, default=88)
     parser.add_argument('--startup-timeout', type=float, default=60.)
     parser.add_argument('--goal-timeout', type=float, default=120.)
+    parser.add_argument('--world',default='office_loop',help='与被验证地图对应的仿真场景')
+    parser.add_argument('--map-file',type=Path,help='显式验证新建地图；默认保持原示例地图')
+    parser.add_argument('--evidence-label',default='ROS integration 20261018')
     parser.add_argument('--_environment-ready', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.domain_id == 86 or not 0 <= args.domain_id <= 232:
@@ -36,6 +39,9 @@ def arguments():
     if not 0 < args.startup_timeout <= 60 or not math.isfinite(args.goal_timeout) or args.goal_timeout <= 0:
         parser.error('启动等待须为 0..60 秒，目标等待须为有限正数。')
     args.output = args.output.expanduser().resolve()
+    if args.map_file:
+        args.map_file=args.map_file.expanduser().resolve()
+        if not args.map_file.is_file():parser.error('地图文件不存在')
     return args
 
 
@@ -104,7 +110,7 @@ def stop_group(process, log_event, pump=None):
     return result
 
 
-def create_plots(output):
+def create_plots(output, label='ROS integration 20261018'):
     """离线读取原始 CSV 逐点作图；无平滑、无插值，长缺口断线。"""
     import matplotlib
     matplotlib.use('Agg')
@@ -127,7 +133,7 @@ def create_plots(output):
         return xs, ys
 
     odom, commands = read('odom.csv'), read('safe_cmd_vel.csv')
-    title = ('ROS integration 20261018 / firmware source v131 / SIMULATION_ONLY\n'
+    title = (label+' / firmware source v131 / SIMULATION_ONLY\n'
              'STM32 P: right reverse .45 -> .45, others .30 -> .30; '
              'I: steady .010 -> .010, start .030 -> .030 / 10 ms\n'
              'PI not exercised; firmware algorithm unchanged; Gazebo DiffDrive + Nav2 single goal')
@@ -187,6 +193,13 @@ def verify(args, workspace):
                                'recovery behaviors', 'multi-goal navigation', 'arbitrary localization'],
               'measurement': 'Gazebo-generated ROS odometry, not external physical ground truth'}
     report['verifier_sha256'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    if args.map_file:
+        import yaml
+        image=args.map_file.parent/yaml.safe_load(args.map_file.read_text())['image']
+        report['map_override']={'yaml':str(args.map_file),'yaml_sha256':hashlib.sha256(args.map_file.read_bytes()).hexdigest(),
+                                'image_sha256':hashlib.sha256(image.read_bytes()).hexdigest()}
+        (args.output/'map_used.yaml').write_bytes(args.map_file.read_bytes())
+        (args.output/'map_used.pgm').write_bytes(image.read_bytes())
     streams, writers, counts = {}, {}, {}
     events = (args.output/'events.jsonl').open('w', buffering=1)
 
@@ -297,7 +310,8 @@ def verify(args, workspace):
                      'behavior_server', 'bt_navigator', 'waypoint_follower', 'velocity_smoother']:
             lifecycle_clients[name] = node.create_client(GetState, '/'+name+'/get_state')
         launch_command = ['ros2', 'launch', 'smartcar_nav2', 'navigation.launch.py',
-                          'headless:=true', 'rviz:=false']
+                          'headless:=true', 'rviz:=false', 'world:='+args.world]
+        if args.map_file:launch_command.append('map:='+str(args.map_file))
         report['launch_command'] = launch_command
         process = subprocess.Popen(launch_command, cwd=workspace, env=os.environ.copy(),
                                    stdout=launch_log, stderr=subprocess.STDOUT, start_new_session=True)
@@ -431,7 +445,7 @@ def verify(args, workspace):
         report['sample_counts'] = counts
         report['duration_wall_s'] = time.monotonic()-started
         try:
-            create_plots(args.output)
+            create_plots(args.output,args.evidence_label)
             report['plots'] = ['velocity.png', 'velocity.svg', 'trajectory.png', 'trajectory.svg']
         except Exception as exc:
             report['plot_error'] = str(exc)

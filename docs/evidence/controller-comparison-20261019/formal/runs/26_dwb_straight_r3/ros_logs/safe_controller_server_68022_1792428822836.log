@@ -1,0 +1,174 @@
+[INFO] [1792428823.361599235] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792428823.565066844] [controller_server]: Creating controller server
+[INFO] [1792428824.092424362] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792428824.094739047] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792428824.115214188] [local_costmap.local_costmap]: Destroying
+[INFO] [1792428824.367047731] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792428824.368954367] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792428830.209490251] [controller_server]: Configuring controller interface
+[INFO] [1792428830.209876086] [controller_server]: getting goal checker plugins..
+[INFO] [1792428830.210426936] [controller_server]: Controller frequency set to 10.0000Hz
+[INFO] [1792428830.210480403] [local_costmap.local_costmap]: Configuring
+[INFO] [1792428830.290011530] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792428830.315939346] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1792428830.358410260] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792428830.358495329] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1792428830.361629145] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792428830.457797097] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792428830.458492139] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1792428830.459013937] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1792428830.470865334] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1792428830.479531653] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[INFO] [1792428830.480728807] [controller_server]: Setting transform_tolerance to 0.500000
+[INFO] [1792428830.550300318] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[INFO] [1792428830.550572634] [controller_server]: Critic plugin initialized
+[INFO] [1792428830.550627521] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[INFO] [1792428830.550762715] [controller_server]: Critic plugin initialized
+[INFO] [1792428830.550818196] [controller_server]: Using critic "ObstacleFootprint" (dwb_critics::ObstacleFootprintCritic)
+[INFO] [1792428830.550889012] [controller_server]: Critic plugin initialized
+[INFO] [1792428830.553718890] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[INFO] [1792428830.555998458] [controller_server]: Critic plugin initialized
+[INFO] [1792428830.556138073] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[INFO] [1792428830.556283734] [controller_server]: Critic plugin initialized
+[INFO] [1792428830.556326626] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[INFO] [1792428830.556436405] [controller_server]: Critic plugin initialized
+[INFO] [1792428830.556473632] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[INFO] [1792428830.556573768] [controller_server]: Critic plugin initialized
+[INFO] [1792428830.556589134] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1792428833.412212267] [controller_server]: Activating
+[INFO] [1792428833.412278052] [local_costmap.local_costmap]: Activating
+[INFO] [1792428833.412298151] [local_costmap.local_costmap]: Checking transform
+[INFO] [1792428833.412505049] [local_costmap.local_costmap]: start
+[INFO] [1792428833.623883237] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1792428837.733614183] [controller_server]: Received FollowPath goal with checked TF completion
+[WARN] [1792428837.743075634] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[WARN] [1792428837.941161682] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428837.983346504] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428838.243732525] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428838.459163340] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428838.843467584] [controller_server]: Passing new path to controller.
+[INFO] [1792428840.043480500] [controller_server]: Passing new path to controller.
+[WARN] [1792428841.160946766] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428841.161010841] [controller_server]: Passing new path to controller.
+[WARN] [1792428841.267787053] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428841.356025659] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428842.243782716] [controller_server]: Passing new path to controller.
+[WARN] [1792428843.162513002] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428843.343481062] [controller_server]: Passing new path to controller.
+[WARN] [1792428843.951898117] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428844.443744034] [controller_server]: Passing new path to controller.
+[INFO] [1792428845.648513543] [controller_server]: Passing new path to controller.
+[WARN] [1792428845.763893498] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428845.886221910] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428845.972325596] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428846.744230790] [controller_server]: Passing new path to controller.
+[WARN] [1792428847.649326110] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428847.755566049] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428847.851999786] [controller_server]: Passing new path to controller.
+[WARN] [1792428849.046691720] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428849.046762615] [controller_server]: Passing new path to controller.
+[WARN] [1792428849.570226042] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428849.658523864] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428849.847130602] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428850.143522847] [controller_server]: Passing new path to controller.
+[INFO] [1792428851.259330301] [controller_server]: Passing new path to controller.
+[INFO] [1792428852.343775686] [controller_server]: Passing new path to controller.
+[INFO] [1792428853.443654681] [controller_server]: Passing new path to controller.
+[INFO] [1792428854.543466459] [controller_server]: Passing new path to controller.
+[WARN] [1792428855.173870482] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428855.262765596] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428855.350167911] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428855.743496604] [controller_server]: Passing new path to controller.
+[WARN] [1792428856.471738338] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428856.755171170] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428856.911371525] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428856.911484110] [controller_server]: Passing new path to controller.
+[WARN] [1792428856.970185092] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428857.274285397] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428857.352748489] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428857.944150055] [controller_server]: Passing new path to controller.
+[WARN] [1792428858.059892980] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428858.170051367] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428858.248149332] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428858.853126786] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428859.143466627] [controller_server]: Passing new path to controller.
+[INFO] [1792428860.251476877] [controller_server]: Passing new path to controller.
+[WARN] [1792428860.653436827] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428860.750008045] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428861.150154665] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428861.289042481] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792428861.448212402] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428861.448266415] [controller_server]: Passing new path to controller.
+[INFO] [1792428862.451834728] [controller_server]: Passing new path to controller.
+[INFO] [1792428863.648293080] [controller_server]: Passing new path to controller.
+[INFO] [1792428864.751642584] [controller_server]: Passing new path to controller.
+[INFO] [1792428865.852143268] [controller_server]: Passing new path to controller.
+[INFO] [1792428866.949463192] [controller_server]: Passing new path to controller.
+[INFO] [1792428868.148299325] [controller_server]: Passing new path to controller.
+[INFO] [1792428869.150438683] [controller_server]: Passing new path to controller.
+[INFO] [1792428870.249912135] [controller_server]: Passing new path to controller.
+[INFO] [1792428871.351837160] [controller_server]: Passing new path to controller.
+[INFO] [1792428872.448497915] [controller_server]: Passing new path to controller.
+[INFO] [1792428873.550975465] [controller_server]: Passing new path to controller.
+[INFO] [1792428874.748626231] [controller_server]: Passing new path to controller.
+[INFO] [1792428875.850808917] [controller_server]: Passing new path to controller.
+[INFO] [1792428876.948287316] [controller_server]: Passing new path to controller.
+[INFO] [1792428878.048819155] [controller_server]: Passing new path to controller.
+[INFO] [1792428879.048976138] [controller_server]: Passing new path to controller.
+[INFO] [1792428880.251651068] [controller_server]: Passing new path to controller.
+[INFO] [1792428881.350247742] [controller_server]: Passing new path to controller.
+[INFO] [1792428882.450632922] [controller_server]: Passing new path to controller.
+[INFO] [1792428883.558966402] [controller_server]: Passing new path to controller.
+[INFO] [1792428884.749830868] [controller_server]: Passing new path to controller.
+[INFO] [1792428885.851987745] [controller_server]: Passing new path to controller.
+[INFO] [1792428886.948350400] [controller_server]: Passing new path to controller.
+[INFO] [1792428888.051261690] [controller_server]: Passing new path to controller.
+[INFO] [1792428889.149252778] [controller_server]: Passing new path to controller.
+[INFO] [1792428890.248539698] [controller_server]: Passing new path to controller.
+[INFO] [1792428891.348801951] [controller_server]: Passing new path to controller.
+[INFO] [1792428892.462260487] [controller_server]: Passing new path to controller.
+[INFO] [1792428893.654537591] [controller_server]: Passing new path to controller.
+[INFO] [1792428894.749414151] [controller_server]: Passing new path to controller.
+[INFO] [1792428895.848681033] [controller_server]: Passing new path to controller.
+[INFO] [1792428896.948290826] [controller_server]: Passing new path to controller.
+[INFO] [1792428898.048919308] [controller_server]: Passing new path to controller.
+[WARN] [1792428899.159145085] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428899.257352389] [controller_server]: Passing new path to controller.
+[INFO] [1792428900.353262190] [controller_server]: Passing new path to controller.
+[INFO] [1792428901.450045699] [controller_server]: Passing new path to controller.
+[INFO] [1792428902.552998055] [controller_server]: Passing new path to controller.
+[INFO] [1792428903.650508947] [controller_server]: Passing new path to controller.
+[WARN] [1792428904.648453237] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792428904.752552298] [controller_server]: Passing new path to controller.
+[INFO] [1792428905.848358049] [controller_server]: Passing new path to controller.
+[INFO] [1792428907.049978728] [controller_server]: Passing new path to controller.
+[INFO] [1792428908.155622319] [controller_server]: Passing new path to controller.
+[INFO] [1792428909.248536904] [controller_server]: Passing new path to controller.
+[INFO] [1792428910.349992434] [controller_server]: Passing new path to controller.
+[INFO] [1792428911.351960762] [controller_server]: Passing new path to controller.
+[INFO] [1792428912.454044316] [controller_server]: Passing new path to controller.
+[INFO] [1792428913.548578563] [controller_server]: Passing new path to controller.
+[INFO] [1792428914.648291926] [controller_server]: Passing new path to controller.
+[INFO] [1792428915.748522088] [controller_server]: Passing new path to controller.
+[INFO] [1792428916.948297304] [controller_server]: Passing new path to controller.
+[INFO] [1792428918.048657923] [controller_server]: Passing new path to controller.
+[INFO] [1792428919.150882477] [controller_server]: Passing new path to controller.
+[INFO] [1792428920.148293262] [controller_server]: Passing new path to controller.
+[INFO] [1792428920.586173755] [controller_server]: Reached goal with valid TF
+[INFO] [1792428922.802119355] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792428922.802220343] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1792428922.802264448] [controller_server]: Deactivating
+[INFO] [1792428922.802305052] [local_costmap.local_costmap]: Deactivating
+[INFO] [1792428922.821695221] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1792428922.884068875] [controller_server]: Cleaning up
+[INFO] [1792428922.908974696] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1792428924.253457306] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

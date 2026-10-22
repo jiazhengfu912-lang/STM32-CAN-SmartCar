@@ -1,0 +1,26 @@
+{"wall_s": 1.0675373339981888, "sim_s": null, "event": "launch_started", "pid": 50024, "partition": "smartcar-replan-9c7014ffe8984ae38d2ade436a9da0ed"}
+{"wall_s": 14.117586394000682, "sim_s": 4.577, "event": "ready", "states": {"amcl": "active", "bt_navigator": "active", "controller_server": "active", "map_server": "active", "smoother_server": "active", "planner_server": "active", "behavior_server": "active", "waypoint_follower": "active", "velocity_smoother": "active"}}
+{"wall_s": 14.119117526999617, "sim_s": 4.578, "event": "goal_accepted"}
+{"wall_s": 51.52218974299467, "sim_s": 20.791, "event": "goal_result", "status": 4}
+{"wall_s": 53.72370666200004, "sim_s": 21.905, "event": "cancel_on_exit"}
+{"wall_s": 53.73647915999754, "sim_s": 21.905, "event": "shutdown_signal", "signal": "SIGINT", "process_group": 50024}
+Traceback (most recent call last):
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_replanning.py", line 654, in <module>
+    raise SystemExit(verify(args, workspace))
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_replanning.py", line 627, in verify
+    report['shutdown'] = stop_group(process, event, lambda: rclpy.spin_once(node, timeout_sec=.05))
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_navigation.py", line 92, in stop_group
+    pump()
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_replanning.py", line 627, in <lambda>
+    report['shutdown'] = stop_group(process, event, lambda: rclpy.spin_once(node, timeout_sec=.05))
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 208, in spin_once
+    executor.spin_once(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    wait_set.wait(timeout_nsec)
+KeyboardInterrupt

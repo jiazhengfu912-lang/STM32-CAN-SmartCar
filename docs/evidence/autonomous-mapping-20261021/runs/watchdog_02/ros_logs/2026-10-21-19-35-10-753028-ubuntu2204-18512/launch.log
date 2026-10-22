@@ -1,0 +1,51 @@
+1792582510.7541373 [INFO] [launch]: All log files can be found below /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-20261021-watchdog-02/ros_logs/2026-10-21-19-35-10-753028-ubuntu2204-18512
+1792582510.7542937 [INFO] [launch]: Default logging verbosity is set to INFO
+1792582512.0502248 [INFO] [ign-1]: process started with pid [18524]
+1792582512.0504675 [INFO] [robot_state_publisher-2]: process started with pid [18526]
+1792582512.0505219 [INFO] [parameter_bridge-3]: process started with pid [18528]
+1792582512.0505662 [INFO] [cmd_guard.py-4]: process started with pid [18530]
+1792582512.0506079 [INFO] [parameter_bridge-5]: process started with pid [18534]
+1792582512.0506542 [INFO] [async_slam_toolbox_node-6]: process started with pid [18544]
+1792582512.0522244 [INFO] [safe_controller_server-7]: process started with pid [18547]
+1792582512.0522935 [INFO] [smoother_server-8]: process started with pid [18549]
+1792582512.0523345 [INFO] [safe_planner_server-9]: process started with pid [18551]
+1792582512.0523751 [INFO] [behavior_server-10]: process started with pid [18554]
+1792582512.0524206 [INFO] [bt_navigator-11]: process started with pid [18556]
+1792582512.0524580 [INFO] [waypoint_follower-12]: process started with pid [18573]
+1792582512.0524945 [INFO] [velocity_smoother-13]: process started with pid [18593]
+1792582512.0525298 [INFO] [navigation_gate.py-14]: process started with pid [18605]
+1792582512.0525637 [INFO] [explore.py-15]: process started with pid [18608]
+1792582517.0376797 [INFO] [lifecycle_manager-16]: process started with pid [18780]
+1792582541.7280588 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1792582541.7663391 [INFO] [lifecycle_manager-16]: sending signal 'SIGINT' to process[lifecycle_manager-16]
+1792582541.7672031 [INFO] [explore.py-15]: sending signal 'SIGINT' to process[explore.py-15]
+1792582541.7680700 [INFO] [navigation_gate.py-14]: sending signal 'SIGINT' to process[navigation_gate.py-14]
+1792582541.7691257 [INFO] [velocity_smoother-13]: sending signal 'SIGINT' to process[velocity_smoother-13]
+1792582541.7701755 [INFO] [waypoint_follower-12]: sending signal 'SIGINT' to process[waypoint_follower-12]
+1792582541.7737458 [INFO] [bt_navigator-11]: sending signal 'SIGINT' to process[bt_navigator-11]
+1792582541.7818046 [INFO] [behavior_server-10]: sending signal 'SIGINT' to process[behavior_server-10]
+1792582541.7827809 [INFO] [safe_planner_server-9]: sending signal 'SIGINT' to process[safe_planner_server-9]
+1792582541.7832532 [ERROR] [waypoint_follower-12]: process has died [pid 18573, exit code -2, cmd '/opt/ros/humble/lib/nav2_waypoint_follower/waypoint_follower --ros-args -r __node:=waypoint_follower --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_2c1y6ck_'].
+1792582541.7834835 [ERROR] [velocity_smoother-13]: process has died [pid 18593, exit code -2, cmd '/opt/ros/humble/lib/nav2_velocity_smoother/velocity_smoother --ros-args -r __node:=velocity_smoother --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_yhraqv0o --params-file /tmp/launch_params_nc1rdouu -r cmd_vel:=/nav/cmd_vel_raw -r cmd_vel_smoothed:=/nav/cmd_vel'].
+1792582541.7841964 [INFO] [smoother_server-8]: sending signal 'SIGINT' to process[smoother_server-8]
+1792582541.7853298 [INFO] [safe_controller_server-7]: sending signal 'SIGINT' to process[safe_controller_server-7]
+1792582541.7864552 [INFO] [async_slam_toolbox_node-6]: sending signal 'SIGINT' to process[async_slam_toolbox_node-6]
+1792582541.7873137 [INFO] [parameter_bridge-5]: sending signal 'SIGINT' to process[parameter_bridge-5]
+1792582541.7902284 [INFO] [cmd_guard.py-4]: sending signal 'SIGINT' to process[cmd_guard.py-4]
+1792582541.8003693 [INFO] [parameter_bridge-3]: sending signal 'SIGINT' to process[parameter_bridge-3]
+1792582541.8021114 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1792582541.8023546 [ERROR] [async_slam_toolbox_node-6]: process has died [pid 18544, exit code -2, cmd '/opt/ros/humble/lib/slam_toolbox/async_slam_toolbox_node --ros-args -r __node:=slam_toolbox --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_slam/share/smartcar_slam/config/slam.yaml --params-file /tmp/launch_params_kje8ftno'].
+1792582541.8024917 [ERROR] [cmd_guard.py-4]: process has died [pid 18530, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_sim/lib/smartcar_sim/cmd_guard.py --ros-args -r __node:=sim_cmd_guard -r /sim/cmd_vel:=/nav/safe_cmd_vel'].
+1792582541.8025606 [ERROR] [smoother_server-8]: process has died [pid 18549, exit code -2, cmd '/opt/ros/humble/lib/nav2_smoother/smoother_server --ros-args -r __node:=smoother_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_zcf744sp'].
+1792582541.8033223 [INFO] [ign-1]: sending signal 'SIGINT' to process[ign-1]
+1792582541.8051994 [ERROR] [robot_state_publisher-2]: process has died [pid 18526, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args --params-file /tmp/launch_params_u8fwbqwr'].
+1792582541.8257554 [ERROR] [navigation_gate.py-14]: process has died [pid 18605, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py --ros-args -r __node:=navigation_gate --params-file /tmp/launch_params_upogb7n8'].
+1792582541.8518500 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 18528]
+1792582541.8526280 [ERROR] [explore.py-15]: process has died [pid 18608, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_slam/lib/smartcar_slam/explore.py --ros-args -r __node:=frontier_explorer --params-file /tmp/launch_params_s5oh_ui3'].
+1792582541.8736849 [INFO] [parameter_bridge-5]: process has finished cleanly [pid 18534]
+1792582541.8861401 [INFO] [ign-1]: process has finished cleanly [pid 18524]
+1792582541.9293292 [INFO] [behavior_server-10]: process has finished cleanly [pid 18554]
+1792582541.9798625 [INFO] [lifecycle_manager-16]: process has finished cleanly [pid 18780]
+1792582541.9835753 [INFO] [bt_navigator-11]: process has finished cleanly [pid 18556]
+1792582542.0265632 [INFO] [safe_controller_server-7]: process has finished cleanly [pid 18547]
+1792582542.2526510 [INFO] [safe_planner_server-9]: process has finished cleanly [pid 18551]

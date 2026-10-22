@@ -1,0 +1,65 @@
+[INFO] [1792428521.498766206] [planner_server]: 
+	planner_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792428521.505844005] [planner_server]: Creating
+[INFO] [1792428521.798472499] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792428521.799587047] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792428521.828013244] [global_costmap.global_costmap]: Destroying
+[INFO] [1792428521.963322387] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792428521.963862347] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792428528.874614013] [planner_server]: Configuring
+[INFO] [1792428528.874675247] [global_costmap.global_costmap]: Configuring
+[INFO] [1792428528.946590752] [global_costmap.global_costmap]: Using plugin "static_layer"
+[INFO] [1792428528.963485779] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[INFO] [1792428528.980452619] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[INFO] [1792428528.980500238] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792428528.996309816] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[INFO] [1792428529.049226057] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792428529.049285886] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[INFO] [1792428529.058730097] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792428529.209889164] [global_costmap.global_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792428529.210366456] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 239 X 200 at 0.050000 m/pix
+[INFO] [1792428529.210599457] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[INFO] [1792428529.210628708] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[INFO] [1792428529.225550060] [planner_server]: Planner Server has GridBased  planners available.
+[INFO] [1792428530.878459955] [planner_server]: Activating
+[INFO] [1792428530.878517552] [global_costmap.global_costmap]: Activating
+[INFO] [1792428530.878533336] [global_costmap.global_costmap]: Checking transform
+[INFO] [1792428530.878597667] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.000000 but the earliest data is at time 1.100000, when looking up transform from frame [base_footprint] to frame [map]
+[INFO] [1792428531.384940739] [global_costmap.global_costmap]: start
+[INFO] [1792428532.435820714] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[INFO] [1792428532.455316582] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[ERROR] [1792428577.316318963] [planner_server]: Failed to create a plan from potential when a legal potential was found. This shouldn't happen.
+[WARN] [1792428577.316403886] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792428577.316419999] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792428577.316433708] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[WARN] [1792428629.276890845] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792428629.289317981] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792428629.289384420] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[WARN] [1792428651.324747401] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792428651.328609232] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792428651.328669689] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[WARN] [1792428661.674573069] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792428661.674655184] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792428661.674672240] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[WARN] [1792428679.646822203] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792428679.647741182] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792428679.647800578] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[INFO] [1792428681.780712912] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792428681.780780307] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[INFO] [1792428681.780854531] [planner_server]: Deactivating
+[INFO] [1792428681.780891490] [global_costmap.global_costmap]: Deactivating
+[INFO] [1792428682.400149267] [planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[INFO] [1792428682.400210443] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[INFO] [1792428682.415919098] [planner_server]: Cleaning up
+[INFO] [1792428683.563651324] [global_costmap.global_costmap]: Cleaning up
+[INFO] [1792428683.565273674] [planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[INFO] [1792428683.565407031] [planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[INFO] [1792428683.622528720] [planner_server]: Destroying bond (planner_server) to lifecycle manager.

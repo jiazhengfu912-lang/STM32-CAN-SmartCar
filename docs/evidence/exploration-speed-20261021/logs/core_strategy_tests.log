@@ -1,0 +1,17 @@
+........F....                                                            [100%]
+=================================== FAILURES ===================================
+_________________ test_known_wall_blocks_predicted_information _________________
+
+    def test_known_wall_blocks_predicted_information():
+        """不能把已知墙后大块未知当作当前观察点可见收益；开门后才出现收益。"""
+        grid=np.zeros((100,100),dtype=np.int16);grid[:,55:]=-1;grid[:,50:52]=100
+        assert predicted_gain(grid,.1,(0.,0.),(3.,5.))==0.
+        grid[43:58,50:52]=0
+>       assert predicted_gain(grid,.1,(0.,0.),(3.,5.))>1.
+E       assert 0.9765117164908275 > 1.0
+E        +  where 0.9765117164908275 = predicted_gain(array([[ 0,  0,  0, ..., -1, -1, -1],\n       [ 0,  0,  0, ..., -1, -1, -1],\n       [ 0,  0,  0, ..., -1, -1, -1],\n    ... 0,  0,  0, ..., -1, -1, -1],\n       [ 0,  0,  0, ..., -1, -1, -1],\n       [ 0,  0,  0, ..., -1, -1, -1]], dtype=int16), 0.1, (0.0, 0.0), (3.0, 5.0))
+
+ros2_ws/src/smartcar_slam/tests/test_frontier_core.py:88: AssertionError
+=========================== short test summary info ============================
+FAILED ros2_ws/src/smartcar_slam/tests/test_frontier_core.py::test_known_wall_blocks_predicted_information
+1 failed, 12 passed in 0.17s

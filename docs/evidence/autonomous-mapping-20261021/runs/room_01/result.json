@@ -1,0 +1,71 @@
+{
+  "result": "FAIL",
+  "case": "autonomous",
+  "scope": "SIMULATION_ONLY",
+  "domain_id": 145,
+  "partition": "smartcar-explore-24ef218ced0844398664838957557fdc",
+  "checks": {},
+  "source_sha256": {
+    "ros2_ws/src/smartcar_slam/scripts/explore.py": "9586ea73e2cff744f7a29df7a26c66834fc21bf122fc213c6bd856d071d6c5d4",
+    "ros2_ws/src/smartcar_slam/scripts/frontier_core.py": "b563dfc96f8a232fb0762a9254eeb8ebee0deab8f79402d2edd863db6410704a",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "c1c55fdab55bbbc6011dc90273a83e4a8a7b380569d2a730a20a1f65b3214e0b",
+    "ros2_ws/src/smartcar_nav2/launch/exploration.launch.py": "a1a4809915122127c20b98edf16e719fcfd355d4ede27fc8fd03c1bf0ac06e3c",
+    "ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py": "45d775c0ffc5ea0d93e41816aff1e0a4f7a3f0032dfa1a46bf755b14f6e0214b",
+    "ros2_ws/src/smartcar_nav2/scripts/gate_core.py": "20542c3de00e0d488ee7adbe00ee0d420fc0aa4483bfe0a6b55d38b0626a1356",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_slam/config/slam.yaml": "46df8388b28828c643ee57df703d550bdc3a1683a15e7994076f0ccc6c3ad262",
+    "ros2_ws/tools/verify_exploration.py": "310466d585a54e15ecdb8409c91b40342f500f325c4d4e18fcf200e51ac06fc2"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "exploration.launch.py",
+    "world:=smartcar",
+    "headless:=true",
+    "rviz:=false",
+    "output_dir:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-20261021-room-01/mission",
+    "max_sim_seconds:=600.0"
+  ],
+  "error": "KeyboardInterrupt",
+  "shutdown": {
+    "process_group": 14268,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "duration_wall_s": 91.82207409699993,
+  "raw_sha256": {
+    "diagnosis.json": "ab4b795656d095335a545732dd6b781d4ed02b6bf0c3cdee27aa9a20a208af50",
+    "gate.csv": "43b49da17ea29510d72602752dc4ff1b06a298a8c44367a8ddaa05031f0d4776",
+    "launch.log": "5331af63a7c0deb5c2d37c7949ef09bde8639cc43dd486c4d03447d7fd340c53",
+    "odom.csv": "ec1d252823ba76587853629d9921ac58c8a02850e265c73f58c5237c9677b70e",
+    "verifier_events.jsonl": "ffb6e0353e4cf93e28598b5c7b6fbeb7ac68d25b472ff75ee352680409d6f29a",
+    "commands.csv": "f9663a4e158f38af04a941d289b9cb1a8b1b5a4df0505fecb536fc658c719624",
+    "ros_logs/waypoint_follower_14325_1792581257977.log": "2d4844201a2a63ad8900b583fdb18f695bc36a878688dcd040cfdfa044b87a93",
+    "ros_logs/parameter_bridge_14295_1792581258023.log": "253d0370482dbbbe42d8e8f5d41b45dc37ea389a13f5a4e078b69c205475bcaf",
+    "ros_logs/behavior_server_14313_1792581258010.log": "bfc9347c69d197ddc5be004e46119cc440bb2cf637d69d44f217428d28ec06ed",
+    "ros_logs/velocity_smoother_14334_1792581257995.log": "2d0d27445ffd0be8cd8abd5968b09d6df9473cbb0c04e64233c3c3b3cac446bf",
+    "ros_logs/parameter_bridge_14299_1792581258004.log": "7acbdd44e01ee2b0875349a321efd27d78602c06098cdb76809dba75a4904cc4",
+    "ros_logs/safe_planner_server_14309_1792581257951.log": "4fb8053f6ce29fcbef5240f865f269f6ecbaa9168e1a4a2ac1b47a808fdfc14a",
+    "ros_logs/python3_14340_1792581259043.log": "57daa038517b474dd0a87f405460d8ca92fb5be697703cd23b44d7b1549421a9",
+    "ros_logs/safe_controller_server_14303_1792581257940.log": "c92c0c195221d69781262ca6df9fcc31c95463d1cb2c10c797e42f80f98b65f9",
+    "ros_logs/python3_14268_1792581256703.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/lifecycle_manager_14547_1792581262958.log": "30f675079e430b80c44c7d88138d7642ce79ba6efa12227665a0df8bf5568376",
+    "ros_logs/python3_14297_1792581258477.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/python3_14244_1792581256464.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/async_slam_toolbox_node_14301_1792581257893.log": "5c84ea5e15baa2d0a7e9faabb399155c37b121155862724ee4cb3883aee10ca9",
+    "ros_logs/python3_14338_1792581258757.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/robot_state_publisher_14293_1792581257869.log": "d7f9bb85803ba04375243aae428f579d19c72af68c95a4448cea3161032beed5",
+    "ros_logs/smoother_server_14307_1792581257982.log": "ef0dd19fa8c820adc9e7e098bf8e2e51459ec56c9e80a97d8c3a842d42106f32",
+    "ros_logs/bt_navigator_14319_1792581258014.log": "0209a3491c87a935bc877335ece5a33df3a5c8b6b535a00cef0d2c195a3e489e",
+    "ros_logs/2026-10-21-19-14-16-665375-ubuntu2204-14268/launch.log": "a3a296e6de90edb2399d1c580d08af6e634463a0c451d9500f60376f2c1b5d37",
+    "mission/session.json": "ecb60e44797d6ac429530aedb44ece0e5591d613277a7df4c78b7fc5e84a14e6",
+    "mission/safe_cmd_vel.csv": "2c12d6641c6155cbeb9881d85d7e0363dda262f647da5b5f331b74c70277b370",
+    "mission/safety.csv": "6a7bdce20d36f203b95f44b86bbc41459fd82a11f5f54b8b484966119c77c64a",
+    "mission/odom.csv": "35fd0658f3a78c6536f300e0fb4e2eee255489040c5e6ed01b12cd6bfef6e22d",
+    "mission/events.jsonl": "25b57c704e74b1dac190a52c1382165b17e558134d2608ec0ad5c14258b7e44c"
+  }
+}

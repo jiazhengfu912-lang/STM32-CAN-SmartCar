@@ -1,0 +1,52 @@
+1792421548.7041161 [INFO] [launch]: All log files can be found below /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/runs/03_mppi_straight_r1/ros_logs/2026-10-19-22-52-28-703302-ubuntu2204-51578
+1792421548.7042260 [INFO] [launch]: Default logging verbosity is set to INFO
+1792421550.0958560 [INFO] [ign-1]: process started with pid [51609]
+1792421550.0960436 [INFO] [robot_state_publisher-2]: process started with pid [51611]
+1792421550.1149313 [INFO] [parameter_bridge-3]: process started with pid [51613]
+1792421550.1152272 [INFO] [cmd_guard.py-4]: process started with pid [51615]
+1792421550.1153190 [INFO] [parameter_bridge-5]: process started with pid [51617]
+1792421550.1153741 [INFO] [map_server-6]: process started with pid [51619]
+1792421550.1154196 [INFO] [amcl-7]: process started with pid [51621]
+1792421550.1154594 [INFO] [safe_controller_server-8]: process started with pid [51625]
+1792421550.1155007 [INFO] [smoother_server-9]: process started with pid [51627]
+1792421550.1155429 [INFO] [safe_planner_server-10]: process started with pid [51636]
+1792421550.1155829 [INFO] [behavior_server-11]: process started with pid [51638]
+1792421550.1156204 [INFO] [bt_navigator-12]: process started with pid [51640]
+1792421550.1156583 [INFO] [waypoint_follower-13]: process started with pid [51644]
+1792421550.1156948 [INFO] [velocity_smoother-14]: process started with pid [51646]
+1792421550.1157284 [INFO] [navigation_gate.py-15]: process started with pid [51650]
+1792421552.0725563 [INFO] [lifecycle_manager-16]: process started with pid [51826]
+1792421555.0886467 [INFO] [lifecycle_manager-17]: process started with pid [51872]
+1792421610.2999859 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1792421610.4149983 [INFO] [lifecycle_manager-17]: sending signal 'SIGINT' to process[lifecycle_manager-17]
+1792421610.4281862 [INFO] [lifecycle_manager-16]: sending signal 'SIGINT' to process[lifecycle_manager-16]
+1792421610.4554183 [INFO] [navigation_gate.py-15]: sending signal 'SIGINT' to process[navigation_gate.py-15]
+1792421610.4947772 [INFO] [velocity_smoother-14]: sending signal 'SIGINT' to process[velocity_smoother-14]
+1792421610.5033476 [INFO] [parameter_bridge-5]: process has finished cleanly [pid 51617]
+1792421610.5056093 [INFO] [waypoint_follower-13]: sending signal 'SIGINT' to process[waypoint_follower-13]
+1792421610.5150602 [INFO] [bt_navigator-12]: sending signal 'SIGINT' to process[bt_navigator-12]
+1792421610.5235775 [INFO] [behavior_server-11]: sending signal 'SIGINT' to process[behavior_server-11]
+1792421610.5549507 [INFO] [safe_planner_server-10]: sending signal 'SIGINT' to process[safe_planner_server-10]
+1792421610.5583398 [ERROR] [waypoint_follower-13]: process has died [pid 51644, exit code -2, cmd '/opt/ros/humble/lib/nav2_waypoint_follower/waypoint_follower --ros-args -r __node:=waypoint_follower --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/mppi.yaml --params-file /tmp/launch_params_w866oubm'].
+1792421610.5585396 [ERROR] [velocity_smoother-14]: process has died [pid 51646, exit code -2, cmd '/opt/ros/humble/lib/nav2_velocity_smoother/velocity_smoother --ros-args -r __node:=velocity_smoother --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/mppi.yaml --params-file /tmp/launch_params_cxzyb30n -r cmd_vel:=/nav/cmd_vel_raw -r cmd_vel_smoothed:=/nav/cmd_vel'].
+1792421610.5586374 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 51613]
+1792421610.5595465 [INFO] [smoother_server-9]: sending signal 'SIGINT' to process[smoother_server-9]
+1792421610.5629568 [INFO] [safe_controller_server-8]: sending signal 'SIGINT' to process[safe_controller_server-8]
+1792421610.5774488 [INFO] [amcl-7]: sending signal 'SIGINT' to process[amcl-7]
+1792421610.5848467 [INFO] [map_server-6]: sending signal 'SIGINT' to process[map_server-6]
+1792421610.5941632 [INFO] [cmd_guard.py-4]: sending signal 'SIGINT' to process[cmd_guard.py-4]
+1792421610.6183667 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1792421610.6251583 [INFO] [ign-1]: sending signal 'SIGINT' to process[ign-1]
+1792421610.6307623 [ERROR] [cmd_guard.py-4]: process has died [pid 51615, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_sim/lib/smartcar_sim/cmd_guard.py --ros-args -r __node:=sim_cmd_guard -r /sim/cmd_vel:=/nav/safe_cmd_vel'].
+1792421610.6335466 [ERROR] [amcl-7]: process has died [pid 51621, exit code -2, cmd '/opt/ros/humble/lib/nav2_amcl/amcl --ros-args -r __node:=amcl --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/mppi.yaml --params-file /tmp/launch_params_gpbvobts --params-file /tmp/launch_params_ixlfmoj6'].
+1792421610.6356480 [INFO] [lifecycle_manager-16]: process has finished cleanly [pid 51826]
+1792421610.6416268 [ERROR] [map_server-6]: process has died [pid 51619, exit code -2, cmd '/opt/ros/humble/lib/nav2_map_server/map_server --ros-args -r __node:=map_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/mppi.yaml --params-file /tmp/launch_params_406d110x --params-file /tmp/launch_params_rrqr19ly'].
+1792421610.6458271 [ERROR] [robot_state_publisher-2]: process has died [pid 51611, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args --params-file /tmp/launch_params_zmua69io'].
+1792421610.8189025 [INFO] [smoother_server-9]: process has finished cleanly [pid 51627]
+1792421610.8331854 [INFO] [behavior_server-11]: process has finished cleanly [pid 51638]
+1792421610.8388491 [ERROR] [navigation_gate.py-15]: process has died [pid 51650, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py --ros-args -r __node:=navigation_gate'].
+1792421610.8436415 [INFO] [ign-1]: process has finished cleanly [pid 51609]
+1792421610.8652618 [INFO] [lifecycle_manager-17]: process has finished cleanly [pid 51872]
+1792421610.8709791 [INFO] [safe_controller_server-8]: process has finished cleanly [pid 51625]
+1792421610.9565539 [INFO] [bt_navigator-12]: process has finished cleanly [pid 51640]
+1792421611.3777313 [INFO] [safe_planner_server-10]: process has finished cleanly [pid 51636]

@@ -1,0 +1,106 @@
+{
+  "status": "STOPPED_QUALITY_GATE",
+  "pid": 55262,
+  "started_utc": "2026-10-22T02:59:40.896543+00:00",
+  "runs": [
+    {
+      "name": "after_discovery_r1",
+      "suffix": "v5-discovery-r1",
+      "returncode": 0,
+      "runtime_result": "PASS",
+      "folder": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-speed-20261021-v5-discovery-r1",
+      "metrics": {
+        "result": "PASS",
+        "reason": "NO_REACHABLE_FRONTIERS_PARTIAL",
+        "complete": false,
+        "stop_verified": true,
+        "goals": 11,
+        "succeeded": 8,
+        "navigation_failures": 3,
+        "travel_m": 37.03304518604324,
+        "angular_travel_rad": 46.50997622795795,
+        "idle_sim_s": 31.55400000000012,
+        "turn_only_sim_s": 67.41999999999996,
+        "duration_wall_s": 524.4102764650015,
+        "end_sim_s": 342.479,
+        "observed_fraction_final": 0.9792826621779102,
+        "reference_area_m2": 38.61500000000001,
+        "milestones": {
+          "0.8": {
+            "sim_s": 24.356,
+            "wall_s": 44.12751745400237
+          },
+          "0.9": {
+            "sim_s": 121.658,
+            "wall_s": 198.71115744300187
+          },
+          "0.95": {
+            "sim_s": 122.9,
+            "wall_s": 200.72062605099927
+          }
+        },
+        "map_geometry_proxy": {
+          "occupied_cells": 4373,
+          "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+          "surface_distance_median_m": 0.06759939275514242,
+          "surface_distance_p95_m": 0.42575914788668817,
+          "occupied_support_fraction_within_015m": 0.7516579007546307,
+          "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+        },
+        "milestone_map_geometry_proxy": {
+          "0.8": {
+            "occupied_cells": 1167,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.03524116586119881,
+            "surface_distance_p95_m": 0.05950091912352599,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.9": {
+            "occupied_cells": 1642,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.02083894345702024,
+            "surface_distance_p95_m": 0.07083890247882678,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.95": {
+            "occupied_cells": 1701,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.02083894345702024,
+            "surface_distance_p95_m": 0.07083890247882678,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          }
+        },
+        "passive_pose_diagnostics": {
+          "odom": {
+            "received_samples": 29305,
+            "missing_samples": 3,
+            "median_position_error_m": 1.522658671252469,
+            "p95_position_error_m": 2.936466994200175,
+            "max_position_error_m": 3.1612188990350454,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          },
+          "slam": {
+            "received_samples": 29305,
+            "missing_samples": 45,
+            "median_position_error_m": 0.010477840939424679,
+            "p95_position_error_m": 0.3171273608548638,
+            "max_position_error_m": 0.7048625341410293,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          }
+        },
+        "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage"
+      },
+      "quality_gate": {
+        "coverage95_reached": true,
+        "final_coverage": true,
+        "map_p95": false,
+        "map_support": false,
+        "stopped_and_saved": true
+      }
+    }
+  ],
+  "active": null
+}

@@ -1,0 +1,90 @@
+{
+  "result": "FAIL",
+  "scope": "SIMULATION_ONLY",
+  "case": "straight",
+  "started_utc": "2026-10-19T16:55:26.387033+00:00",
+  "domain_id": 126,
+  "ign_partition": "smartcar-replan-041cf2d4d6fd4866973605a8d5e86f01",
+  "goal": [
+    4.5,
+    0.0,
+    0.0
+  ],
+  "goal_send_count": 0,
+  "checks": {},
+  "firmware_source_version": 131,
+  "pi_exercised": false,
+  "pi_changed": false,
+  "not_verified": [
+    "physical vehicle",
+    "moving obstacles",
+    "arbitrary routes",
+    "multi-goal GUI"
+  ],
+  "obstacle": {
+    "x": 4.5,
+    "y": 0.0,
+    "dx": 1.2,
+    "dy": 1.85,
+    "dz": 0.6
+  },
+  "blockers": [],
+  "reopen_requested": false,
+  "action_type": "NavigateToPose",
+  "reset_cycles_requested": 0,
+  "source_sha256": {
+    "ros2_ws/tools/verify_replanning.py": "631dfadab8876bef6539b001214b1030df2581242c54a6654eae1dc775d00583",
+    "ros2_ws/tools/verify_navigation.py": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml": "c2366b36a4d12b1bc29d3b003651f9a6bb797dd013a01c2517364d5be2778556",
+    "ros2_ws/src/smartcar_nav2/config/navigate_through_recovery.xml": "0c869e8b78530b398af4fee458133158463b4e6c2f2cda025c95a8e9c58594e5",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "ec0bbd3203a523ea50079f5e38eeda3718e1f22f636b00152039d8cd33a6bc2b",
+    "ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp": "c0a3212dcf32b832f09a32d30a741e9f8da8ba6c1e20ecb8a5464960a0a896cf",
+    "ros2_ws/src/smartcar_nav2/src/safe_costmap.hpp": "886d6dec8b80a39f6ce775657a3056d332719792c2e7f723da34e161f0f937d2",
+    "ros2_ws/src/smartcar_nav2/src/safe_planner_server.cpp": "e2ec842f1dae3c285a759c55bc8d420100cb77cfcb04edb6cbac4fd94a673ffc"
+  },
+  "params_override_sha256": "0960ba8200e98eb497a5f0758474717fdf8b946669f53b38bbd99a32b343034f",
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false",
+    "params_file:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/rpp.yaml"
+  ],
+  "error": "60 秒内未就绪；生命周期：{'amcl': 'unconfigured', 'behavior_server': 'inactive', 'waypoint_follower': 'inactive', 'planner_server': 'inactive', 'map_server': 'inactive', 'smoother_server': 'active', 'bt_navigator': 'inactive', 'velocity_smoother': 'inactive', 'controller_server': 'active'}",
+  "shutdown": {
+    "process_group": 68532,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "truth_bridge_shutdown": {
+    "process_group": 68533,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "paths_received": 0,
+  "duration_wall_s": 71.84147063599812,
+  "raw_sha256": {
+    "velocity.csv": "549de47d34f90d2dbfefb2a341079468bcadd1d0cfe0a7d6c6a9bae414db2eaa",
+    "world_pose.csv": "351b807dab3d207a3943ea2a7460d12ac5cd406d3cf727a613a3f15133c1389b",
+    "scan.jsonl": "8177c85e5a2bf68df932a583675bdf74f5046a07fa4e1d36412f83b07918e0d1",
+    "launch.log": "72bf27ba5372373d696a26340869fc71cd50c2540b01c7d954d7efe8ca8091fa",
+    "exception.log": "b6a7b0904764aa46d08546bf44255532266f43abfb743a9479647645efcabe77",
+    "safety.jsonl": "48176666b30deff3c0a69154c1b86e9f819cb312063d6215238f0cd3472b8c34",
+    "odom.csv": "a530f860cdf8628751b00c0fad94ccb77b86f6afde180bec836687899e237774",
+    "truth_bridge.log": "0376ccfd086aadaace0a2b50a53c55fe84be46ecd59b85af7b73ccfd91e2d89e",
+    "clock.jsonl": "00601c655aa0882ad129f3596096f17c1d89ebd2650433f71a1cb365792c891e",
+    "local_costmap_costmap.jsonl": "75a9604f8da3a01881a178c5da1d3ba326951f175ab075dd72c765c88f29d94b",
+    "resources.csv": "56d0aa75fefb1683951b3ad1b4cfcf993b49159eab72bcdf13d8cd2ff6b4dbe7",
+    "world_pose.jsonl": "a8d0e897885c5025db538a5f999c8cc5d00556fded50f00efc995a32f0b55527",
+    "events.jsonl": "ff500c616aef89bb9bbb423e9906be7440ac500a0f16dccba0184ce38ad3aaa5"
+  }
+}

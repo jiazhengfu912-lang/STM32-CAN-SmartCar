@@ -1,0 +1,77 @@
+{
+  "result": null,
+  "reason": null,
+  "complete": false,
+  "stop_verified": false,
+  "goals": 7,
+  "succeeded": 6,
+  "navigation_failures": 0,
+  "travel_m": null,
+  "angular_travel_rad": 23.28228895292719,
+  "idle_sim_s": 7.821999999999994,
+  "turn_only_sim_s": 29.648999999999972,
+  "duration_wall_s": null,
+  "end_sim_s": 190.958,
+  "observed_fraction_final": 0.993525831930597,
+  "reference_area_m2": 38.61500000000001,
+  "milestones": {
+    "0.8": {
+      "sim_s": 29.87,
+      "wall_s": 49.23557752600027
+    },
+    "0.9": {
+      "sim_s": 114.617,
+      "wall_s": 175.28923143599968
+    },
+    "0.95": {
+      "sim_s": 116.046,
+      "wall_s": 177.27557355099998
+    }
+  },
+  "map_geometry_proxy": null,
+  "milestone_map_geometry_proxy": {
+    "0.8": {
+      "occupied_cells": 1210,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.027267556486447478,
+      "surface_distance_p95_m": 0.07178715099036685,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "0.9": {
+      "occupied_cells": 1689,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.027267616091092253,
+      "surface_distance_p95_m": 0.06143291715983139,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "0.95": {
+      "occupied_cells": 1741,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.027267556486447478,
+      "surface_distance_p95_m": 0.06143291715983139,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    }
+  },
+  "passive_pose_diagnostics": {
+    "odom": {
+      "received_samples": 17141,
+      "missing_samples": 3,
+      "median_position_error_m": 0.6056254803038391,
+      "p95_position_error_m": 2.7908205265172907,
+      "max_position_error_m": 2.7944230108511277,
+      "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+    },
+    "slam": {
+      "received_samples": 17141,
+      "missing_samples": 41,
+      "median_position_error_m": 0.018424916386197934,
+      "p95_position_error_m": 0.03953724007029877,
+      "max_position_error_m": 0.0479450282009629,
+      "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+    }
+  },
+  "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage"
+}

@@ -1,0 +1,26 @@
+{
+  "scope": "SIMULATION_ONLY",
+  "primary_world": "discovery_lab",
+  "secondary_world": "office_loop",
+  "headless": true,
+  "max_sim_seconds": 900,
+  "primary_pairs": 2,
+  "metrics": [
+    "time to 80/90/95 percent observed reference reachable free space",
+    "complete flag and reason",
+    "sim and wall duration",
+    "odom travel",
+    "angular travel",
+    "goal count and failures",
+    "stopped and all map files saved",
+    "occupied-to-SDF surface distances, no fitted registration"
+  ],
+  "reference": "Scene geometry is used OFFLINE for evaluation only; never supplied to explorer or SLAM",
+  "map_grid_sampling_m": 0.05,
+  "reference_robot_clearance_m": 0.37,
+  "quality_acceptance": "No claim of a speed improvement if achieved by lower coverage or substantially worse map geometry. Include all failures and incomplete outcomes.",
+  "motion": "Keep 0.20 m/s and 0.35 rad/s mapping limits unchanged in strategy comparison",
+  "isolation": "Unique non86 ROS domain AND Gazebo partition for every run; sequential comparisons; preserve user sessions",
+  "raw_policy": "All map updates, CSV points, logs and failure records retained; no smoothing/interpolation/outlier removal",
+  "milestone_confirmation": "3 consecutive actual map updates at or above threshold, no interpolation"
+}

@@ -1,0 +1,19 @@
+{
+  "scope": "OFFLINE_ONLY_NO_ROBOT_CONTROL",
+  "working_directory": "Repository root after sourcing ros2_ws/tools/env.bash",
+  "build": [
+    "cmake -S docs/evidence/exploration-speed-20261021/diagnostics/replay_probe -B out/replay_probe_build",
+    "cmake --build out/replay_probe_build"
+  ],
+  "original_parameters": [
+    "--params-file",
+    "docs/evidence/exploration-speed-20261021/runs/pilot_v5/source/slam.yaml",
+    "--params-file",
+    "docs/evidence/exploration-speed-20261021/runs/pilot_v5/source/exploration_slam.yaml",
+    "-p",
+    "use_sim_time:=false"
+  ],
+  "input": "docs/evidence/exploration-speed-20261021/runs/pilot_v5/mission/map.data",
+  "executable": "out/replay_probe_build/replay",
+  "usage": "Set an unused non86 ROS_DOMAIN_ID; positional args are input and a new output directory; then --ros-args and the original parameters above. For no-loop ablation append -p do_loop_closing:=false. For final threshold replay append -p loop_match_minimum_response_fine:=0.8. Do not use final v6 YAML as the original v5 parameter file."
+}

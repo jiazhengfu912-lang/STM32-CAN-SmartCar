@@ -1,0 +1,168 @@
+{
+  "result": "PASS",
+  "case": "watchdog",
+  "scope": "SIMULATION_ONLY",
+  "domain_id": 150,
+  "partition": "smartcar-explore-9bd5df56cce942deb125ead3e03b3263",
+  "checks": {
+    "watchdog_stops_and_latches": true,
+    "heartbeat_does_not_auto_resume": true,
+    "explicit_resume_selects_new_goal": true,
+    "explicit_pause_stops": true,
+    "finished_and_saved": true,
+    "stop_verified": true,
+    "no_prior_map": true,
+    "one_slam_map_source": true,
+    "no_amcl_or_map_server": true,
+    "autonomous_goals": true,
+    "actual_motion": true
+  },
+  "source_sha256": {
+    "ros2_ws/src/smartcar_slam/scripts/explore.py": "939dc6e91207678523ccfbfde4f249abf4e209b80270591fc03f12b17d7adaa8",
+    "ros2_ws/src/smartcar_slam/scripts/frontier_core.py": "bf26f61f9848153a1cc7b980e3fa43bbcd76db388108c9b0c322fc9d70067708",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "3f02f60fc39484eb8be041fbfbfc979ab015b17455731f7157ff4b9214eb3e2c",
+    "ros2_ws/src/smartcar_nav2/launch/exploration.launch.py": "a1a4809915122127c20b98edf16e719fcfd355d4ede27fc8fd03c1bf0ac06e3c",
+    "ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py": "4fade3d32b1f55f0167f68ef1ab77a87c3391b6fb71b2deb39e967f27af045f7",
+    "ros2_ws/src/smartcar_nav2/scripts/gate_core.py": "20542c3de00e0d488ee7adbe00ee0d420fc0aa4483bfe0a6b55d38b0626a1356",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_slam/config/slam.yaml": "46df8388b28828c643ee57df703d550bdc3a1683a15e7994076f0ccc6c3ad262",
+    "ros2_ws/tools/verify_exploration.py": "939c7d90aa3440791d06b0d32e3e23a1441a3c42d5846991e17cc731501f58d1"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "exploration.launch.py",
+    "world:=office_loop",
+    "headless:=true",
+    "rviz:=false",
+    "output_dir:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-20261021-watchdog-02/mission",
+    "max_sim_seconds:=600.0"
+  ],
+  "session": {
+    "state": "DONE",
+    "reason": "USER_FINISHED_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "scope": "SIMULATION_ONLY",
+    "prior_map_loaded": false,
+    "goals": [
+      {
+        "x": 0.02609251081731756,
+        "y": 0.514748484024445,
+        "yaw": 2.0899424410414196,
+        "frontier_cells": 289,
+        "path_distance_m": 0.5500000081956387,
+        "score": -1.7307893458473513,
+        "sent_sim_s": 6.236,
+        "action_status": 5
+      },
+      {
+        "x": -1.4746329084323335,
+        "y": 0.3490188105933303,
+        "yaw": 2.5535900500422257,
+        "frontier_cells": 544,
+        "path_distance_m": 1.750000026077032,
+        "score": -1.379217151734724,
+        "sent_sim_s": 20.576,
+        "action_status": 5
+      }
+    ],
+    "navigation_failures": 0,
+    "duration_wall_s": 28.834289720000015,
+    "firmware_source_version": 131,
+    "pi_changed": false,
+    "pi_exercised": false,
+    "not_verified": [
+      "physical vehicle",
+      "all unseen spaces",
+      "unreachable rooms",
+      "arbitrary environments"
+    ]
+  },
+  "effective_parameters": {
+    "controller_server": {
+      "FollowPath.desired_linear_vel": 0.2,
+      "FollowPath.rotate_to_heading_angular_vel": 0.35
+    },
+    "velocity_smoother": {
+      "max_velocity": [
+        0.2,
+        0.0,
+        0.35
+      ],
+      "max_accel": [
+        0.25,
+        0.0,
+        0.5
+      ]
+    }
+  },
+  "travel_m": 0.09374969861301338,
+  "map_initial": {
+    "wall_s": 5.824486053000101,
+    "known": 2103,
+    "free": 1966,
+    "occupied": 137,
+    "resolution": 0.05000000074505806,
+    "width": 238,
+    "height": 93
+  },
+  "map_final": {
+    "wall_s": 29.824798766000185,
+    "known": 5099,
+    "free": 4837,
+    "occupied": 262,
+    "resolution": 0.05000000074505806,
+    "width": 238,
+    "height": 97
+  },
+  "shutdown": {
+    "process_group": 18512,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "duration_wall_s": 31.868494888999976,
+  "raw_sha256": {
+    "gate.csv": "d3beb70bc5f0def9e777142f7772c22e5724d5d169336b5833695949672b5265",
+    "launch.log": "26962588acdb9aacd096622441a3d5b9a4c93b4da188bb5ac29a708da17b1a60",
+    "odom.csv": "693af857f6c76e35eee4ea1409c2dd0030f2edf5cef42e550bd1dfbe66947a15",
+    "verifier_events.jsonl": "18cf726e093ee365de29b78f524901d31098c67ea455885d87a8f519af23071f",
+    "maps.csv": "bca500070b396a67f57ce8670dd21456ee6306410d98b65d59ff4120c1cdc4c3",
+    "commands.csv": "b16dce1587adbfec8dcec1a355311b1a1fb13c90599f7027188775e1ca506d5d",
+    "ros_logs/bt_navigator_18556_1792582512074.log": "0e3024e627f165c365ddd8b9b194df76b9f3d314c2a15bf35c000f416f45a02a",
+    "ros_logs/waypoint_follower_18573_1792582512074.log": "f73a2c58615845155e66f76ca5a807ce178c896bcfe1b81e44ff221043a994ef",
+    "ros_logs/python3_18530_1792582512479.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/velocity_smoother_18593_1792582512049.log": "52cea6ef1b4832590aee24dd1389abdce124a0c11c7806b68230cc1257b80c5f",
+    "ros_logs/async_slam_toolbox_node_18544_1792582512007.log": "0a95e57b45d849497e67f4ee3bc43f78ea2ad628b3c918216c35a2f3f073bbe2",
+    "ros_logs/python3_18487_1792582510537.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/python3_18605_1792582512574.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/robot_state_publisher_18526_1792582511973.log": "1a8d3b5045a0f66a6b1fe41b359096c768643afdcc6625d1aaebd41628b718d8",
+    "ros_logs/safe_planner_server_18551_1792582512006.log": "75528c870e080dba103550736f81bd464c7e4bc4fec8e4932336f93bcce57cc2",
+    "ros_logs/parameter_bridge_18534_1792582512184.log": "a9042d20388ccdfce4ed18c35ac63a6b437700a53e7855432566b913967228f1",
+    "ros_logs/lifecycle_manager_18780_1792582517053.log": "505823dc2a2058b9496c7404dc71052875ae86dd259163fb456a8794e1d6fa80",
+    "ros_logs/map_saver_cli_18849_1792582538863.log": "c9c7c4e9b0c5540f5fcee4ef3ac6e07f4e19b5d7c38433cac253b285b96461b0",
+    "ros_logs/behavior_server_18554_1792582512086.log": "5cb57252d4be5c4691ed3e751144efc266814583d4b603e21a4ffbac58d49d94",
+    "ros_logs/smoother_server_18549_1792582512007.log": "43d776e7b94c63535a40b9d8a3411652a8f9d1aa349b9400eeb29cd0d99373fe",
+    "ros_logs/parameter_bridge_18528_1792582512038.log": "b8dfb6e870f6d1808f8aa9d44e04a491f8115911279da721165d6f81fa2dc1e6",
+    "ros_logs/python3_18512_1792582510786.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/safe_controller_server_18547_1792582512009.log": "4f5fafebe164d177622f156b3da3b62644517f4e6f17eafcfdf09757c3db8c60",
+    "ros_logs/python3_18608_1792582512628.log": "71b6ccd20eae261a93455e67f4503bf12a5816b93288fea0d0b7bf0ed9603472",
+    "ros_logs/2026-10-21-19-35-10-753028-ubuntu2204-18512/launch.log": "7b17b438648be550ee8a6d292317942a3e55606d6a4bf0121e2170fe51538a29",
+    "mission/session.json": "be0b1444434e7f78980b4c36e703a7adb0197286287e0532b8d5ec3f858e7575",
+    "mission/map_initial.npz": "2bd37c84810feaca25c35c64d2fef81d67abbd0274a79bc0ea38e931c2dcb75d",
+    "mission/map.posegraph": "78a66b8e522707e28505b28b7093917925dda0d59d314478567a5bbb7227d116",
+    "mission/map_updates.csv": "e13c698da7cbd1be4764a8feff71e31ce87772d6a5eb860124dc6ba10ac9aed1",
+    "mission/safe_cmd_vel.csv": "8a1a88a73a7cfb98ae889a29b0f62540418577fcdfa55be2342229286992408a",
+    "mission/safety.csv": "4bc20b6a7c4a49711759dc40930c2ae44f322b06720163e91b8a8d4ba5f461c3",
+    "mission/map.pgm": "e974d34505ae76a3d36301ff3d27e43b123b4beca66e427572f540497feb55ab",
+    "mission/odom.csv": "474255463eef092d1077a3f01aa58387521147c8c9b7d42a308adb6ffdfe19cd",
+    "mission/map.yaml": "4986d609104d31dd10b6aefb3e29f0fee48058e3fffc2ca5190134df562f2d41",
+    "mission/map_final.npz": "d0f0fb099e62cf43b85b5c4890726b4345f987122b9810b22efbfee0062dadc8",
+    "mission/map.data": "38e0785e86164032996ecbff51892bc1c6d3d65afc6021239f9c41e2e60d448c",
+    "mission/events.jsonl": "96e4164b7669c1f2cf2e3bb777ceb2278f2cf3eed0844e6bf095ae9aa584dc36"
+  }
+}

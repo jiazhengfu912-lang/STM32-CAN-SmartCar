@@ -1,0 +1,60 @@
+1792429000.9210951 [INFO] [launch]: All log files can be found below /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/runs/28_dwb_turn_r3/ros_logs/2026-10-20-00-56-40-918717-ubuntu2204-68967
+1792429000.9212697 [INFO] [launch]: Default logging verbosity is set to INFO
+1792429002.4567635 [INFO] [ign-1]: process started with pid [68998]
+1792429002.4570396 [INFO] [robot_state_publisher-2]: process started with pid [69000]
+1792429002.4571252 [INFO] [parameter_bridge-3]: process started with pid [69002]
+1792429002.4571934 [INFO] [cmd_guard.py-4]: process started with pid [69004]
+1792429002.4572556 [INFO] [parameter_bridge-5]: process started with pid [69006]
+1792429002.4573176 [INFO] [map_server-6]: process started with pid [69008]
+1792429002.4573772 [INFO] [amcl-7]: process started with pid [69010]
+1792429002.4574351 [INFO] [safe_controller_server-8]: process started with pid [69012]
+1792429002.4574950 [INFO] [smoother_server-9]: process started with pid [69014]
+1792429002.4575541 [INFO] [safe_planner_server-10]: process started with pid [69016]
+1792429002.4576204 [INFO] [behavior_server-11]: process started with pid [69018]
+1792429002.4576812 [INFO] [bt_navigator-12]: process started with pid [69020]
+1792429002.4577408 [INFO] [waypoint_follower-13]: process started with pid [69022]
+1792429002.4869146 [INFO] [velocity_smoother-14]: process started with pid [69026]
+1792429002.4871526 [INFO] [navigation_gate.py-15]: process started with pid [69033]
+1792429004.5066576 [INFO] [lifecycle_manager-16]: process started with pid [69214]
+1792429007.4722352 [INFO] [lifecycle_manager-17]: process started with pid [69263]
+1792454417.4737773 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1792454417.7036073 [INFO] [lifecycle_manager-17]: sending signal 'SIGINT' to process[lifecycle_manager-17]
+1792454417.7742891 [INFO] [lifecycle_manager-16]: sending signal 'SIGINT' to process[lifecycle_manager-16]
+1792454417.8099880 [INFO] [navigation_gate.py-15]: sending signal 'SIGINT' to process[navigation_gate.py-15]
+1792454417.8686116 [INFO] [velocity_smoother-14]: sending signal 'SIGINT' to process[velocity_smoother-14]
+1792454417.8892210 [INFO] [waypoint_follower-13]: sending signal 'SIGINT' to process[waypoint_follower-13]
+1792454417.9556832 [INFO] [bt_navigator-12]: sending signal 'SIGINT' to process[bt_navigator-12]
+1792454417.9774401 [INFO] [parameter_bridge-5]: process has finished cleanly [pid 69006]
+1792454417.9777412 [ERROR] [velocity_smoother-14]: process has died [pid 69026, exit code -2, cmd '/opt/ros/humble/lib/nav2_velocity_smoother/velocity_smoother --ros-args -r __node:=velocity_smoother --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_ipb7yw0c -r cmd_vel:=/nav/cmd_vel_raw -r cmd_vel_smoothed:=/nav/cmd_vel'].
+1792454417.9778552 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 69002]
+1792454417.9779403 [ERROR] [waypoint_follower-13]: process has died [pid 69022, exit code -2, cmd '/opt/ros/humble/lib/nav2_waypoint_follower/waypoint_follower --ros-args -r __node:=waypoint_follower --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_pova0ofc'].
+1792454417.9863639 [INFO] [behavior_server-11]: sending signal 'SIGINT' to process[behavior_server-11]
+1792454418.0092196 [INFO] [safe_planner_server-10]: sending signal 'SIGINT' to process[safe_planner_server-10]
+1792454418.0147645 [ERROR] [bt_navigator-12]: process has died [pid 69020, exit code -2, cmd '/opt/ros/humble/lib/nav2_bt_navigator/bt_navigator --ros-args -r __node:=bt_navigator --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_6rysztfk --params-file /tmp/launch_params_8x3b7qko'].
+1792454418.0202959 [INFO] [smoother_server-9]: sending signal 'SIGINT' to process[smoother_server-9]
+1792454418.0286553 [ERROR] [behavior_server-11]: process has died [pid 69018, exit code -2, cmd '/opt/ros/humble/lib/nav2_behaviors/behavior_server --ros-args -r __node:=behavior_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_9g_fsf6a -r cmd_vel:=/nav/cmd_vel_raw'].
+1792454418.0301495 [INFO] [safe_controller_server-8]: sending signal 'SIGINT' to process[safe_controller_server-8]
+1792454418.0358670 [INFO] [amcl-7]: sending signal 'SIGINT' to process[amcl-7]
+1792454418.0428336 [INFO] [map_server-6]: sending signal 'SIGINT' to process[map_server-6]
+1792454418.0549450 [ERROR] [safe_planner_server-10]: process has died [pid 69016, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/safe_planner_server --ros-args -r __node:=planner_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params__ndanbb1'].
+1792454418.0635681 [ERROR] [smoother_server-9]: process has died [pid 69014, exit code -2, cmd '/opt/ros/humble/lib/nav2_smoother/smoother_server --ros-args -r __node:=smoother_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params__txqh_ek'].
+1792454418.0684941 [INFO] [cmd_guard.py-4]: sending signal 'SIGINT' to process[cmd_guard.py-4]
+1792454418.0723720 [ERROR] [map_server-6]: process has died [pid 69008, exit code -2, cmd '/opt/ros/humble/lib/nav2_map_server/map_server --ros-args -r __node:=map_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_svnnv9t9 --params-file /tmp/launch_params_milmfvc6'].
+1792454418.0742688 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1792454418.0839591 [INFO] [ign-1]: sending signal 'SIGINT' to process[ign-1]
+1792454418.0924292 [ERROR] [robot_state_publisher-2]: process has died [pid 69000, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args --params-file /tmp/launch_params_5_1sj5sy'].
+1792454419.1805472 [ERROR] [navigation_gate.py-15]: process has died [pid 69033, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py --ros-args -r __node:=navigation_gate'].
+1792454419.1867304 [INFO] [lifecycle_manager-16]: process has finished cleanly [pid 69214]
+1792454419.1996813 [ERROR] [cmd_guard.py-4]: process has died [pid 69004, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_sim/lib/smartcar_sim/cmd_guard.py --ros-args -r __node:=sim_cmd_guard -r /sim/cmd_vel:=/nav/safe_cmd_vel'].
+1792454419.2363443 [INFO] [safe_controller_server-8]: process has finished cleanly [pid 69012]
+1792454420.0258844 [INFO] [lifecycle_manager-17]: process has finished cleanly [pid 69263]
+1792454422.6619854 [ERROR] [amcl-7]: process[amcl-7] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1792454422.6644909 [ERROR] [ign-1]: process[ign-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1792454422.6657326 [INFO] [amcl-7]: sending signal 'SIGTERM' to process[amcl-7]
+1792454422.6726980 [INFO] [ign-1]: sending signal 'SIGTERM' to process[ign-1]
+1792454427.6638873 [ERROR] [amcl-7]: process[amcl-7] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+1792454427.6647363 [ERROR] [ign-1]: process[ign-1] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+1792454427.6664469 [INFO] [amcl-7]: sending signal 'SIGKILL' to process[amcl-7]
+1792454427.6692543 [INFO] [ign-1]: sending signal 'SIGKILL' to process[ign-1]
+1792454427.6702747 [ERROR] [amcl-7]: process has died [pid 69010, exit code -9, cmd '/opt/ros/humble/lib/nav2_amcl/amcl --ros-args -r __node:=amcl --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_0a90g1fu --params-file /tmp/launch_params_swcdz35i'].
+1792454427.7205837 [ERROR] [ign-1]: process has died [pid 68998, exit code -9, cmd 'ign gazebo -r -v 3 -s /tmp/smartcar_world_jva1k5gr.sdf'].

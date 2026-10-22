@@ -1,0 +1,761 @@
+[INFO] [launch]: All log files can be found below /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/runs/17_dwb_turn_r2/ros_logs/2026-10-20-00-25-11-863902-ubuntu2204-61619
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ign-1]: process started with pid [61656]
+[INFO] [robot_state_publisher-2]: process started with pid [61658]
+[INFO] [parameter_bridge-3]: process started with pid [61660]
+[INFO] [cmd_guard.py-4]: process started with pid [61662]
+[INFO] [parameter_bridge-5]: process started with pid [61664]
+[INFO] [map_server-6]: process started with pid [61666]
+[INFO] [amcl-7]: process started with pid [61668]
+[INFO] [safe_controller_server-8]: process started with pid [61670]
+[INFO] [smoother_server-9]: process started with pid [61672]
+[INFO] [safe_planner_server-10]: process started with pid [61683]
+[INFO] [behavior_server-11]: process started with pid [61686]
+[INFO] [bt_navigator-12]: process started with pid [61690]
+[INFO] [waypoint_follower-13]: process started with pid [61692]
+[INFO] [velocity_smoother-14]: process started with pid [61697]
+[INFO] [navigation_gate.py-15]: process started with pid [61714]
+[robot_state_publisher-2] [INFO] [1792427113.624810747] [robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-2] [INFO] [1792427113.624926141] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-2] [INFO] [1792427113.624937349] [robot_state_publisher]: got segment camera_link
+[robot_state_publisher-2] [INFO] [1792427113.624945048] [robot_state_publisher]: got segment camera_optical_frame
+[robot_state_publisher-2] [INFO] [1792427113.624953068] [robot_state_publisher]: got segment laser_frame
+[robot_state_publisher-2] [INFO] [1792427113.624960829] [robot_state_publisher]: got segment left_caster_swivel
+[robot_state_publisher-2] [INFO] [1792427113.624968385] [robot_state_publisher]: got segment left_caster_wheel
+[robot_state_publisher-2] [INFO] [1792427113.624975775] [robot_state_publisher]: got segment left_wheel_link
+[robot_state_publisher-2] [INFO] [1792427113.624983158] [robot_state_publisher]: got segment lidar_link
+[robot_state_publisher-2] [INFO] [1792427113.624990567] [robot_state_publisher]: got segment right_caster_swivel
+[robot_state_publisher-2] [INFO] [1792427113.624998056] [robot_state_publisher]: got segment right_caster_wheel
+[robot_state_publisher-2] [INFO] [1792427113.625005415] [robot_state_publisher]: got segment right_wheel_link
+[behavior_server-11] [INFO] [1792427113.662783420] [behavior_server]: 
+[behavior_server-11] 	behavior_server lifecycle node launched. 
+[behavior_server-11] 	Waiting on external lifecycle transitions to activate
+[behavior_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_controller_server-8] [INFO] [1792427113.922066100] [controller_server]: 
+[safe_controller_server-8] 	controller_server lifecycle node launched. 
+[safe_controller_server-8] 	Waiting on external lifecycle transitions to activate
+[safe_controller_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_controller_server-8] [INFO] [1792427114.014469099] [controller_server]: Creating controller server
+[amcl-7] [INFO] [1792427114.030478679] [amcl]: 
+[amcl-7] 	amcl lifecycle node launched. 
+[amcl-7] 	Waiting on external lifecycle transitions to activate
+[amcl-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[amcl-7] [INFO] [1792427114.030980925] [amcl]: Creating
+[smoother_server-9] [INFO] [1792427114.112428259] [smoother_server]: 
+[smoother_server-9] 	smoother_server lifecycle node launched. 
+[smoother_server-9] 	Waiting on external lifecycle transitions to activate
+[smoother_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-9] [INFO] [1792427114.174447459] [smoother_server]: Creating smoother server
+[safe_controller_server-8] [INFO] [1792427114.290759466] [local_costmap.local_costmap]: 
+[safe_controller_server-8] 	local_costmap lifecycle node launched. 
+[safe_controller_server-8] 	Waiting on external lifecycle transitions to activate
+[safe_controller_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_controller_server-8] [INFO] [1792427114.345674130] [local_costmap.local_costmap]: Creating Costmap
+[safe_controller_server-8] [INFO] [1792427114.384538614] [local_costmap.local_costmap]: Destroying
+[bt_navigator-12] [INFO] [1792427114.462363847] [bt_navigator]: 
+[bt_navigator-12] 	bt_navigator lifecycle node launched. 
+[bt_navigator-12] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-12] [INFO] [1792427114.462513678] [bt_navigator]: Creating
+[safe_planner_server-10] [INFO] [1792427114.707897329] [planner_server]: 
+[safe_planner_server-10] 	planner_server lifecycle node launched. 
+[safe_planner_server-10] 	Waiting on external lifecycle transitions to activate
+[safe_planner_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_planner_server-10] [INFO] [1792427114.722590515] [planner_server]: Creating
+[waypoint_follower-13] [INFO] [1792427114.726783418] [waypoint_follower]: 
+[waypoint_follower-13] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-13] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-13] [INFO] [1792427114.727514081] [waypoint_follower]: Creating
+[parameter_bridge-5] [INFO] [1792427114.778306440] [laser_bridge]: Creating GZ->ROS Bridge: [/sim/scan (ignition.msgs.LaserScan) -> /sim/scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[map_server-6] [INFO] [1792427114.836562188] [map_server]: 
+[map_server-6] 	map_server lifecycle node launched. 
+[map_server-6] 	Waiting on external lifecycle transitions to activate
+[map_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-6] [INFO] [1792427114.840049102] [map_server]: Creating
+[velocity_smoother-14] [INFO] [1792427114.918450542] [velocity_smoother]: 
+[velocity_smoother-14] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-14] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_planner_server-10] [INFO] [1792427115.060935975] [global_costmap.global_costmap]: 
+[safe_planner_server-10] 	global_costmap lifecycle node launched. 
+[safe_planner_server-10] 	Waiting on external lifecycle transitions to activate
+[safe_planner_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_planner_server-10] [INFO] [1792427115.064563760] [global_costmap.global_costmap]: Creating Costmap
+[safe_planner_server-10] [INFO] [1792427115.095926084] [global_costmap.global_costmap]: Destroying
+[safe_controller_server-8] [INFO] [1792427115.129946138] [local_costmap.local_costmap]: 
+[safe_controller_server-8] 	local_costmap lifecycle node launched. 
+[safe_controller_server-8] 	Waiting on external lifecycle transitions to activate
+[safe_controller_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_controller_server-8] [INFO] [1792427115.135167663] [local_costmap.local_costmap]: Creating Costmap
+[parameter_bridge-3] [INFO] [1792427115.218119747] [state_bridge]: Creating GZ->ROS Bridge: [/clock (ignition.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792427115.257566629] [state_bridge]: Creating ROS->GZ Bridge: [/sim/drive_cmd_vel (geometry_msgs/msg/Twist) -> /model/smartcar/cmd_vel (ignition.msgs.Twist)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792427115.269838153] [state_bridge]: Creating GZ->ROS Bridge: [/model/smartcar/odometry (ignition.msgs.Odometry) -> /sim/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792427115.294268873] [state_bridge]: Creating GZ->ROS Bridge: [/model/smartcar/tf (ignition.msgs.Pose_V) -> /tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792427115.313469180] [state_bridge]: Creating GZ->ROS Bridge: [/model/smartcar/joint_states (ignition.msgs.Model) -> /joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[safe_planner_server-10] [INFO] [1792427115.342749818] [global_costmap.global_costmap]: 
+[safe_planner_server-10] 	global_costmap lifecycle node launched. 
+[safe_planner_server-10] 	Waiting on external lifecycle transitions to activate
+[safe_planner_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_planner_server-10] [INFO] [1792427115.343356760] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [lifecycle_manager-16]: process started with pid [61860]
+[ign-1] [1;32m[Msg] [0m[1;32mIgnition Gazebo Server v[0m[1;32m6.18.0[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLoading SDF world file[[0m[1;32m/tmp/smartcar_world_hzlu0wyt.sdf[0m[1;32m].[0m
+[ign-1] [1;33mWarning [Utils.cc:129][0m [/sdf/model[@name="smartcar"]/link[@name="lidar_link"]/sensor[@name="c1_scan"]/lidar/noise[@type="gaussian"]:/tmp/smartcar_model_3a3oaai2.sdf:L827]: XML Attribute[type] in element[noise] not defined in SDF.
+[lifecycle_manager-16] [INFO] [1792427116.060167813] [lifecycle_manager_localization]: Creating
+[lifecycle_manager-16] [INFO] [1792427116.062078347] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[parameter_bridge-3] [INFO] [1792427116.264183896] [state_bridge]: Passing message from ROS geometry_msgs/msg/Twist to Gazebo gz.msgs.Twist (showing msg only once per type)
+[lifecycle_manager-16] [INFO] [1792427117.074082750] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-16] [INFO] [1792427117.076195687] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[map_server-6] [INFO] [1792427117.076738000] [map_server]: Configuring
+[map_server-6] [INFO] [1792427117.076828144] [map_io]: Loading yaml file: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/maps/office_01/map.yaml
+[map_server-6] [INFO] [1792427117.077124539] [map_io]: resolution: 0.05
+[map_server-6] [INFO] [1792427117.077136259] [map_io]: origin[0]: -5.99
+[map_server-6] [INFO] [1792427117.077142808] [map_io]: origin[1]: -4.98
+[map_server-6] [INFO] [1792427117.077149241] [map_io]: origin[2]: 0
+[map_server-6] [INFO] [1792427117.077155984] [map_io]: free_thresh: 0.25
+[map_server-6] [INFO] [1792427117.077162568] [map_io]: occupied_thresh: 0.65
+[map_server-6] [INFO] [1792427117.077171269] [map_io]: mode: trinary
+[map_server-6] [INFO] [1792427117.077178437] [map_io]: negate: 0
+[map_server-6] [INFO] [1792427117.077403973] [map_io]: Loading image_file: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/maps/office_01/map.pgm
+[map_server-6] [INFO] [1792427117.104464328] [map_io]: Read map /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/maps/office_01/map.pgm: 239 X 200 map @ 0.05 m/cell
+[lifecycle_manager-16] [INFO] [1792427117.186559100] [lifecycle_manager_localization]: [34m[1mConfiguring amcl[0m[0m
+[amcl-7] [INFO] [1792427117.187394349] [amcl]: Configuring
+[amcl-7] [INFO] [1792427117.187505082] [amcl]: initTransforms
+[amcl-7] [INFO] [1792427117.321572114] [amcl]: initPubSub
+[amcl-7] [INFO] [1792427117.369088231] [amcl]: Subscribed to map topic.
+[lifecycle_manager-16] [INFO] [1792427117.402867884] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[map_server-6] [INFO] [1792427117.405807485] [map_server]: Activating
+[map_server-6] [INFO] [1792427117.408525817] [map_server]: Creating bond (map_server) to lifecycle manager.
+[amcl-7] [INFO] [1792427117.416154069] [amcl]: Received a 239 X 200 map @ 0.050 m/pix
+[ign-1] [1;32m[Msg] [0m[1;32mServing entity system service on [[0m[1;32m/[0m[1;32mentity/system/add[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mCreate service on [[0m[1;32m/world/smartcar_world/create[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mRemove service on [[0m[1;32m/world/smartcar_world/remove[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPose service on [[0m[1;32m/world/smartcar_world/set_pose[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPose service on [[0m[1;32m/world/smartcar_world/set_pose_vector[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLight configuration service on [[0m[1;32m/world/smartcar_world/light_config[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPhysics service on [[0m[1;32m/world/smartcar_world/set_physics[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mSphericalCoordinates service on [[0m[1;32m/world/smartcar_world/set_spherical_coordinates[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mEnable collision service on [[0m[1;32m/world/smartcar_world/enable_collision[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mDisable collision service on [[0m[1;32m/world/smartcar_world/disable_collision[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mMaterial service on [[0m[1;32m/world/smartcar_world/visual_config[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mMaterial service on [[0m[1;32m/world/smartcar_world/wheel_slip[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mDiffDrive subscribing to twist messages on [[0m[1;32m/model/smartcar/cmd_vel[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLoaded level [[0m[1;32m3[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing world controls on [[0m[1;32m/world/smartcar_world[0m[1;32m/control], [[0m[1;32m/world/smartcar_world[0m[1;32m/control/state] and [[0m[1;32m/world/smartcar_world[0m[1;32m/playback/control][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing GUI information on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mgui/info[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mWorld [[0m[1;32msmartcar_world[0m[1;32m] initialized with [[0m[1;32mphysics[0m[1;32m] physics profile.[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing world SDF generation service on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mgenerate_world_sdf[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing world names on [[0m[1;32m/gazebo/worlds[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource path add service on [[0m[1;32m/gazebo/resource_paths/add[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource path get service on [[0m[1;32m/gazebo/resource_paths/get[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource path resolve service on [[0m[1;32m/gazebo/resource_paths/resolve[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource paths published on [[0m[1;32m/gazebo/resource_paths[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServer control service on [[0m[1;32m/server_control[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mFound no publishers on /stats, adding root stats topic[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mFound no publishers on /clock, adding root clock topic[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLoading plugin [[0m[1;32mignition-rendering-ogre2[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing scene information on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mscene/info[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing graph information on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mscene/graph[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing full state on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mstate[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing full state (async) on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mstate_async[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing scene information on [[0m[1;32m/world/smartcar_world/scene/info[0m[1;32m][0m[1;32m[0m
+[lifecycle_manager-16] [INFO] [1792427117.535201933] [lifecycle_manager_localization]: Server map_server connected with bond.
+[lifecycle_manager-16] [INFO] [1792427117.535259382] [lifecycle_manager_localization]: [34m[1mActivating amcl[0m[0m
+[amcl-7] [INFO] [1792427117.544953799] [amcl]: Activating
+[amcl-7] [INFO] [1792427117.545018357] [amcl]: initialPoseReceived
+[amcl-7] [INFO] [1792427117.545107097] [amcl]: Setting pose (0.002000): 0.000 0.000 0.000
+[amcl-7] [INFO] [1792427117.545452539] [amcl]: Creating bond (amcl) to lifecycle manager.
+[lifecycle_manager-16] [INFO] [1792427117.669230749] [lifecycle_manager_localization]: Server amcl connected with bond.
+[lifecycle_manager-16] [INFO] [1792427117.669347009] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-16] [INFO] [1792427117.669364292] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[ign-1] VMware: No 3D enabled (0, Success).
+[ign-1] libEGL warning: egl: failed to create dri2 screen
+[ign-1] VMware: No 3D enabled (0, Success).
+[ign-1] libEGL warning: egl: failed to create dri2 screen
+[INFO] [lifecycle_manager-17]: process started with pid [61921]
+[lifecycle_manager-17] [INFO] [1792427119.476600729] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-17] [INFO] [1792427119.516045899] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[lifecycle_manager-17] [INFO] [1792427119.949289333] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-17] [INFO] [1792427119.949353860] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[safe_controller_server-8] [INFO] [1792427119.956548891] [controller_server]: Configuring controller interface
+[safe_controller_server-8] [INFO] [1792427119.958390828] [controller_server]: getting goal checker plugins..
+[safe_controller_server-8] [INFO] [1792427119.959885672] [controller_server]: Controller frequency set to 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427119.959953643] [local_costmap.local_costmap]: Configuring
+[amcl-7] [INFO] [1792427120.062750712] [amcl]: createLaserObject
+[safe_controller_server-8] [INFO] [1792427120.120470506] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[safe_controller_server-8] [INFO] [1792427120.166826300] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[safe_controller_server-8] [INFO] [1792427120.182647623] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[safe_controller_server-8] [INFO] [1792427120.182894418] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[safe_controller_server-8] [INFO] [1792427120.207504376] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[safe_controller_server-8] [INFO] [1792427120.332003418] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[safe_controller_server-8] [INFO] [1792427120.340274258] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[safe_controller_server-8] [INFO] [1792427120.341209400] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[safe_controller_server-8] [INFO] [1792427120.341426472] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[safe_controller_server-8] [INFO] [1792427120.368430863] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[safe_controller_server-8] [INFO] [1792427120.385019207] [controller_server]: Setting transform_tolerance to 0.500000
+[safe_controller_server-8] [INFO] [1792427120.479766662] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[safe_controller_server-8] [INFO] [1792427120.480158712] [controller_server]: Critic plugin initialized
+[safe_controller_server-8] [INFO] [1792427120.480228830] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[safe_controller_server-8] [INFO] [1792427120.480417249] [controller_server]: Critic plugin initialized
+[safe_controller_server-8] [INFO] [1792427120.480468488] [controller_server]: Using critic "ObstacleFootprint" (dwb_critics::ObstacleFootprintCritic)
+[safe_controller_server-8] [INFO] [1792427120.480546333] [controller_server]: Critic plugin initialized
+[safe_controller_server-8] [INFO] [1792427120.480591477] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[safe_controller_server-8] [INFO] [1792427120.480762220] [controller_server]: Critic plugin initialized
+[safe_controller_server-8] [INFO] [1792427120.499506383] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[safe_controller_server-8] [INFO] [1792427120.501971158] [controller_server]: Critic plugin initialized
+[safe_controller_server-8] [INFO] [1792427120.502075434] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[safe_controller_server-8] [INFO] [1792427120.509283510] [controller_server]: Critic plugin initialized
+[safe_controller_server-8] [INFO] [1792427120.514708110] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[safe_controller_server-8] [INFO] [1792427120.521397707] [controller_server]: Critic plugin initialized
+[safe_controller_server-8] [INFO] [1792427120.521458403] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-17] [INFO] [1792427120.617709856] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-9] [INFO] [1792427120.619155899] [smoother_server]: Configuring smoother server
+[smoother_server-9] [INFO] [1792427120.720211162] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-9] [INFO] [1792427120.722535522] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-17] [INFO] [1792427120.797044999] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[safe_planner_server-10] [INFO] [1792427120.799044810] [planner_server]: Configuring
+[safe_planner_server-10] [INFO] [1792427120.799108050] [global_costmap.global_costmap]: Configuring
+[safe_planner_server-10] [INFO] [1792427120.913883383] [global_costmap.global_costmap]: Using plugin "static_layer"
+[safe_planner_server-10] [INFO] [1792427120.967430592] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[safe_planner_server-10] [INFO] [1792427121.011522380] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[safe_planner_server-10] [INFO] [1792427121.011586363] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[safe_planner_server-10] [INFO] [1792427121.011940196] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[safe_planner_server-10] [INFO] [1792427121.034174638] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[safe_planner_server-10] [INFO] [1792427121.034238387] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[safe_planner_server-10] [INFO] [1792427121.058828745] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[safe_planner_server-10] [INFO] [1792427121.240351550] [global_costmap.global_costmap]: SmartCar: TF and scan filters share one callback executor
+[safe_planner_server-10] [INFO] [1792427121.240979997] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 239 X 200 at 0.050000 m/pix
+[safe_planner_server-10] [INFO] [1792427121.247317047] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[safe_planner_server-10] [INFO] [1792427121.247408972] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[safe_planner_server-10] [INFO] [1792427121.283302590] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-17] [INFO] [1792427121.496067434] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-11] [INFO] [1792427121.498648272] [behavior_server]: Configuring
+[behavior_server-11] [INFO] [1792427121.709489173] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-11] [INFO] [1792427121.719660151] [behavior_server]: Configuring spin
+[behavior_server-11] [INFO] [1792427121.832267344] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-11] [INFO] [1792427121.838686764] [behavior_server]: Configuring backup
+[behavior_server-11] [INFO] [1792427121.934373641] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-11] [INFO] [1792427121.935571085] [behavior_server]: Configuring wait
+[lifecycle_manager-17] [INFO] [1792427122.014922223] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-12] [INFO] [1792427122.019763085] [bt_navigator]: Configuring
+[lifecycle_manager-17] [INFO] [1792427122.608255548] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-13] [INFO] [1792427122.614343020] [waypoint_follower]: Configuring
+[waypoint_follower-13] [INFO] [1792427122.818299416] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[waypoint_follower-13] [INFO] [1792427122.818609738] [waypoint_follower]: Waypoint pause duration is set to zero, disabling task executor plugin.
+[lifecycle_manager-17] [INFO] [1792427122.826077312] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-14] [INFO] [1792427122.831233684] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-17] [INFO] [1792427122.912881125] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[safe_controller_server-8] [INFO] [1792427122.914113595] [controller_server]: Activating
+[safe_controller_server-8] [INFO] [1792427122.914195706] [local_costmap.local_costmap]: Activating
+[safe_controller_server-8] [INFO] [1792427122.914222308] [local_costmap.local_costmap]: Checking transform
+[safe_controller_server-8] [INFO] [1792427122.914895590] [local_costmap.local_costmap]: start
+[safe_controller_server-8] [INFO] [1792427123.130909571] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427123.277229983] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792427123.277480414] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-9] [INFO] [1792427123.283378367] [smoother_server]: Activating
+[smoother_server-9] [INFO] [1792427123.283439468] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427123.406182396] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792427123.406274359] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[safe_planner_server-10] [INFO] [1792427123.408264142] [planner_server]: Activating
+[safe_planner_server-10] [INFO] [1792427123.408422070] [global_costmap.global_costmap]: Activating
+[safe_planner_server-10] [INFO] [1792427123.408440453] [global_costmap.global_costmap]: Checking transform
+[safe_planner_server-10] [INFO] [1792427123.410391541] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 0.560000 but the earliest data is at time 0.700000, when looking up transform from frame [base_footprint] to frame [map]
+[safe_planner_server-10] [INFO] [1792427123.910566300] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 0.660000 but the earliest data is at time 0.700000, when looking up transform from frame [base_footprint] to frame [map]
+[safe_planner_server-10] [INFO] [1792427124.413037720] [global_costmap.global_costmap]: start
+[safe_planner_server-10] [INFO] [1792427125.437765002] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[safe_planner_server-10] [INFO] [1792427125.470427338] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427125.628858621] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792427125.628920940] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-11] [INFO] [1792427125.630903891] [behavior_server]: Activating
+[behavior_server-11] [INFO] [1792427125.630940266] [behavior_server]: Activating spin
+[behavior_server-11] [INFO] [1792427125.630959075] [behavior_server]: Activating backup
+[behavior_server-11] [INFO] [1792427125.630972357] [behavior_server]: Activating wait
+[behavior_server-11] [INFO] [1792427125.630989708] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427125.787037547] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792427125.787122849] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-12] [INFO] [1792427125.789937764] [bt_navigator]: Activating
+[bt_navigator-12] [INFO] [1792427127.014363604] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427127.164480971] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-17] [INFO] [1792427127.164697534] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-13] [INFO] [1792427127.168466705] [waypoint_follower]: Activating
+[waypoint_follower-13] [INFO] [1792427127.168666233] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427127.342266535] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-17] [INFO] [1792427127.342345576] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-14] [INFO] [1792427127.345701115] [velocity_smoother]: Activating
+[velocity_smoother-14] [INFO] [1792427127.345816319] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427127.510168222] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-17] [INFO] [1792427127.510252057] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-17] [INFO] [1792427127.510267377] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[bt_navigator-12] [INFO] [1792427128.172099348] [bt_navigator]: Begin navigating from current location (-0.00, 0.00) to (3.00, 2.70)
+[safe_controller_server-8] [INFO] [1792427128.282062295] [controller_server]: Received FollowPath goal with checked TF completion
+[safe_controller_server-8] [WARN] [1792427128.282152500] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[safe_controller_server-8] [INFO] [1792427129.485674949] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427130.485294406] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427130.587902452] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427131.683637995] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427132.889283236] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427132.889354359] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427133.819211485] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427133.925048961] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427133.982648627] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427134.402940943] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427134.499253830] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427134.613681353] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427134.757381409] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427134.882763751] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427135.166204902] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427135.384376878] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427135.586001802] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427135.731691117] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427135.837515254] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427136.131300605] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427136.183071628] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427136.285274442] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427137.383617634] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427137.488991209] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427137.898287724] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427138.390696575] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427138.487710219] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427138.487772607] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427138.796227699] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427139.684208600] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427140.784467607] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427141.384880718] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427141.486159674] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427141.986246099] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427142.216606186] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427143.088921381] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427143.088980595] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427143.401666436] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427144.194983961] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427144.299231314] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427144.299317361] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427144.404615217] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427145.386053792] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427146.382832080] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427147.483063252] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427147.585572478] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427148.683549671] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427149.689880421] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427150.227123888] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427150.309637987] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427150.512692541] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427150.583921764] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427150.790226852] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427150.883936715] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427151.190342548] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427151.393328501] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427151.503080520] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427151.797419030] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427151.901978132] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427151.984147252] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427152.085062859] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427153.099174463] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427153.099237974] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427154.087949000] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427154.185089730] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427154.319681969] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427155.385679321] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427156.484817971] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427157.583046458] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427158.682859669] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427159.883128596] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427160.989371014] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427161.110433311] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[bt_navigator-12] [WARN] [1792427161.328722486] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[safe_controller_server-8] [INFO] [1792427162.083076524] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427163.084677409] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427163.693030578] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427164.182936583] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427165.340223979] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427165.340304371] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427165.423991361] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427165.517130550] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427165.595046854] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427166.389494881] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427166.495439334] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427167.582876614] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427168.685185699] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427169.785100393] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427170.885794721] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427171.096668784] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427171.219815687] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427171.312247739] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427171.983638237] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427173.182910688] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427174.344212636] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427174.344436161] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427174.460712529] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427174.490704114] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427174.601547751] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427174.691506169] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427174.989731183] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427175.284989533] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427175.383059562] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427175.490217008] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427175.631236614] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427175.719597225] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427175.861038541] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427175.905547992] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427176.103073222] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427176.203871249] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427176.492689367] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427176.798679921] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427176.929362831] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427177.050762838] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427177.230038328] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427177.554443873] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427177.554572218] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427177.863052989] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427178.144882342] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427178.355628913] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427178.630448319] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427179.341056220] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427179.830134889] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427180.348730597] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427180.917513752] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427180.942968586] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427180.943033856] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427181.459336348] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427181.545408304] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427181.835563726] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427182.033442159] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427182.232323905] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427182.436421199] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427182.636750826] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427183.130685013] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427184.232154295] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427184.936198558] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427185.435118898] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427185.645978875] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427186.352325140] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427186.469035929] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427186.469230187] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427186.578661289] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427186.664778417] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427186.765037940] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427186.854267140] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427187.049237981] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427187.530117163] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427188.630123878] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427189.639549716] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427189.731924145] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427190.537015471] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427190.932820793] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427191.136325538] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427191.253050965] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427191.338737288] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427192.031327485] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427193.136945647] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427194.230246549] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427194.930863886] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427195.436410551] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427195.647641117] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427195.766757958] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427195.843670263] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427196.037083161] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427196.530293717] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427196.735551561] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427196.931516099] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427197.446731495] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427197.549725690] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427197.635908907] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427197.635961755] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427197.832932944] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427197.938320577] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427198.226119876] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[bt_navigator-12] [WARN] [1792427198.241054313] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[safe_controller_server-8] [WARN] [1792427198.328525218] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427198.363992627] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427198.833258835] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427198.833327960] [controller_server]: Passing new path to controller.
+[bt_navigator-12] [WARN] [1792427199.679803939] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[safe_controller_server-8] [INFO] [1792427199.930631188] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427200.931815704] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427201.162471185] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427201.278489021] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[bt_navigator-12] [WARN] [1792427201.280077696] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[safe_controller_server-8] [WARN] [1792427201.367150809] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427201.742741745] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427202.033150067] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427202.435035537] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427202.540817929] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427202.913241822] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427203.040446127] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427203.210748491] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427204.240998088] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427205.342432236] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427206.440751043] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427207.540533875] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427208.146134822] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427208.542933653] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427208.842463805] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427209.740524341] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427209.860872561] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427210.650430089] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427210.840526866] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427210.991443999] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427211.121315513] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427211.177669608] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427211.766178552] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427211.945623968] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427211.945700704] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427212.067017009] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427212.450184046] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427213.041844355] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427214.240819105] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427214.849927742] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427214.942588571] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427215.070515455] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427215.190148699] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427215.304581864] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427215.304679227] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427215.420070798] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427215.511278773] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427215.586680307] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427216.441282221] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427216.868675003] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427216.944595047] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427217.543840401] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427218.647290763] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427219.843318780] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427220.941086870] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427222.040718794] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427223.041363890] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427224.147979989] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427224.260986957] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427224.399117307] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427224.489907312] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427224.544335669] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427224.948154418] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427225.349247154] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427226.440573475] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427226.652172596] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427227.441741244] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427228.462070119] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427228.554704431] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427228.554809855] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427228.700283948] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427228.756076011] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427228.963694453] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427229.050659867] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427229.741468128] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427229.842073727] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427229.949461665] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427230.843287458] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427231.941119343] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427232.365719357] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427232.748304798] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427233.041176898] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427233.247686662] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427234.145604263] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427235.240862925] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427235.442191914] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427236.340773211] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427236.340892663] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427236.546953987] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427237.157870730] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427237.260969181] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427237.443426778] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427238.640631805] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427239.741429082] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427240.844111633] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427241.397078210] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427241.449575767] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427241.684513755] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427241.740521298] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427242.040724910] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427242.384868312] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427242.507093183] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427242.598121110] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427242.714590022] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427242.770508014] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427243.141313967] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427243.290724003] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427243.376151369] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427243.465103391] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427244.242750037] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427244.347129576] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427244.755692338] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427245.348615443] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427245.544745670] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427246.347809384] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427246.742506921] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427246.857826747] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427247.446557558] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427247.578570189] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427247.670142233] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427248.241975071] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427248.641167267] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427249.741904049] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427250.793712766] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427250.930058855] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427250.930136120] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427250.994363847] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427251.114261053] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427251.192527165] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427251.557345844] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427251.942830805] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [INFO] [1792427253.041145329] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427253.783193661] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [WARN] [1792427253.947289648] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427254.151728612] [controller_server]: Passing new path to controller.
+[safe_controller_server-8] [WARN] [1792427254.252091634] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[safe_controller_server-8] [INFO] [1792427254.762562594] [controller_server]: Reached goal with valid TF
+[bt_navigator-12] [INFO] [1792427254.930548115] [bt_navigator]: Goal succeeded
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[map_server-6] [INFO] [1792427257.019871402] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-6] [INFO] [1792427257.020014860] [map_server]: Running Nav2 LifecycleNode rcl preshutdown (map_server)
+[map_server-6] [INFO] [1792427257.020084944] [map_server]: Deactivating
+[map_server-6] [INFO] [1792427257.020106911] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[map_server-6] [INFO] [1792427257.031629974] [map_server]: Cleaning up
+[map_server-6] [INFO] [1792427257.031683547] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[parameter_bridge-3] [INFO] [1792427257.019825637] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-11] [INFO] [1792427257.019910758] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-11] [INFO] [1792427257.020016971] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-11] [INFO] [1792427257.020081691] [behavior_server]: Deactivating
+[behavior_server-11] [INFO] [1792427257.020111447] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[behavior_server-11] [INFO] [1792427257.039457458] [behavior_server]: Cleaning up
+[INFO] [parameter_bridge-5]: process has finished cleanly [pid 61664]
+[waypoint_follower-13] [INFO] [1792427257.021420932] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[waypoint_follower-13] [INFO] [1792427257.021550115] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-13] [INFO] [1792427257.021619647] [waypoint_follower]: Deactivating
+[waypoint_follower-13] [INFO] [1792427257.021641153] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[waypoint_follower-13] [INFO] [1792427257.033303134] [waypoint_follower]: Cleaning up
+[parameter_bridge-5] [INFO] [1792427257.021892355] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[smoother_server-9] [INFO] [1792427257.022143019] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[smoother_server-9] [INFO] [1792427257.022211943] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-9] [INFO] [1792427257.022270358] [smoother_server]: Deactivating
+[smoother_server-9] [INFO] [1792427257.022293386] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[bt_navigator-12] [INFO] [1792427257.022456360] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[bt_navigator-12] [INFO] [1792427257.022507941] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-12] [INFO] [1792427257.022552442] [bt_navigator]: Deactivating
+[bt_navigator-12] [INFO] [1792427257.022575261] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[amcl-7] [INFO] [1792427257.022909488] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[amcl-7] [INFO] [1792427257.022987908] [amcl]: Running Nav2 LifecycleNode rcl preshutdown (amcl)
+[amcl-7] [INFO] [1792427257.023045626] [amcl]: Deactivating
+[amcl-7] [INFO] [1792427257.023065766] [amcl]: Destroying bond (amcl) to lifecycle manager.
+[safe_controller_server-8] [INFO] [1792427257.024162458] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_controller_server-8] [INFO] [1792427257.024273644] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[safe_controller_server-8] [INFO] [1792427257.024325409] [controller_server]: Deactivating
+[safe_controller_server-8] [INFO] [1792427257.024378915] [local_costmap.local_costmap]: Deactivating
+[INFO] [parameter_bridge-3]: process has finished cleanly [pid 61660]
+[velocity_smoother-14] [INFO] [1792427257.025123872] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother-14] [INFO] [1792427257.025234373] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-14] [INFO] [1792427257.025303455] [velocity_smoother]: Deactivating
+[velocity_smoother-14] [INFO] [1792427257.025329303] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-16] [INFO] [1792427257.026439513] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-16] [INFO] [1792427257.026554167] [lifecycle_manager_localization]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_localization)
+[lifecycle_manager-16] [INFO] [1792427257.029476117] [lifecycle_manager_localization]: [34m[1mTerminating bond timer...[0m[0m
+[robot_state_publisher-2] [INFO] [1792427257.026932575] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-17] [INFO] [1792427257.030058410] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-17] [INFO] [1792427257.030157806] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-17] [INFO] [1792427257.030190978] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[safe_planner_server-10] [INFO] [1792427257.033146271] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_planner_server-10] [INFO] [1792427257.033222498] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[safe_planner_server-10] [INFO] [1792427257.033285561] [planner_server]: Deactivating
+[safe_planner_server-10] [INFO] [1792427257.033320744] [global_costmap.global_costmap]: Deactivating
+[INFO] [lifecycle_manager-17]: sending signal 'SIGINT' to process[lifecycle_manager-17]
+[INFO] [lifecycle_manager-16]: sending signal 'SIGINT' to process[lifecycle_manager-16]
+[INFO] [navigation_gate.py-15]: sending signal 'SIGINT' to process[navigation_gate.py-15]
+[INFO] [velocity_smoother-14]: sending signal 'SIGINT' to process[velocity_smoother-14]
+[INFO] [waypoint_follower-13]: sending signal 'SIGINT' to process[waypoint_follower-13]
+[ERROR] [lifecycle_manager-16]: process has died [pid 61860, exit code -2, cmd '/opt/ros/humble/lib/nav2_lifecycle_manager/lifecycle_manager --ros-args -r __node:=lifecycle_manager_localization --params-file /tmp/launch_params_u6zjinpg'].
+[INFO] [bt_navigator-12]: sending signal 'SIGINT' to process[bt_navigator-12]
+[INFO] [behavior_server-11]: sending signal 'SIGINT' to process[behavior_server-11]
+[INFO] [safe_planner_server-10]: sending signal 'SIGINT' to process[safe_planner_server-10]
+[ERROR] [velocity_smoother-14]: process has died [pid 61697, exit code -2, cmd '/opt/ros/humble/lib/nav2_velocity_smoother/velocity_smoother --ros-args -r __node:=velocity_smoother --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_xe_zi7gc -r cmd_vel:=/nav/cmd_vel_raw -r cmd_vel_smoothed:=/nav/cmd_vel'].
+[ERROR] [waypoint_follower-13]: process has died [pid 61692, exit code -2, cmd '/opt/ros/humble/lib/nav2_waypoint_follower/waypoint_follower --ros-args -r __node:=waypoint_follower --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_1iddlw5y'].
+[INFO] [smoother_server-9]: sending signal 'SIGINT' to process[smoother_server-9]
+[INFO] [safe_controller_server-8]: sending signal 'SIGINT' to process[safe_controller_server-8]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 61658]
+[INFO] [amcl-7]: sending signal 'SIGINT' to process[amcl-7]
+[INFO] [map_server-6]: process has finished cleanly [pid 61666]
+[ERROR] [smoother_server-9]: process has died [pid 61672, exit code -2, cmd '/opt/ros/humble/lib/nav2_smoother/smoother_server --ros-args -r __node:=smoother_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_j7ujonwx'].
+[ERROR] [amcl-7]: process has died [pid 61668, exit code -2, cmd '/opt/ros/humble/lib/nav2_amcl/amcl --ros-args -r __node:=amcl --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml --params-file /tmp/launch_params_g5d_494o --params-file /tmp/launch_params_lot6an78'].
+[INFO] [cmd_guard.py-4]: sending signal 'SIGINT' to process[cmd_guard.py-4]
+[INFO] [ign-1]: sending signal 'SIGINT' to process[ign-1]
+[ERROR] [cmd_guard.py-4]: process has died [pid 61662, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_sim/lib/smartcar_sim/cmd_guard.py --ros-args -r __node:=sim_cmd_guard -r /sim/cmd_vel:=/nav/safe_cmd_vel'].
+[amcl-7] [INFO] [1792427257.044616555] [amcl]: Cleaning up
+[bt_navigator-12] [INFO] [1792427257.065112815] [bt_navigator]: Cleaning up
+[velocity_smoother-14] [INFO] [1792427257.072874211] [velocity_smoother]: Cleaning up
+[velocity_smoother-14] [INFO] [1792427257.072928738] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[velocity_smoother-14] [INFO] [1792427257.210120796] [velocity_smoother]: Destroying
+[smoother_server-9] [INFO] [1792427257.078462547] [smoother_server]: Cleaning up
+[safe_controller_server-8] [INFO] [1792427257.118656560] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[safe_controller_server-8] [INFO] [1792427257.219089610] [controller_server]: Cleaning up
+[safe_controller_server-8] [INFO] [1792427257.244988147] [local_costmap.local_costmap]: Cleaning up
+[map_server-6] [INFO] [1792427257.187621308] [map_server]: Destroying
+[waypoint_follower-13] [INFO] [1792427257.234417749] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-16] [INFO] [1792427257.322676491] [lifecycle_manager_localization]: Destroying lifecycle_manager_localization
+[amcl-7] [INFO] [1792427257.345217544] [amcl]: Destroying bond (amcl) to lifecycle manager.
+[waypoint_follower-13] [INFO] [1792427257.357673133] [waypoint_follower]: Destroying
+[behavior_server-11] [INFO] [1792427257.383116070] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[safe_planner_server-10] [INFO] [1792427257.423549406] [planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[safe_planner_server-10] [INFO] [1792427257.423597922] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[smoother_server-9] [INFO] [1792427257.436018440] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[smoother_server-9] [INFO] [1792427257.472031779] [smoother_server]: Destroying
+[safe_planner_server-10] [INFO] [1792427257.450075319] [planner_server]: Cleaning up
+[INFO] [behavior_server-11]: process has finished cleanly [pid 61686]
+[ERROR] [navigation_gate.py-15]: process has died [pid 61714, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py --ros-args -r __node:=navigation_gate'].
+[navigation_gate.py-15] Traceback (most recent call last):
+[navigation_gate.py-15]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py", line 123, in main
+[navigation_gate.py-15]     rclpy.spin(node)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[navigation_gate.py-15]     executor.spin_once()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[navigation_gate.py-15]     self._spin_once_impl(timeout_sec)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 809, in _spin_once_impl
+[navigation_gate.py-15]     raise handler.exception()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 309, in _execute_coroutine_step
+[navigation_gate.py-15]     result = coro.send(None)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 478, in handler
+[navigation_gate.py-15]     arg = take_from_wait_list(entity)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 400, in _take_subscription
+[navigation_gate.py-15]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[navigation_gate.py-15] RuntimeError: Unable to convert call argument to Python object (compile in debug mode for details)
+[navigation_gate.py-15] 
+[navigation_gate.py-15] During handling of the above exception, another exception occurred:
+[navigation_gate.py-15] 
+[navigation_gate.py-15] Traceback (most recent call last):
+[navigation_gate.py-15]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py", line 131, in <module>
+[navigation_gate.py-15]     main()
+[navigation_gate.py-15]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py", line 127, in main
+[navigation_gate.py-15]     node.destroy_node();rclpy.try_shutdown()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1691, in destroy_node
+[navigation_gate.py-15]     self.destroy_service(self._services[0])
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1615, in destroy_service
+[amcl-7] [INFO] [1792427257.508508135] [amcl]: Destroying
+[navigation_gate.py-15]     service.destroy()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/service.py", line 93, in destroy
+[navigation_gate.py-15]     self.__service.destroy_when_not_in_use()
+[navigation_gate.py-15] KeyboardInterrupt
+[behavior_server-11] [INFO] [1792427257.533046275] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-11] [INFO] [1792427257.570038545] [behavior_server]: Destroying
+[safe_planner_server-10] [INFO] [1792427257.669030116] [global_costmap.global_costmap]: Cleaning up
+[safe_planner_server-10] [INFO] [1792427257.684543161] [planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[safe_planner_server-10] [INFO] [1792427257.684611994] [planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[safe_controller_server-8] [INFO] [1792427257.678563885] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[safe_controller_server-8] [INFO] [1792427257.693771297] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_controller_server-8] [INFO] [1792427257.703695270] [local_costmap.local_costmap]: Destroying
+[lifecycle_manager-17] [INFO] [1792427257.723285543] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_planner_server-10] [INFO] [1792427257.752734321] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792427257.760995420] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[safe_planner_server-10] [INFO] [1792427257.764448299] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_planner_server-10] [INFO] [1792427257.787274030] [global_costmap.global_costmap]: Destroying
+[safe_controller_server-8] [INFO] [1792427257.812887894] [controller_server]: Destroying
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing entity deletions on [[0m[1;32m/world/smartcar_world/scene/deletion[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing state changes on [[0m[1;32m/world/smartcar_world/state[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing pose messages on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mpose/info[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing dynamic pose messages on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mdynamic_pose/info[0m[1;32m][0m[1;32m[0m
+[safe_planner_server-10] [INFO] [1792427257.865484000] [planner_server]: Destroying
+[INFO] [ign-1]: process has finished cleanly [pid 61656]
+[bt_navigator-12] [INFO] [1792427257.965867178] [bt_navigator]: Completed Cleaning up
+[bt_navigator-12] [INFO] [1792427257.965927788] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[bt_navigator-12] [INFO] [1792427257.977241875] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [lifecycle_manager-17]: process has finished cleanly [pid 61921]
+[bt_navigator-12] [INFO] [1792427257.993097740] [bt_navigator]: Destroying
+[INFO] [safe_controller_server-8]: process has finished cleanly [pid 61670]
+[INFO] [safe_planner_server-10]: process has finished cleanly [pid 61683]
+[INFO] [bt_navigator-12]: process has finished cleanly [pid 61690]

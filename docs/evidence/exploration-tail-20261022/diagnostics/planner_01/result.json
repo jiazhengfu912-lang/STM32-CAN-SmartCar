@@ -1,0 +1,154 @@
+{
+  "scope": "STATIC_ARCHIVED_MAP_NAV2_PLANNING_ONLY",
+  "result": "PASS",
+  "source_run": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/after_discovery_r2",
+  "domain_id": 153,
+  "partition": "smartcar-path-probe-8486b9b66b594e4192a42bf115f9011d",
+  "commands": [
+    [
+      "ros2",
+      "run",
+      "nav2_map_server",
+      "map_server",
+      "--ros-args",
+      "--params-file",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/diagnostics/planner_01/params.yaml",
+      "-p",
+      "yaml_filename:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/after_discovery_r2/mission/map.yaml"
+    ],
+    [
+      "ros2",
+      "run",
+      "smartcar_nav2",
+      "safe_planner_server",
+      "--ros-args",
+      "--params-file",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/diagnostics/planner_01/params.yaml"
+    ],
+    [
+      "ros2",
+      "run",
+      "tf2_ros",
+      "static_transform_publisher",
+      "--x",
+      "-3.475810553356179",
+      "--y",
+      "1.6912286198132471",
+      "--frame-id",
+      "map",
+      "--child-frame-id",
+      "base_footprint"
+    ],
+    [
+      "ros2",
+      "run",
+      "nav2_lifecycle_manager",
+      "lifecycle_manager",
+      "--ros-args",
+      "-p",
+      "autostart:=true",
+      "-p",
+      "use_sim_time:=false",
+      "-p",
+      "node_names:=[map_server,planner_server]"
+    ]
+  ],
+  "search": {
+    "frontier_cells": 128,
+    "clusters": 13,
+    "small_clusters": 12,
+    "geometric_views": 764,
+    "occluded_views": 638,
+    "excluded_cells": 0,
+    "reachable_cells": 15004,
+    "candidates": 126,
+    "reason": "CANDIDATES"
+  },
+  "input_map_sha256": "a6f67ab4c4bddcf6b383b90c280413999d9071e73eb73bbb4bf1474f8fad8b52",
+  "begun": true,
+  "done": true,
+  "reason": "CANDIDATES",
+  "target": {
+    "x": -2.660917029976707,
+    "y": 3.282776948180922,
+    "yaw": 1.1674832226937704,
+    "frontier_cells": 26,
+    "cell": [
+      145,
+      46
+    ],
+    "frontier_group": 9,
+    "small_frontier": false,
+    "path_distance_m": 2.400000035762787,
+    "predicted_gain_m2": 0.9568004327659907,
+    "visible_gain_m2": 0.03500000104308129,
+    "visible_cells": [
+      28629,
+      28828,
+      29027,
+      29226,
+      29426,
+      29625,
+      29824,
+      30023,
+      30222,
+      30421,
+      30620,
+      30819,
+      31018,
+      31416
+    ],
+    "initial_turn_rad": 0.9505468408120752,
+    "goal_margin_m": 0.65,
+    "estimated_cost_s": 16.715848295419864,
+    "score": -0.0020938214097498886,
+    "stage": "fine",
+    "nav2_path": {
+      "length_m": 2.137987309587539,
+      "initial_yaw": 0.5522600912426815,
+      "arrival_yaw": 1.1674832226937704,
+      "initial_turn_rad": 0.5522600912426815,
+      "path_turn_rad": 1.621219646943235,
+      "inflation_integral_m": 0.035119197060652634,
+      "maximum_cost": 177,
+      "estimated_cost_s": 15.496074950568973
+    },
+    "route_reason": "nav2_gain_per_cost",
+    "nav2_anchor_index": 0,
+    "nav2_chosen_index": 0
+  },
+  "shutdown": [
+    {
+      "process_group": 92119,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 92118,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 92117,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 92116,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    }
+  ]
+}

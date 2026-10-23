@@ -1,5 +1,7 @@
 # SmartCar ROS 2 上层工作空间
 
+自主探索当前的补盲策略、实际 Nav2 路径比较与终止原因见 [尾段优化说明](../docs/EXPLORATION_TAIL.md)，原始逐轮结果见 [本轮证据](../docs/evidence/exploration-tail-20261022/README.md)。
+
 这里包含小车的 Gazebo 仿真、二维 SLAM 和 Nav2 导航。底层 STM32、ESP32、CAN 与控制台工程保留在仓库原目录；本工作空间中的仿真节点通过 ROS 话题控制 Gazebo，不能据此宣称已经接通实车。
 
 目标环境：Ubuntu 22.04、ROS 2 Humble、Gazebo Fortress。质量、惯量、摩擦、相机视场与部分传感器安装尺寸仍为估算参数；主动轮采用已确认的 65 mm 直径、27 mm 宽度，轮距沿用现有模型 252 mm。

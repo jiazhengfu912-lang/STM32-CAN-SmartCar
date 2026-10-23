@@ -1,0 +1,35 @@
+{
+  "scope": "SIMULATION_ONLY",
+  "date": "2026-10-22 Asia/Shanghai",
+  "head": "b77c32cbdaf06085ed7d2c2ff418c7d183bddad0",
+  "order": [
+    "observable coverage and viewpoint memory",
+    "actual Nav2 path costs and local region ordering",
+    "explicit termination reasons"
+  ],
+  "worlds": [
+    "discovery_lab",
+    "office_loop"
+  ],
+  "budget_sim_s": 900,
+  "motion_limits": {
+    "linear_mps": 0.2,
+    "angular_rps": 0.35
+  },
+  "safety_clearance_m": {
+    "transit": 0.37,
+    "observation": 0.4
+  },
+  "quality_gate": {
+    "occupied_surface_p95_m": 0.15,
+    "support_within_015_min": 0.95
+  },
+  "acceptance": [
+    "no loss of fixed reachable-center reference coverage; specifically audit NW 50 missed reference points",
+    "report last 10% and 5% time, travel, map quality and observable residuals",
+    "record real Nav2 candidate/edge paths, map context, executed distance and all failures",
+    "watchdog freeze stops and locks; heartbeat recovery does not resume",
+    "stop verification and four nonempty map files"
+  ],
+  "comparison": "Fresh baseline on frozen install/source; historical v6 repeated runs retained as context. No SDF or truth in online explorer. No code commit/push or hardware operation."
+}

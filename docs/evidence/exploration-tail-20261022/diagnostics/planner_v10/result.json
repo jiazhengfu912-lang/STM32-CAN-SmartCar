@@ -1,0 +1,157 @@
+{
+  "scope": "STATIC_ARCHIVED_MAP_NAV2_PLANNING_ONLY",
+  "result": "PASS",
+  "source_run": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/after_discovery_r2",
+  "domain_id": 163,
+  "partition": "smartcar-path-probe-1af4cba0ab144d0fbaaf499f5b5a5b63",
+  "commands": [
+    [
+      "ros2",
+      "run",
+      "nav2_map_server",
+      "map_server",
+      "--ros-args",
+      "--params-file",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/diagnostics/planner_v10/params.yaml",
+      "-p",
+      "yaml_filename:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/after_discovery_r2/mission/map.yaml"
+    ],
+    [
+      "ros2",
+      "run",
+      "smartcar_nav2",
+      "safe_planner_server",
+      "--ros-args",
+      "--params-file",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/diagnostics/planner_v10/params.yaml"
+    ],
+    [
+      "ros2",
+      "run",
+      "tf2_ros",
+      "static_transform_publisher",
+      "--x",
+      "-3.475810553356179",
+      "--y",
+      "1.6912286198132471",
+      "--frame-id",
+      "map",
+      "--child-frame-id",
+      "base_footprint"
+    ],
+    [
+      "ros2",
+      "run",
+      "nav2_lifecycle_manager",
+      "lifecycle_manager",
+      "--ros-args",
+      "-p",
+      "autostart:=true",
+      "-p",
+      "use_sim_time:=false",
+      "-p",
+      "node_names:=[map_server,planner_server]"
+    ]
+  ],
+  "search": {
+    "frontier_cells": 128,
+    "clusters": 13,
+    "small_clusters": 12,
+    "geometric_views": 762,
+    "occluded_views": 644,
+    "excluded_cells": 0,
+    "reachable_cells": 15004,
+    "candidates": 118,
+    "reason": "CANDIDATES"
+  },
+  "source_sha256": {
+    "route_core.py": "cace77375bb392c3f3e53c91a35e7e3f659a160c71ba2f029378d0df6ca3db65",
+    "verify_exploration_planner.py": "bcf2f4d9cd4e9c91ed5551e3c22d360636656ab72c1730a11b0ef96b2a3224fa",
+    "exploration_memory.py": "f6d726fb1bf679a4d9dfc2f6332a3c85b1fe138f852115bdbee60dde318971ef",
+    "route_planner.py": "3fa1be2423b16eadba451a3541265e014278e2648aad9cdc66b365123d8e4a2c",
+    "frontier_core.py": "9a0cbf9ffa87baeea291f882559f249dbb117bcd173c5cbad8d8d63970ee299e"
+  },
+  "input_map_sha256": "a6f67ab4c4bddcf6b383b90c280413999d9071e73eb73bbb4bf1474f8fad8b52",
+  "begun": true,
+  "done": true,
+  "reason": "CANDIDATES",
+  "target": {
+    "x": -4.310917054563623,
+    "y": 1.682776924339064,
+    "yaw": -3.063056006875248,
+    "frontier_cells": 1,
+    "cell": [
+      113,
+      13
+    ],
+    "frontier_group": 12,
+    "small_frontier": true,
+    "path_distance_m": 0.850000012665987,
+    "predicted_gain_m2": 0.2930298818349938,
+    "visible_gain_m2": 0.00750000022351742,
+    "visible_cells": [
+      26210,
+      27807,
+      29004
+    ],
+    "initial_turn_rad": 3.141592653589793,
+    "goal_margin_m": 0.5700000000000001,
+    "estimated_cost_s": 15.225979073586487,
+    "score": -0.0004925791758461146,
+    "stage": "fine",
+    "nav2_path": {
+      "length_m": 0.851634921221193,
+      "initial_yaw": 3.141592653589793,
+      "arrival_yaw": -3.063056006875248,
+      "initial_turn_rad": 3.141592653589793,
+      "path_turn_rad": 1.0766461967897194,
+      "inflation_integral_m": 0.0,
+      "maximum_cost": 0,
+      "estimated_cost_s": 16.003186614069456
+    },
+    "route_reason": "nav2_open_visit_order",
+    "nav2_anchor_index": 2,
+    "nav2_chosen_index": 2,
+    "nav2_visit_order": [
+      2,
+      0,
+      3,
+      1
+    ],
+    "nav2_visit_cost_s": 132.9687892937451
+  },
+  "shutdown": [
+    {
+      "process_group": 97820,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 97819,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 97818,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 97817,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    }
+  ]
+}

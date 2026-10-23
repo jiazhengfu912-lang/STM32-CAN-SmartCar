@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.8)
+project(smartcar_sim)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY config launch models urdf worlds rviz tools tests cad_source docs verification
+  DESTINATION share/${PROJECT_NAME})
+install(FILES README.md SOURCES.md LICENSE DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/cmd_guard.py scripts/keyboard_drive.py scripts/check_runtime.py
+  DESTINATION lib/${PROJECT_NAME})
+install(FILES scripts/command_guard_core.py DESTINATION lib/${PROJECT_NAME})
+if(BUILD_TESTING)
+  find_package(ament_cmake_pytest REQUIRED)
+  ament_add_pytest_test(model tests/test_model.py)
+  ament_add_pytest_test(worlds tests/test_worlds.py)
+endif()
+ament_package()

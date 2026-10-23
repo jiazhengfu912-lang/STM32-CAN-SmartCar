@@ -1,0 +1,49 @@
+[INFO] [1792723982.744565021] [planner_server]: 
+	planner_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792723982.748099981] [planner_server]: Creating
+[INFO] [1792723982.887267919] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792723982.893875809] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792723982.903945798] [global_costmap.global_costmap]: Destroying
+[INFO] [1792723983.006541684] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792723983.007017880] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792723989.291152641] [planner_server]: Configuring
+[INFO] [1792723989.291188717] [global_costmap.global_costmap]: Configuring
+[INFO] [1792723989.310807826] [global_costmap.global_costmap]: Using plugin "static_layer"
+[INFO] [1792723989.318154892] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[INFO] [1792723989.322184955] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[INFO] [1792723989.322404298] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792723989.323197635] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[INFO] [1792723989.330579259] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792723989.330608176] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[INFO] [1792723989.333750160] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792723989.363527781] [global_costmap.global_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792723989.363889422] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 198 X 158 at 0.050000 m/pix
+[INFO] [1792723989.363988210] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[INFO] [1792723989.364006454] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[INFO] [1792723989.364133784] [planner_server]: Planner Server has GridBased  planners available.
+[INFO] [1792723990.076124581] [planner_server]: Activating
+[INFO] [1792723990.076163073] [global_costmap.global_costmap]: Activating
+[INFO] [1792723990.076173655] [global_costmap.global_costmap]: Checking transform
+[INFO] [1792723990.076361567] [global_costmap.global_costmap]: start
+[INFO] [1792723991.079136175] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[INFO] [1792723991.084101632] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[INFO] [1792724007.076748243] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 198 X 158 at 0.050000 m/pix
+[INFO] [1792724036.583476417] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792724036.583644969] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[INFO] [1792724036.583752657] [planner_server]: Deactivating
+[INFO] [1792724036.583811943] [global_costmap.global_costmap]: Deactivating
+[INFO] [1792724037.076678620] [planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[INFO] [1792724037.076759010] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[INFO] [1792724037.918588636] [planner_server]: Cleaning up
+[INFO] [1792724039.241554866] [global_costmap.global_costmap]: Cleaning up
+[INFO] [1792724039.245032285] [planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[INFO] [1792724039.245115595] [planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[INFO] [1792724039.259782426] [planner_server]: Destroying bond (planner_server) to lifecycle manager.

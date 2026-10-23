@@ -1,0 +1,27 @@
+{
+  "algorithm": "v9 stopping margin and phased real Nav2 regional insertion",
+  "source_sha256": {
+    "ros2_ws/src/smartcar_slam/scripts/explore.py": "1642bec9d0138385f072dc06ce550389b54f7b2009990a3fb9b42438dafe90ec",
+    "ros2_ws/src/smartcar_slam/scripts/frontier_core.py": "9a0cbf9ffa87baeea291f882559f249dbb117bcd173c5cbad8d8d63970ee299e",
+    "ros2_ws/src/smartcar_slam/scripts/exploration_memory.py": "f6d726fb1bf679a4d9dfc2f6332a3c85b1fe138f852115bdbee60dde318971ef",
+    "ros2_ws/src/smartcar_slam/scripts/route_core.py": "8a61bbb8cebd38d3bf13c1ec6bad43de9a073762afdbc70eac049cfd7163df62",
+    "ros2_ws/src/smartcar_slam/scripts/route_planner.py": "c6fc5d266e622891ffb872e2c532c06cb43ca0c54de0d1cc5757619025b2a761"
+  },
+  "transit_clearance_m": 0.37,
+  "terminal_margin_m": 0.57,
+  "position_tolerance_m": 0.15,
+  "linear_mps": 0.2,
+  "angular_rps": 0.35,
+  "sliding_mode_or_PI_changed": false,
+  "formal_runs": [
+    "final_v9_discovery_r1",
+    "final_v9_discovery_r2",
+    "final_v9_office"
+  ],
+  "development": [
+    "pilot_v7_discovery",
+    "after_discovery_r1 (v8)",
+    "after_office (v8, stopped before replacement)"
+  ],
+  "comparison": "Report all failures and partial results; observable proxy and center-space coverage separated; performance against an earlier unsafe termination is not equivalent-task completion improvement."
+}

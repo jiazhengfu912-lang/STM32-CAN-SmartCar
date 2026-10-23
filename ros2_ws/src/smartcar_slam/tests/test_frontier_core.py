@@ -28,7 +28,7 @@ def test_disconnected_frontier_cannot_be_reached_through_wall():
     """隔离墙把前沿全部隔断时，不能给出穿墙目标或完成结论。"""
     grid=room();grid[:,25:27]=100
     goals,details=select_frontiers(grid,.1,(0.,0.),(1.5,3.))
-    assert not goals and details['reason']=='NO_REACHABLE_FRONTIERS'
+    assert not goals and details['reason']=='NO_OBSERVABLE_FRONTIERS'
 
 
 def test_unknown_surrounded_robot_does_not_snap_across_obstacle():

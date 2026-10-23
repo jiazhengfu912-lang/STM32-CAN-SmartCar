@@ -1,0 +1,47 @@
+[INFO] [1792663462.127292348] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792663462.169746055] [controller_server]: Creating controller server
+[INFO] [1792663462.347137005] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792663462.350864639] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792663462.353996377] [local_costmap.local_costmap]: Destroying
+[INFO] [1792663462.429139403] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792663462.430434960] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792663468.757187510] [controller_server]: Configuring controller interface
+[INFO] [1792663468.758520206] [controller_server]: getting goal checker plugins..
+[INFO] [1792663468.758612778] [controller_server]: Controller frequency set to 10.0000Hz
+[INFO] [1792663468.760607637] [local_costmap.local_costmap]: Configuring
+[INFO] [1792663468.792608022] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792663468.804481858] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1792663468.809651851] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792663468.809688187] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1792663468.815075558] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792663468.913838793] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792663468.915165368] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1792663468.917478820] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1792663468.917585866] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1792663468.918004979] [controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792663468.936268322] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1792663469.554504470] [controller_server]: Activating
+[INFO] [1792663469.554555644] [local_costmap.local_costmap]: Activating
+[INFO] [1792663469.554568387] [local_costmap.local_costmap]: Checking transform
+[INFO] [1792663469.554702227] [local_costmap.local_costmap]: start
+[INFO] [1792663469.759801754] [controller_server]: Activating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792663469.759846683] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1792663485.154319293] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792663485.154425384] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1792663485.154474858] [controller_server]: Deactivating
+[INFO] [1792663485.154489904] [controller_server]: Deactivating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792663485.154511450] [local_costmap.local_costmap]: Deactivating
+[INFO] [1792663485.161195834] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1792663485.201433999] [controller_server]: Cleaning up
+[INFO] [1792663485.201476409] [controller_server]: Cleaning up controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792663485.208792295] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1792663485.365931000] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

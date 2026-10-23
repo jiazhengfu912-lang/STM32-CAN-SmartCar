@@ -1,0 +1,67 @@
+Panels:
+- Class: rviz_common/Displays
+  Name: Displays
+- Class: rviz_common/Views
+  Name: Views
+Visualization Manager:
+  Class: ''
+  Enabled: true
+  Global Options:
+    Background Color: 35; 35; 35
+    Fixed Frame: odom
+    Frame Rate: 15
+  Displays:
+  - Class: rviz_default_plugins/Grid
+    Name: Grid (1 m cells)
+    Enabled: true
+    Cell Size: 1.0
+    Plane Cell Count: 12
+    Alpha: 0.35
+  - Class: rviz_default_plugins/RobotModel
+    Name: SmartCar
+    Enabled: true
+    Description Source: Topic
+    Description Topic:
+      Value: /robot_description
+      Durability Policy: Transient Local
+      Reliability Policy: Reliable
+      Depth: 5
+    Visual Enabled: true
+    Collision Enabled: false
+  - Class: rviz_default_plugins/LaserScan
+    Name: C1 scan - red
+    Enabled: true
+    Topic:
+      Value: /sim/scan
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      Depth: 5
+      Filter size: 10
+    Position Transformer: XYZ
+    Color Transformer: FlatColor
+    Color: 255; 40; 40
+    Style: Points
+    Size (Pixels): 5
+    Size (m): 0.05
+    Alpha: 1
+    Decay Time: 1.0
+    Use Fixed Frame: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Distance: 10.0
+      Pitch: 1.45
+      Yaw: 0.0
+      Focal Point:
+        X: 0.0
+        Y: 0.0
+        Z: 0.22
+      Target Frame: <Fixed Frame>
+      Near Clip Distance: 0.01
+  Tools:
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+Window Geometry:
+  Width: 1200
+  Height: 850

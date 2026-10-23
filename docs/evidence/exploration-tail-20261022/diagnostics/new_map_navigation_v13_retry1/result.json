@@ -1,0 +1,136 @@
+{
+  "result": "PASS",
+  "scope": "SIMULATION_ONLY",
+  "started_utc": "2026-10-22T14:34:16.710674+00:00",
+  "domain_id": 229,
+  "ros_localhost_only": 1,
+  "ign_partition": "smartcar-verify-443490af65bf4128a14bc1f3a8bb377e",
+  "goal": {
+    "frame": "map",
+    "x_m": 1.5,
+    "y_m": 0.0,
+    "yaw_rad": 0.0
+  },
+  "checks": {
+    "startup_ready": true,
+    "goal_accepted": true,
+    "goal_succeeded": true,
+    "odom_and_command_stopped": true,
+    "actual_odom_moved": true
+  },
+  "lifecycle_states": {
+    "waypoint_follower": "active",
+    "velocity_smoother": "active",
+    "smoother_server": "active",
+    "behavior_server": "active",
+    "controller_server": "active",
+    "bt_navigator": "active",
+    "planner_server": "active",
+    "amcl": "active",
+    "map_server": "active"
+  },
+  "error": null,
+  "firmware": {
+    "pi_exercised": false,
+    "pi_changed": false,
+    "algorithm_changed": false,
+    "version": 131,
+    "p_i_before_after": "P right reverse .45 -> .45, others .30 -> .30; I steady .010 -> .010, start .030 -> .030 per 10 ms motor-rpm error; not exercised in Gazebo"
+  },
+  "not_verified": [
+    "STM32 hardware/PI",
+    "physical vehicle",
+    "obstacle avoidance",
+    "recovery behaviors",
+    "multi-goal navigation",
+    "arbitrary localization"
+  ],
+  "measurement": "Gazebo-generated ROS odometry, not external physical ground truth",
+  "verifier_sha256": "205139ef991c76bb5e7d02fe0cac1fba5e4589cbcc5bda4f7ed028cbfdc8d705",
+  "map_override": {
+    "yaml": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/final_v13_discovery_r1/mission/map.yaml",
+    "yaml_sha256": "dade90b05872a17b284255edcba88526de187bcd5bef467ba95fe59436f7ddc6",
+    "image_sha256": "d8d1d74f990783febcb17cb0539537dd090afc5ed3372cf9c938295464f8d319"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false",
+    "world:=discovery_lab",
+    "map:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/final_v13_discovery_r1/mission/map.yaml"
+  ],
+  "readiness": {
+    "map_server_active": true,
+    "amcl_active": true,
+    "controller_server_active": true,
+    "smoother_server_active": true,
+    "planner_server_active": true,
+    "behavior_server_active": true,
+    "bt_navigator_active": true,
+    "waypoint_follower_active": true,
+    "velocity_smoother_active": true,
+    "scan_fresh": true,
+    "odom_fresh": true,
+    "gate_fresh": true,
+    "clock_progress_fresh": true,
+    "map_received": true,
+    "clock_advancing": true,
+    "action_server_ready": true,
+    "single_publishers": true,
+    "tf_map_odom": 1,
+    "tf_odom_base_footprint": 1,
+    "tf_base_footprint_laser_frame": 1,
+    "gate_ready": true
+  },
+  "initial_odom_position_m": {
+    "x": 3.9467569428934973e-10,
+    "y": 7.416436655326194e-29,
+    "z": 0.0
+  },
+  "action_status": 4,
+  "stop_evidence": {
+    "samples": 56,
+    "duration_wall_s": 1.4494381359982071,
+    "max_linear_mps": 0.016640933929223944,
+    "max_angular_rps": 6.908935504830043e-10,
+    "displacement_m": 0.0005732260241582372
+  },
+  "final_odom_position_m": {
+    "x": 1.354867954990586,
+    "y": 0.007735096805151547,
+    "z": 0.0
+  },
+  "odom_displacement_m": 1.354890034694141,
+  "shutdown": {
+    "process_group": 123879,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "sample_counts": {
+    "odom.csv": 510,
+    "safe_cmd_vel.csv": 437,
+    "safety_status.csv": 80,
+    "clock.csv": 10181,
+    "feedback.csv": 176
+  },
+  "duration_wall_s": 28.701176013004442,
+  "plots": [
+    "velocity.png",
+    "velocity.svg",
+    "trajectory.png",
+    "trajectory.svg"
+  ],
+  "raw_sha256": {
+    "odom.csv": "a6f2b838902e02835dc1d488eab7bcdfe29bdc36d92b619cd945bbc616e7d837",
+    "safe_cmd_vel.csv": "615a84be6ca38aca46877e35f292aaf396d87089f82788bdfed64819cbd0624c",
+    "safety_status.csv": "9208cd4414c9f9a2a2dfb3223b14faf8d06e9d7c8eff65c699c32671040a1303",
+    "clock.csv": "a02781dcd565bcbad30aa4a93bde9ae9f7667aa84d50b40918845b9ae856701c",
+    "feedback.csv": "b6f59e1a8b3ef3f85de24c9515e35c5a2ae9f2f16a8ce95ee8627ef1aff93936"
+  }
+}

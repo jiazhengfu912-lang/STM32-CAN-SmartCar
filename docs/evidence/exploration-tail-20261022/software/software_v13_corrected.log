@@ -1,0 +1,24 @@
+........F..........                                                      [100%]
+=================================== FAILURES ===================================
+____________ test_wide_room_retains_wide_and_narrow_legal_observers ____________
+
+    def test_wide_room_retains_wide_and_narrow_legal_observers():
+        """宽余量和原合法窄余量均保留，停车安全由实际路径末段独立判定。"""
+        g=np.zeros((120,120),dtype=np.int16);g[0,:]=g[-1,:]=g[:,0]=g[:,-1]=100;g[50:60,80:90]=-1
+        goals,_=select_frontiers(g,.05,(0.,0.),(3.,3.))
+        from frontier_core import dilate
+        safe=(g==0)&~dilate(g!=0,.40/.05)
+>       assert {goal['goal_margin_m'] for goal in goals}=={.40,.57,.65}
+E       assert {0.4, 0.57000...0000001, 0.65} == {0.4, 0.57, 0.65}
+E         Extra items in the left set:
+E         0.5700000000000001
+E         Extra items in the right set:
+E         0.57
+E         Full diff:
+E         - {0.4, 0.57, 0.65}
+E         + {0.4, 0.5700000000000001, 0.65}
+
+ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py:119: AssertionError
+=========================== short test summary info ============================
+FAILED ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py::test_wide_room_retains_wide_and_narrow_legal_observers
+1 failed, 18 passed in 1.18s

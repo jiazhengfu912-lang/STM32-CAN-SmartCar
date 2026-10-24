@@ -1,5 +1,26 @@
 # STM32-CAN-SmartCar
 
+**新对话接手入口：[当前工程完整交接 README（2026-10-24）](README_HANDOFF.md)**。其中汇总当前分支与作者更正后的提交、功能、验证边界、启动命令、证据及下一轮接手提示词；历史阶段状态以该文档注明的最新核对为准。
+
+本仓库同时保存 **STM32/ESP32 底层控制** 和 **ROS 2 Humble 上层仿真、二维 SLAM、Nav2 导航**。
+新增的 [`ros2_ws/`](ros2_ws/README.md) 可在 Ubuntu 22.04 / Gazebo Fortress 中编译运行，
+支持键盘驾驶、C1 雷达仿真、[自主探索建图](docs/AUTONOMOUS_MAPPING.md)、建图保存、AMCL 定位、单点/多点导航、规划、碰撞检查与恢复。
+
+亲自验证陌生环境自动建图：[全新discovery_lab场景及启动步骤](docs/DISCOVERY_LAB_ACCEPTANCE.md)。
+自主探索的目标选择、转向和等待优化见[效率优化说明](docs/EXPLORATION_SPEED.md)。
+本地后续的补盲、实际 Nav2 区域访问与终止诊断见[尾段优化说明](docs/EXPLORATION_TAIL.md)及[最新实测结论](docs/evidence/exploration-tail-20261022/final_conclusion.md)。
+Frontier目标交接与近静止优化见[当前v17说明](docs/EXPLORATION_HANDOFF.md)和[匹配构建的实测结论](docs/evidence/exploration-handoff-20261024/final_conclusion.md)。
+ROS 2 当前仍通过 Gazebo 驱动车辆；**尚未接通实车 ROS 底盘接口**。
+上下层使用同一仓库管理，不把 Nav2 编译进 STM32。
+
+| 入口 | 用途 |
+|---|---|
+| [ROS 2 快速开始](ros2_ws/README.md) | 安装、构建、仿真、建图和导航 |
+| [实车接口与分阶段接入](docs/ROS2_HARDWARE_INTEGRATION.md) | 核对现有协议、轮速单位、里程计和控制权 |
+| [软件与仿真验收](docs/evidence/ros2-integration-20261018/README.md) | 本次新目录构建、测试和实际仿真记录；不代表实车通过 |
+
+以下是底层固件的现有交付状态。固件版本与 ROS 软件版本分别管理。
+
 **开发中 · 当前源码 v131（ICM-42688-P驱动，未上板） · 整体实物验收未完成。**
 
 [ICM-42688-P驱动与接线](docs/ICM42688_UPGRADE.md) · [BSP分层说明](docs/BSP.md) · [坐标导航说明](docs/COORDINATE_NAVIGATION.md) · [MPU6050历史升级记录](docs/MPU6050_UPGRADE.md) · [当前进度](docs/PROGRESS.md) · [PID 调试记录](docs/PID_TUNING.md) · [完整验收与实测波形](docs/ACCEPTANCE.md) · [每轮归档规范](docs/ACCEPTANCE_WORKFLOW.md)

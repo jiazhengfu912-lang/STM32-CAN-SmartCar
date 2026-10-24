@@ -1,0 +1,131 @@
+{
+  "time": "2026-10-19T17:28:13.330887",
+  "duration_wall": 12.00030942400008,
+  "stats": {
+    "/navigation/safety_status": {
+      "count": 44,
+      "first_wall": 0.038946718001170666,
+      "last_wall": 11.81367867500012
+    },
+    "/nav/safe_cmd_vel": {
+      "count": 240,
+      "first_wall": 0.039072937001037644,
+      "last_wall": 11.960689224000816
+    },
+    "/clock": {
+      "count": 6764,
+      "first_wall": 0.04263491600067937,
+      "last_wall": 11.99929347500074,
+      "first_sim": 213.91,
+      "last_sim": 220.68
+    },
+    "/sim/scan": {
+      "count": 68,
+      "first_wall": 0.053956550000293646,
+      "last_wall": 11.93135618100132,
+      "first_stamp": 213.9,
+      "last_stamp": 220.6
+    },
+    "/sim/odom": {
+      "count": 339,
+      "first_wall": 0.08279067200055579,
+      "last_wall": 12.000138104000143,
+      "first_stamp": 213.92,
+      "last_stamp": 220.68
+    },
+    "/amcl_pose": {
+      "count": 1,
+      "first_wall": 0.9567228100004286,
+      "last_wall": 0.9567228100004286,
+      "first_stamp": 84.1,
+      "last_stamp": 84.1
+    }
+  },
+  "latest": {
+    "/navigation/safety_status": {
+      "state": "COMMAND_STALE",
+      "vx": 0.0,
+      "wz": 0.0,
+      "stop_latched": false
+    },
+    "/nav/safe_cmd_vel": {
+      "linear": 0.0,
+      "angular": 0.0
+    },
+    "/sim/scan": {
+      "frame": "laser_frame",
+      "rays": 500,
+      "finite": 500
+    },
+    "/sim/odom": {
+      "position": [
+        0.5338902713621068,
+        0.10236596039981019,
+        0.0
+      ],
+      "linear": 0.0,
+      "angular": 0.0
+    },
+    "/amcl_pose": {
+      "x": 0.0531388135945729,
+      "y": 2.9759328467359727,
+      "covariance_xy": [
+        -6.852157730108388e-17,
+        4.298783551348606e-13
+      ]
+    }
+  },
+  "services": {
+    "map_server": "active",
+    "amcl": "no_response",
+    "controller_server": "no_response",
+    "planner_server": "no_response",
+    "behavior_server": "unconfigured",
+    "bt_navigator": "no_response",
+    "velocity_smoother": "unconfigured",
+    "bt_params": "no_response"
+  },
+  "tf": {
+    "map->odom": {
+      "stamp": 221.1,
+      "position": [
+        -0.4894287675633872,
+        2.9421981230809613,
+        0.0
+      ]
+    },
+    "odom->base_footprint": {
+      "stamp": 220.68,
+      "position": [
+        0.5338902713621068,
+        0.10236596039981019,
+        0.0
+      ]
+    },
+    "map->base_footprint": {
+      "stamp": 220.68,
+      "position": [
+        0.05313881359457279,
+        2.9759328467359727,
+        0.0
+      ]
+    }
+  },
+  "publishers": {
+    "/clock": [
+      "state_bridge"
+    ],
+    "/sim/scan": [
+      "laser_bridge"
+    ],
+    "/sim/odom": [
+      "state_bridge"
+    ],
+    "/map": [
+      "map_server"
+    ],
+    "/sim/drive_cmd_vel": [
+      "sim_cmd_guard"
+    ]
+  }
+}

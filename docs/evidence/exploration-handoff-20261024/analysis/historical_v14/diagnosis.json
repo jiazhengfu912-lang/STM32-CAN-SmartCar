@@ -1,0 +1,118 @@
+{
+  "intervals": {
+    "task": {
+      "start_sim_s": 5.195,
+      "end_sim_s": 759.747,
+      "simulation_seconds": 754.5519999999999,
+      "near_stationary_sim_s": 117.07400000000014,
+      "turning_in_place_sim_s": 93.32499999999975,
+      "translation_sim_s": 544.1400000000001,
+      "unclassified_gap_sim_s": 0.0,
+      "travel_m": 87.13087883188103,
+      "near_stationary_bouts_ge_0_5s": 29,
+      "near_stationary_by_event_phase_sim_s": {
+        "DISPATCH_WAIT": 11.264000000000035,
+        "FRONTIER_SEARCH": 50.330999999999676,
+        "NAV2_ROUTE_QUERY": 27.481000000000158,
+        "NAVIGATING": 8.915999999999952,
+        "OBSERVATION_MAP_WAIT": 19.082000000000317
+      },
+      "goals_sent": 29
+    },
+    "0.9->0.95": {
+      "start_sim_s": 160.811,
+      "end_sim_s": 186.727,
+      "simulation_seconds": 25.915999999999997,
+      "near_stationary_sim_s": 4.139999999999986,
+      "turning_in_place_sim_s": 0.0,
+      "translation_sim_s": 21.760999999999996,
+      "unclassified_gap_sim_s": 0.0,
+      "travel_m": 3.1856339774114906,
+      "near_stationary_bouts_ge_0_5s": 1,
+      "near_stationary_by_event_phase_sim_s": {
+        "DISPATCH_WAIT": 0.12100000000000932,
+        "FRONTIER_SEARCH": 2.1239999999999952,
+        "NAV2_ROUTE_QUERY": 0.2609999999999957,
+        "NAVIGATING": 0.25199999999998113,
+        "OBSERVATION_MAP_WAIT": 1.382000000000005
+      },
+      "goals_sent": 1,
+      "normalized_reference_area_m2_per_sim_s": 0.20890087204815536
+    },
+    "0.9->0.98": {
+      "start_sim_s": 160.811,
+      "end_sim_s": 331.408,
+      "simulation_seconds": 170.597,
+      "near_stationary_sim_s": 31.044000000000068,
+      "turning_in_place_sim_s": 19.765999999999963,
+      "translation_sim_s": 119.76699999999994,
+      "unclassified_gap_sim_s": 0.0,
+      "travel_m": 18.12526949962235,
+      "near_stationary_bouts_ge_0_5s": 8,
+      "near_stationary_by_event_phase_sim_s": {
+        "DISPATCH_WAIT": 0.6190000000000282,
+        "FRONTIER_SEARCH": 14.086000000000013,
+        "NAV2_ROUTE_QUERY": 9.333999999999946,
+        "NAVIGATING": 2.5810000000000173,
+        "OBSERVATION_MAP_WAIT": 4.424000000000063
+      },
+      "goals_sent": 8,
+      "normalized_reference_area_m2_per_sim_s": 0.05077580496726201
+    },
+    "0.95->0.98": {
+      "start_sim_s": 186.727,
+      "end_sim_s": 331.408,
+      "simulation_seconds": 144.681,
+      "near_stationary_sim_s": 26.90400000000008,
+      "turning_in_place_sim_s": 19.765999999999963,
+      "translation_sim_s": 97.98599999999993,
+      "unclassified_gap_sim_s": 0.0,
+      "travel_m": 14.938347643352147,
+      "near_stationary_bouts_ge_0_5s": 7,
+      "near_stationary_by_event_phase_sim_s": {
+        "DISPATCH_WAIT": 0.49800000000001887,
+        "FRONTIER_SEARCH": 11.962000000000018,
+        "NAV2_ROUTE_QUERY": 9.07299999999995,
+        "NAVIGATING": 2.329000000000036,
+        "OBSERVATION_MAP_WAIT": 3.0420000000000584
+      },
+      "goals_sent": 7,
+      "normalized_reference_area_m2_per_sim_s": 0.022451634976258135
+    },
+    "0.98->0.99": {
+      "start_sim_s": 331.408,
+      "end_sim_s": 449.276,
+      "simulation_seconds": 117.868,
+      "near_stationary_sim_s": 17.574000000000012,
+      "turning_in_place_sim_s": 18.65799999999996,
+      "translation_sim_s": 81.608,
+      "unclassified_gap_sim_s": 0.0,
+      "travel_m": 13.13466832121723,
+      "near_stationary_bouts_ge_0_5s": 4,
+      "near_stationary_by_event_phase_sim_s": {
+        "DISPATCH_WAIT": 0.06299999999998818,
+        "FRONTIER_SEARCH": 3.891999999999939,
+        "NAV2_ROUTE_QUERY": 8.898000000000025,
+        "NAVIGATING": 0.9780000000000086,
+        "OBSERVATION_MAP_WAIT": 3.743000000000052
+      },
+      "goals_sent": 4,
+      "normalized_reference_area_m2_per_sim_s": 0.009186335561814921
+    }
+  },
+  "handoffs": {
+    "count": 28,
+    "total_gap_sim_s": 100.481,
+    "median_gap_sim_s": 3.5755000000000194,
+    "total_near_stationary_sim_s": 98.77300000000011
+  },
+  "preparation": {
+    "frontier_preparation_used": 0,
+    "frontier_preparation_discarded": 0,
+    "frontier_preparation_empty_recheck": 0,
+    "frontier_preparation_start_unsafe_recheck": 0
+  },
+  "pipeline_samples": 0,
+  "maximum_tick_interval_wall_s": null,
+  "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+}

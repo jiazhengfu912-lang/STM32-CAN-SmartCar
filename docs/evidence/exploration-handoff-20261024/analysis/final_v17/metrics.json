@@ -1,0 +1,2926 @@
+{
+  "before_v15_discovery": {
+    "result": "PASS",
+    "reason": "NAV2_UNREACHABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 14,
+    "succeeded": 13,
+    "navigation_failures": 1,
+    "travel_m": 54.233408347021005,
+    "angular_travel_rad": 57.03167517997462,
+    "idle_sim_s": 66.19399999999999,
+    "turn_only_sim_s": 76.5630000000001,
+    "duration_wall_s": 816.7515634759998,
+    "end_sim_s": 485.727,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 38.61500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 43.313,
+        "wall_s": 76.38167447599972
+      },
+      "0.9": {
+        "sim_s": 147.444,
+        "wall_s": 244.47171163999974
+      },
+      "0.95": {
+        "sim_s": 150.705,
+        "wall_s": 250.427813925
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 2965,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.024917102997849383,
+      "surface_distance_p95_m": 0.06861186453880545,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 2965,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.026576927545718942,
+      "surface_distance_p95_m": 0.07000000000000099,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 1163,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.0316911400844309,
+        "surface_distance_p95_m": 0.0566911102821086,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 1666,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.0371900842384358,
+        "surface_distance_p95_m": 0.07290870346157367,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 1742,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.02923230409099714,
+        "surface_distance_p95_m": 0.07290870346157367,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 45400,
+        "missing_samples": 3,
+        "median_position_error_m": 0.41725372203151473,
+        "p95_position_error_m": 1.337132100965368,
+        "max_position_error_m": 1.4245746397250272,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 45400,
+        "missing_samples": 45,
+        "median_position_error_m": 0.012403766820636894,
+        "p95_position_error_m": 0.033926358941617676,
+        "max_position_error_m": 0.04446546478251185,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 28527,
+      "known_fraction": 0.9927787709888877,
+      "free_fraction": 0.95109895888106,
+      "missing_unknown_cells": 206,
+      "missing_unknown_area_m2": 0.5150000000000001,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 152.343,
+      "0.95": 159.764,
+      "0.98": 253.803,
+      "0.99": 350.82,
+      "0.995": null
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 43.313,
+        "remaining_sim_s": 442.414,
+        "travel_m": 51.2812303409318,
+        "goals_sent": 12
+      },
+      "0.9": {
+        "start_sim_s": 147.444,
+        "remaining_sim_s": 338.283,
+        "travel_m": 38.91843458544691,
+        "goals_sent": 9
+      },
+      "0.95": {
+        "start_sim_s": 150.705,
+        "remaining_sim_s": 335.02199999999993,
+        "travel_m": 38.266434622157234,
+        "goals_sent": 9
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 94.03899999999999,
+        "travel_m": 11.586386162999858
+      },
+      "0.99": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.99,
+        "simulation_seconds": 191.05599999999998,
+        "travel_m": 21.50821313853364
+      },
+      "0.995": null
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 7.421000000000021,
+        "travel_m": 1.2982535191673148,
+        "near_stationary_sim_s": 0.0,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 7.4199999999999875,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 101.46000000000001,
+        "travel_m": 12.884639682167176,
+        "near_stationary_sim_s": 11.305999999999955,
+        "turning_in_place_sim_s": 15.65700000000001,
+        "translation_sim_s": 74.49700000000001,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 94.03899999999999,
+        "travel_m": 11.586386162999858,
+        "near_stationary_sim_s": 11.305999999999955,
+        "turning_in_place_sim_s": 15.65700000000001,
+        "translation_sim_s": 67.07700000000003,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": {
+        "simulation_seconds": 191.05599999999998,
+        "travel_m": 21.50821313853364,
+        "near_stationary_sim_s": 22.579999999999842,
+        "turning_in_place_sim_s": 36.319000000000045,
+        "translation_sim_s": 132.1600000000001,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".98->.99": {
+        "simulation_seconds": 97.017,
+        "travel_m": 9.92182697553378,
+        "near_stationary_sim_s": 11.273999999999887,
+        "turning_in_place_sim_s": 20.662000000000035,
+        "translation_sim_s": 65.08300000000008,
+        "unclassified_gap_sim_s": 0.0
+      }
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 14,
+      "expected_target_cells": 297,
+      "observed_target_cells": 293,
+      "observed_target_free_cells": 276,
+      "zero_target_yield_actions": 1,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 24307,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.174285675000192
+      },
+      "commands.csv": {
+        "samples": 16250,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.11856624099982582
+      },
+      "mission/odom.csv": {
+        "samples": 24277,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.2513868740002181
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 267,
+      "valid": 182,
+      "pair_queries": 146
+    },
+    "nav2_local_insertions": 1,
+    "nav2_order_validation": {
+      "verified_batches": 10,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 7,
+      "mean_static_estimated_cost_reduction_percent": 5.348811525790383
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 8.544,
+          "end_sim_s": 484.959,
+          "simulation_seconds": 476.415,
+          "near_stationary_sim_s": 60.45199999999967,
+          "turning_in_place_sim_s": 76.5630000000001,
+          "translation_sim_s": 339.3520000000002,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 54.23340834662618,
+          "near_stationary_bouts_ge_0_5s": 16,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 8.610999999999898,
+            "FRONTIER_SEARCH": 15.568999999999939,
+            "NAV2_ROUTE_QUERY": 9.252000000000052,
+            "NAVIGATING": 8.55299999999962,
+            "OBSERVATION_MAP_WAIT": 9.114000000000072,
+            "READINESS_WAIT": 9.353000000000094
+          },
+          "goals_sent": 14
+        },
+        "0.9->0.95": {
+          "start_sim_s": 152.343,
+          "end_sim_s": 159.764,
+          "simulation_seconds": 7.421000000000021,
+          "near_stationary_sim_s": 0.0,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 7.399000000000001,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 1.2942535199427865,
+          "near_stationary_bouts_ge_0_5s": 0,
+          "near_stationary_by_event_phase_sim_s": {},
+          "goals_sent": 0,
+          "normalized_reference_area_m2_per_sim_s": 0.4805113866055769
+        },
+        "0.9->0.98": {
+          "start_sim_s": 152.343,
+          "end_sim_s": 253.803,
+          "simulation_seconds": 101.46000000000001,
+          "near_stationary_sim_s": 11.305999999999955,
+          "turning_in_place_sim_s": 15.65700000000001,
+          "translation_sim_s": 74.47600000000003,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 12.880639682942647,
+          "near_stationary_bouts_ge_0_5s": 3,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.16699999999997317,
+            "FRONTIER_SEARCH": 2.375,
+            "NAV2_ROUTE_QUERY": 2.6990000000000123,
+            "NAVIGATING": 1.028999999999968,
+            "OBSERVATION_MAP_WAIT": 1.813999999999993,
+            "READINESS_WAIT": 3.2220000000000084
+          },
+          "goals_sent": 3,
+          "normalized_reference_area_m2_per_sim_s": 0.05623299822590181
+        },
+        "0.95->0.98": {
+          "start_sim_s": 159.764,
+          "end_sim_s": 253.803,
+          "simulation_seconds": 94.03899999999999,
+          "near_stationary_sim_s": 11.305999999999955,
+          "turning_in_place_sim_s": 15.65700000000001,
+          "translation_sim_s": 67.05700000000002,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 11.584827899220887,
+          "near_stationary_bouts_ge_0_5s": 3,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.16699999999997317,
+            "FRONTIER_SEARCH": 2.375,
+            "NAV2_ROUTE_QUERY": 2.6990000000000123,
+            "NAVIGATING": 1.028999999999968,
+            "OBSERVATION_MAP_WAIT": 1.813999999999993,
+            "READINESS_WAIT": 3.2220000000000084
+          },
+          "goals_sent": 3,
+          "normalized_reference_area_m2_per_sim_s": 0.02275146481778839
+        },
+        "0.98->0.99": {
+          "start_sim_s": 253.803,
+          "end_sim_s": 350.82,
+          "simulation_seconds": 97.017,
+          "near_stationary_sim_s": 11.273999999999887,
+          "turning_in_place_sim_s": 20.662000000000035,
+          "translation_sim_s": 65.06100000000006,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 9.919877810547408,
+          "near_stationary_bouts_ge_0_5s": 4,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.23599999999993315,
+            "NAV2_ROUTE_QUERY": 2.908999999999992,
+            "NAVIGATING": 2.3259999999998513,
+            "OBSERVATION_MAP_WAIT": 1.8490000000000464,
+            "READINESS_WAIT": 3.9540000000000646
+          },
+          "goals_sent": 3,
+          "normalized_reference_area_m2_per_sim_s": 0.007351031262562239
+        }
+      },
+      "handoffs": {
+        "count": 13,
+        "total_gap_sim_s": 43.64300000000004,
+        "median_gap_sim_s": 3.3850000000000193,
+        "total_near_stationary_sim_s": 43.196000000000076
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 0
+      },
+      "pipeline_samples": 0,
+      "maximum_tick_interval_wall_s": null,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "before_v15_matched_discovery": {
+    "result": "PASS",
+    "reason": "NAV2_UNREACHABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 21,
+    "succeeded": 21,
+    "navigation_failures": 0,
+    "travel_m": 92.61017168506054,
+    "angular_travel_rad": 101.70705214499137,
+    "idle_sim_s": 87.70100000000001,
+    "turn_only_sim_s": 137.10200000000026,
+    "duration_wall_s": 1390.8134224719997,
+    "end_sim_s": 814.841,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 38.61500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 45.037,
+        "wall_s": 76.49916086099984
+      },
+      "0.9": {
+        "sim_s": 137.498,
+        "wall_s": 226.55668910300028
+      },
+      "0.95": {
+        "sim_s": 138.654,
+        "wall_s": 228.55166778900002
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 3074,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.034498159480918944,
+      "surface_distance_p95_m": 0.05598260393285752,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 3074,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.03536437752384425,
+      "surface_distance_p95_m": 0.06000000000000032,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 1297,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.030566558449670198,
+        "surface_distance_p95_m": 0.05556657186071545,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 1716,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.028558204786765892,
+        "surface_distance_p95_m": 0.054834177523656664,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 1776,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.028558204786765892,
+        "surface_distance_p95_m": 0.05474412170201814,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 77352,
+        "missing_samples": 2,
+        "median_position_error_m": 0.9585325253649917,
+        "p95_position_error_m": 1.3244226559564878,
+        "max_position_error_m": 1.3774394269625643,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 77352,
+        "missing_samples": 39,
+        "median_position_error_m": 0.012892953775039767,
+        "p95_position_error_m": 0.04634718379577511,
+        "max_position_error_m": 0.07047299314336397,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 28527,
+      "known_fraction": 0.9982122200021033,
+      "free_fraction": 0.955060118484243,
+      "missing_unknown_cells": 51,
+      "missing_unknown_area_m2": 0.12750000000000003,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 139.895,
+      "0.95": 148.737,
+      "0.98": 245.366,
+      "0.99": 427.738,
+      "0.995": 624.956
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 45.037,
+        "remaining_sim_s": 769.804,
+        "travel_m": 89.80660257789188,
+        "goals_sent": 18
+      },
+      "0.9": {
+        "start_sim_s": 137.498,
+        "remaining_sim_s": 677.3430000000001,
+        "travel_m": 78.599876350576,
+        "goals_sent": 15
+      },
+      "0.95": {
+        "start_sim_s": 138.654,
+        "remaining_sim_s": 676.187,
+        "travel_m": 78.36787636567405,
+        "goals_sent": 15
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 96.62900000000002,
+        "travel_m": 11.48187968128848
+      },
+      "0.99": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.99,
+        "simulation_seconds": 279.001,
+        "travel_m": 26.95045265727488
+      },
+      "0.995": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.995,
+        "simulation_seconds": 476.21900000000005,
+        "travel_m": 53.154217368792814
+      }
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 8.841999999999985,
+        "travel_m": 1.6868042167307817,
+        "near_stationary_sim_s": 0.0,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 8.840000000000003,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 105.471,
+        "travel_m": 13.16868389801926,
+        "near_stationary_sim_s": 10.275000000000006,
+        "turning_in_place_sim_s": 16.619,
+        "translation_sim_s": 78.58600000000001,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 96.62900000000002,
+        "travel_m": 11.48187968128848,
+        "near_stationary_sim_s": 10.275000000000006,
+        "turning_in_place_sim_s": 16.619,
+        "translation_sim_s": 69.74600000000001,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": {
+        "simulation_seconds": 279.001,
+        "travel_m": 26.95045265727488,
+        "near_stationary_sim_s": 28.470000000000027,
+        "turning_in_place_sim_s": 74.30000000000001,
+        "translation_sim_s": 176.23099999999997,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".98->.99": {
+        "simulation_seconds": 182.37199999999999,
+        "travel_m": 15.468572975986397,
+        "near_stationary_sim_s": 18.19500000000002,
+        "turning_in_place_sim_s": 57.68100000000001,
+        "translation_sim_s": 106.48499999999996,
+        "unclassified_gap_sim_s": 0.0
+      }
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 21,
+      "expected_target_cells": 316,
+      "observed_target_cells": 305,
+      "observed_target_free_cells": 284,
+      "zero_target_yield_actions": 3,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 40746,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.17292220899980748
+      },
+      "commands.csv": {
+        "samples": 27720,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.14852987400081474
+      },
+      "mission/odom.csv": {
+        "samples": 40746,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.24904885300020396
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 273,
+      "valid": 203,
+      "pair_queries": 144
+    },
+    "nav2_local_insertions": 4,
+    "nav2_order_validation": {
+      "verified_batches": 10,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 8,
+      "mean_static_estimated_cost_reduction_percent": 4.45064840619734
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 8.065,
+          "end_sim_s": 813.754,
+          "simulation_seconds": 805.689,
+          "near_stationary_sim_s": 84.91200000000018,
+          "turning_in_place_sim_s": 137.10200000000026,
+          "translation_sim_s": 583.6309999999996,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 92.61017168466519,
+          "near_stationary_bouts_ge_0_5s": 25,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 13.365000000000123,
+            "FRONTIER_SEARCH": 26.099000000000103,
+            "NAV2_ROUTE_QUERY": 8.872999999999937,
+            "NAVIGATING": 15.798000000000025,
+            "OBSERVATION_MAP_WAIT": 12.49899999999996,
+            "READINESS_WAIT": 8.27800000000002
+          },
+          "goals_sent": 21
+        },
+        "0.9->0.95": {
+          "start_sim_s": 139.895,
+          "end_sim_s": 148.737,
+          "simulation_seconds": 8.841999999999985,
+          "near_stationary_sim_s": 0.0,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 8.819999999999993,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 1.6828042167329298,
+          "near_stationary_bouts_ge_0_5s": 0,
+          "near_stationary_by_event_phase_sim_s": {},
+          "goals_sent": 0,
+          "normalized_reference_area_m2_per_sim_s": 0.4032882831938478
+        },
+        "0.9->0.98": {
+          "start_sim_s": 139.895,
+          "end_sim_s": 245.366,
+          "simulation_seconds": 105.471,
+          "near_stationary_sim_s": 10.275000000000006,
+          "turning_in_place_sim_s": 16.619,
+          "translation_sim_s": 78.566,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 13.164683898021408,
+          "near_stationary_bouts_ge_0_5s": 3,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.29400000000001114,
+            "FRONTIER_SEARCH": 2.1599999999999966,
+            "NAV2_ROUTE_QUERY": 2.2489999999999952,
+            "NAVIGATING": 0.8799999999999955,
+            "OBSERVATION_MAP_WAIT": 1.342000000000013,
+            "READINESS_WAIT": 3.3499999999999943
+          },
+          "goals_sent": 3,
+          "normalized_reference_area_m2_per_sim_s": 0.05409449042864861
+        },
+        "0.95->0.98": {
+          "start_sim_s": 148.737,
+          "end_sim_s": 245.366,
+          "simulation_seconds": 96.62900000000002,
+          "near_stationary_sim_s": 10.275000000000006,
+          "turning_in_place_sim_s": 16.619,
+          "translation_sim_s": 69.726,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 11.47966692311811,
+          "near_stationary_bouts_ge_0_5s": 3,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.29400000000001114,
+            "FRONTIER_SEARCH": 2.1599999999999966,
+            "NAV2_ROUTE_QUERY": 2.2489999999999952,
+            "NAVIGATING": 0.8799999999999955,
+            "OBSERVATION_MAP_WAIT": 1.342000000000013,
+            "READINESS_WAIT": 3.3499999999999943
+          },
+          "goals_sent": 3,
+          "normalized_reference_area_m2_per_sim_s": 0.02214164484782003
+        },
+        "0.98->0.99": {
+          "start_sim_s": 245.366,
+          "end_sim_s": 427.738,
+          "simulation_seconds": 182.37199999999999,
+          "near_stationary_sim_s": 18.19500000000002,
+          "turning_in_place_sim_s": 57.68100000000001,
+          "translation_sim_s": 106.46499999999997,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 15.464572975991114,
+          "near_stationary_bouts_ge_0_5s": 7,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.6250000000000853,
+            "NAV2_ROUTE_QUERY": 2.2329999999999757,
+            "NAVIGATING": 10.686999999999983,
+            "OBSERVATION_MAP_WAIT": 1.1279999999999575,
+            "READINESS_WAIT": 3.52200000000002
+          },
+          "goals_sent": 3,
+          "normalized_reference_area_m2_per_sim_s": 0.003910550961770452
+        }
+      },
+      "handoffs": {
+        "count": 20,
+        "total_gap_sim_s": 61.042999999999815,
+        "median_gap_sim_s": 2.6514999999999986,
+        "total_near_stationary_sim_s": 60.12299999999996
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 0
+      },
+      "pipeline_samples": 0,
+      "maximum_tick_interval_wall_s": null,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "before_v15_matched_office": {
+    "result": "PASS",
+    "reason": "NAV2_UNREACHABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 19,
+    "succeeded": 19,
+    "navigation_failures": 0,
+    "travel_m": 57.460647531808306,
+    "angular_travel_rad": 50.562457587846566,
+    "idle_sim_s": 85.24900000000004,
+    "turn_only_sim_s": 49.48000000000004,
+    "duration_wall_s": 851.7328084979999,
+    "end_sim_s": 505.018,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 65.20500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 105.998,
+        "wall_s": 178.05084138599887
+      },
+      "0.9": {
+        "sim_s": 131.258,
+        "wall_s": 220.06734889699874
+      },
+      "0.95": {
+        "sim_s": 144.536,
+        "wall_s": 242.07515729499937
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 4345,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.0343997921050196,
+      "surface_distance_p95_m": 0.0843997034431105,
+      "occupied_support_fraction_within_015m": 0.9997698504027618,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 4345,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.03000000000000007,
+      "surface_distance_p95_m": 0.07999999999999936,
+      "occupied_support_fraction_within_015m": 0.9997698504027618,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 2531,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.03702009040487102,
+        "surface_distance_p95_m": 0.0870200039781361,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 2939,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.04150213071001403,
+        "surface_distance_p95_m": 0.09150213145507209,
+        "occupied_support_fraction_within_015m": 0.9959169785641374,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 3255,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.04150212847483985,
+        "surface_distance_p95_m": 0.0877460477992884,
+        "occupied_support_fraction_within_015m": 0.9960061443932412,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 47311,
+        "missing_samples": 3,
+        "median_position_error_m": 1.1472505210366915,
+        "p95_position_error_m": 2.2782070513136343,
+        "max_position_error_m": 2.839313227108625,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 47311,
+        "missing_samples": 56,
+        "median_position_error_m": 0.04701039922505866,
+        "p95_position_error_m": 0.14116250853104695,
+        "max_position_error_m": 0.17420405989895588,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 43311,
+      "known_fraction": 0.9877860127912078,
+      "free_fraction": 0.9454872896031031,
+      "missing_unknown_cells": 529,
+      "missing_unknown_area_m2": 1.3225000000000002,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 144.536,
+      "0.95": 168.195,
+      "0.98": 406.121,
+      "0.99": null,
+      "0.995": null
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 105.998,
+        "remaining_sim_s": 399.02,
+        "travel_m": 47.44864349915111,
+        "goals_sent": 12
+      },
+      "0.9": {
+        "start_sim_s": 131.258,
+        "remaining_sim_s": 373.76,
+        "travel_m": 44.42195579869422,
+        "goals_sent": 11
+      },
+      "0.95": {
+        "start_sim_s": 144.536,
+        "remaining_sim_s": 360.48199999999997,
+        "travel_m": 43.21598587016422,
+        "goals_sent": 10
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 237.926,
+        "travel_m": 28.277825641896936
+      },
+      "0.99": null,
+      "0.995": null
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 23.658999999999992,
+        "travel_m": 3.0868739037034416,
+        "near_stationary_sim_s": 4.138999999999982,
+        "turning_in_place_sim_s": 0.9800000000000182,
+        "translation_sim_s": 18.540999999999997,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 261.585,
+        "travel_m": 31.364699545600377,
+        "near_stationary_sim_s": 27.267999999999972,
+        "turning_in_place_sim_s": 33.48199999999997,
+        "translation_sim_s": 200.85000000000005,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 237.926,
+        "travel_m": 28.277825641896936,
+        "near_stationary_sim_s": 23.12899999999999,
+        "turning_in_place_sim_s": 32.50199999999995,
+        "translation_sim_s": 182.30900000000005,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": null,
+      ".98->.99": null
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 19,
+      "expected_target_cells": 231,
+      "observed_target_cells": 227,
+      "observed_target_free_cells": 210,
+      "zero_target_yield_actions": 2,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 25301,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.17893891499988968
+      },
+      "commands.csv": {
+        "samples": 16942,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.1846336840008007
+      },
+      "mission/odom.csv": {
+        "samples": 25301,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.21561516800102254
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 306,
+      "valid": 237,
+      "pair_queries": 160
+    },
+    "nav2_local_insertions": 5,
+    "nav2_order_validation": {
+      "verified_batches": 10,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 5,
+      "mean_static_estimated_cost_reduction_percent": 13.129068743361618
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 5.66,
+          "end_sim_s": 505.054,
+          "simulation_seconds": 499.39399999999995,
+          "near_stationary_sim_s": 82.30999999999992,
+          "turning_in_place_sim_s": 49.48000000000004,
+          "translation_sim_s": 367.5900000000001,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 57.46064753141394,
+          "near_stationary_bouts_ge_0_5s": 19,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 13.550999999999942,
+            "FRONTIER_SEARCH": 32.79499999999998,
+            "NAV2_ROUTE_QUERY": 9.22100000000007,
+            "NAVIGATING": 6.07899999999995,
+            "OBSERVATION_MAP_WAIT": 11.84499999999993,
+            "READINESS_WAIT": 8.819000000000045
+          },
+          "goals_sent": 19
+        },
+        "0.9->0.95": {
+          "start_sim_s": 144.536,
+          "end_sim_s": 168.195,
+          "simulation_seconds": 23.658999999999992,
+          "near_stationary_sim_s": 4.138999999999982,
+          "turning_in_place_sim_s": 0.9800000000000182,
+          "translation_sim_s": 18.521000000000015,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 3.0828739039314925,
+          "near_stationary_bouts_ge_0_5s": 1,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.3680000000000234,
+            "FRONTIER_SEARCH": 1.9879999999999995,
+            "NAV2_ROUTE_QUERY": 0.2909999999999968,
+            "NAVIGATING": 0.5889999999999702,
+            "OBSERVATION_MAP_WAIT": 0.9029999999999916
+          },
+          "goals_sent": 1,
+          "normalized_reference_area_m2_per_sim_s": 0.2288294095270297
+        },
+        "0.9->0.98": {
+          "start_sim_s": 144.536,
+          "end_sim_s": 406.121,
+          "simulation_seconds": 261.585,
+          "near_stationary_sim_s": 27.267999999999972,
+          "turning_in_place_sim_s": 33.48199999999997,
+          "translation_sim_s": 200.83000000000007,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 31.360699545828428,
+          "near_stationary_bouts_ge_0_5s": 8,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 1.13799999999992,
+            "FRONTIER_SEARCH": 4.247000000000014,
+            "NAV2_ROUTE_QUERY": 6.280000000000001,
+            "NAVIGATING": 2.613000000000028,
+            "OBSERVATION_MAP_WAIT": 4.170999999999964,
+            "READINESS_WAIT": 8.819000000000045
+          },
+          "goals_sent": 8,
+          "normalized_reference_area_m2_per_sim_s": 0.03311428407592178
+        },
+        "0.95->0.98": {
+          "start_sim_s": 168.195,
+          "end_sim_s": 406.121,
+          "simulation_seconds": 237.926,
+          "near_stationary_sim_s": 23.12899999999999,
+          "turning_in_place_sim_s": 32.50199999999995,
+          "translation_sim_s": 182.28900000000007,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 28.273825642136874,
+          "near_stationary_bouts_ge_0_5s": 7,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.7699999999998965,
+            "FRONTIER_SEARCH": 2.2590000000000146,
+            "NAV2_ROUTE_QUERY": 5.989000000000004,
+            "NAVIGATING": 2.0240000000000578,
+            "OBSERVATION_MAP_WAIT": 3.2679999999999723,
+            "READINESS_WAIT": 8.819000000000045
+          },
+          "goals_sent": 7,
+          "normalized_reference_area_m2_per_sim_s": 0.013652669317350789
+        },
+        "0.98->0.99": null
+      },
+      "handoffs": {
+        "count": 18,
+        "total_gap_sim_s": 66.22099999999983,
+        "median_gap_sim_s": 3.5120000000000005,
+        "total_near_stationary_sim_s": 65.35499999999993
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 0
+      },
+      "pipeline_samples": 0,
+      "maximum_tick_interval_wall_s": null,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "before_v15_office": {
+    "result": "PASS",
+    "reason": "NAV2_UNREACHABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 26,
+    "succeeded": 26,
+    "navigation_failures": 0,
+    "travel_m": 70.17260967402653,
+    "angular_travel_rad": 63.65406789370798,
+    "idle_sim_s": 101.648,
+    "turn_only_sim_s": 84.01200000000013,
+    "duration_wall_s": 1133.6131890259999,
+    "end_sim_s": 639.013,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 65.20500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 119.71,
+        "wall_s": 208.73564318499996
+      },
+      "0.9": {
+        "sim_s": 151.212,
+        "wall_s": 262.7641616719999
+      },
+      "0.95": {
+        "sim_s": 161.012,
+        "wall_s": 280.788634722
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 4061,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.026598159963921827,
+      "surface_distance_p95_m": 0.12340178266660758,
+      "occupied_support_fraction_within_015m": 0.9985225313962078,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 4061,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.03000000000000007,
+      "surface_distance_p95_m": 0.1199999999999994,
+      "occupied_support_fraction_within_015m": 0.9985225313962078,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 2315,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.02764432679469682,
+        "surface_distance_p95_m": 0.07764435734207727,
+        "occupied_support_fraction_within_015m": 0.9922246220302375,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 2898,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.027644356597019207,
+        "surface_distance_p95_m": 0.12764426868016815,
+        "occupied_support_fraction_within_015m": 0.9920634920634921,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 3037,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.027644354361845022,
+        "surface_distance_p95_m": 0.12764428432638758,
+        "occupied_support_fraction_within_015m": 0.9878169245966414,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 62687,
+        "missing_samples": 4,
+        "median_position_error_m": 2.4386657913421232,
+        "p95_position_error_m": 5.5759139138040075,
+        "max_position_error_m": 5.6975621380091175,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 62687,
+        "missing_samples": 45,
+        "median_position_error_m": 0.03883136916331788,
+        "p95_position_error_m": 0.22017771935295216,
+        "max_position_error_m": 0.23732500915952306,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 43311,
+      "known_fraction": 0.9934427743529357,
+      "free_fraction": 0.9544457528110641,
+      "missing_unknown_cells": 284,
+      "missing_unknown_area_m2": 0.7100000000000002,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 161.012,
+      "0.95": 182.782,
+      "0.98": 411.289,
+      "0.99": 554.642,
+      "0.995": null
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 119.71,
+        "remaining_sim_s": 519.303,
+        "travel_m": 59.55880112491545,
+        "goals_sent": 19
+      },
+      "0.9": {
+        "start_sim_s": 151.212,
+        "remaining_sim_s": 487.80100000000004,
+        "travel_m": 56.058685294720476,
+        "goals_sent": 17
+      },
+      "0.95": {
+        "start_sim_s": 161.012,
+        "remaining_sim_s": 478.00100000000003,
+        "travel_m": 54.271148766607425,
+        "goals_sent": 17
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 228.50699999999998,
+        "travel_m": 24.793541396777513
+      },
+      "0.99": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.99,
+        "simulation_seconds": 371.86,
+        "travel_m": 43.05695207610914
+      },
+      "0.995": null
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 21.77000000000001,
+        "travel_m": 1.8292721033607755,
+        "near_stationary_sim_s": 6.879999999999967,
+        "turning_in_place_sim_s": 0.07999999999998408,
+        "translation_sim_s": 14.81800000000004,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 250.277,
+        "travel_m": 26.62281350013829,
+        "near_stationary_sim_s": 37.66299999999981,
+        "turning_in_place_sim_s": 41.054000000000116,
+        "translation_sim_s": 171.56100000000004,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 228.50699999999998,
+        "travel_m": 24.793541396777513,
+        "near_stationary_sim_s": 30.782999999999845,
+        "turning_in_place_sim_s": 40.97400000000013,
+        "translation_sim_s": 156.743,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": {
+        "simulation_seconds": 371.86,
+        "travel_m": 43.05695207610914,
+        "near_stationary_sim_s": 42.46999999999974,
+        "turning_in_place_sim_s": 61.598000000000155,
+        "translation_sim_s": 267.7920000000001,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".98->.99": {
+        "simulation_seconds": 143.35300000000007,
+        "travel_m": 18.263410679331624,
+        "near_stationary_sim_s": 11.686999999999898,
+        "turning_in_place_sim_s": 20.624000000000024,
+        "translation_sim_s": 111.04900000000009,
+        "unclassified_gap_sim_s": 0.0
+      }
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 26,
+      "expected_target_cells": 310,
+      "observed_target_cells": 298,
+      "observed_target_free_cells": 286,
+      "zero_target_yield_actions": 1,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 31983,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.16975247599975773
+      },
+      "commands.csv": {
+        "samples": 22579,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.12716426399992997
+      },
+      "mission/odom.csv": {
+        "samples": 31982,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.33062089099985315
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 408,
+      "valid": 342,
+      "pair_queries": 234
+    },
+    "nav2_local_insertions": 6,
+    "nav2_order_validation": {
+      "verified_batches": 15,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 12,
+      "mean_static_estimated_cost_reduction_percent": 10.427082003207724
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 4.288,
+          "end_sim_s": 638.708,
+          "simulation_seconds": 634.42,
+          "near_stationary_sim_s": 101.28199999999973,
+          "turning_in_place_sim_s": 84.01200000000013,
+          "translation_sim_s": 449.1050000000002,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 70.1726096736319,
+          "near_stationary_bouts_ge_0_5s": 26,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 15.110000000000205,
+            "FRONTIER_SEARCH": 32.51499999999996,
+            "NAV2_ROUTE_QUERY": 15.864999999999768,
+            "NAVIGATING": 8.260999999999658,
+            "OBSERVATION_MAP_WAIT": 15.490999999999977,
+            "READINESS_WAIT": 14.040000000000163
+          },
+          "goals_sent": 26
+        },
+        "0.9->0.95": {
+          "start_sim_s": 161.012,
+          "end_sim_s": 182.782,
+          "simulation_seconds": 21.77000000000001,
+          "near_stationary_sim_s": 6.879999999999967,
+          "turning_in_place_sim_s": 0.07999999999998408,
+          "translation_sim_s": 14.797000000000054,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 1.8271903435442027,
+          "near_stationary_bouts_ge_0_5s": 2,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.9190000000000111,
+            "FRONTIER_SEARCH": 3.6980000000000075,
+            "NAV2_ROUTE_QUERY": 0.5379999999999825,
+            "NAVIGATING": 0.5169999999999675,
+            "OBSERVATION_MAP_WAIT": 1.2079999999999984
+          },
+          "goals_sent": 2,
+          "normalized_reference_area_m2_per_sim_s": 0.24868511713366978
+        },
+        "0.9->0.98": {
+          "start_sim_s": 161.012,
+          "end_sim_s": 411.289,
+          "simulation_seconds": 250.277,
+          "near_stationary_sim_s": 37.66299999999981,
+          "turning_in_place_sim_s": 41.054000000000116,
+          "translation_sim_s": 171.54000000000005,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 26.62073174032172,
+          "near_stationary_bouts_ge_0_5s": 10,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 1.3719999999999857,
+            "FRONTIER_SEARCH": 6.981999999999999,
+            "NAV2_ROUTE_QUERY": 9.212999999999994,
+            "NAVIGATING": 3.1909999999998035,
+            "OBSERVATION_MAP_WAIT": 6.209000000000032,
+            "READINESS_WAIT": 10.695999999999998
+          },
+          "goals_sent": 10,
+          "normalized_reference_area_m2_per_sim_s": 0.034610451619605465
+        },
+        "0.95->0.98": {
+          "start_sim_s": 182.782,
+          "end_sim_s": 411.289,
+          "simulation_seconds": 228.50699999999998,
+          "near_stationary_sim_s": 30.782999999999845,
+          "turning_in_place_sim_s": 40.97400000000013,
+          "translation_sim_s": 156.72299999999998,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 24.791826301263338,
+          "near_stationary_bouts_ge_0_5s": 8,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.45299999999997453,
+            "FRONTIER_SEARCH": 3.283999999999992,
+            "NAV2_ROUTE_QUERY": 8.675000000000011,
+            "NAVIGATING": 2.673999999999836,
+            "OBSERVATION_MAP_WAIT": 5.001000000000033,
+            "READINESS_WAIT": 10.695999999999998
+          },
+          "goals_sent": 8,
+          "normalized_reference_area_m2_per_sim_s": 0.01421542884900683
+        },
+        "0.98->0.99": {
+          "start_sim_s": 411.289,
+          "end_sim_s": 554.642,
+          "simulation_seconds": 143.35300000000007,
+          "near_stationary_sim_s": 11.686999999999898,
+          "turning_in_place_sim_s": 20.624000000000024,
+          "translation_sim_s": 111.02900000000005,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 18.259410679711646,
+          "near_stationary_bouts_ge_0_5s": 4,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.6170000000000755,
+            "FRONTIER_SEARCH": 2.155999999999949,
+            "NAV2_ROUTE_QUERY": 3.3349999999999227,
+            "NAVIGATING": 1.0709999999998558,
+            "OBSERVATION_MAP_WAIT": 2.9330000000000496,
+            "READINESS_WAIT": 1.5750000000000455
+          },
+          "goals_sent": 4,
+          "normalized_reference_area_m2_per_sim_s": 0.007553207815671808
+        }
+      },
+      "handoffs": {
+        "count": 25,
+        "total_gap_sim_s": 84.0269999999999,
+        "median_gap_sim_s": 3.509999999999991,
+        "total_near_stationary_sim_s": 83.09000000000002
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 0
+      },
+      "pipeline_samples": 0,
+      "maximum_tick_interval_wall_s": null,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "complete_v17": {
+    "result": "PASS",
+    "reason": "NO_FRONTIERS",
+    "complete": true,
+    "stop_verified": true,
+    "goals": 2,
+    "succeeded": 2,
+    "navigation_failures": 0,
+    "travel_m": 1.4432089643557988,
+    "angular_travel_rad": 1.066878544493515,
+    "idle_sim_s": 15.132000000000001,
+    "turn_only_sim_s": 0.3990000000000009,
+    "duration_wall_s": 48.84257894699931,
+    "end_sim_s": 28.155,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 9.922500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 7.625,
+        "wall_s": 16.276796303999618
+      },
+      "0.9": {
+        "sim_s": 7.625,
+        "wall_s": 16.276796303999618
+      },
+      "0.95": {
+        "sim_s": 7.625,
+        "wall_s": 16.276796303999618
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 371,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.014161701824236997,
+      "surface_distance_p95_m": 0.04134143875748446,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 371,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.015000000000000083,
+      "surface_distance_p95_m": 0.04499999999999997,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 295,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.005897927624532964,
+        "surface_distance_p95_m": 0.049476253111190346,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 295,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.005897927624532964,
+        "surface_distance_p95_m": 0.049476253111190346,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 295,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.005897927624532964,
+        "surface_distance_p95_m": 0.049476253111190346,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 2422,
+        "missing_samples": 3,
+        "median_position_error_m": 0.007134224525406838,
+        "p95_position_error_m": 0.06377132607722348,
+        "max_position_error_m": 0.06377132607722348,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 2422,
+        "missing_samples": 49,
+        "median_position_error_m": 0.004127447515953883,
+        "p95_position_error_m": 0.006698499386361866,
+        "max_position_error_m": 0.009531558206522746,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 6084,
+      "known_fraction": 1.0,
+      "free_fraction": 0.960223537146614,
+      "missing_unknown_cells": 0,
+      "missing_unknown_area_m2": 0.0,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 7.625,
+      "0.95": 9.112,
+      "0.98": 9.112,
+      "0.99": 10.374,
+      "0.995": 10.374
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 7.625,
+        "remaining_sim_s": 20.53,
+        "travel_m": 1.3758800383837024,
+        "goals_sent": 1
+      },
+      "0.9": {
+        "start_sim_s": 7.625,
+        "remaining_sim_s": 20.53,
+        "travel_m": 1.3758800383837024,
+        "goals_sent": 1
+      },
+      "0.95": {
+        "start_sim_s": 7.625,
+        "remaining_sim_s": 20.53,
+        "travel_m": 1.3758800383837024,
+        "goals_sent": 1
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 0.0,
+        "travel_m": 0.0
+      },
+      "0.99": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.99,
+        "simulation_seconds": 1.2620000000000005,
+        "travel_m": 0.08096608951004994
+      },
+      "0.995": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.995,
+        "simulation_seconds": 1.2620000000000005,
+        "travel_m": 0.08096608951004994
+      }
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 1.487,
+        "travel_m": 0.15356814477367395,
+        "near_stationary_sim_s": 0.0,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 1.4810000000000008,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 1.487,
+        "travel_m": 0.15356814477367395,
+        "near_stationary_sim_s": 0.0,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 1.4810000000000008,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 0.0,
+        "travel_m": 0.0,
+        "near_stationary_sim_s": 0.0,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 0.0,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": {
+        "simulation_seconds": 1.2620000000000005,
+        "travel_m": 0.08096608951004994,
+        "near_stationary_sim_s": 0.0,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 1.2589999999999986,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".98->.99": {
+        "simulation_seconds": 1.2620000000000005,
+        "travel_m": 0.08096608951004994,
+        "near_stationary_sim_s": 0.0,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 1.2589999999999986,
+        "unclassified_gap_sim_s": 0.0
+      }
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 2,
+      "expected_target_cells": 125,
+      "observed_target_cells": 125,
+      "observed_target_free_cells": 125,
+      "zero_target_yield_actions": 0,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 1456,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.09476967799946578
+      },
+      "commands.csv": {
+        "samples": 888,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.1112419740002224
+      },
+      "mission/odom.csv": {
+        "samples": 1440,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.10119217500050581
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 26,
+      "valid": 24,
+      "pair_queries": 18
+    },
+    "nav2_local_insertions": 0,
+    "nav2_order_validation": {
+      "verified_batches": 2,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 2,
+      "mean_static_estimated_cost_reduction_percent": 0.0
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 6.36,
+          "end_sim_s": 28.452,
+          "simulation_seconds": 22.092000000000002,
+          "near_stationary_sim_s": 8.876000000000001,
+          "turning_in_place_sim_s": 0.3990000000000009,
+          "translation_sim_s": 12.780999999999999,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 1.4432089639611227,
+          "near_stationary_bouts_ge_0_5s": 2,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.04100000000000037,
+            "FRONTIER_SEARCH": 1.8290000000000042,
+            "NAV2_ROUTE_QUERY": 6.307999999999998,
+            "NAVIGATING": 0.6979999999999995
+          },
+          "goals_sent": 2
+        },
+        "0.9->0.95": {
+          "start_sim_s": 7.625,
+          "end_sim_s": 9.112,
+          "simulation_seconds": 1.487,
+          "near_stationary_sim_s": 0.0,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 1.4610000000000012,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 0.1511615024628775,
+          "near_stationary_bouts_ge_0_5s": 0,
+          "near_stationary_by_event_phase_sim_s": {},
+          "goals_sent": 0,
+          "normalized_reference_area_m2_per_sim_s": 0.5114324142568925
+        },
+        "0.9->0.98": {
+          "start_sim_s": 7.625,
+          "end_sim_s": 9.112,
+          "simulation_seconds": 1.487,
+          "near_stationary_sim_s": 0.0,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 1.4610000000000012,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 0.1511615024628775,
+          "near_stationary_bouts_ge_0_5s": 0,
+          "near_stationary_by_event_phase_sim_s": {},
+          "goals_sent": 0,
+          "normalized_reference_area_m2_per_sim_s": 0.8182918628110286
+        },
+        "0.95->0.98": {
+          "start_sim_s": 9.112,
+          "end_sim_s": 9.112,
+          "simulation_seconds": 0.0,
+          "near_stationary_sim_s": 0.0,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 0.0,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 0.0,
+          "near_stationary_bouts_ge_0_5s": 0,
+          "near_stationary_by_event_phase_sim_s": {},
+          "goals_sent": 0,
+          "normalized_reference_area_m2_per_sim_s": null
+        },
+        "0.98->0.99": {
+          "start_sim_s": 9.112,
+          "end_sim_s": 10.374,
+          "simulation_seconds": 1.2620000000000005,
+          "near_stationary_sim_s": 0.0,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 1.238999999999999,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 0.07937478525800007,
+          "near_stationary_bouts_ge_0_5s": 0,
+          "near_stationary_by_event_phase_sim_s": {},
+          "goals_sent": 0,
+          "normalized_reference_area_m2_per_sim_s": 0.12052297939778138
+        }
+      },
+      "handoffs": {
+        "count": 1,
+        "total_gap_sim_s": 1.0500000000000007,
+        "median_gap_sim_s": 1.0500000000000007,
+        "total_near_stationary_sim_s": 1.0370000000000008
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 2
+      },
+      "pipeline_samples": 223,
+      "maximum_tick_interval_wall_s": 0.2084637030002341,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "final_v16_discovery": {
+    "result": "PASS",
+    "reason": "NAV2_UNREACHABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 18,
+    "succeeded": 18,
+    "navigation_failures": 0,
+    "travel_m": 76.6586330603328,
+    "angular_travel_rad": 73.69856287464725,
+    "idle_sim_s": 55.338000000000136,
+    "turn_only_sim_s": 88.83500000000004,
+    "duration_wall_s": 1036.4189653489998,
+    "end_sim_s": 615.04,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 38.61500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 41.8,
+        "wall_s": 74.21434954300003
+      },
+      "0.9": {
+        "sim_s": 152.415,
+        "wall_s": 252.28204624199998
+      },
+      "0.95": {
+        "sim_s": 154.781,
+        "wall_s": 256.311511206
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 3167,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.03972791551102155,
+      "surface_distance_p95_m": 0.06027214334856516,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 3167,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.040000000000000216,
+      "surface_distance_p95_m": 0.06000000000000032,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 1210,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.036721153487900796,
+        "surface_distance_p95_m": 0.04757766969611795,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 1820,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.03257990109411839,
+        "surface_distance_p95_m": 0.06742005643757203,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 1924,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.03257990109411839,
+        "surface_distance_p95_m": 0.06742005643757203,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 57607,
+        "missing_samples": 4,
+        "median_position_error_m": 1.045535297633996,
+        "p95_position_error_m": 2.0042908978153116,
+        "max_position_error_m": 2.8748158471825063,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 57607,
+        "missing_samples": 41,
+        "median_position_error_m": 0.014213606902944733,
+        "p95_position_error_m": 0.049728432504730385,
+        "max_position_error_m": 0.07098579068890547,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 28527,
+      "known_fraction": 0.9948119325551232,
+      "free_fraction": 0.9500473235881797,
+      "missing_unknown_cells": 148,
+      "missing_unknown_area_m2": 0.37000000000000005,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 155.796,
+      "0.95": 168.533,
+      "0.98": 399.831,
+      "0.99": 504.321,
+      "0.995": null
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 41.8,
+        "remaining_sim_s": 573.24,
+        "travel_m": 73.68905713552095,
+        "goals_sent": 16
+      },
+      "0.9": {
+        "start_sim_s": 152.415,
+        "remaining_sim_s": 462.625,
+        "travel_m": 61.0712997648658,
+        "goals_sent": 12
+      },
+      "0.95": {
+        "start_sim_s": 154.781,
+        "remaining_sim_s": 460.25899999999996,
+        "travel_m": 60.59529978717273,
+        "goals_sent": 12
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 231.29800000000003,
+        "travel_m": 30.518424609517
+      },
+      "0.99": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.99,
+        "simulation_seconds": 335.788,
+        "travel_m": 45.71089262543132
+      },
+      "0.995": null
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 12.736999999999995,
+        "travel_m": 1.4908518239266622,
+        "near_stationary_sim_s": 1.6069999999999993,
+        "turning_in_place_sim_s": 0.0,
+        "translation_sim_s": 11.13300000000001,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 244.03500000000003,
+        "travel_m": 32.00927643344366,
+        "near_stationary_sim_s": 16.467999999999932,
+        "turning_in_place_sim_s": 37.22200000000004,
+        "translation_sim_s": 190.35000000000002,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 231.29800000000003,
+        "travel_m": 30.518424609517,
+        "near_stationary_sim_s": 14.860999999999933,
+        "turning_in_place_sim_s": 37.22200000000004,
+        "translation_sim_s": 179.217,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": {
+        "simulation_seconds": 335.788,
+        "travel_m": 45.71089262543132,
+        "near_stationary_sim_s": 18.25299999999993,
+        "turning_in_place_sim_s": 51.321000000000026,
+        "translation_sim_s": 266.2270000000001,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".98->.99": {
+        "simulation_seconds": 104.49000000000001,
+        "travel_m": 15.192468015914324,
+        "near_stationary_sim_s": 3.391999999999996,
+        "turning_in_place_sim_s": 14.09899999999999,
+        "translation_sim_s": 87.01000000000005,
+        "unclassified_gap_sim_s": 0.0
+      }
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 18,
+      "expected_target_cells": 285,
+      "observed_target_cells": 280,
+      "observed_target_free_cells": 269,
+      "zero_target_yield_actions": 2,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 30773,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.2800954509998519
+      },
+      "commands.csv": {
+        "samples": 20638,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.10794637199978752
+      },
+      "mission/odom.csv": {
+        "samples": 30742,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.33545794200017554
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 383,
+      "valid": 281,
+      "pair_queries": 251
+    },
+    "nav2_local_insertions": 2,
+    "nav2_order_validation": {
+      "verified_batches": 10,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 3,
+      "mean_static_estimated_cost_reduction_percent": 4.434930740886393
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 8.863,
+          "end_sim_s": 614.208,
+          "simulation_seconds": 605.345,
+          "near_stationary_sim_s": 49.507999999999925,
+          "turning_in_place_sim_s": 88.83500000000004,
+          "translation_sim_s": 466.975,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 76.65863305993818,
+          "near_stationary_bouts_ge_0_5s": 18,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 5.335999999999924,
+            "FRONTIER_SEARCH": 22.29999999999994,
+            "NAV2_ROUTE_QUERY": 11.75300000000026,
+            "NAVIGATING": 7.069999999999805,
+            "OBSERVATION_MAP_WAIT": 3.0489999999999995
+          },
+          "goals_sent": 18
+        },
+        "0.9->0.95": {
+          "start_sim_s": 155.796,
+          "end_sim_s": 168.533,
+          "simulation_seconds": 12.736999999999995,
+          "near_stationary_sim_s": 1.6069999999999993,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 11.113,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 1.4868518240436885,
+          "near_stationary_bouts_ge_0_5s": 1,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.05500000000000682,
+            "NAV2_ROUTE_QUERY": 1.157999999999987,
+            "NAVIGATING": 0.39400000000000546
+          },
+          "goals_sent": 1,
+          "normalized_reference_area_m2_per_sim_s": 0.2799619219596449
+        },
+        "0.9->0.98": {
+          "start_sim_s": 155.796,
+          "end_sim_s": 399.831,
+          "simulation_seconds": 244.03500000000003,
+          "near_stationary_sim_s": 16.467999999999932,
+          "turning_in_place_sim_s": 37.22200000000004,
+          "translation_sim_s": 190.33,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 32.00527643356069,
+          "near_stationary_bouts_ge_0_5s": 7,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.47199999999995157,
+            "FRONTIER_SEARCH": 3.506999999999948,
+            "NAV2_ROUTE_QUERY": 8.154000000000082,
+            "NAVIGATING": 2.872999999999962,
+            "OBSERVATION_MAP_WAIT": 1.461999999999989
+          },
+          "goals_sent": 7,
+          "normalized_reference_area_m2_per_sim_s": 0.02337943327801339
+        },
+        "0.95->0.98": {
+          "start_sim_s": 168.533,
+          "end_sim_s": 399.831,
+          "simulation_seconds": 231.29800000000003,
+          "near_stationary_sim_s": 14.860999999999933,
+          "turning_in_place_sim_s": 37.22200000000004,
+          "translation_sim_s": 179.19600000000003,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 30.516942072935976,
+          "near_stationary_bouts_ge_0_5s": 6,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.41699999999994475,
+            "FRONTIER_SEARCH": 3.506999999999948,
+            "NAV2_ROUTE_QUERY": 6.996000000000095,
+            "NAVIGATING": 2.4789999999999566,
+            "OBSERVATION_MAP_WAIT": 1.461999999999989
+          },
+          "goals_sent": 6,
+          "normalized_reference_area_m2_per_sim_s": 0.009250079983398048
+        },
+        "0.98->0.99": {
+          "start_sim_s": 399.831,
+          "end_sim_s": 504.321,
+          "simulation_seconds": 104.49000000000001,
+          "near_stationary_sim_s": 3.391999999999996,
+          "turning_in_place_sim_s": 14.09899999999999,
+          "translation_sim_s": 86.98900000000003,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 15.188468016249427,
+          "near_stationary_bouts_ge_0_5s": 2,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.24300000000005184,
+            "FRONTIER_SEARCH": 0.5729999999999791,
+            "NAV2_ROUTE_QUERY": 1.162999999999954,
+            "NAVIGATING": 0.8509999999999991,
+            "OBSERVATION_MAP_WAIT": 0.5620000000000118
+          },
+          "goals_sent": 2,
+          "normalized_reference_area_m2_per_sim_s": 0.006825294286534603
+        }
+      },
+      "handoffs": {
+        "count": 17,
+        "total_gap_sim_s": 36.36599999999994,
+        "median_gap_sim_s": 1.6889999999999645,
+        "total_near_stationary_sim_s": 35.37599999999996
+      },
+      "preparation": {
+        "frontier_preparation_used": 5,
+        "frontier_preparation_discarded": 12,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 1,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 12
+      },
+      "pipeline_samples": 5158,
+      "maximum_tick_interval_wall_s": 0.3493812820001949,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "final_v16_office": {
+    "result": "FAIL",
+    "reason": "INTERRUPTED_PARTIAL",
+    "error": "Unable to convert call argument to Python object (compile in debug mode for details)",
+    "complete": false,
+    "stop_verified": false,
+    "goals": 4,
+    "travel_m": null,
+    "end_sim_s": null,
+    "observed_fraction_final": null,
+    "observable_proxy": null,
+    "observable_intervals": {},
+    "run_classification": "FAILED_NO_FINAL_MAP",
+    "map_artifacts_missing": [
+      "map_final.npz",
+      "map.yaml",
+      "map.pgm",
+      "map.data",
+      "map.posegraph"
+    ],
+    "metric_scope": "Missing final artifacts retained as missing; original CSV and snapshots preserved, no substitute final coverage"
+  },
+  "final_v17_discovery": {
+    "result": "PASS",
+    "reason": "NAV2_UNREACHABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 14,
+    "succeeded": 14,
+    "navigation_failures": 0,
+    "travel_m": 54.569308395837254,
+    "angular_travel_rad": 55.86282661858944,
+    "idle_sim_s": 53.855999999999966,
+    "turn_only_sim_s": 75.40699999999997,
+    "duration_wall_s": 778.7440511519999,
+    "end_sim_s": 470.55,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 38.61500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 33.676,
+        "wall_s": 62.27459994800029
+      },
+      "0.9": {
+        "sim_s": 73.435,
+        "wall_s": 126.3011675100006
+      },
+      "0.95": {
+        "sim_s": 95.932,
+        "wall_s": 162.31074591300057
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 2907,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.031039698604854893,
+      "surface_distance_p95_m": 0.059925844973959294,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 2907,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.03104223312505061,
+      "surface_distance_p95_m": 0.06000000000000032,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 921,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.027907024190641574,
+        "surface_distance_p95_m": 0.05216513523127725,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 1554,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.0279069645859968,
+        "surface_distance_p95_m": 0.0720929296157589,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 1842,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.02790702195546739,
+        "surface_distance_p95_m": 0.06391677075587081,
+        "occupied_support_fraction_within_015m": 1.0,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 43319,
+        "missing_samples": 3,
+        "median_position_error_m": 0.4426269136471205,
+        "p95_position_error_m": 1.4246541248764442,
+        "max_position_error_m": 1.4844009450529836,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 43319,
+        "missing_samples": 45,
+        "median_position_error_m": 0.014470916300015672,
+        "p95_position_error_m": 0.031817715356730655,
+        "max_position_error_m": 0.049551573126693005,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 28527,
+      "known_fraction": 0.9924282258912609,
+      "free_fraction": 0.9484348161390963,
+      "missing_unknown_cells": 216,
+      "missing_unknown_area_m2": 0.5400000000000001,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 95.932,
+      "0.95": 176.521,
+      "0.98": 304.53,
+      "0.99": 395.494,
+      "0.995": null
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 33.676,
+        "remaining_sim_s": 436.874,
+        "travel_m": 53.49676750963681,
+        "goals_sent": 12
+      },
+      "0.9": {
+        "start_sim_s": 73.435,
+        "remaining_sim_s": 397.115,
+        "travel_m": 48.56937843898922,
+        "goals_sent": 11
+      },
+      "0.95": {
+        "start_sim_s": 95.932,
+        "remaining_sim_s": 374.618,
+        "travel_m": 46.36377744481727,
+        "goals_sent": 10
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 128.009,
+        "travel_m": 16.348460456901737
+      },
+      "0.99": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.99,
+        "simulation_seconds": 218.97300000000004,
+        "travel_m": 28.80532730125358
+      },
+      "0.995": null
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 80.58899999999998,
+        "travel_m": 10.438382200141085,
+        "near_stationary_sim_s": 6.429000000000002,
+        "turning_in_place_sim_s": 8.878,
+        "translation_sim_s": 65.29399999999998,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 208.59799999999996,
+        "travel_m": 26.78284265765202,
+        "near_stationary_sim_s": 18.503000000000014,
+        "turning_in_place_sim_s": 28.19299999999997,
+        "translation_sim_s": 161.90500000000003,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 128.009,
+        "travel_m": 16.348460456901737,
+        "near_stationary_sim_s": 12.074000000000012,
+        "turning_in_place_sim_s": 19.31499999999997,
+        "translation_sim_s": 96.63200000000003,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": {
+        "simulation_seconds": 218.97300000000004,
+        "travel_m": 28.80532730125358,
+        "near_stationary_sim_s": 16.031999999999982,
+        "turning_in_place_sim_s": 35.26000000000002,
+        "translation_sim_s": 167.68800000000002,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".98->.99": {
+        "simulation_seconds": 90.96400000000006,
+        "travel_m": 12.456866844351843,
+        "near_stationary_sim_s": 3.95799999999997,
+        "turning_in_place_sim_s": 15.94500000000005,
+        "translation_sim_s": 71.05599999999998,
+        "unclassified_gap_sim_s": 0.0
+      }
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 14,
+      "expected_target_cells": 218,
+      "observed_target_cells": 215,
+      "observed_target_free_cells": 207,
+      "zero_target_yield_actions": 0,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 23557,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.13553886399949988
+      },
+      "commands.csv": {
+        "samples": 15489,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.08190350600034435
+      },
+      "mission/odom.csv": {
+        "samples": 23542,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.23134029100037878
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 257,
+      "valid": 180,
+      "pair_queries": 136
+    },
+    "nav2_local_insertions": 0,
+    "nav2_order_validation": {
+      "verified_batches": 10,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 8,
+      "mean_static_estimated_cost_reduction_percent": 9.829746800837448
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 7.941,
+          "end_sim_s": 470.223,
+          "simulation_seconds": 462.28200000000004,
+          "near_stationary_sim_s": 48.202000000000055,
+          "turning_in_place_sim_s": 75.40699999999997,
+          "translation_sim_s": 338.67099999999994,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 54.56930839544241,
+          "near_stationary_bouts_ge_0_5s": 14,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 3.9420000000000393,
+            "FRONTIER_SEARCH": 30.586999999999946,
+            "NAV2_ROUTE_QUERY": 8.502999999999961,
+            "NAVIGATING": 4.253000000000051,
+            "OBSERVATION_MAP_WAIT": 0.9170000000000584
+          },
+          "goals_sent": 14
+        },
+        "0.9->0.95": {
+          "start_sim_s": 95.932,
+          "end_sim_s": 176.521,
+          "simulation_seconds": 80.58899999999998,
+          "near_stationary_sim_s": 6.429000000000002,
+          "turning_in_place_sim_s": 8.878,
+          "translation_sim_s": 65.27299999999998,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 10.43438220101111,
+          "near_stationary_bouts_ge_0_5s": 2,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.09799999999999898,
+            "FRONTIER_SEARCH": 4.894999999999996,
+            "NAV2_ROUTE_QUERY": 0.7199999999999989,
+            "NAVIGATING": 0.5180000000000007,
+            "OBSERVATION_MAP_WAIT": 0.1980000000000075
+          },
+          "goals_sent": 2,
+          "normalized_reference_area_m2_per_sim_s": 0.04424766407326058
+        },
+        "0.9->0.98": {
+          "start_sim_s": 95.932,
+          "end_sim_s": 304.53,
+          "simulation_seconds": 208.59799999999996,
+          "near_stationary_sim_s": 18.503000000000014,
+          "turning_in_place_sim_s": 28.19299999999997,
+          "translation_sim_s": 161.88400000000001,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 26.778842658522045,
+          "near_stationary_bouts_ge_0_5s": 6,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.4620000000000033,
+            "FRONTIER_SEARCH": 10.72899999999997,
+            "NAV2_ROUTE_QUERY": 4.907999999999987,
+            "NAVIGATING": 1.7690000000000339,
+            "OBSERVATION_MAP_WAIT": 0.6350000000000193
+          },
+          "goals_sent": 6,
+          "normalized_reference_area_m2_per_sim_s": 0.02735117306973221
+        },
+        "0.95->0.98": {
+          "start_sim_s": 176.521,
+          "end_sim_s": 304.53,
+          "simulation_seconds": 128.009,
+          "near_stationary_sim_s": 12.074000000000012,
+          "turning_in_place_sim_s": 19.31499999999997,
+          "translation_sim_s": 96.61100000000005,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 16.344460457510934,
+          "near_stationary_bouts_ge_0_5s": 4,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.3640000000000043,
+            "FRONTIER_SEARCH": 5.833999999999975,
+            "NAV2_ROUTE_QUERY": 4.187999999999988,
+            "NAVIGATING": 1.2510000000000332,
+            "OBSERVATION_MAP_WAIT": 0.4370000000000118
+          },
+          "goals_sent": 4,
+          "normalized_reference_area_m2_per_sim_s": 0.016713863868946733
+        },
+        "0.98->0.99": {
+          "start_sim_s": 304.53,
+          "end_sim_s": 395.494,
+          "simulation_seconds": 90.96400000000006,
+          "near_stationary_sim_s": 3.95799999999997,
+          "turning_in_place_sim_s": 15.94500000000005,
+          "translation_sim_s": 71.036,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 12.454555904316555,
+          "near_stationary_bouts_ge_0_5s": 2,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.23500000000001364,
+            "FRONTIER_SEARCH": 1.879000000000019,
+            "NAV2_ROUTE_QUERY": 1.1649999999999636,
+            "NAVIGATING": 0.6789999999999736
+          },
+          "goals_sent": 2,
+          "normalized_reference_area_m2_per_sim_s": 0.007840189525526585
+        }
+      },
+      "handoffs": {
+        "count": 13,
+        "total_gap_sim_s": 36.51600000000007,
+        "median_gap_sim_s": 2.688999999999993,
+        "total_near_stationary_sim_s": 35.629000000000026
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 10
+      },
+      "pipeline_samples": 3871,
+      "maximum_tick_interval_wall_s": 0.2890081720006492,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "final_v17_office": {
+    "result": "PASS",
+    "reason": "NO_OBSERVABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 30,
+    "succeeded": 30,
+    "navigation_failures": 0,
+    "travel_m": 90.70490687189722,
+    "angular_travel_rad": 78.84440503483637,
+    "idle_sim_s": 96.64399999999992,
+    "turn_only_sim_s": 98.93800000000027,
+    "duration_wall_s": 1327.8294269789994,
+    "end_sim_s": 766.261,
+    "observed_fraction_final": 1.0,
+    "reference_area_m2": 65.20500000000001,
+    "milestones": {
+      "0.8": {
+        "sim_s": 126.305,
+        "wall_s": 220.17272179999964
+      },
+      "0.9": {
+        "sim_s": 149.723,
+        "wall_s": 260.18439449799916
+      },
+      "0.95": {
+        "sim_s": 167.386,
+        "wall_s": 288.1936873229997
+      }
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 4527,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.04350807129608007,
+      "surface_distance_p95_m": 0.10649184153212694,
+      "occupied_support_fraction_within_015m": 0.9792356969295339,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 4527,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.039999999999999855,
+      "surface_distance_p95_m": 0.1100000000000005,
+      "occupied_support_fraction_within_015m": 0.9792356969295339,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {
+      "0.8": {
+        "occupied_cells": 2469,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.032499080891828666,
+        "surface_distance_p95_m": 0.06859611415042599,
+        "occupied_support_fraction_within_015m": 0.9991899554475496,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.9": {
+        "occupied_cells": 2775,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.030184600068962023,
+        "surface_distance_p95_m": 0.11750078797795299,
+        "occupied_support_fraction_within_015m": 0.9971171171171171,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      },
+      "0.95": {
+        "occupied_cells": 3247,
+        "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+        "surface_distance_median_m": 0.03249917029879583,
+        "surface_distance_p95_m": 0.11750078797795299,
+        "occupied_support_fraction_within_015m": 0.9886048660301817,
+        "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+      }
+    },
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 73808,
+        "missing_samples": 12,
+        "median_position_error_m": 1.5249586016769237,
+        "p95_position_error_m": 4.56032926601215,
+        "max_position_error_m": 5.304275108043555,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 73808,
+        "missing_samples": 56,
+        "median_position_error_m": 0.05046639181490446,
+        "p95_position_error_m": 0.21225317107113725,
+        "max_position_error_m": 0.23127521673375362,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 43311,
+      "known_fraction": 0.9951975248782065,
+      "free_fraction": 0.9504282976611023,
+      "missing_unknown_cells": 208,
+      "missing_unknown_area_m2": 0.5200000000000001,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": 166.034,
+      "0.95": 182.847,
+      "0.98": 431.65,
+      "0.99": 604.757,
+      "0.995": 757.156
+    },
+    "tail": {
+      "0.8": {
+        "start_sim_s": 126.305,
+        "remaining_sim_s": 639.9559999999999,
+        "travel_m": 79.25093522314079,
+        "goals_sent": 22
+      },
+      "0.9": {
+        "start_sim_s": 149.723,
+        "remaining_sim_s": 616.538,
+        "travel_m": 76.17675608179282,
+        "goals_sent": 21
+      },
+      "0.95": {
+        "start_sim_s": 167.386,
+        "remaining_sim_s": 598.875,
+        "travel_m": 74.17877083976774,
+        "goals_sent": 20
+      }
+    },
+    "observable_tail": {
+      "0.98": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.98,
+        "simulation_seconds": 248.80299999999997,
+        "travel_m": 27.6779265820128
+      },
+      "0.99": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.99,
+        "simulation_seconds": 421.90999999999997,
+        "travel_m": 53.73723132952076
+      },
+      "0.995": {
+        "from_fraction": 0.95,
+        "to_fraction": 0.995,
+        "simulation_seconds": 574.309,
+        "travel_m": 72.78617400913733
+      }
+    },
+    "observable_intervals": {
+      ".9->.95": {
+        "simulation_seconds": 16.813000000000017,
+        "travel_m": 1.664596771067563,
+        "near_stationary_sim_s": 3.079999999999984,
+        "turning_in_place_sim_s": 1.6620000000000061,
+        "translation_sim_s": 12.073000000000008,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".9->.98": {
+        "simulation_seconds": 265.616,
+        "travel_m": 29.342523353080363,
+        "near_stationary_sim_s": 35.03399999999996,
+        "turning_in_place_sim_s": 39.42199999999997,
+        "translation_sim_s": 191.15900000000005,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.98": {
+        "simulation_seconds": 248.80299999999997,
+        "travel_m": 27.6779265820128,
+        "near_stationary_sim_s": 31.95399999999998,
+        "turning_in_place_sim_s": 37.75999999999996,
+        "translation_sim_s": 179.08600000000004,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".95->.99": {
+        "simulation_seconds": 421.90999999999997,
+        "travel_m": 53.73723132952076,
+        "near_stationary_sim_s": 38.29099999999991,
+        "turning_in_place_sim_s": 54.418000000000035,
+        "translation_sim_s": 329.19100000000003,
+        "unclassified_gap_sim_s": 0.0
+      },
+      ".98->.99": {
+        "simulation_seconds": 173.10699999999997,
+        "travel_m": 26.059304747507955,
+        "near_stationary_sim_s": 6.336999999999932,
+        "turning_in_place_sim_s": 16.658000000000072,
+        "translation_sim_s": 150.10500000000002,
+        "unclassified_gap_sim_s": 0.0
+      }
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": false,
+    "intervention_files": [],
+    "run_classification": "NATURAL_TERMINATION",
+    "target_observation": {
+      "recorded_results": 30,
+      "expected_target_cells": 353,
+      "observed_target_cells": 343,
+      "observed_target_free_cells": 324,
+      "zero_target_yield_actions": 3,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 38315,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.15557640199949674
+      },
+      "commands.csv": {
+        "samples": 26472,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.09923916299976554
+      },
+      "mission/odom.csv": {
+        "samples": 38300,
+        "gaps_over_1s": 1,
+        "maximum_gap_s": 1.0982532299995
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 465,
+      "valid": 371,
+      "pair_queries": 283
+    },
+    "nav2_local_insertions": 7,
+    "nav2_order_validation": {
+      "verified_batches": 17,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 7,
+      "mean_static_estimated_cost_reduction_percent": 9.105678274397007
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 5.06,
+          "end_sim_s": 764.634,
+          "simulation_seconds": 759.5740000000001,
+          "near_stationary_sim_s": 95.76299999999992,
+          "turning_in_place_sim_s": 98.93800000000027,
+          "translation_sim_s": 564.8589999999998,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 90.70490687150235,
+          "near_stationary_bouts_ge_0_5s": 31,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 2.268999999999938,
+            "FRONTIER_SEARCH": 54.89900000000004,
+            "NAV2_ROUTE_QUERY": 21.242000000000182,
+            "NAVIGATING": 10.783999999999821,
+            "OBSERVATION_MAP_WAIT": 6.568999999999932
+          },
+          "goals_sent": 30
+        },
+        "0.9->0.95": {
+          "start_sim_s": 166.034,
+          "end_sim_s": 182.847,
+          "simulation_seconds": 16.813000000000017,
+          "near_stationary_sim_s": 3.079999999999984,
+          "turning_in_place_sim_s": 1.6620000000000061,
+          "translation_sim_s": 12.057000000000016,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 1.66059677278161,
+          "near_stationary_bouts_ge_0_5s": 1,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.11199999999999477,
+            "FRONTIER_SEARCH": 1.8249999999999886,
+            "NAV2_ROUTE_QUERY": 0.30400000000000205,
+            "NAVIGATING": 0.33899999999999864,
+            "OBSERVATION_MAP_WAIT": 0.5
+          },
+          "goals_sent": 1,
+          "normalized_reference_area_m2_per_sim_s": 0.3220052935228685
+        },
+        "0.9->0.98": {
+          "start_sim_s": 166.034,
+          "end_sim_s": 431.65,
+          "simulation_seconds": 265.616,
+          "near_stationary_sim_s": 35.03399999999996,
+          "turning_in_place_sim_s": 39.42199999999997,
+          "translation_sim_s": 191.14300000000006,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 29.33852335479441,
+          "near_stationary_bouts_ge_0_5s": 10,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.6200000000000045,
+            "FRONTIER_SEARCH": 18.393,
+            "NAV2_ROUTE_QUERY": 11.688000000000017,
+            "NAVIGATING": 3.4129999999999825,
+            "OBSERVATION_MAP_WAIT": 0.9199999999999591
+          },
+          "goals_sent": 10,
+          "normalized_reference_area_m2_per_sim_s": 0.03261174025661104
+        },
+        "0.95->0.98": {
+          "start_sim_s": 182.847,
+          "end_sim_s": 431.65,
+          "simulation_seconds": 248.80299999999997,
+          "near_stationary_sim_s": 31.95399999999998,
+          "turning_in_place_sim_s": 37.75999999999996,
+          "translation_sim_s": 179.06600000000003,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 27.673926582062865,
+          "near_stationary_bouts_ge_0_5s": 9,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.5080000000000098,
+            "FRONTIER_SEARCH": 16.568000000000012,
+            "NAV2_ROUTE_QUERY": 11.384000000000015,
+            "NAVIGATING": 3.073999999999984,
+            "OBSERVATION_MAP_WAIT": 0.4199999999999591
+          },
+          "goals_sent": 9,
+          "normalized_reference_area_m2_per_sim_s": 0.013055811224141204
+        },
+        "0.98->0.99": {
+          "start_sim_s": 431.65,
+          "end_sim_s": 604.757,
+          "simulation_seconds": 173.10699999999997,
+          "near_stationary_sim_s": 6.336999999999932,
+          "turning_in_place_sim_s": 16.658000000000072,
+          "translation_sim_s": 150.08499999999998,
+          "unclassified_gap_sim_s": 0.0,
+          "travel_m": 26.05753320318883,
+          "near_stationary_bouts_ge_0_5s": 4,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.27899999999999636,
+            "FRONTIER_SEARCH": 2.6189999999999714,
+            "NAV2_ROUTE_QUERY": 1.6210000000000946,
+            "NAVIGATING": 1.0839999999998327,
+            "OBSERVATION_MAP_WAIT": 0.7340000000000373
+          },
+          "goals_sent": 4,
+          "normalized_reference_area_m2_per_sim_s": 0.00625494636265432
+        }
+      },
+      "handoffs": {
+        "count": 29,
+        "total_gap_sim_s": 77.55100000000007,
+        "median_gap_sim_s": 2.7319999999999993,
+        "total_near_stationary_sim_s": 76.38500000000025
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 17
+      },
+      "pipeline_samples": 6613,
+      "maximum_tick_interval_wall_s": 1.071807852999882,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  },
+  "watchdog_v17": {
+    "result": "PASS",
+    "reason": "USER_FINISHED_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "goals": 2,
+    "succeeded": 0,
+    "navigation_failures": 0,
+    "travel_m": 0.1220789379058823,
+    "angular_travel_rad": 0.03487690561878328,
+    "idle_sim_s": 29.611,
+    "turn_only_sim_s": 0.0,
+    "duration_wall_s": 56.95729611200022,
+    "end_sim_s": 31.608,
+    "observed_fraction_final": 0.4289136345979542,
+    "reference_area_m2": 38.61500000000001,
+    "milestones": {
+      "0.8": null,
+      "0.9": null,
+      "0.95": null
+    },
+    "map_geometry_proxy": {
+      "occupied_cells": 364,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.04018276340819878,
+      "surface_distance_p95_m": 0.05131159629494926,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "exported_map_geometry_proxy": {
+      "occupied_cells": 364,
+      "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+      "surface_distance_median_m": 0.039999999999999855,
+      "surface_distance_p95_m": 0.05,
+      "occupied_support_fraction_within_015m": 1.0,
+      "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+    },
+    "milestone_map_geometry_proxy": {},
+    "passive_pose_diagnostics": {
+      "odom": {
+        "received_samples": 2814,
+        "missing_samples": 5,
+        "median_position_error_m": 8.99216761229917e-06,
+        "p95_position_error_m": 8.421383147824199e-05,
+        "max_position_error_m": 0.0019603641289216273,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      },
+      "slam": {
+        "received_samples": 2814,
+        "missing_samples": 49,
+        "median_position_error_m": 0.00016186525926403664,
+        "p95_position_error_m": 0.00016191904226858312,
+        "max_position_error_m": 0.002369828855746463,
+        "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+      }
+    },
+    "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage",
+    "observable_proxy": {
+      "reference_cells": 28527,
+      "known_fraction": 0.314579170610299,
+      "free_fraction": 0.30567532513057805,
+      "missing_unknown_cells": 19553,
+      "missing_unknown_area_m2": 48.88250000000001,
+      "scope": "Offline planar SDF line of sight, 5cm free samples, 0.37m connected centers, 12m range; not hardware accuracy or scan-beam completeness"
+    },
+    "observable_milestones": {
+      "0.9": null,
+      "0.95": null,
+      "0.98": null,
+      "0.99": null,
+      "0.995": null
+    },
+    "tail": {},
+    "observable_tail": {
+      "0.98": null,
+      "0.99": null,
+      "0.995": null
+    },
+    "observable_intervals": {
+      ".9->.95": null,
+      ".9->.98": null,
+      ".95->.98": null,
+      ".95->.99": null,
+      ".98->.99": null
+    },
+    "interval_timing_definition": "Raw odom message intervals: stationary |v|<0.02m/s and |w|<0.05rad/s; turn |v|<0.02 and |w|>=0.05; translation |v|>=0.02. Gaps >1 simulation second unclassified; no interpolation.",
+    "input_stale_pause_recorded": true,
+    "intervention_files": [],
+    "run_classification": "PROTECTED_INTERRUPTED_FINISHED",
+    "target_observation": {
+      "recorded_results": 1,
+      "expected_target_cells": 133,
+      "observed_target_cells": 132,
+      "observed_target_free_cells": 132,
+      "zero_target_yield_actions": 0,
+      "scope": "Per-action recorded target-cell counts; repeated cells counted per action, not unique covered area"
+    },
+    "sampling_gaps_wall_s": {
+      "odom.csv": {
+        "samples": 1634,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.09408531799999764
+      },
+      "commands.csv": {
+        "samples": 1051,
+        "gaps_over_1s": 0,
+        "maximum_gap_s": 0.1001055209999322
+      },
+      "mission/odom.csv": {
+        "samples": 1551,
+        "gaps_over_1s": 1,
+        "maximum_gap_s": 2.7924829829999
+      }
+    },
+    "zero_predicted_gain_goals": 0,
+    "nav2_queries": {
+      "total": 37,
+      "valid": 32,
+      "pair_queries": 23
+    },
+    "nav2_local_insertions": 1,
+    "nav2_order_validation": {
+      "verified_batches": 1,
+      "all_match_independent_optimum": true,
+      "same_subset_greedy_comparisons": 1,
+      "mean_static_estimated_cost_reduction_percent": 0.0
+    },
+    "handoff_timing": {
+      "intervals": {
+        "task": {
+          "start_sim_s": 7.552,
+          "end_sim_s": 31.873,
+          "simulation_seconds": 24.321,
+          "near_stationary_sim_s": 21.482999999999997,
+          "turning_in_place_sim_s": 0.0,
+          "translation_sim_s": 0.9420000000000028,
+          "unclassified_gap_sim_s": 1.8629999999999995,
+          "travel_m": 0.040348670416287896,
+          "near_stationary_bouts_ge_0_5s": 2,
+          "near_stationary_by_event_phase_sim_s": {
+            "DISPATCH_WAIT": 0.08800000000000097,
+            "FRONTIER_SEARCH": 13.174999999999997,
+            "NAV2_ROUTE_QUERY": 0.21199999999999974,
+            "NAVIGATING": 0.5699999999999976,
+            "OBSERVATION_MAP_WAIT": 3.2620000000000005,
+            "PAUSED": 0.9969999999999999,
+            "READINESS_WAIT": 0.13700000000000045,
+            "WAITING": 3.0420000000000016
+          },
+          "goals_sent": 2
+        },
+        "0.9->0.95": null,
+        "0.9->0.98": null,
+        "0.95->0.98": null,
+        "0.98->0.99": null
+      },
+      "handoffs": {
+        "count": 1,
+        "total_gap_sim_s": 18.809,
+        "median_gap_sim_s": 18.809,
+        "total_near_stationary_sim_s": 18.782
+      },
+      "preparation": {
+        "frontier_preparation_used": 0,
+        "frontier_preparation_discarded": 0,
+        "frontier_preparation_empty_recheck": 0,
+        "frontier_preparation_start_unsafe_recheck": 0,
+        "frontier_preparation_observed_recheck": 0,
+        "frontier_preparation_filtered_recheck": 0,
+        "observation_already_current": 0
+      },
+      "pipeline_samples": 250,
+      "maximum_tick_interval_wall_s": 2.8424021840000933,
+      "definition": "Raw odom intervals <=1 sim s. Near-stationary |v|<0.02 m/s and |w|<0.05 rad/s. Event phases use identical inference for both versions; phase association is not CPU attribution. Task excludes startup and final save. Throughput is fixed reference area between thresholds / elapsed simulation time; not exact newly scanned beam area. Bouts are kinematic intervals, not proof of commanded stops."
+    }
+  }
+}

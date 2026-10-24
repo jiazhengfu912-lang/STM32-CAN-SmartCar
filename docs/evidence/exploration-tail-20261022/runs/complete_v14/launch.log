@@ -1,0 +1,511 @@
+[INFO] [launch]: All log files can be found below /home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/complete_v14/ros_logs/2026-10-22-23-49-39-300152-ubuntu2204-133004
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ign-1]: process started with pid [133035]
+[INFO] [robot_state_publisher-2]: process started with pid [133037]
+[INFO] [parameter_bridge-3]: process started with pid [133039]
+[INFO] [cmd_guard.py-4]: process started with pid [133041]
+[INFO] [parameter_bridge-5]: process started with pid [133043]
+[INFO] [async_slam_toolbox_node-6]: process started with pid [133054]
+[INFO] [safe_controller_server-7]: process started with pid [133057]
+[INFO] [smoother_server-8]: process started with pid [133059]
+[INFO] [safe_planner_server-9]: process started with pid [133061]
+[INFO] [behavior_server-10]: process started with pid [133064]
+[INFO] [bt_navigator-11]: process started with pid [133066]
+[INFO] [waypoint_follower-12]: process started with pid [133068]
+[INFO] [velocity_smoother-13]: process started with pid [133071]
+[INFO] [map_saver_server-14]: process started with pid [133073]
+[INFO] [navigation_gate.py-15]: process started with pid [133077]
+[INFO] [explore.py-16]: process started with pid [133096]
+[async_slam_toolbox_node-6] [INFO] [1792684180.923020827] [slam_toolbox]: Node using stack size 40000000
+[robot_state_publisher-2] [INFO] [1792684180.983792603] [robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-2] [INFO] [1792684180.983997124] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-2] [INFO] [1792684180.984011164] [robot_state_publisher]: got segment camera_link
+[robot_state_publisher-2] [INFO] [1792684180.984019493] [robot_state_publisher]: got segment camera_optical_frame
+[robot_state_publisher-2] [INFO] [1792684180.984028296] [robot_state_publisher]: got segment laser_frame
+[robot_state_publisher-2] [INFO] [1792684180.984036528] [robot_state_publisher]: got segment left_caster_swivel
+[robot_state_publisher-2] [INFO] [1792684180.984097609] [robot_state_publisher]: got segment left_caster_wheel
+[robot_state_publisher-2] [INFO] [1792684180.984106126] [robot_state_publisher]: got segment left_wheel_link
+[robot_state_publisher-2] [INFO] [1792684180.984114160] [robot_state_publisher]: got segment lidar_link
+[robot_state_publisher-2] [INFO] [1792684180.984122087] [robot_state_publisher]: got segment right_caster_swivel
+[robot_state_publisher-2] [INFO] [1792684180.984130210] [robot_state_publisher]: got segment right_caster_wheel
+[robot_state_publisher-2] [INFO] [1792684180.984138088] [robot_state_publisher]: got segment right_wheel_link
+[safe_controller_server-7] [INFO] [1792684181.075727763] [controller_server]: 
+[safe_controller_server-7] 	controller_server lifecycle node launched. 
+[safe_controller_server-7] 	Waiting on external lifecycle transitions to activate
+[safe_controller_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_controller_server-7] [INFO] [1792684181.142082099] [controller_server]: Creating controller server
+[async_slam_toolbox_node-6] [INFO] [1792684181.278887541] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[async_slam_toolbox_node-6] [INFO] [1792684181.287550176] [slam_toolbox]: CeresSolver: Using HuberLoss loss function.
+[async_slam_toolbox_node-6] [INFO] [1792684181.287598529] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[behavior_server-10] [INFO] [1792684181.340185898] [behavior_server]: 
+[behavior_server-10] 	behavior_server lifecycle node launched. 
+[behavior_server-10] 	Waiting on external lifecycle transitions to activate
+[behavior_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-11] [INFO] [1792684181.399681478] [bt_navigator]: 
+[bt_navigator-11] 	bt_navigator lifecycle node launched. 
+[bt_navigator-11] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-11] [INFO] [1792684181.402546714] [bt_navigator]: Creating
+[safe_planner_server-9] [INFO] [1792684181.404116323] [planner_server]: 
+[safe_planner_server-9] 	planner_server lifecycle node launched. 
+[safe_planner_server-9] 	Waiting on external lifecycle transitions to activate
+[safe_planner_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_planner_server-9] [INFO] [1792684181.405978266] [planner_server]: Creating
+[smoother_server-8] [INFO] [1792684181.425821419] [smoother_server]: 
+[smoother_server-8] 	smoother_server lifecycle node launched. 
+[smoother_server-8] 	Waiting on external lifecycle transitions to activate
+[smoother_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[velocity_smoother-13] [INFO] [1792684181.466003435] [velocity_smoother]: 
+[velocity_smoother-13] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-13] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-8] [INFO] [1792684181.481235330] [smoother_server]: Creating smoother server
+[map_saver_server-14] [INFO] [1792684181.507064338] [map_saver_server]: 
+[map_saver_server-14] 	map_saver_server lifecycle node launched. 
+[map_saver_server-14] 	Waiting on external lifecycle transitions to activate
+[map_saver_server-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[parameter_bridge-5] [INFO] [1792684181.510812785] [laser_bridge]: Creating GZ->ROS Bridge: [/sim/scan (ignition.msgs.LaserScan) -> /sim/scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[map_saver_server-14] [INFO] [1792684181.511910031] [map_saver_server]: Creating
+[waypoint_follower-12] [INFO] [1792684181.520093121] [waypoint_follower]: 
+[waypoint_follower-12] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-12] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-12] [INFO] [1792684181.520703936] [waypoint_follower]: Creating
+[safe_controller_server-7] [INFO] [1792684181.576457475] [local_costmap.local_costmap]: 
+[safe_controller_server-7] 	local_costmap lifecycle node launched. 
+[safe_controller_server-7] 	Waiting on external lifecycle transitions to activate
+[safe_controller_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_controller_server-7] [INFO] [1792684181.577231776] [local_costmap.local_costmap]: Creating Costmap
+[safe_controller_server-7] [INFO] [1792684181.595409237] [local_costmap.local_costmap]: Destroying
+[safe_planner_server-9] [INFO] [1792684181.669142811] [global_costmap.global_costmap]: 
+[safe_planner_server-9] 	global_costmap lifecycle node launched. 
+[safe_planner_server-9] 	Waiting on external lifecycle transitions to activate
+[safe_planner_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_planner_server-9] [INFO] [1792684181.672923955] [global_costmap.global_costmap]: Creating Costmap
+[safe_planner_server-9] [INFO] [1792684181.691870006] [global_costmap.global_costmap]: Destroying
+[safe_controller_server-7] [INFO] [1792684181.732667036] [local_costmap.local_costmap]: 
+[safe_controller_server-7] 	local_costmap lifecycle node launched. 
+[safe_controller_server-7] 	Waiting on external lifecycle transitions to activate
+[safe_controller_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_controller_server-7] [INFO] [1792684181.733374817] [local_costmap.local_costmap]: Creating Costmap
+[safe_planner_server-9] [INFO] [1792684181.805934623] [global_costmap.global_costmap]: 
+[safe_planner_server-9] 	global_costmap lifecycle node launched. 
+[safe_planner_server-9] 	Waiting on external lifecycle transitions to activate
+[safe_planner_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[safe_planner_server-9] [INFO] [1792684181.806622099] [global_costmap.global_costmap]: Creating Costmap
+[parameter_bridge-3] [INFO] [1792684182.256587070] [state_bridge]: Creating GZ->ROS Bridge: [/clock (ignition.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792684182.266174614] [state_bridge]: Creating ROS->GZ Bridge: [/sim/drive_cmd_vel (geometry_msgs/msg/Twist) -> /model/smartcar/cmd_vel (ignition.msgs.Twist)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792684182.281117307] [state_bridge]: Creating GZ->ROS Bridge: [/model/smartcar/odometry (ignition.msgs.Odometry) -> /sim/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792684182.297097411] [state_bridge]: Creating GZ->ROS Bridge: [/model/smartcar/tf (ignition.msgs.Pose_V) -> /tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[ign-1] [1;32m[Msg] [0m[1;32mIgnition Gazebo Server v[0m[1;32m6.18.0[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLoading SDF world file[[0m[1;32m/tmp/smartcar_world_94tnxkbj.sdf[0m[1;32m].[0m
+[ign-1] [1;33mWarning [Utils.cc:129][0m [/sdf/model[@name="smartcar"]/link[@name="lidar_link"]/sensor[@name="c1_scan"]/lidar/noise[@type="gaussian"]:/tmp/smartcar_model_au6rfwn3.sdf:L827]: XML Attribute[type] in element[noise] not defined in SDF.
+[parameter_bridge-3] [INFO] [1792684182.310342373] [state_bridge]: Creating GZ->ROS Bridge: [/model/smartcar/joint_states (ignition.msgs.Model) -> /joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792684182.620127896] [state_bridge]: Passing message from ROS geometry_msgs/msg/Twist to Gazebo gz.msgs.Twist (showing msg only once per type)
+[explore.py-16] [INFO] [1792684183.048926200] [frontier_explorer]: {"wall_s": 0.05761364700447302, "sim_s": 0.0, "event": "session_started", "scope": "SIMULATION_ONLY", "prior_map_loaded": false, "algorithm": "v14 bounded information completion / target visibility / task-aware memory / confirmed termination + safe stopping approach / Nav2 regional open order + RPP / SLAM Toolbox"}
+[ign-1] [1;32m[Msg] [0m[1;32mServing entity system service on [[0m[1;32m/[0m[1;32mentity/system/add[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mCreate service on [[0m[1;32m/world/smartcar_world/create[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mRemove service on [[0m[1;32m/world/smartcar_world/remove[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPose service on [[0m[1;32m/world/smartcar_world/set_pose[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPose service on [[0m[1;32m/world/smartcar_world/set_pose_vector[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLight configuration service on [[0m[1;32m/world/smartcar_world/light_config[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPhysics service on [[0m[1;32m/world/smartcar_world/set_physics[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mSphericalCoordinates service on [[0m[1;32m/world/smartcar_world/set_spherical_coordinates[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mEnable collision service on [[0m[1;32m/world/smartcar_world/enable_collision[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mDisable collision service on [[0m[1;32m/world/smartcar_world/disable_collision[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mMaterial service on [[0m[1;32m/world/smartcar_world/visual_config[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mMaterial service on [[0m[1;32m/world/smartcar_world/wheel_slip[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mDiffDrive subscribing to twist messages on [[0m[1;32m/model/smartcar/cmd_vel[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLoaded level [[0m[1;32m3[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing world controls on [[0m[1;32m/world/smartcar_world[0m[1;32m/control], [[0m[1;32m/world/smartcar_world[0m[1;32m/control/state] and [[0m[1;32m/world/smartcar_world[0m[1;32m/playback/control][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing GUI information on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mgui/info[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mWorld [[0m[1;32msmartcar_world[0m[1;32m] initialized with [[0m[1;32mphysics[0m[1;32m] physics profile.[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing world SDF generation service on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mgenerate_world_sdf[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing world names on [[0m[1;32m/gazebo/worlds[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource path add service on [[0m[1;32m/gazebo/resource_paths/add[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource path get service on [[0m[1;32m/gazebo/resource_paths/get[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource path resolve service on [[0m[1;32m/gazebo/resource_paths/resolve[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mResource paths published on [[0m[1;32m/gazebo/resource_paths[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServer control service on [[0m[1;32m/server_control[0m[1;32m].[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mFound no publishers on /stats, adding root stats topic[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mFound no publishers on /clock, adding root clock topic[0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mLoading plugin [[0m[1;32mignition-rendering-ogre2[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing scene information on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mscene/info[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing graph information on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mscene/graph[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing full state on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mstate[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mServing full state (async) on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mstate_async[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing scene information on [[0m[1;32m/world/smartcar_world/scene/info[0m[1;32m][0m[1;32m[0m
+[ign-1] VMware: No 3D enabled (0, Success).
+[ign-1] libEGL warning: egl: failed to create dri2 screen
+[ign-1] VMware: No 3D enabled (0, Success).
+[ign-1] libEGL warning: egl: failed to create dri2 screen
+[async_slam_toolbox_node-6] Registering sensor: [Custom Described Lidar]
+[explore.py-16] [INFO] [1792684185.610484455] [frontier_explorer]: {"wall_s": 2.6585544740009937, "sim_s": 0.176, "event": "first_online_map", "known_cells": 2999}
+[INFO] [lifecycle_manager-17]: process started with pid [133309]
+[lifecycle_manager-17] [INFO] [1792684186.021009490] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-17] [INFO] [1792684186.025871037] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[lifecycle_manager-17] [INFO] [1792684187.856142159] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-17] [INFO] [1792684187.856211303] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[safe_controller_server-7] [INFO] [1792684187.856610792] [controller_server]: Configuring controller interface
+[safe_controller_server-7] [INFO] [1792684187.857425033] [controller_server]: getting goal checker plugins..
+[safe_controller_server-7] [INFO] [1792684187.859356863] [controller_server]: Controller frequency set to 10.0000Hz
+[safe_controller_server-7] [INFO] [1792684187.859479182] [local_costmap.local_costmap]: Configuring
+[safe_controller_server-7] [INFO] [1792684187.893421246] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[safe_controller_server-7] [INFO] [1792684187.908724627] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[safe_controller_server-7] [INFO] [1792684187.922364700] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[safe_controller_server-7] [INFO] [1792684187.922412976] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[safe_controller_server-7] [INFO] [1792684187.926774700] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[safe_controller_server-7] [INFO] [1792684188.021039103] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[safe_controller_server-7] [INFO] [1792684188.022118819] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[safe_controller_server-7] [INFO] [1792684188.027933681] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[safe_controller_server-7] [INFO] [1792684188.028815472] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[safe_controller_server-7] [INFO] [1792684188.029472691] [controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[safe_controller_server-7] [INFO] [1792684188.045854986] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-17] [INFO] [1792684188.082881160] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-8] [INFO] [1792684188.083616468] [smoother_server]: Configuring smoother server
+[smoother_server-8] [INFO] [1792684188.141966959] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-8] [INFO] [1792684188.150280462] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-17] [INFO] [1792684188.175346905] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[safe_planner_server-9] [INFO] [1792684188.175635188] [planner_server]: Configuring
+[safe_planner_server-9] [INFO] [1792684188.175679498] [global_costmap.global_costmap]: Configuring
+[safe_planner_server-9] [INFO] [1792684188.220555974] [global_costmap.global_costmap]: Using plugin "static_layer"
+[safe_planner_server-9] [INFO] [1792684188.231895551] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[safe_planner_server-9] [INFO] [1792684188.233221843] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[safe_planner_server-9] [INFO] [1792684188.233249197] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[safe_planner_server-9] [INFO] [1792684188.233440149] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[safe_planner_server-9] [INFO] [1792684188.245586257] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[safe_planner_server-9] [INFO] [1792684188.245630750] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[safe_planner_server-9] [INFO] [1792684188.249762733] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[safe_planner_server-9] [INFO] [1792684188.345476778] [global_costmap.global_costmap]: SmartCar: TF and scan filters share one callback executor
+[safe_planner_server-9] [INFO] [1792684188.346771070] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[safe_planner_server-9] [INFO] [1792684188.346839971] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[safe_planner_server-9] [INFO] [1792684188.347415048] [planner_server]: Planner Server has GridBased  planners available.
+[safe_planner_server-9] [INFO] [1792684188.348658685] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[lifecycle_manager-17] [INFO] [1792684188.417656323] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-10] [INFO] [1792684188.418187167] [behavior_server]: Configuring
+[behavior_server-10] [INFO] [1792684188.523133564] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-10] [INFO] [1792684188.525748487] [behavior_server]: Configuring spin
+[behavior_server-10] [INFO] [1792684188.581728933] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-10] [INFO] [1792684188.584576516] [behavior_server]: Configuring backup
+[behavior_server-10] [INFO] [1792684188.605746840] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-10] [INFO] [1792684188.606516658] [behavior_server]: Configuring wait
+[lifecycle_manager-17] [INFO] [1792684188.646679090] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-11] [INFO] [1792684188.647073929] [bt_navigator]: Configuring
+[lifecycle_manager-17] [INFO] [1792684189.021213710] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-12] [INFO] [1792684189.021545357] [waypoint_follower]: Configuring
+[waypoint_follower-12] [INFO] [1792684189.085087581] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[waypoint_follower-12] [INFO] [1792684189.086707249] [waypoint_follower]: Waypoint pause duration is set to zero, disabling task executor plugin.
+[lifecycle_manager-17] [INFO] [1792684189.118341680] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-13] [INFO] [1792684189.121684738] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-17] [INFO] [1792684189.176866574] [lifecycle_manager_navigation]: [34m[1mConfiguring map_saver_server[0m[0m
+[map_saver_server-14] [INFO] [1792684189.177563515] [map_saver_server]: Configuring
+[lifecycle_manager-17] [INFO] [1792684189.198276936] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[safe_controller_server-7] [INFO] [1792684189.205362129] [controller_server]: Activating
+[safe_controller_server-7] [INFO] [1792684189.205438581] [local_costmap.local_costmap]: Activating
+[safe_controller_server-7] [INFO] [1792684189.205457311] [local_costmap.local_costmap]: Checking transform
+[safe_controller_server-7] [INFO] [1792684189.205619596] [local_costmap.local_costmap]: start
+[safe_controller_server-7] [INFO] [1792684189.410834922] [controller_server]: Activating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[safe_controller_server-7] [INFO] [1792684189.410915146] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684189.533276959] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792684189.533344617] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-8] [INFO] [1792684189.534572582] [smoother_server]: Activating
+[smoother_server-8] [INFO] [1792684189.534640009] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684189.658917131] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792684189.658996965] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[safe_planner_server-9] [INFO] [1792684189.659503494] [planner_server]: Activating
+[safe_planner_server-9] [INFO] [1792684189.659577445] [global_costmap.global_costmap]: Activating
+[safe_planner_server-9] [INFO] [1792684189.659601398] [global_costmap.global_costmap]: Checking transform
+[safe_planner_server-9] [INFO] [1792684189.659807458] [global_costmap.global_costmap]: start
+[safe_planner_server-9] [INFO] [1792684190.674489930] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[safe_planner_server-9] [INFO] [1792684190.682283918] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684190.797491198] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792684190.797566003] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-10] [INFO] [1792684190.800654392] [behavior_server]: Activating
+[behavior_server-10] [INFO] [1792684190.800722595] [behavior_server]: Activating spin
+[behavior_server-10] [INFO] [1792684190.800742651] [behavior_server]: Activating backup
+[behavior_server-10] [INFO] [1792684190.800757376] [behavior_server]: Activating wait
+[behavior_server-10] [INFO] [1792684190.800777949] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684190.917557903] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792684190.917731394] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-11] [INFO] [1792684190.920355657] [bt_navigator]: Activating
+[bt_navigator-11] [INFO] [1792684191.406574764] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684191.527173108] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-17] [INFO] [1792684191.527249355] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-12] [INFO] [1792684191.527714850] [waypoint_follower]: Activating
+[waypoint_follower-12] [INFO] [1792684191.527760301] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684191.644466679] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-17] [INFO] [1792684191.644536003] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-13] [INFO] [1792684191.645671880] [velocity_smoother]: Activating
+[velocity_smoother-13] [INFO] [1792684191.645799240] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684191.771519689] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-17] [INFO] [1792684191.771572214] [lifecycle_manager_navigation]: [34m[1mActivating map_saver_server[0m[0m
+[map_saver_server-14] [INFO] [1792684191.773390507] [map_saver_server]: Activating
+[map_saver_server-14] [INFO] [1792684191.773441424] [map_saver_server]: Creating bond (map_saver_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684191.893254569] [lifecycle_manager_navigation]: Server map_saver_server connected with bond.
+[lifecycle_manager-17] [INFO] [1792684191.893342917] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-17] [INFO] [1792684191.893359751] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[explore.py-16] [INFO] [1792684197.624420618] [frontier_explorer]: {"wall_s": 14.674798586005636, "sim_s": 5.735, "event": "frontier_search", "robot": [3.9467569437428763e-10, 7.416436666339161e-29], "frontier_cells": 1391, "clusters": 115, "small_clusters": 114, "observation_regions": 1, "geometric_views": 1266, "occluded_views": 1201, "excluded_cells": 0, "reachable_cells": 400, "candidates": 65, "reason": "CANDIDATES", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 65}
+[explore.py-16] [INFO] [1792684197.685834100] [frontier_explorer]: {"wall_s": 14.73710357100208, "sim_s": 5.752, "event": "nav2_path_evaluated", "batch": 1, "from_index": null, "to_index": 0, "status": 4, "cost": {"length_m": 0.4428519906004187, "initial_yaw": 0.12435499454676144, "arrival_yaw": 0.2031775940368498, "initial_turn_rad": 0.12435499454676144, "path_turn_rad": 0.6610431688506868, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 5.041733629457617, "stop_approach_points": [[0.2327382230909507, -0.013223185940785642], [0.25679351367157044, -0.006415858568840749], [0.2808798940353683, 0.0002814147853509308], [0.30494357695009744, 0.007059178253046694], [0.3290969052519046, 0.01350983142534079], [0.3531716507888689, 0.020248112775749005], [0.37720424392041996, 0.02713573952633186], [0.402204244292949, 0.05213573989886089]]}}
+[explore.py-16] [INFO] [1792684197.720393479] [frontier_explorer]: {"wall_s": 14.77156101300352, "sim_s": 5.774, "event": "nav2_path_evaluated", "batch": 1, "from_index": null, "to_index": 1, "status": 4, "cost": null}
+[explore.py-16] [INFO] [1792684197.759454315] [frontier_explorer]: {"wall_s": 14.810109791003924, "sim_s": 5.786, "event": "nav2_path_evaluated", "batch": 1, "from_index": null, "to_index": 2, "status": 4, "cost": {"length_m": 0.454484515999799, "initial_yaw": 1.3258176636680326, "arrival_yaw": 1.232338704129892, "initial_turn_rad": 1.3258176636680326, "path_turn_rad": 0.5404195002705843, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 8.446486976386648, "stop_approach_points": [[0.0206229321494249, 0.2382193455769961], [0.030208503581323543, 0.2613087547955668], [0.03965274047742473, 0.2844563381483052], [0.049140846392734305, 0.3075858016887618], [0.058286392488486216, 0.33085297580255957], [0.06768428081211941, 0.35401925117217803], [0.0772042394500716, 0.3771357447417383], [0.10220423982260063, 0.4021357451142673]]}}
+[explore.py-16] [INFO] [1792684197.819813405] [frontier_explorer]: {"wall_s": 14.870553123000718, "sim_s": 5.808, "event": "nav2_path_evaluated", "batch": 1, "from_index": null, "to_index": 3, "status": 4, "cost": null}
+[explore.py-16] [INFO] [1792684197.881393073] [frontier_explorer]: {"wall_s": 14.932615160003479, "sim_s": 5.835, "event": "nav2_path_evaluated", "batch": 1, "from_index": null, "to_index": 4, "status": 4, "cost": {"length_m": 0.35672616453786893, "initial_yaw": -2.455863142683507, "arrival_yaw": -2.455863142683507, "initial_turn_rad": 2.455863142683507, "path_turn_rad": 0, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 10.800382658927937, "stop_approach_points": [[-0.16511563415589303, -0.124926869551101], [-0.18436516904966704, -0.14087840787473493], [-0.2035807531372711, -0.1568709541945854], [-0.22279576502027676, -0.17286426345390038], [-0.2727957657653348, -0.22286426419895844], [-0.29779576613786385, -0.24786426457148747]]}}
+[explore.py-16] [INFO] [1792684197.930811012] [frontier_explorer]: {"wall_s": 14.98069262500212, "sim_s": 5.86, "event": "nav2_path_evaluated", "batch": 1, "from_index": 0, "to_index": 2, "status": 4, "cost": {"length_m": 0.4968883551597918, "initial_yaw": 2.279422598922567, "arrival_yaw": 2.39966180988576, "initial_turn_rad": 2.0762450048857173, "path_turn_rad": 1.6475682180646747, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 11.593404802661489, "stop_approach_points": [[0.25918036978623893, 0.2827706234015064], [0.24283534543379237, 0.301687325953895], [0.22638617984444243, 0.32051342944487504], [0.21006766763838702, 0.3394530201811985], [0.19366885605369366, 0.3583229926913869], [0.17720424094018772, 0.3771357447417383], [0.12720424019512966, 0.42713574548679634], [0.10220423982260063, 0.4021357451142673]]}}
+[explore.py-16] [INFO] [1792684198.008019790] [frontier_explorer]: {"wall_s": 15.058160865999525, "sim_s": 5.883, "event": "nav2_path_evaluated", "batch": 1, "from_index": 0, "to_index": 4, "status": 4, "cost": {"length_m": 0.8080036925706585, "initial_yaw": -2.8388339222829866, "arrival_yaw": -2.5960506032100703, "initial_turn_rad": 3.0420115163198362, "path_turn_rad": 0.2363138819099553, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 14.900275567988507, "stop_approach_points": [[-0.15557831864512361, -0.1395955251651888], [-0.17800149097632523, -0.15065013653597004], [-0.200406352760379, -0.16174136900104696], [-0.22279576502027676, -0.17286426345390038], [-0.2727957657653348, -0.22286426419895844], [-0.29779576613786385, -0.24786426457148747]]}}
+[explore.py-16] [INFO] [1792684198.054034641] [frontier_explorer]: {"wall_s": 15.105387121999229, "sim_s": 5.903, "event": "nav2_path_evaluated", "batch": 1, "from_index": 2, "to_index": 0, "status": 4, "cost": {"length_m": 0.49835024526887234, "initial_yaw": -0.8621700546672264, "arrival_yaw": -0.9340438937668537, "initial_turn_rad": 2.0945087587971187, "path_turn_rad": 1.4940244355251184, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 11.543222276854072, "stop_approach_points": [[0.310960689771693, 0.2020464782166893], [0.32763454103333634, 0.18341892972134377], [0.3442158858849098, 0.16470917449869904], [0.360739628806914, 0.14594849306679936], [0.37720424392041996, 0.12713574101644798], [0.427204244665478, 0.07713574027138992], [0.402204244292949, 0.05213573989886089]]}}
+[explore.py-16] [INFO] [1792684198.135694890] [frontier_explorer]: {"wall_s": 15.185759381005482, "sim_s": 5.922, "event": "nav2_path_evaluated", "batch": 1, "from_index": 2, "to_index": 4, "status": 4, "cost": {"length_m": 0.8044722497943043, "initial_yaw": -2.063445782617454, "arrival_yaw": -2.209451942345336, "initial_turn_rad": 2.9874008204322404, "path_turn_rad": 0.1460061597278819, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 14.662082278583554, "stop_approach_points": [[-0.18140668054122666, -0.11031867688957431], [-0.19518994490676955, -0.13117591596990263], [-0.20898808659187007, -0.15202323683719254], [-0.22279576502027676, -0.17286426345390038], [-0.2727957657653348, -0.22286426419895844], [-0.29779576613786385, -0.24786426457148747]]}}
+[explore.py-16] [INFO] [1792684198.234346688] [frontier_explorer]: {"wall_s": 15.272714673003065, "sim_s": 5.972, "event": "nav2_path_evaluated", "batch": 1, "from_index": 4, "to_index": 0, "status": 4, "cost": {"length_m": 0.7424076958431063, "initial_yaw": 0.30141745254288105, "arrival_yaw": 0.4833009148187499, "initial_turn_rad": 2.7572805952263884, "path_turn_rad": 0.1875676572876896, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 13.723959935067848, "stop_approach_points": [[0.24265834347802984, -0.03917533476500279], [0.2651168017594643, -0.028193011908482335], [0.2875180395810617, -0.017093768579028223], [0.3099118387428803, -0.005980029399748732], [0.33239642770097366, 0.004948887694257165], [0.3548148316605222, 0.016012845073478443], [0.37720424392041996, 0.02713573952633186], [0.402204244292949, 0.05213573989886089]]}}
+[explore.py-16] [INFO] [1792684198.306973277] [frontier_explorer]: {"wall_s": 15.35804031000589, "sim_s": 6.001, "event": "nav2_path_evaluated", "batch": 1, "from_index": 4, "to_index": 2, "status": 4, "cost": {"length_m": 0.7388833139308566, "initial_yaw": 1.0834892112737762, "arrival_yaw": 0.9709166434241591, "initial_turn_rad": 2.743832953222303, "path_turn_rad": 0.11586629742239264, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 13.616700934162573, "stop_approach_points": [[-0.0053957831430693215, 0.25192746040528635], [0.008384429464615595, 0.2727866068342759], [0.022123634076083976, 0.293672837614255], [0.035946380558914415, 0.3145039460179244], [0.04962664809675066, 0.33542889597572656], [0.06339656102166491, 0.35629471812503044], [0.0772042394500716, 0.3771357447417383], [0.10220423982260063, 0.4021357451142673]]}}
+[explore.py-16] [INFO] [1792684198.309226155] [frontier_explorer]: {"wall_s": 15.3603624210009, "sim_s": 6.001, "event": "planning_batch_finished", "batch": 1, "reason": "CANDIDATES", "candidates": 5, "valid_paths": 3, "pair_paths": 6, "selected": {"x": 0.402204244292949, "y": 0.05213573989886089, "yaw": 0.2031775940368498, "frontier_cells": 1178, "cell": [40, 47], "frontier_group": 1, "small_frontier": false, "path_distance_m": 0.45000000670552254, "predicted_gain_m2": 7.892804536747432, "visible_gain_m2": 0.29000000864267356, "target_visible_gain_m2": 0.2825000084191561, "information_gain_m2": 7.892804536747432, "visible_cells": [1074, 1076, 1149, 1231, 1298, 1302, 1308, 1312, 1375, 1380, 1388, 1393, 1452, 1456, 1529, 1542, 1552, 1554, 1687, 1690, 1768, 1845, 1868, 1921, 1926, 1994, 2032, 2034, 2078, 2080, 2084, 2154, 2228, 2342, 2350, 2352, 2385, 2388, 2427, 2432, 2465, 2545, 2591, 2593, 2595, 2623, 2751, 2783, 2861, 2908, 2911, 2938, 2988, 3072, 3101, 3170, 3229, 3254, 3304, 3335, 3381, 3412, 3488, 3540, 3544, 3569, 3618, 3653, 3695, 3731, 3779, 3809, 3855, 3887, 3896, 3925, 3933, 3966, 3977, 4009, 4133, 4166, 4199, 4218, 4290, 4293, 4401, 4407, 4453, 4477, 4533, 4558, 4612, 4634, 4702, 4714, 4771, 4774, 4788, 4790, 4791, 4847, 4851, 4856, 4932, 4943, 5004, 5012, 5015, 5021, 5024, 5026, 5099, 5102, 5250, 5264], "target_visible_cells": [1074, 1076, 1149, 1231, 1298, 1302, 1308, 1312, 1375, 1380, 1388, 1393, 1452, 1456, 1529, 1542, 1552, 1554, 1687, 1690, 1768, 1845, 1921, 1926, 1994, 2032, 2034, 2078, 2080, 2084, 2154, 2228, 2342, 2350, 2352, 2385, 2388, 2427, 2432, 2465, 2545, 2591, 2593, 2595, 2623, 2751, 2783, 2861, 2908, 2911, 2938, 2988, 3072, 3101, 3170, 3229, 3254, 3304, 3335, 3381, 3412, 3488, 3540, 3544, 3569, 3618, 3653, 3695, 3731, 3779, 3809, 3855, 3887, 3896, 3933, 3966, 3977, 4009, 4133, 4166, 4199, 4290, 4293, 4401, 4407, 4453, 4477, 4533, 4558, 4612, 4634, 4702, 4714, 4771, 4774, 4788, 4790, 4791, 4847, 4851, 4856, 4932, 4943, 5004, 5012, 5015, 5021, 5024, 5026, 5099, 5102, 5250, 5264], "initial_turn_rad": 0.12435499454676144, "goal_margin_m": 0.5700000000000001, "estimated_cost_s": 4.605300017946931, "score": -1.7138524104811939, "stage": "fine", "observation_region": 0, "nav2_path": {"length_m": 0.4428519906004187, "initial_yaw": 0.12435499454676144, "arrival_yaw": 0.2031775940368498, "initial_turn_rad": 0.12435499454676144, "path_turn_rad": 0.6610431688506868, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 5.041733629457617, "stop_approach_points": [[0.2327382230909507, -0.013223185940785642], [0.25679351367157044, -0.006415858568840749], [0.2808798940353683, 0.0002814147853509308], [0.30494357695009744, 0.007059178253046694], [0.3290969052519046, 0.01350983142534079], [0.3531716507888689, 0.020248112775749005], [0.37720424392041996, 0.02713573952633186], [0.402204244292949, 0.05213573989886089]]}, "route_reason": "nav2_open_visit_order", "nav2_anchor_index": 0, "nav2_chosen_index": 0, "nav2_visit_order": [0, 2, 4], "nav2_visit_cost_s": 31.29722071070266, "nav2_visit_objective": "information_completion_with_travel_budget", "nav2_minimum_visit_cost_s": 31.29722071070266, "nav2_visit_cost_budget_s": 33.29722071070266, "nav2_baseline_information_latency_m2_s": 416.49164164643247, "nav2_information_latency_m2_s": 416.49164164643247, "nav2_information_order_used": false}}
+[explore.py-16] [INFO] [1792684198.851226787] [frontier_explorer]: {"wall_s": 15.901172853002208, "sim_s": 6.169, "event": "goal_sent", "target": {"x": 0.402204244292949, "y": 0.05213573989886089, "yaw": 0.2031775940368498, "frontier_cells": 1178, "cell": [40, 47], "frontier_group": 1, "small_frontier": false, "path_distance_m": 0.45000000670552254, "predicted_gain_m2": 7.892804536747432, "visible_gain_m2": 0.29000000864267356, "target_visible_gain_m2": 0.2825000084191561, "information_gain_m2": 7.892804536747432, "visible_cells": [1074, 1076, 1149, 1231, 1298, 1302, 1308, 1312, 1375, 1380, 1388, 1393, 1452, 1456, 1529, 1542, 1552, 1554, 1687, 1690, 1768, 1845, 1868, 1921, 1926, 1994, 2032, 2034, 2078, 2080, 2084, 2154, 2228, 2342, 2350, 2352, 2385, 2388, 2427, 2432, 2465, 2545, 2591, 2593, 2595, 2623, 2751, 2783, 2861, 2908, 2911, 2938, 2988, 3072, 3101, 3170, 3229, 3254, 3304, 3335, 3381, 3412, 3488, 3540, 3544, 3569, 3618, 3653, 3695, 3731, 3779, 3809, 3855, 3887, 3896, 3925, 3933, 3966, 3977, 4009, 4133, 4166, 4199, 4218, 4290, 4293, 4401, 4407, 4453, 4477, 4533, 4558, 4612, 4634, 4702, 4714, 4771, 4774, 4788, 4790, 4791, 4847, 4851, 4856, 4932, 4943, 5004, 5012, 5015, 5021, 5024, 5026, 5099, 5102, 5250, 5264], "target_visible_cells": [1074, 1076, 1149, 1231, 1298, 1302, 1308, 1312, 1375, 1380, 1388, 1393, 1452, 1456, 1529, 1542, 1552, 1554, 1687, 1690, 1768, 1845, 1921, 1926, 1994, 2032, 2034, 2078, 2080, 2084, 2154, 2228, 2342, 2350, 2352, 2385, 2388, 2427, 2432, 2465, 2545, 2591, 2593, 2595, 2623, 2751, 2783, 2861, 2908, 2911, 2938, 2988, 3072, 3101, 3170, 3229, 3254, 3304, 3335, 3381, 3412, 3488, 3540, 3544, 3569, 3618, 3653, 3695, 3731, 3779, 3809, 3855, 3887, 3896, 3933, 3966, 3977, 4009, 4133, 4166, 4199, 4290, 4293, 4401, 4407, 4453, 4477, 4533, 4558, 4612, 4634, 4702, 4714, 4771, 4774, 4788, 4790, 4791, 4847, 4851, 4856, 4932, 4943, 5004, 5012, 5015, 5021, 5024, 5026, 5099, 5102, 5250, 5264], "initial_turn_rad": 0.12435499454676144, "goal_margin_m": 0.5700000000000001, "estimated_cost_s": 4.605300017946931, "score": -1.7138524104811939, "stage": "fine", "observation_region": 0, "nav2_path": {"length_m": 0.4428519906004187, "initial_yaw": 0.12435499454676144, "arrival_yaw": 0.2031775940368498, "initial_turn_rad": 0.12435499454676144, "path_turn_rad": 0.6610431688506868, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 5.041733629457617, "stop_approach_points": [[0.2327382230909507, -0.013223185940785642], [0.25679351367157044, -0.006415858568840749], [0.2808798940353683, 0.0002814147853509308], [0.30494357695009744, 0.007059178253046694], [0.3290969052519046, 0.01350983142534079], [0.3531716507888689, 0.020248112775749005], [0.37720424392041996, 0.02713573952633186], [0.402204244292949, 0.05213573989886089]]}, "route_reason": "nav2_open_visit_order", "nav2_anchor_index": 0, "nav2_chosen_index": 0, "nav2_visit_order": [0, 2, 4], "nav2_visit_cost_s": 31.29722071070266, "nav2_visit_objective": "information_completion_with_travel_budget", "nav2_minimum_visit_cost_s": 31.29722071070266, "nav2_visit_cost_budget_s": 33.29722071070266, "nav2_baseline_information_latency_m2_s": 416.49164164643247, "nav2_information_latency_m2_s": 416.49164164643247, "nav2_information_order_used": false, "observation_world": [[0.402204244292949, -1.2978642802177067], [0.5022042457830651, -1.2978642802177067], [0.20220424131271675, -1.2478642794726487], [0.3522042435478909, -1.1978642787275906], [-0.2477957653928058, -1.1478642779825325], [-0.04779576241257355, -1.1478642779825325], [0.2522042420577748, -1.1478642779825325], [0.45220424503800705, -1.1478642779825325], [-0.3477957668829219, -1.0978642772374745], [-0.09779576315763161, -1.0978642772374745], [0.30220424280283287, -1.0978642772374745], [0.5522042465281232, -1.0978642772374745], [-0.44779576837303803, -1.0478642764924164], [-0.2477957653928058, -1.0478642764924164], [-0.5477957698631541, -0.9978642757473584], [0.10220423982260063, -0.9978642757473584], [0.6022042472731812, -0.9978642757473584], [0.7022042487632973, -0.9978642757473584], [-0.5477957698631541, -0.8978642742572422], [-0.39779576762797997, -0.8978642742572422], [-0.44779576837303803, -0.8478642735121842], [-0.5477957698631541, -0.7978642727671261], [0.6022042472731812, -0.7978642727671261], [-0.6977957720983283, -0.7478642720220681], [-0.44779576837303803, -0.7478642720220681], [-0.9977957765686767, -0.69786427127701], [0.9022042517435296, -0.69786427127701], [1.0022042532336457, -0.69786427127701], [-0.7477957728433864, -0.647864270531952], [-0.6477957713532703, -0.647864270531952], [-0.44779576837303803, -0.647864270531952], [-0.8977957750785606, -0.5978642697868939], [-1.1477957788038509, -0.5478642690418358], [0.6022042472731812, -0.49786426829677777], [1.0022042532336457, -0.49786426829677777], [1.1022042547237618, -0.49786426829677777], [-1.197795779548909, -0.4478642675517197], [-1.0477957773137347, -0.4478642675517197], [0.9022042517435296, -0.4478642675517197], [1.1522042554688199, -0.4478642675517197], [-1.1477957788038509, -0.39786426680666165], [-1.0977957780587928, -0.3478642660616036], [1.202204256213878, -0.3478642660616036], [1.302204257703994, -0.3478642660616036], [1.4022042591941102, -0.3478642660616036], [-1.1477957788038509, -0.29786426531654553], [1.302204257703994, -0.24786426457148747], [-1.0477957773137347, -0.1978642638264294], [-1.0977957780587928, -0.14786426308137135], [1.252204256958936, -0.14786426308137135], [1.4022042591941102, -0.14786426308137135], [-1.197795779548909, -0.09786426233631329], [1.302204257703994, -0.09786426233631329], [1.5522042614292844, -0.04786426159125523], [-0.9477957758236186, 0.002135739153802829], [-1.4477957832741992, 0.05213573989886089], [1.5022042606842263, 0.05213573989886089], [-1.197795779548909, 0.10213574064391895], [1.302204257703994, 0.10213574064391895], [-1.0977957780587928, 0.152135741388977], [1.202204256213878, 0.152135741388977], [-1.197795779548909, 0.20213574213403507], [-1.347795781784083, 0.2521357428790931], [1.252204256958936, 0.2521357428790931], [1.4522042599391682, 0.2521357428790931], [-1.247795780293967, 0.3021357436241512], [1.202204256213878, 0.3021357436241512], [-0.9977957765686767, 0.35213574436920925], [1.1022042547237618, 0.35213574436920925], [-1.0477957773137347, 0.4021357451142673], [1.3522042584490521, 0.4021357451142673], [-1.0977957780587928, 0.45213574585932537], [1.202204256213878, 0.45213574585932537], [-1.1477957788038509, 0.5021357466043834], [-0.6977957720983283, 0.5021357466043834], [0.7522042495083554, 0.5021357466043834], [1.1522042554688199, 0.5021357466043834], [-1.1477957788038509, 0.5521357473494415], [-0.5977957706082122, 0.5521357473494415], [1.0022042532336457, 0.5521357473494415], [-0.6977957720983283, 0.6521357488395576], [0.9522042524885876, 0.6521357488395576], [-1.347795781784083, 0.7021357495846157], [-0.39779576762797997, 0.7021357495846157], [-0.7477957728433864, 0.7521357503296737], [-0.5977957706082122, 0.7521357503296737], [0.8522042509984715, 0.8021357510747318], [1.1522042554688199, 0.8021357510747318], [-0.4977957691180961, 0.8521357518197898], [0.7022042487632973, 0.8521357518197898], [-0.44779576837303803, 0.9021357525648479], [0.8022042502534135, 0.9021357525648479], [-0.44779576837303803, 0.952135753309906], [0.6522042480182393, 0.952135753309906], [0.10220423982260063, 1.002135754054964], [0.7022042487632973, 1.002135754054964], [-0.39779576762797997, 1.052135754800022], [-0.2477957653928058, 1.052135754800022], [0.45220424503800705, 1.052135754800022], [0.5522042465281232, 1.052135754800022], [0.6022042472731812, 1.052135754800022], [-0.5477957698631541, 1.1021357555450801], [-0.3477957668829219, 1.1021357555450801], [-0.09779576315763161, 1.1021357555450801], [-0.2477957653928058, 1.1521357562901382], [0.30220424280283287, 1.1521357562901382], [-0.5977957706082122, 1.2021357570351963], [-0.19779576464774773, 1.2021357570351963], [-0.04779576241257355, 1.2021357570351963], [0.2522042420577748, 1.2021357570351963], [0.402204244292949, 1.2021357570351963], [0.5022042457830651, 1.2021357570351963], [0.20220424131271675, 1.2521357577802543], [0.3522042435478909, 1.2521357577802543], [-0.14779576390268967, 1.3521357592703704], [0.5522042465281232, 1.3521357592703704]], "target_observation_world": [[0.402204244292949, -1.2978642802177067], [0.5022042457830651, -1.2978642802177067], [0.20220424131271675, -1.2478642794726487], [0.3522042435478909, -1.1978642787275906], [-0.2477957653928058, -1.1478642779825325], [-0.04779576241257355, -1.1478642779825325], [0.2522042420577748, -1.1478642779825325], [0.45220424503800705, -1.1478642779825325], [-0.3477957668829219, -1.0978642772374745], [-0.09779576315763161, -1.0978642772374745], [0.30220424280283287, -1.0978642772374745], [0.5522042465281232, -1.0978642772374745], [-0.44779576837303803, -1.0478642764924164], [-0.2477957653928058, -1.0478642764924164], [-0.5477957698631541, -0.9978642757473584], [0.10220423982260063, -0.9978642757473584], [0.6022042472731812, -0.9978642757473584], [0.7022042487632973, -0.9978642757473584], [-0.5477957698631541, -0.8978642742572422], [-0.39779576762797997, -0.8978642742572422], [-0.44779576837303803, -0.8478642735121842], [-0.5477957698631541, -0.7978642727671261], [-0.6977957720983283, -0.7478642720220681], [-0.44779576837303803, -0.7478642720220681], [-0.9977957765686767, -0.69786427127701], [0.9022042517435296, -0.69786427127701], [1.0022042532336457, -0.69786427127701], [-0.7477957728433864, -0.647864270531952], [-0.6477957713532703, -0.647864270531952], [-0.44779576837303803, -0.647864270531952], [-0.8977957750785606, -0.5978642697868939], [-1.1477957788038509, -0.5478642690418358], [0.6022042472731812, -0.49786426829677777], [1.0022042532336457, -0.49786426829677777], [1.1022042547237618, -0.49786426829677777], [-1.197795779548909, -0.4478642675517197], [-1.0477957773137347, -0.4478642675517197], [0.9022042517435296, -0.4478642675517197], [1.1522042554688199, -0.4478642675517197], [-1.1477957788038509, -0.39786426680666165], [-1.0977957780587928, -0.3478642660616036], [1.202204256213878, -0.3478642660616036], [1.302204257703994, -0.3478642660616036], [1.4022042591941102, -0.3478642660616036], [-1.1477957788038509, -0.29786426531654553], [1.302204257703994, -0.24786426457148747], [-1.0477957773137347, -0.1978642638264294], [-1.0977957780587928, -0.14786426308137135], [1.252204256958936, -0.14786426308137135], [1.4022042591941102, -0.14786426308137135], [-1.197795779548909, -0.09786426233631329], [1.302204257703994, -0.09786426233631329], [1.5522042614292844, -0.04786426159125523], [-0.9477957758236186, 0.002135739153802829], [-1.4477957832741992, 0.05213573989886089], [1.5022042606842263, 0.05213573989886089], [-1.197795779548909, 0.10213574064391895], [1.302204257703994, 0.10213574064391895], [-1.0977957780587928, 0.152135741388977], [1.202204256213878, 0.152135741388977], [-1.197795779548909, 0.20213574213403507], [-1.347795781784083, 0.2521357428790931], [1.252204256958936, 0.2521357428790931], [1.4522042599391682, 0.2521357428790931], [-1.247795780293967, 0.3021357436241512], [1.202204256213878, 0.3021357436241512], [-0.9977957765686767, 0.35213574436920925], [1.1022042547237618, 0.35213574436920925], [-1.0477957773137347, 0.4021357451142673], [1.3522042584490521, 0.4021357451142673], [-1.0977957780587928, 0.45213574585932537], [1.202204256213878, 0.45213574585932537], [-1.1477957788038509, 0.5021357466043834], [-0.6977957720983283, 0.5021357466043834], [1.1522042554688199, 0.5021357466043834], [-1.1477957788038509, 0.5521357473494415], [-0.5977957706082122, 0.5521357473494415], [1.0022042532336457, 0.5521357473494415], [-0.6977957720983283, 0.6521357488395576], [0.9522042524885876, 0.6521357488395576], [-1.347795781784083, 0.7021357495846157], [-0.7477957728433864, 0.7521357503296737], [-0.5977957706082122, 0.7521357503296737], [0.8522042509984715, 0.8021357510747318], [1.1522042554688199, 0.8021357510747318], [-0.4977957691180961, 0.8521357518197898], [0.7022042487632973, 0.8521357518197898], [-0.44779576837303803, 0.9021357525648479], [0.8022042502534135, 0.9021357525648479], [-0.44779576837303803, 0.952135753309906], [0.6522042480182393, 0.952135753309906], [0.10220423982260063, 1.002135754054964], [0.7022042487632973, 1.002135754054964], [-0.39779576762797997, 1.052135754800022], [-0.2477957653928058, 1.052135754800022], [0.45220424503800705, 1.052135754800022], [0.5522042465281232, 1.052135754800022], [0.6022042472731812, 1.052135754800022], [-0.5477957698631541, 1.1021357555450801], [-0.3477957668829219, 1.1021357555450801], [-0.09779576315763161, 1.1021357555450801], [-0.2477957653928058, 1.1521357562901382], [0.30220424280283287, 1.1521357562901382], [-0.5977957706082122, 1.2021357570351963], [-0.19779576464774773, 1.2021357570351963], [-0.04779576241257355, 1.2021357570351963], [0.2522042420577748, 1.2021357570351963], [0.402204244292949, 1.2021357570351963], [0.5022042457830651, 1.2021357570351963], [0.20220424131271675, 1.2521357577802543], [0.3522042435478909, 1.2521357577802543], [-0.14779576390268967, 1.3521357592703704], [0.5522042465281232, 1.3521357592703704]]}}
+[bt_navigator-11] [INFO] [1792684198.855362908] [bt_navigator]: Begin navigating from current location (0.00, 0.00) to (0.40, 0.05)
+[safe_controller_server-7] [INFO] [1792684198.964767587] [controller_server]: Received FollowPath goal with checked TF completion
+[safe_controller_server-7] [WARN] [1792684198.964862631] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[safe_controller_server-7] [INFO] [1792684200.066597474] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684201.164983849] [controller_server]: Passing new path to controller.
+[safe_planner_server-9] [INFO] [1792684201.662586402] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[safe_controller_server-7] [INFO] [1792684202.168612882] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684203.267658861] [controller_server]: Passing new path to controller.
+[safe_planner_server-9] [INFO] [1792684203.660050255] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[safe_controller_server-7] [INFO] [1792684204.365096094] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684205.465068627] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684206.666769183] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684206.965583992] [controller_server]: Reached goal with valid TF
+[bt_navigator-11] [INFO] [1792684207.156934410] [bt_navigator]: Goal succeeded
+[explore.py-16] [INFO] [1792684207.208808197] [frontier_explorer]: {"wall_s": 24.257104390999302, "sim_s": 9.771, "event": "goal_result", "status": 4}
+[explore.py-16] [INFO] [1792684207.619103545] [frontier_explorer]: {"wall_s": 24.670376623005723, "sim_s": 10.002, "event": "observation_result", "goal_index": 0, "action_status": 4, "expected_boundary_cells": 116, "observed_boundary_cells": 116, "expected_target_cells": 113, "observed_target_cells": 113, "observed_target_free_cells": 113}
+[safe_planner_server-9] [INFO] [1792684207.661745263] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[explore.py-16] [INFO] [1792684208.836162810] [frontier_explorer]: {"wall_s": 25.886464821000118, "sim_s": 10.701, "event": "frontier_search", "robot": [0.26305430918566164, 0.019150307867280298], "frontier_cells": 30, "clusters": 5, "small_clusters": 5, "observation_regions": 1, "geometric_views": 183, "occluded_views": 3, "excluded_cells": 0, "reachable_cells": 3765, "candidates": 180, "reason": "CANDIDATES", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 180}
+[explore.py-16] [INFO] [1792684208.860721661] [frontier_explorer]: {"wall_s": 25.91214855600265, "sim_s": 10.728, "event": "nav2_path_evaluated", "batch": 2, "from_index": null, "to_index": 0, "status": 4, "cost": {"length_m": 1.4515243986109074, "initial_yaw": -0.7272862539946121, "arrival_yaw": -0.8462157541877176, "initial_turn_rad": 0.8857916826763805, "path_turn_rad": 0.20842904854884362, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 11.937333263950512, "stop_approach_points": [[1.1716142598447368, -0.7981687420942187], [1.1901893562518984, -0.8149008628574628], [1.2087623545755326, -0.8316352724391003], [1.2273490858095277, -0.8483546139663141], [1.2459354355737906, -0.8650744323306931], [1.264522548277518, -0.8817931062858755], [1.314522549022576, -0.9317931070309335], [1.289522548650047, -0.9567931074034626]]}}
+[explore.py-16] [INFO] [1792684208.869936103] [frontier_explorer]: {"wall_s": 25.921142689003318, "sim_s": 10.734, "event": "nav2_path_evaluated", "batch": 2, "from_index": null, "to_index": 1, "status": 4, "cost": {"length_m": 1.2810109973625974, "initial_yaw": 0.49036922585364734, "arrival_yaw": 0.606658025255516, "initial_turn_rad": 0.33186379717187886, "path_turn_rad": 0.2138865518979614, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 9.506013372945471, "stop_approach_points": [[1.189814943709698, 0.5848521563525331], [1.2105977961922383, 0.5987471913496243], [1.2313869429253606, 0.6126328803382755], [1.2521606401343268, 0.6265416482457276], [1.2729583699364246, 0.6404147487332146], [1.2937404594795003, 0.6543109281395025], [1.314522549022576, 0.6682069168109244], [1.339522549395105, 0.6932069171834534]]}}
+[explore.py-16] [INFO] [1792684208.880331764] [frontier_explorer]: {"wall_s": 25.93178558300133, "sim_s": 10.741, "event": "nav2_path_evaluated", "batch": 2, "from_index": null, "to_index": 2, "status": 4, "cost": null}
+[explore.py-16] [INFO] [1792684208.896896788] [frontier_explorer]: {"wall_s": 25.94794099000137, "sim_s": 10.752, "event": "nav2_path_evaluated", "batch": 2, "from_index": null, "to_index": 3, "status": 4, "cost": {"length_m": 1.5255614356065392, "initial_yaw": 1.1739399841238891, "arrival_yaw": 1.0118717791647251, "initial_turn_rad": 1.0154345554421207, "path_turn_rad": 0.167841850280118, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 12.648935800924555, "stop_approach_points": [[0.8878133675542506, 1.1893052522126133], [0.9006025217975582, 1.2107861943051652], [0.913385763260016, 1.2322709510950396], [0.9261903670274796, 1.2537427379140176], [0.9389247803642098, 1.2752564864035427], [0.9517129809331868, 1.2967378099658269], [0.9645225438071696, 1.3182069264966791], [0.9895225441796986, 1.3432069268692082]]}}
+[explore.py-16] [INFO] [1792684208.907101955] [frontier_explorer]: {"wall_s": 25.9582992680007, "sim_s": 10.757, "event": "nav2_path_evaluated", "batch": 2, "from_index": null, "to_index": 4, "status": 4, "cost": {"length_m": 1.4580398294627683, "initial_yaw": -2.485276236921706, "arrival_yaw": -2.425961355118747, "initial_turn_rad": 2.6437816656034747, "path_turn_rad": 0.07595576701568252, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 16.89811516833497, "stop_approach_points": [[-0.7275325160438664, -0.7841761462131054], [-0.7468433721970991, -0.8000533933063843], [-0.7661574708430559, -0.8159269210697737], [-0.7854774822698625, -0.8317931055408174], [-0.8354774830149205, -0.8817931062858755], [-0.8604774833874496, -0.9067931066584045]]}}
+[explore.py-16] [INFO] [1792684208.921439752] [frontier_explorer]: {"wall_s": 25.972830121005245, "sim_s": 10.763, "event": "nav2_path_evaluated", "batch": 2, "from_index": 0, "to_index": 1, "status": 4, "cost": {"length_m": 1.635355363428021, "initial_yaw": 1.5707963267948966, "arrival_yaw": 1.5042281630190728, "initial_turn_rad": 2.417012080982614, "path_turn_rad": 0.7853981633974483, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 17.643524308088608, "stop_approach_points": [[1.314522549022576, 0.5182069145757502], [1.314522549022576, 0.5432069149482792], [1.314522549022576, 0.5682069153208082], [1.314522549022576, 0.5932069156933373], [1.314522549022576, 0.6182069160658663], [1.314522549022576, 0.6432069164383953], [1.314522549022576, 0.6682069168109244], [1.339522549395105, 0.6932069171834534]]}}
+[explore.py-16] [INFO] [1792684208.939512337] [frontier_explorer]: {"wall_s": 25.989350345000275, "sim_s": 10.781, "event": "nav2_path_evaluated", "batch": 2, "from_index": 0, "to_index": 3, "status": 4, "cost": {"length_m": 2.372625068560964, "initial_yaw": 1.5913172023767603, "arrival_yaw": 1.9380898073870536, "initial_turn_rad": 2.437532956564478, "path_turn_rad": 0.3656179012953109, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 21.088660862485693, "stop_approach_points": [[1.0859571388173697, 1.169746345365987], [1.0823789527288943, 1.1944888536692495], [1.0788051535423397, 1.2192323156468425], [1.0752305914163207, 1.2439752054198372], [1.071660988396821, 1.2687192396020286], [1.068091194642455, 1.2934628923144877], [1.0645225452972857, 1.3182069264966791], [1.0145225445522277, 1.3682069272417372], [0.9895225441796986, 1.3432069268692082]]}}
+[explore.py-16] [INFO] [1792684208.959626492] [frontier_explorer]: {"wall_s": 26.010587027005386, "sim_s": 10.788, "event": "nav2_path_evaluated", "batch": 2, "from_index": 0, "to_index": 4, "status": 4, "cost": {"length_m": 2.2060660500509273, "initial_yaw": 3.141592653589793, "arrival_yaw": 3.070285188804503, "initial_turn_rad": 2.2953768994020756, "path_turn_rad": 0.14189705460416402, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 19.68990500183497, "stop_approach_points": [[-0.6854774807797464, -0.9317931070309335], [-0.7104774811522754, -0.9317931070309335], [-0.7354774815248044, -0.9317931070309335], [-0.7604774818973334, -0.9317931070309335], [-0.7854774822698625, -0.9317931070309335], [-0.8354774830149205, -0.8817931062858755], [-0.8604774833874496, -0.9067931066584045]]}}
+[explore.py-16] [INFO] [1792684208.974432545] [frontier_explorer]: {"wall_s": 26.025516330002574, "sim_s": 10.8, "event": "nav2_path_evaluated", "batch": 2, "from_index": 1, "to_index": 0, "status": 4, "cost": {"length_m": 1.7060660426003469, "initial_yaw": -1.5707963267948966, "arrival_yaw": -1.7818896600176433, "initial_turn_rad": 2.177454352050413, "path_turn_rad": 0.7853981633974483, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 17.312627049858236, "stop_approach_points": [[1.364522549767634, -0.7817931047957594], [1.364522549767634, -0.8067931051682884], [1.364522549767634, -0.8317931055408174], [1.364522549767634, -0.8567931059133465], [1.364522549767634, -0.8817931062858755], [1.314522549022576, -0.9317931070309335], [1.289522548650047, -0.9567931074034626]]}}
+[explore.py-16] [INFO] [1792684208.989664980] [frontier_explorer]: {"wall_s": 26.040609905001475, "sim_s": 10.807, "event": "nav2_path_evaluated", "batch": 2, "from_index": 1, "to_index": 3, "status": 4, "cost": {"length_m": 0.7813177004333559, "initial_yaw": 1.9871705765518375, "arrival_yaw": 2.2567653509460692, "initial_turn_rad": 1.3805125512963214, "path_turn_rad": 0.26959477439423174, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 10.043477773295006, "stop_approach_points": [[1.1282812056101568, 1.2106904454023713], [1.115575402503345, 1.2322209785601153], [1.102831833893041, 1.2537290050036567], [1.0901088646482782, 1.2752496199483623], [1.0773376394823861, 1.296741243193417], [1.0645225452972857, 1.3182069264966791], [1.0145225445522277, 1.3682069272417372], [0.9895225441796986, 1.3432069268692082]]}}
+[explore.py-16] [INFO] [1792684209.024360282] [frontier_explorer]: {"wall_s": 26.075393753002572, "sim_s": 10.819, "event": "nav2_path_evaluated", "batch": 2, "from_index": 1, "to_index": 4, "status": 4, "cost": {"length_m": 2.7594045827139038, "initial_yaw": -2.572837062106168, "arrival_yaw": -2.466976726346035, "initial_turn_rad": 3.1036902198179024, "path_turn_rad": 0.11436635344026014, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 24.74639950836371, "stop_approach_points": [[-0.7249241213821955, -0.7875405185166564], [-0.7451045377900849, -0.802296912169161], [-0.7652896272021943, -0.8170469162036504], [-0.7854774822698625, -0.8317931055408174], [-0.8354774830149205, -0.8817931062858755], [-0.8604774833874496, -0.9067931066584045]]}}
+[explore.py-16] [INFO] [1792684209.077392273] [frontier_explorer]: {"wall_s": 26.128637608002464, "sim_s": 10.853, "event": "nav2_path_evaluated", "batch": 2, "from_index": 3, "to_index": 0, "status": 4, "cost": {"length_m": 2.3738715084841533, "initial_yaw": -1.5719152479267324, "arrival_yaw": -1.3875289038994842, "initial_turn_rad": 2.5837870270914576, "path_turn_rad": 0.18738300498773297, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 21.385451194816167, "stop_approach_points": [[1.2502376512140705, -0.782818686170905], [1.253811259665759, -0.8075618620461988], [1.2573833422385183, -0.8323054193912249], [1.2609538989323488, -0.8570491674711171], [1.264522548277518, -0.8817931062858755], [1.314522549022576, -0.9317931070309335], [1.289522548650047, -0.9567931074034626]]}}
+[explore.py-16] [INFO] [1792684209.089243888] [frontier_explorer]: {"wall_s": 26.140478569999686, "sim_s": 10.865, "event": "nav2_path_evaluated", "batch": 2, "from_index": 3, "to_index": 1, "status": 4, "cost": {"length_m": 0.790991956165865, "initial_yaw": -1.1568073536965904, "arrival_yaw": -1.0829672495379572, "initial_turn_rad": 2.1686791328613158, "path_turn_rad": 0.07384010415863317, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 12.203928806260679, "stop_approach_points": [[1.2632247882484142, 0.8540471447998861], [1.276062007677985, 0.8325948129372527], [1.2888854941971948, 0.8111340887405099], [1.3017074548374756, 0.7896726016043025], [1.314522549022576, 0.7682069183010405], [1.364522549767634, 0.7182069175559824], [1.339522549395105, 0.6932069171834534]]}}
+[explore.py-16] [INFO] [1792684209.104927759] [frontier_explorer]: {"wall_s": 26.15600311000162, "sim_s": 10.872, "event": "nav2_path_evaluated", "batch": 2, "from_index": 3, "to_index": 4, "status": 4, "cost": {"length_m": 2.9496340635771365, "initial_yaw": -2.2336994616121455, "arrival_yaw": -2.282892592307887, "initial_turn_rad": 3.0376140664027163, "path_turn_rad": 0.12595523777640905, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 25.51703567744802, "stop_approach_points": [[-0.7381079060635125, -0.7736456742544313], [-0.7538992270996028, -0.7930269115732635], [-0.7696900712985277, -0.8124086257292611], [-0.7854774822698625, -0.8317931055408174], [-0.8354774830149205, -0.8817931062858755], [-0.8604774833874496, -0.9067931066584045]]}}
+[explore.py-16] [INFO] [1792684209.120463163] [frontier_explorer]: {"wall_s": 26.171853108004143, "sim_s": 10.884, "event": "nav2_path_evaluated", "batch": 2, "from_index": 4, "to_index": 0, "status": 4, "cost": {"length_m": 2.2060660500509273, "initial_yaw": 0.0, "arrival_yaw": -0.24497866312686414, "initial_turn_rad": 2.425961355118747, "path_turn_rad": 0.5404195002705842, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 20.347662336501475, "stop_approach_points": [[1.1145225460423438, -0.8817931062858755], [1.1395225464148728, -0.8817931062858755], [1.1645225467874019, -0.8817931062858755], [1.1895225471599309, -0.8817931062858755], [1.21452254753246, -0.8817931062858755], [1.239522547904989, -0.8817931062858755], [1.264522548277518, -0.8817931062858755], [1.314522549022576, -0.9317931070309335], [1.289522548650047, -0.9567931074034626]]}}
+[explore.py-16] [INFO] [1792684209.165658130] [frontier_explorer]: {"wall_s": 26.21220053000434, "sim_s": 10.895, "event": "nav2_path_evaluated", "batch": 2, "from_index": 4, "to_index": 1, "status": 4, "cost": {"length_m": 2.693049577268674, "initial_yaw": 0.5694663322505574, "arrival_yaw": 0.646331372364626, "initial_turn_rad": 2.9954276873693044, "path_turn_rad": 0.08657732170402632, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 24.085453651472832, "stop_approach_points": [[1.1934705681538196, 0.5796267839602158], [1.21363887289771, 0.5943999622809393], [1.2338039351488765, 0.6091773367687174], [1.253975291650625, 0.62394612818752], [1.2741538960772862, 0.6387048106584181], [1.294334789322341, 0.6534606321063243], [1.314522549022576, 0.6682069168109244], [1.339522549395105, 0.6932069171834534]]}}
+[explore.py-16] [INFO] [1792684209.188763182] [frontier_explorer]: {"wall_s": 26.238993133003532, "sim_s": 10.919, "event": "nav2_path_evaluated", "batch": 2, "from_index": 4, "to_index": 3, "status": 4, "cost": {"length_m": 2.8793464281944012, "initial_yaw": 0.9051812231309232, "arrival_yaw": 0.878187928267407, "initial_turn_rad": 2.9520427289299165, "path_turn_rad": 0.10079854996475857, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 24.903138902175165, "stop_approach_points": [[0.8698940176168213, 1.2018220370670967], [0.8856716057425507, 1.2212144323755971], [0.9014566325280589, 1.2406011056381139], [0.9172094251211922, 1.2600137188424234], [0.9329597381610659, 1.2794282393953942], [0.9487350374684018, 1.2988225420525559], [0.9645225438071696, 1.3182069264966791], [0.9895225441796986, 1.3432069268692082]]}}
+[explore.py-16] [INFO] [1792684209.189735391] [frontier_explorer]: {"wall_s": 26.241156447998947, "sim_s": 10.919, "event": "planning_batch_finished", "batch": 2, "reason": "CANDIDATES", "candidates": 5, "valid_paths": 4, "pair_paths": 12, "selected": {"x": 1.339522549395105, "y": 0.6932069171834534, "yaw": 0.606658025255516, "frontier_cells": 12, "cell": [53, 66], "frontier_group": 4, "small_frontier": true, "path_distance_m": 1.750000026077032, "predicted_gain_m2": 0.024292802250177985, "visible_gain_m2": 0.012500000372529033, "target_visible_gain_m2": 0.005000000149011613, "information_gain_m2": 0.024292802250177985, "visible_cells": [393, 471, 5681, 5843, 6080], "target_visible_cells": [5843, 6080], "initial_turn_rad": 0.3752027629574931, "goal_margin_m": 0.5700000000000001, "estimated_cost_s": 11.822008024549426, "score": -0.00205487952636573, "stage": "fine", "observation_region": 0, "nav2_path": {"length_m": 1.2810109973625974, "initial_yaw": 0.49036922585364734, "arrival_yaw": 0.606658025255516, "initial_turn_rad": 0.33186379717187886, "path_turn_rad": 0.2138865518979614, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 9.506013372945471, "stop_approach_points": [[1.189814943709698, 0.5848521563525331], [1.2105977961922383, 0.5987471913496243], [1.2313869429253606, 0.6126328803382755], [1.2521606401343268, 0.6265416482457276], [1.2729583699364246, 0.6404147487332146], [1.2937404594795003, 0.6543109281395025], [1.314522549022576, 0.6682069168109244], [1.339522549395105, 0.6932069171834534]]}, "route_reason": "nav2_open_visit_order", "nav2_anchor_index": 1, "nav2_chosen_index": 1, "nav2_visit_order": [1, 3, 0, 4], "nav2_visit_cost_s": 60.62484734289161, "nav2_visit_objective": "information_completion_with_travel_budget", "nav2_minimum_visit_cost_s": 60.62484734289161, "nav2_visit_cost_budget_s": 63.65608971003619, "nav2_baseline_information_latency_m2_s": 2.9766525180338808, "nav2_information_latency_m2_s": 2.9766525180338808, "nav2_information_order_used": false}}
+[bt_navigator-11] [INFO] [1792684210.023991456] [bt_navigator]: Begin navigating from current location (0.26, 0.02) to (1.34, 0.69)
+[explore.py-16] [INFO] [1792684210.024160172] [frontier_explorer]: {"wall_s": 27.074026689006132, "sim_s": 11.46, "event": "goal_sent", "target": {"x": 1.339522549395105, "y": 0.6932069171834534, "yaw": 0.606658025255516, "frontier_cells": 12, "cell": [53, 66], "frontier_group": 4, "small_frontier": true, "path_distance_m": 1.750000026077032, "predicted_gain_m2": 0.024292802250177985, "visible_gain_m2": 0.012500000372529033, "target_visible_gain_m2": 0.005000000149011613, "information_gain_m2": 0.024292802250177985, "visible_cells": [393, 471, 5681, 5843, 6080], "target_visible_cells": [5843, 6080], "initial_turn_rad": 0.3752027629574931, "goal_margin_m": 0.5700000000000001, "estimated_cost_s": 11.822008024549426, "score": -0.00205487952636573, "stage": "fine", "observation_region": 0, "nav2_path": {"length_m": 1.2810109973625974, "initial_yaw": 0.49036922585364734, "arrival_yaw": 0.606658025255516, "initial_turn_rad": 0.33186379717187886, "path_turn_rad": 0.2138865518979614, "inflation_integral_m": 0.0, "maximum_cost": 0, "estimated_cost_s": 9.506013372945471, "stop_approach_points": [[1.189814943709698, 0.5848521563525331], [1.2105977961922383, 0.5987471913496243], [1.2313869429253606, 0.6126328803382755], [1.2521606401343268, 0.6265416482457276], [1.2729583699364246, 0.6404147487332146], [1.2937404594795003, 0.6543109281395025], [1.314522549022576, 0.6682069168109244], [1.339522549395105, 0.6932069171834534]]}, "route_reason": "nav2_open_visit_order", "nav2_anchor_index": 1, "nav2_chosen_index": 1, "nav2_visit_order": [1, 3, 0, 4], "nav2_visit_cost_s": 60.62484734289161, "nav2_visit_objective": "information_completion_with_travel_budget", "nav2_minimum_visit_cost_s": 60.62484734289161, "nav2_visit_cost_budget_s": 63.65608971003619, "nav2_baseline_information_latency_m2_s": 2.9766525180338808, "nav2_information_latency_m2_s": 2.9766525180338808, "nav2_information_order_used": false, "observation_world": [[1.8895225575907437, -1.7567931193243915], [1.8395225568456857, -1.7067931185793335], [1.6395225538654534, 1.5932069305944985], [1.8395225568456857, 1.6932069320846146], [1.8395225568456857, 1.8432069343197888]], "target_observation_world": [[1.8395225568456857, 1.6932069320846146], [1.8395225568456857, 1.8432069343197888]]}}
+[safe_controller_server-7] [INFO] [1792684210.136446965] [controller_server]: Received FollowPath goal with checked TF completion
+[safe_controller_server-7] [INFO] [1792684211.338547773] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684212.437476755] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684213.537156808] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684214.742119986] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684215.737152447] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684216.837383140] [controller_server]: Passing new path to controller.
+[safe_planner_server-9] [INFO] [1792684217.660316872] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[safe_controller_server-7] [INFO] [1792684217.937759404] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684218.938800186] [controller_server]: Passing new path to controller.
+[safe_planner_server-9] [INFO] [1792684219.660561972] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 80 X 79 at 0.050000 m/pix
+[safe_controller_server-7] [INFO] [1792684220.138428904] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684221.237366752] [controller_server]: Passing new path to controller.
+[safe_planner_server-9] [INFO] [1792684221.662387734] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 80 X 79 at 0.050000 m/pix
+[safe_controller_server-7] [INFO] [1792684222.339267719] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684223.538259957] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684224.639112067] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684225.737355323] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684226.837455344] [controller_server]: Passing new path to controller.
+[safe_controller_server-7] [INFO] [1792684227.436819205] [controller_server]: Reached goal with valid TF
+[bt_navigator-11] [INFO] [1792684227.625749158] [bt_navigator]: Goal succeeded
+[safe_planner_server-9] [INFO] [1792684227.660040581] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 80 X 80 at 0.050000 m/pix
+[explore.py-16] [INFO] [1792684227.805574491] [frontier_explorer]: {"wall_s": 44.85688014400512, "sim_s": 20.042, "event": "goal_result", "status": 4}
+[explore.py-16] [INFO] [1792684229.813449419] [frontier_explorer]: {"wall_s": 46.85702923100325, "sim_s": 21.08, "event": "observation_result", "goal_index": 1, "action_status": 4, "expected_boundary_cells": 5, "observed_boundary_cells": 5, "expected_target_cells": 2, "observed_target_cells": 2, "observed_target_free_cells": 2}
+[explore.py-16] [INFO] [1792684231.019795253] [frontier_explorer]: {"wall_s": 48.05955090700445, "sim_s": 21.465, "event": "frontier_search", "robot": [1.230256439352822, 0.6035359380126849], "frontier_cells": 0, "clusters": 0, "small_clusters": 0, "observation_regions": 0, "geometric_views": 0, "occluded_views": 0, "excluded_cells": 0, "reachable_cells": 3919, "candidates": 0, "reason": "NO_FRONTIERS", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 0}
+[explore.py-16] [INFO] [1792684233.221685778] [frontier_explorer]: {"wall_s": 50.267336306998914, "sim_s": 22.575, "event": "frontier_search", "robot": [1.230256439352822, 0.6035359380126849], "frontier_cells": 0, "clusters": 0, "small_clusters": 0, "observation_regions": 0, "geometric_views": 0, "occluded_views": 0, "excluded_cells": 0, "reachable_cells": 3919, "candidates": 0, "reason": "NO_FRONTIERS", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 0}
+[explore.py-16] [INFO] [1792684235.609125181] [frontier_explorer]: {"wall_s": 52.65761380800541, "sim_s": 23.632, "event": "frontier_search", "robot": [1.230256439352822, 0.6035359380126849], "frontier_cells": 0, "clusters": 0, "small_clusters": 0, "observation_regions": 0, "geometric_views": 0, "occluded_views": 0, "excluded_cells": 0, "reachable_cells": 3919, "candidates": 0, "reason": "NO_FRONTIERS", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 0}
+[explore.py-16] [INFO] [1792684237.818771786] [frontier_explorer]: {"wall_s": 54.860406712999975, "sim_s": 24.612, "event": "frontier_search", "robot": [1.230256439352822, 0.6035359380126849], "frontier_cells": 0, "clusters": 0, "small_clusters": 0, "observation_regions": 0, "geometric_views": 0, "occluded_views": 0, "excluded_cells": 0, "reachable_cells": 3919, "candidates": 0, "reason": "NO_FRONTIERS", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 0}
+[explore.py-16] [INFO] [1792684240.207822896] [frontier_explorer]: {"wall_s": 57.25753131900274, "sim_s": 26.026, "event": "frontier_search", "robot": [1.230256439352822, 0.6035359380126849], "frontier_cells": 0, "clusters": 0, "small_clusters": 0, "observation_regions": 0, "geometric_views": 0, "occluded_views": 0, "excluded_cells": 0, "reachable_cells": 3919, "candidates": 0, "reason": "NO_FRONTIERS", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 0}
+[explore.py-16] [INFO] [1792684242.612375608] [frontier_explorer]: {"wall_s": 59.662061851006, "sim_s": 27.461, "event": "frontier_search", "robot": [1.230256439352822, 0.6035359380126849], "frontier_cells": 0, "clusters": 0, "small_clusters": 0, "observation_regions": 0, "geometric_views": 0, "occluded_views": 0, "excluded_cells": 0, "reachable_cells": 3919, "candidates": 0, "reason": "NO_FRONTIERS", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 0}
+[explore.py-16] [INFO] [1792684245.014458933] [frontier_explorer]: {"wall_s": 62.065549794002436, "sim_s": 28.593, "event": "frontier_search", "robot": [1.230256439352822, 0.6035359380126849], "frontier_cells": 0, "clusters": 0, "small_clusters": 0, "observation_regions": 0, "geometric_views": 0, "occluded_views": 0, "excluded_cells": 0, "reachable_cells": 3919, "candidates": 0, "reason": "NO_FRONTIERS", "cooling_views": 0, "exhausted_views": 0, "retry_sim": null, "available_candidates": 0}
+[explore.py-16] [INFO] [1792684245.018258902] [frontier_explorer]: {"wall_s": 62.06668887800333, "sim_s": 28.593, "event": "mission_stopping", "reason": "NO_FRONTIERS"}
+[explore.py-16] [INFO] [1792684245.608575517] [frontier_explorer]: {"wall_s": 62.657845282999915, "sim_s": 28.847, "event": "stop_verified"}
+[map_saver_server-14] [INFO] [1792684245.615342965] [map_saver_server]: Saving map from '/map' topic to '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/complete_v14/mission/map' file
+[map_saver_server-14] [INFO] [1792684245.655704113] [map_io]: Received a 80 X 80 map @ 0.05 m/pix
+[map_saver_server-14] [INFO] [1792684245.697059032] [map_io]: Writing map occupancy data to /home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/complete_v14/mission/map.pgm
+[map_saver_server-14] [INFO] [1792684245.700015475] [map_io]: Writing map metadata to /home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/complete_v14/mission/map.yaml
+[map_saver_server-14] [INFO] [1792684245.700671144] [map_io]: Map saved
+[map_saver_server-14] [INFO] [1792684245.700758536] [map_saver_server]: Map saved successfully
+[async_slam_toolbox_node-6] Save To File /home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/complete_v14/mission/map.posegraph 
+[async_slam_toolbox_node-6] Mapper <- Module
+[async_slam_toolbox_node-6] Mapper <- m_pSequentialScanMatcher
+[async_slam_toolbox_node-6] Mapper <- m_pGraph
+[async_slam_toolbox_node-6] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[async_slam_toolbox_node-6] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[async_slam_toolbox_node-6] Mapper <- m_pMapperSensorManager
+[async_slam_toolbox_node-6] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[async_slam_toolbox_node-6] Mapper <- m_Listeners
+[async_slam_toolbox_node-6] **Finished serializing Mapper**
+[async_slam_toolbox_node-6] Save To File
+[async_slam_toolbox_node-6] **Serializing Dataset**
+[async_slam_toolbox_node-6] Dataset <- m_SensorNameLookup
+[async_slam_toolbox_node-6] Dataset <- m_Data
+[async_slam_toolbox_node-6] Dataset <- m_Lasers
+[async_slam_toolbox_node-6] Dataset <- m_pDatasetInfo
+[async_slam_toolbox_node-6] **Finished serializing Dataset**
+[explore.py-16] [INFO] [1792684246.065325469] [frontier_explorer]: {"wall_s": 63.116071578006085, "sim_s": 29.014, "event": "map_saved", "sha256": {"map.yaml": "5481a7ccdc6e0467c05e9c939c83f0f1169f5eab295030ce6e1e7831d6797f32", "map.pgm": "6ef42131eba80486298f064a2bf7646e1b97f16e309bb96b004576d381ee24e8", "map.posegraph": "581183bdcfc589184fd8a63b833d3c8841d79512aa685460f7f570dfcd1c8587", "map.data": "7675f1aa90960b73f7530df321166acd86f7c902788f502ff18d9899a4a6331e"}}
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[waypoint_follower-12] [INFO] [1792684246.437307322] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[waypoint_follower-12] [INFO] [1792684246.437484792] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-12] [INFO] [1792684246.437557479] [waypoint_follower]: Deactivating
+[waypoint_follower-12] [INFO] [1792684246.437577767] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[behavior_server-10] [INFO] [1792684246.437414299] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-10] [INFO] [1792684246.437795865] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-10] [INFO] [1792684246.437857215] [behavior_server]: Deactivating
+[behavior_server-10] [INFO] [1792684246.437885567] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[smoother_server-8] [INFO] [1792684246.437461201] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[smoother_server-8] [INFO] [1792684246.437573938] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-8] [INFO] [1792684246.437733724] [smoother_server]: Deactivating
+[smoother_server-8] [INFO] [1792684246.437755207] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[bt_navigator-11] [INFO] [1792684246.437835199] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[bt_navigator-11] [INFO] [1792684246.437891281] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-11] [INFO] [1792684246.437939825] [bt_navigator]: Deactivating
+[bt_navigator-11] [INFO] [1792684246.437962223] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[robot_state_publisher-2] [INFO] [1792684246.438612220] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[async_slam_toolbox_node-6] [INFO] [1792684246.438825523] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-5] [INFO] [1792684246.442174277] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-3] [INFO] [1792684246.442313662] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_saver_server-14] [INFO] [1792684246.442401283] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_saver_server-14] [INFO] [1792684246.442501525] [map_saver_server]: Running Nav2 LifecycleNode rcl preshutdown (map_saver_server)
+[map_saver_server-14] [INFO] [1792684246.442588315] [map_saver_server]: Deactivating
+[map_saver_server-14] [INFO] [1792684246.442607039] [map_saver_server]: Destroying bond (map_saver_server) to lifecycle manager.
+[velocity_smoother-13] [INFO] [1792684246.447340544] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother-13] [INFO] [1792684246.447522305] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-13] [INFO] [1792684246.447639463] [velocity_smoother]: Deactivating
+[velocity_smoother-13] [INFO] [1792684246.447671090] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[safe_controller_server-7] [INFO] [1792684246.448862284] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_controller_server-7] [INFO] [1792684246.448942652] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[safe_controller_server-7] [INFO] [1792684246.449010099] [controller_server]: Deactivating
+[safe_controller_server-7] [INFO] [1792684246.449044079] [controller_server]: Deactivating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[safe_controller_server-7] [INFO] [1792684246.449071345] [local_costmap.local_costmap]: Deactivating
+[INFO] [lifecycle_manager-17]: sending signal 'SIGINT' to process[lifecycle_manager-17]
+[INFO] [explore.py-16]: sending signal 'SIGINT' to process[explore.py-16]
+[INFO] [navigation_gate.py-15]: sending signal 'SIGINT' to process[navigation_gate.py-15]
+[INFO] [map_saver_server-14]: sending signal 'SIGINT' to process[map_saver_server-14]
+[INFO] [velocity_smoother-13]: sending signal 'SIGINT' to process[velocity_smoother-13]
+[INFO] [waypoint_follower-12]: sending signal 'SIGINT' to process[waypoint_follower-12]
+[INFO] [bt_navigator-11]: sending signal 'SIGINT' to process[bt_navigator-11]
+[INFO] [behavior_server-10]: sending signal 'SIGINT' to process[behavior_server-10]
+[INFO] [safe_planner_server-9]: sending signal 'SIGINT' to process[safe_planner_server-9]
+[ERROR] [map_saver_server-14]: process has died [pid 133073, exit code -2, cmd '/opt/ros/humble/lib/nav2_map_server/map_saver_server --ros-args -r __node:=map_saver_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_19dc45mk --params-file /tmp/launch_params_qhvf5mx2'].
+[ERROR] [velocity_smoother-13]: process has died [pid 133071, exit code -2, cmd '/opt/ros/humble/lib/nav2_velocity_smoother/velocity_smoother --ros-args -r __node:=velocity_smoother --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_xgy6zcrd --params-file /tmp/launch_params_23jecnin -r cmd_vel:=/nav/cmd_vel_raw -r cmd_vel_smoothed:=/nav/cmd_vel'].
+[INFO] [parameter_bridge-3]: process has finished cleanly [pid 133039]
+[INFO] [smoother_server-8]: sending signal 'SIGINT' to process[smoother_server-8]
+[INFO] [parameter_bridge-5]: process has finished cleanly [pid 133043]
+[INFO] [safe_controller_server-7]: sending signal 'SIGINT' to process[safe_controller_server-7]
+[INFO] [async_slam_toolbox_node-6]: process has finished cleanly [pid 133054]
+[ERROR] [smoother_server-8]: process has died [pid 133059, exit code -2, cmd '/opt/ros/humble/lib/nav2_smoother/smoother_server --ros-args -r __node:=smoother_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_ndi13jkj'].
+[INFO] [cmd_guard.py-4]: sending signal 'SIGINT' to process[cmd_guard.py-4]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 133037]
+[INFO] [ign-1]: sending signal 'SIGINT' to process[ign-1]
+[smoother_server-8] [INFO] [1792684246.454294845] [smoother_server]: Cleaning up
+[lifecycle_manager-17] [INFO] [1792684246.454995592] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-17] [INFO] [1792684246.455159224] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-17] [INFO] [1792684246.455232440] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[safe_planner_server-9] [INFO] [1792684246.456707518] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_planner_server-9] [INFO] [1792684246.456779546] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[safe_planner_server-9] [INFO] [1792684246.456837760] [planner_server]: Deactivating
+[safe_planner_server-9] [INFO] [1792684246.456881357] [global_costmap.global_costmap]: Deactivating
+[behavior_server-10] [INFO] [1792684246.458599988] [behavior_server]: Cleaning up
+[ERROR] [cmd_guard.py-4]: process has died [pid 133041, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_sim/lib/smartcar_sim/cmd_guard.py --ros-args -r __node:=sim_cmd_guard -r /sim/cmd_vel:=/nav/safe_cmd_vel'].
+[map_saver_server-14] [INFO] [1792684246.464623390] [map_saver_server]: Cleaning up
+[map_saver_server-14] [INFO] [1792684246.464801484] [map_saver_server]: Destroying bond (map_saver_server) to lifecycle manager.
+[map_saver_server-14] [INFO] [1792684246.561238676] [map_saver_server]: Destroying
+[waypoint_follower-12] [INFO] [1792684246.468000238] [waypoint_follower]: Cleaning up
+[velocity_smoother-13] [INFO] [1792684246.488098020] [velocity_smoother]: Cleaning up
+[velocity_smoother-13] [INFO] [1792684246.488192121] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[bt_navigator-11] [INFO] [1792684246.488403711] [bt_navigator]: Cleaning up
+[velocity_smoother-13] [INFO] [1792684246.587084721] [velocity_smoother]: Destroying
+[safe_controller_server-7] [INFO] [1792684246.608810346] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[explore.py-16] Traceback (most recent call last):
+[explore.py-16]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_slam/lib/smartcar_slam/explore.py", line 416, in <module>
+[navigation_gate.py-15] Traceback (most recent call last):
+[navigation_gate.py-15]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py", line 175, in main
+[navigation_gate.py-15]     rclpy.spin(node)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[navigation_gate.py-15]     executor.spin_once()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[navigation_gate.py-15]     self._spin_once_impl(timeout_sec)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 809, in _spin_once_impl
+[navigation_gate.py-15]     raise handler.exception()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 309, in _execute_coroutine_step
+[navigation_gate.py-15]     result = coro.send(None)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 478, in handler
+[navigation_gate.py-15]     arg = take_from_wait_list(entity)
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 400, in _take_subscription
+[navigation_gate.py-15]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[navigation_gate.py-15] RuntimeError: Unable to convert call argument to Python object (compile in debug mode for details)
+[navigation_gate.py-15] 
+[navigation_gate.py-15] During handling of the above exception, another exception occurred:
+[navigation_gate.py-15] 
+[navigation_gate.py-15] Traceback (most recent call last):
+[navigation_gate.py-15]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py", line 183, in <module>
+[navigation_gate.py-15]     main()
+[navigation_gate.py-15]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py", line 179, in main
+[navigation_gate.py-15]     node.destroy_node();rclpy.try_shutdown()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1689, in destroy_node
+[navigation_gate.py-15]     self.destroy_client(self._clients[0])
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1599, in destroy_client
+[safe_controller_server-7] [INFO] [1792684246.651092130] [controller_server]: Cleaning up
+[safe_controller_server-7] [INFO] [1792684246.651135392] [controller_server]: Cleaning up controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [ign-1]: process has finished cleanly [pid 133035]
+[explore.py-16]     if __name__=='__main__':main()
+[explore.py-16]   File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_slam/lib/smartcar_slam/explore.py", line 413, in main
+[explore.py-16]     node.destroy_node();rclpy.try_shutdown()
+[explore.py-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1691, in destroy_node
+[explore.py-16]     self.destroy_service(self._services[0])
+[explore.py-16] KeyboardInterrupt
+[navigation_gate.py-15]     client.destroy()
+[navigation_gate.py-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/client.py", line 187, in destroy
+[navigation_gate.py-15]     self.__client.destroy_when_not_in_use()
+[navigation_gate.py-15] KeyboardInterrupt
+[safe_planner_server-9] [INFO] [1792684246.660235097] [planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[safe_planner_server-9] [INFO] [1792684246.660295503] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[safe_planner_server-9] [INFO] [1792684246.682252982] [planner_server]: Cleaning up
+[safe_controller_server-7] [INFO] [1792684246.688062341] [local_costmap.local_costmap]: Cleaning up
+[smoother_server-8] [INFO] [1792684246.689783053] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[waypoint_follower-12] [INFO] [1792684246.697431600] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[waypoint_follower-12] [INFO] [1792684246.700016271] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [waypoint_follower-12]: process has finished cleanly [pid 133068]
+[waypoint_follower-12] [INFO] [1792684246.702518587] [waypoint_follower]: Destroying
+[smoother_server-8] [INFO] [1792684246.722827707] [smoother_server]: Destroying
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing entity deletions on [[0m[1;32m/world/smartcar_world/scene/deletion[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing state changes on [[0m[1;32m/world/smartcar_world/state[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing pose messages on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mpose/info[0m[1;32m][0m[1;32m[0m
+[ign-1] [1;32m[Msg] [0m[1;32mPublishing dynamic pose messages on [[0m[1;32m/world/smartcar_world[0m[1;32m/[0m[1;32mdynamic_pose/info[0m[1;32m][0m[1;32m[0m
+[behavior_server-10] [INFO] [1792684246.808152249] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[behavior_server-10] [INFO] [1792684246.822858557] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_planner_server-9] [INFO] [1792684246.860316611] [global_costmap.global_costmap]: Cleaning up
+[safe_planner_server-9] [INFO] [1792684246.870307426] [planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[safe_planner_server-9] [INFO] [1792684246.870440277] [planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[behavior_server-10] [INFO] [1792684246.893839739] [behavior_server]: Destroying
+[safe_controller_server-7] [INFO] [1792684246.906134466] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[safe_controller_server-7] [INFO] [1792684246.923912342] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_controller_server-7] [INFO] [1792684246.933256150] [local_costmap.local_costmap]: Destroying
+[safe_planner_server-9] [INFO] [1792684246.936539568] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[lifecycle_manager-17] [INFO] [1792684246.942495377] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_planner_server-9] [INFO] [1792684246.950389753] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[safe_planner_server-9] [INFO] [1792684246.962941363] [global_costmap.global_costmap]: Destroying
+[lifecycle_manager-17] [INFO] [1792684247.015817008] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[safe_controller_server-7] [INFO] [1792684247.021842793] [controller_server]: Destroying
+[safe_planner_server-9] [INFO] [1792684247.039262592] [planner_server]: Destroying
+[ERROR] [navigation_gate.py-15]: process has died [pid 133077, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py --ros-args -r __node:=navigation_gate --params-file /tmp/launch_params_blaxkc34'].
+[bt_navigator-11] [INFO] [1792684247.113528666] [bt_navigator]: Completed Cleaning up
+[bt_navigator-11] [INFO] [1792684247.113595504] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[bt_navigator-11] [INFO] [1792684247.113917456] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[bt_navigator-11] [INFO] [1792684247.121884392] [bt_navigator]: Destroying
+[INFO] [behavior_server-10]: process has finished cleanly [pid 133064]
+[ERROR] [explore.py-16]: process has died [pid 133096, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_slam/lib/smartcar_slam/explore.py --ros-args -r __node:=frontier_explorer --params-file /tmp/launch_params_c49pnoo7'].
+[INFO] [lifecycle_manager-17]: process has finished cleanly [pid 133309]
+[INFO] [safe_planner_server-9]: process has finished cleanly [pid 133061]
+[INFO] [safe_controller_server-7]: process has finished cleanly [pid 133057]
+[INFO] [bt_navigator-11]: process has finished cleanly [pid 133066]

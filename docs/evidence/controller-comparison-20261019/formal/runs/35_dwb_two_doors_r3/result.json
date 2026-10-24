@@ -1,0 +1,157 @@
+{
+  "result": "PASS",
+  "scope": "SIMULATION_ONLY",
+  "case": "two_doors",
+  "started_utc": "2026-10-20T00:12:25.273455+00:00",
+  "domain_id": 134,
+  "ign_partition": "smartcar-replan-d5c337fd569a4aa9af3091aaca5c7fe8",
+  "goal": [
+    1.03,
+    -2.92,
+    0.0
+  ],
+  "goal_send_count": 1,
+  "checks": {
+    "blockers_present_before_goal": true,
+    "startup_ready": true,
+    "stopped": true,
+    "single_goal_for_blocked_phase": true,
+    "expected_action_result": true,
+    "both_blockers_observed": true,
+    "blockers_retained_until_abort": true,
+    "no_automatic_full_map_clears": true
+  },
+  "firmware_source_version": 131,
+  "pi_exercised": false,
+  "pi_changed": false,
+  "not_verified": [
+    "physical vehicle",
+    "moving obstacles",
+    "arbitrary routes",
+    "multi-goal GUI"
+  ],
+  "obstacle": {
+    "x": 4.5,
+    "y": 0.0,
+    "dx": 1.2,
+    "dy": 1.85,
+    "dz": 0.6
+  },
+  "blockers": [
+    {
+      "name": "blocked_left",
+      "shape": "sphere",
+      "x": -2.9082,
+      "y": 0.2833,
+      "z": 0.5,
+      "radius": 0.5
+    },
+    {
+      "name": "blocked_right",
+      "shape": "box",
+      "x": 3.0925,
+      "y": 0.8227,
+      "z": 0.5,
+      "size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "reopen_requested": false,
+  "action_type": "NavigateToPose",
+  "reset_cycles_requested": 0,
+  "source_sha256": {
+    "ros2_ws/tools/verify_replanning.py": "631dfadab8876bef6539b001214b1030df2581242c54a6654eae1dc775d00583",
+    "ros2_ws/tools/verify_navigation.py": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml": "c2366b36a4d12b1bc29d3b003651f9a6bb797dd013a01c2517364d5be2778556",
+    "ros2_ws/src/smartcar_nav2/config/navigate_through_recovery.xml": "0c869e8b78530b398af4fee458133158463b4e6c2f2cda025c95a8e9c58594e5",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "ec0bbd3203a523ea50079f5e38eeda3718e1f22f636b00152039d8cd33a6bc2b",
+    "ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp": "c0a3212dcf32b832f09a32d30a741e9f8da8ba6c1e20ecb8a5464960a0a896cf",
+    "ros2_ws/src/smartcar_nav2/src/safe_costmap.hpp": "886d6dec8b80a39f6ce775657a3056d332719792c2e7f723da34e161f0f937d2",
+    "ros2_ws/src/smartcar_nav2/src/safe_planner_server.cpp": "e2ec842f1dae3c285a759c55bc8d420100cb77cfcb04edb6cbac4fd94a673ffc"
+  },
+  "params_override_sha256": "7faee2d5f30366ed6b0a2e45fdb14d47dad350032bd89324d84c232094d7ce03",
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false",
+    "params_file:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/dwb.yaml",
+    "world:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/runs/35_dwb_two_doors_r3/test_world.sdf",
+    "initial_x:=-2.99",
+    "initial_y:=1.91"
+  ],
+  "lifecycle_states": {
+    "amcl": "active",
+    "waypoint_follower": "active",
+    "controller_server": "active",
+    "map_server": "active",
+    "smoother_server": "active",
+    "planner_server": "active",
+    "behavior_server": "active",
+    "velocity_smoother": "active",
+    "bt_navigator": "active"
+  },
+  "action_status": 6,
+  "stop_evidence": {
+    "verified": true,
+    "samples": 31,
+    "duration_wall_s": 1.0007446750023519,
+    "max_linear_mps": 0.009604167443155731,
+    "max_angular_rps": 6.023400473283785e-10,
+    "wait_wall_s": 1.023910342999443
+  },
+  "stop_samples": 31,
+  "final_world_pose": [
+    0.5188515774365928,
+    2.8433569993270016,
+    1.6877190735967331
+  ],
+  "global_clear_calls": 0,
+  "local_clear_calls": 0,
+  "shutdown": {
+    "process_group": 74142,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "truth_bridge_shutdown": {
+    "process_group": 74143,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "paths_received": 16,
+  "duration_wall_s": 48.17256134100171,
+  "raw_sha256": {
+    "velocity.csv": "46a34757a31891925ea2fd473d6e9b64d72366ad082e0b44cb82fb55c0d6ba95",
+    "world_pose.csv": "bf4813e1c8fe1880990e16a62e9e5e746bcd1fed0d299da74e0d2e3d05e6edb4",
+    "scan.jsonl": "0fe8f3db49f8ab69403a33fa4518f5aee10fc9078c12238e809c77375ba8c04c",
+    "launch.log": "6beeefd050ca3b6249331ad17008f13a2ad5226160f4998ad2054b23df68c6d3",
+    "test_world.sdf": "2eeae2a7911a39b622afbe47528fc20d639ae2b1a85bb158cb94ccd33361ec9c",
+    "safety.jsonl": "a385b73579eaf6d14bcaac051a1c8f4e44bbd092c98556bdc09c441d80a24c23",
+    "odom.csv": "fde32ea4c42cfed86fb51e4ec48fd89858081c1edf35e336ac4b62e8848d8bae",
+    "truth_bridge.log": "6c37d1a5afe3ca58cd9cfdfb7d347639ed98709d1ff62b51dcf9cca09c678eb7",
+    "amcl.jsonl": "fa43012bf5fdd08597250773f4bd1e76adba34f0272de38367489f25aad3385f",
+    "behavior_tree.jsonl": "9a2fa52c7eedb504b2341d6b7a3a72c8496227c9510651f315113674b0f32978",
+    "clock.jsonl": "45505a4d78eb152ab982cf934c8a28643f9b5e3ad31098a8641385eec7dea2c4",
+    "feedback.jsonl": "6e2ac2e599264f2dbc6987b2419fb5898c4a65c0e631f79f803f838184ca2764",
+    "global_costmap_costmap.jsonl": "3237400a216f79264307eb6616560e02d84b386a2867a48984eee9a5ca4cebaa",
+    "local_costmap_costmap.jsonl": "83abd3925d35e7e7daa6053eab60a9bfc2c80407b7fdf7a6dbaabda25a720359",
+    "plans.jsonl": "d7ee585dc2c262375344e7a42360953aee35b8a90ba1fbb1cca7bf30100955a9",
+    "resources.csv": "e70a18c122bdde39e564d07a16d7b386144ee7f605870d013bb4be5e2321ee2c",
+    "world_pose.jsonl": "4a2dd7ad75580174514c5bc2f35ce70437dbebc1fe0d54e6a9c9006a9d86c655",
+    "map.jsonl": "b2d25f9fab0991278f7e6dc937ada4ca268c300260902d9afddcd4de09d55b37",
+    "events.jsonl": "85781ed4ed5b270995c98db12270579ba10e4d3b762998bee9b0e3dd7b58ffb1",
+    "obstacle_memory.csv": "f1a5e5b9799b2ae2bc7cff22e809cdaaa5872e6dd2b961160afd586becfdd179"
+  }
+}

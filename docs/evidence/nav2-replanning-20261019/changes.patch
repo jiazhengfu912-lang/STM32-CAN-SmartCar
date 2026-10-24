@@ -1,0 +1,103 @@
+diff --git a/docs/ACCEPTANCE.md b/docs/ACCEPTANCE.md
+index c56bf57..99844bd 100644
+--- a/docs/ACCEPTANCE.md
++++ b/docs/ACCEPTANCE.md
+@@ -1,5 +1,34 @@
+ # SmartCar 验收记录与调参波形 · 更新至 2026-10-19
+ 
++## 2026-10-19：导航途中遇障重规划与转向空间修复（仅仿真）
++
++用户报告遇障停住后Goal failed。原配置实测在约1.21秒内已经生成绕行路径，但路径从箱体侧面窄缝通过，门控累计569条`OBSTACLE_NEAR_TURN`，控制器多次`Failed to make progress`；180秒未结束后验收器取消。**这次基线没有等到顶层ABORTED，不把主动取消写成Goal failed。**首次测试因验收器未启动世界位姿记录桥，60秒未就绪且未发目标，也完整保留。
++
++全局规划由矩形轮廓改为半径0.35m保守圆，保留0.02m padding；覆盖局部带padding矩形的约0.3245m最大转弯半径及半个0.05m栅格余量。NavFn A*、RPP、每秒重规划、局部矩形、速度、碰撞预测、近障保护与所有超时不变。算法没有换成其它规划/控制器，改变的是规划碰撞空间；可能改走更长路线或排除只适合固定姿态的窄缝。
++
++**STM32 v131，P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，10ms按电机轴rpm误差累计，D=0。**固件轮速PI、起步、IMU和相对导航均未改、未在Gazebo执行。下面波形直接来自本轮Gazebo/ROS实收点，未平滑/补点/删异常，长缺口断线；不是实物轮速波形。
++
++![修改前：新路径存在但近障转向门控长期阻止运动，保留180秒超时](evidence/nav2-replanning-20261019/baseline_detour_02/velocity.png)
++
++图中P/I同上未改，全局为原矩形。控制器持续请求速度而保护输出基本为零，证明仅“生成新路径”不足以完成绕行；原因是规划预留空间小于执行转向要求。原始扫描、代价图、路径、故障与超时取消记录均保留。
++
++![修改后：自动改道、到达与持续停车，原始速度和保护状态](evidence/nav2-replanning-20261019/after_detour_01/velocity.png)
++
++图中P/I同上未改，采用保守圆形全局轮廓，局部矩形及保护不变。在office_loop中向map(4.5,0,0)只发一次目标，车辆x约0.45m时插入中心(2,0)、0.4×0.5×0.6m箱体，约2.67墙钟秒收到绕行路径；该延迟包括运行负载，不是上限。车辆经左门→上方两间房→右门绕过，返回SUCCEEDED，最终世界位姿约(4.4532,0.0693,0.0981rad)，86条连续停车样本通过；该轮无近障转向门控阻塞。启动和并行负载中的扫描过期告警原样保留，未调整保护阈值。前后运行部分时间在不同ROS域/随机Gazebo分区并行，不能当同负载性能比较。
++
++![同轮新旧规划路径和完整实收车辆轨迹，坐标范围与修改前一致](evidence/nav2-replanning-20261019/after_detour_01/trajectory.png)
++
++图中P/I同上未改，修改全局规划轮廓的原因是让规划器选择有转弯空间的路线。橙色原路径、绿色首条绕行路径来自map，蓝色世界轨迹仅用于验收，按AMCL近似对齐；不从两者差标定定位误差。离线模型轮廓到箱体最小间隙约0.625m，不是实车间隙/接触传感器实测。
++
++![目标被障碍完全占据：有限恢复后ABORTED并停车](evidence/nav2-replanning-20261019/after_blocked_01/velocity.png)
++
++图中P/I未改、采用同一修改后配置，向同一目标只发一次，随后以1.2×1.85×0.6m箱体占住目标；原有恢复后返回ABORTED，70条持续停车样本通过。此工况是目标占据，不能推广为所有完全封路；目标距离超出局部4m窗口，局部图没有箱体格属于窗口范围，实际全局图已标记障碍。
++
++三包构建通过，34个pytest通过（colcon39项含5个CTest包装，0错误/失败/跳过）；新增全局转弯空间与双代价图扫描输入回归。全部自建进程退出，未打开用户RViz、未连接硬件、未提交/推送/合并。移动障碍、多目标GUI、其它门口/地图、长期运行与实车仍待各自验收。
++
++[工况/限制和全部尝试](evidence/nav2-replanning-20261019/README.md) · [修改后结果](evidence/nav2-replanning-20261019/after_detour_01/result.json) · [目标占据结果](evidence/nav2-replanning-20261019/after_blocked_01/result.json) · [原始世界位姿CSV](evidence/nav2-replanning-20261019/after_detour_01/world_pose.csv) · [原始速度CSV](evidence/nav2-replanning-20261019/after_detour_01/velocity.csv) · [速度SVG](evidence/nav2-replanning-20261019/after_detour_01/velocity.svg) · [软件测试](evidence/nav2-replanning-20261019/ros_tests.log) · [证据SHA256](evidence/nav2-replanning-20261019/SHA256.json)。
++
++---
+ 
+ ## 2026-10-18—19：ROS 2 仿真、SLAM 与 Nav2 迁入同一仓库
+ 
+diff --git a/docs/PROGRESS.md b/docs/PROGRESS.md
+index f882961..c4d8242 100644
+--- a/docs/PROGRESS.md
++++ b/docs/PROGRESS.md
+@@ -10,11 +10,13 @@ v130完成[STM32 BSP分层](BSP.md)：按CAN/UART/I2C/System模块封装当前PC
+ 
+ 2026-10-18—19：新增 [ROS 2 上层工作空间](../ros2_ws/README.md)，把 Gazebo 仿真、二维 SLAM、AMCL/Nav2 与示例地图纳入同一仓库。三包构建、32 个软件用例和新目录实际单目标导航/到达停车通过；[原始证据与限制](evidence/ros2-integration-20261018/README.md)已归档。STM32/ESP32/协议/控制台未改，未实现或启用 ROS 实车桥；后续接入按[真实协议与分阶段路线](ROS2_HARDWARE_INTEGRATION.md)进行。本轮原固件全套主机回归因缺少新构建的 App 镜像中断，不把它写成全通过。
+ 
++2026-10-19：修复仿真全局规划轮廓与实际转向空间不匹配的问题。[本轮遇障重规划验收](evidence/nav2-replanning-20261019/README.md)记录原配置在箱体前被近障转向保护拦住、修改后中途插入箱体自动绕经相邻房间并抵达停车，以及目标区域被占据时失败停车。三包构建与34个pytest通过（colcon39项含包装）；未修改固件、降低保护或实现实车桥。全部修改仍在本地，未提交/推送/合并。
++
+ 本页依据当前源码和已有 [验收记录](ACCEPTANCE.md) 整理，不把历史试验当作本次重新实测，不以主观百分比表示完成度。
+ 
+ | 模块/里程碑 | 当前进度 | 验证边界 |
+ |---|---|---|
+-| ROS 2 仿真、SLAM、Nav2 | 三包源码与地图入库，构建/单元测试/一次实际单目标仿真通过 | 实车桥待实现；更多场景、恢复与多目标待本仓库复测 |
++| ROS 2 仿真、SLAM、Nav2 | 三包、单目标、选定途中遇障改道和目标占据失败停车已验证 | 实车桥待实现；更多障碍、移动物体、多目标GUI与长期运行仍待验证 |
+ | STM32 HAL App、CubeMX、Keil/EIDE | 已实现并有构建记录 | CubeMX重新生成流程尚未实际回归 |
+ | 双轮CAN反馈、速度PI与状态机 | 已实现，已做架空调试 | 低速二次启动、超调和左右启动差未解决 |
+ | Bootloader与无线OTA | 已实现，历史记录包含多版无线安装 | 新版断电恢复完整矩阵仍待验收 |
+diff --git a/ros2_ws/src/smartcar_nav2/CMakeLists.txt b/ros2_ws/src/smartcar_nav2/CMakeLists.txt
+index 1271998..f0e3df6 100644
+--- a/ros2_ws/src/smartcar_nav2/CMakeLists.txt
++++ b/ros2_ws/src/smartcar_nav2/CMakeLists.txt
+@@ -9,5 +9,6 @@ install(FILES scripts/gate_core.py DESTINATION lib/${PROJECT_NAME})
+ if(BUILD_TESTING)
+   find_package(ament_cmake_pytest REQUIRED)
+   ament_add_pytest_test(gate_core tests/test_gate_core.py)
++  ament_add_pytest_test(planning_clearance tests/test_planning_clearance.py)
+ endif()
+ ament_package()
+diff --git a/ros2_ws/src/smartcar_nav2/README.md b/ros2_ws/src/smartcar_nav2/README.md
+index 4b0dd4a..2b1a1bc 100644
+--- a/ros2_ws/src/smartcar_nav2/README.md
++++ b/ros2_ws/src/smartcar_nav2/README.md
+@@ -72,6 +72,14 @@ ros2 service call /navigation/stop std_srvs/srv/SetBool '{data: false}'
+ 6. 异常恢复：进展检查、控制失败检查，行为树最多4轮恢复，依次清理代价地图、碰撞检查下原地转动、等待、短距离后退。不可达时返回ABORTED；取消返回CANCELED。恢复不是保证任何堵塞都能走通。
+ 7. 到达结束：位置/朝向容差判定，动作返回SUCCEEDED并停车；导航基础节点仍保持运行，等待下一个目标。
+ 
++### 导航途中出现新障碍
++
++保持当前目标时，全局障碍层会接收新扫描，行为树每秒重规划一次。有可通行替代路线时，小车会换路继续前往原目标；目标被占据或没有可行路线时，会经过有限恢复后失败停车，需要用户重新发目标。
++
++全局 NavFn 使用半径0.35m、padding0.02m的保守圆形规划轮廓，局部碰撞检查仍使用原矩形。这让规划器预留转弯空间，避免选择随后被近障转向保护拦住的窄缝；因此可能绕更远，也可能拒绝只适合固定车身朝向通过的狭窄通道。不是实车标定参数，停车保护没有放宽。
++
++2026-10-19已在本仓库实际复现“生成绕行路径但被近障转向保护拦住”，并验证修改后中途插入箱体时自动经相邻房间绕行、抵达停车，以及目标被箱体占据时失败停车。[当轮原始数据与前后波形](../../../docs/evidence/nav2-replanning-20261019/README.md)包含失败、超时和缺测。重启导航后配置生效；用户已有RViz可保留，启动时使用`rviz:=false`避免重复打开。
++
+ ```text
+ Nav2控制/恢复 → /nav/cmd_vel_raw → 速度平滑 → /nav/cmd_vel
+   → 导航检查门控 → /nav/safe_cmd_vel → 原cmd_guard → /sim/drive_cmd_vel → Gazebo
+diff --git a/ros2_ws/src/smartcar_nav2/config/nav2.yaml b/ros2_ws/src/smartcar_nav2/config/nav2.yaml
+index ec8b9c0..1b87f14 100644
+--- a/ros2_ws/src/smartcar_nav2/config/nav2.yaml
++++ b/ros2_ws/src/smartcar_nav2/config/nav2.yaml
+@@ -238,7 +238,9 @@ global_costmap:
+         cost_scaling_factor: 4.0
+         inflation_radius: 0.45
+       always_send_full_costmap: true
+-      footprint: '[[-0.14, -0.16], [0.25, -0.16], [0.25, 0.16], [-0.14, 0.16]]'
++      # NavFn 仅检查栅格中心的内切半径，矩形会放行车头/转弯不能通过的窄缝。
++      # 全局规划采用覆盖矩形及近障转向保护的保守圆，局部碰撞检查仍用真实矩形。
++      robot_radius: 0.35
+       footprint_padding: 0.02
+       transform_tolerance: 0.5
+ map_server:

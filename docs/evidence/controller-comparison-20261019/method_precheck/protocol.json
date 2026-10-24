@@ -1,0 +1,222 @@
+{
+  "created_utc": "2026-10-19T14:46:35.128345+00:00",
+  "phase": "FORMAL",
+  "repeats": 3,
+  "order": [
+    {
+      "repeat": 1,
+      "case": "straight",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 1,
+      "case": "straight",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 1,
+      "case": "straight",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 1,
+      "case": "turn",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 1,
+      "case": "turn",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 1,
+      "case": "turn",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 1,
+      "case": "detour",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 1,
+      "case": "detour",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 1,
+      "case": "detour",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 1,
+      "case": "two_doors",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 1,
+      "case": "two_doors",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 1,
+      "case": "two_doors",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 2,
+      "case": "straight",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 2,
+      "case": "straight",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 2,
+      "case": "straight",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 2,
+      "case": "turn",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 2,
+      "case": "turn",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 2,
+      "case": "turn",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 2,
+      "case": "detour",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 2,
+      "case": "detour",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 2,
+      "case": "detour",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 2,
+      "case": "two_doors",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 2,
+      "case": "two_doors",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 2,
+      "case": "two_doors",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 3,
+      "case": "straight",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 3,
+      "case": "straight",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 3,
+      "case": "straight",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 3,
+      "case": "turn",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 3,
+      "case": "turn",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 3,
+      "case": "turn",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 3,
+      "case": "detour",
+      "controller": "RPP"
+    },
+    {
+      "repeat": 3,
+      "case": "detour",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 3,
+      "case": "detour",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 3,
+      "case": "two_doors",
+      "controller": "MPPI"
+    },
+    {
+      "repeat": 3,
+      "case": "two_doors",
+      "controller": "DWB"
+    },
+    {
+      "repeat": 3,
+      "case": "two_doors",
+      "controller": "RPP"
+    }
+  ],
+  "goal_timeout_wall_s": 240.0,
+  "head": "bef40ae9a8cca4eee6004a7495876a11e89495a5",
+  "scope": "SIMULATION_ONLY; no system/controller default changes; no physical hardware",
+  "common": {
+    "controller_hz": 10,
+    "forward_limit_mps": 0.3,
+    "controller_angular_limit_rps": 0.6,
+    "goal_xy_m": 0.15,
+    "goal_yaw_rad": 0.2,
+    "global_planner": "NavFn A*",
+    "replan_hz": 1,
+    "costmaps": "unchanged",
+    "gates": "unchanged",
+    "recovery": "unchanged, max 4, no automatic clears",
+    "threads_env": 1,
+    "execution": "serial, rotated controller order"
+  },
+  "selection_policy": {
+    "primary": "lexicographic: correct task outcome + verified stop, then model geometry overlap safety check",
+    "tie_break": "among controllers passing all planned trials without model overlap, min-max normalize controller means within each reachable case; equal-case mean cost: sim_time 40%, travel_length 25%, angular_total_variation_per_sim_s 20%, controller_process_cpu 15%; lower is better; score is not probability or accuracy",
+    "blocked_case": "expected ABORTED+stop; excluded from efficiency score, included in reliability",
+    "failed_trials": "never removed; partial-success efficiency cannot defeat reliable completion"
+  },
+  "limitations": [
+    "Three repeats do not establish statistical significance or universal optimality",
+    "AMCL/Gazebo and MPPI random noise are not seed-controlled in this interface",
+    "CPU process includes local costmap and middleware; not pure optimizer time",
+    "existing user GUI workload remains; record host load and real-time factor",
+    "clearance is a 2D model geometry proxy, not a contact sensor or hardware measurement"
+  ],
+  "config_sha256": {
+    "DWB": "436699e3fec64e87b3c6ab21eacea38c1005ee5ffd044c04b90e7ef74b88c444",
+    "RPP": "bc5bf97fa717efe53f0170f9f1278a54838706b6b2503688742d4cbe9656284e",
+    "MPPI": "cef77409f3531f7e0b41647e44d62dc77df7484120e92f3463a8133e6b3f759c"
+  }
+}

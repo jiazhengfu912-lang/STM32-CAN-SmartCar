@@ -1,0 +1,226 @@
+{
+  "scope": "STATIC_ARCHIVED_MAP_NAV2_PLANNING_ONLY",
+  "result": "PASS",
+  "source_run": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/after_discovery_r2",
+  "domain_id": 59,
+  "partition": "smartcar-path-probe-4d43d56de77c416e83a7a59279abe721",
+  "commands": [
+    [
+      "ros2",
+      "run",
+      "nav2_map_server",
+      "map_server",
+      "--ros-args",
+      "--params-file",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/diagnostics/planner_v14/params.yaml",
+      "-p",
+      "yaml_filename:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/after_discovery_r2/mission/map.yaml"
+    ],
+    [
+      "ros2",
+      "run",
+      "smartcar_nav2",
+      "safe_planner_server",
+      "--ros-args",
+      "--params-file",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/diagnostics/planner_v14/params.yaml"
+    ],
+    [
+      "ros2",
+      "run",
+      "tf2_ros",
+      "static_transform_publisher",
+      "--x",
+      "-3.475810553356179",
+      "--y",
+      "1.6912286198132471",
+      "--frame-id",
+      "map",
+      "--child-frame-id",
+      "base_footprint"
+    ],
+    [
+      "ros2",
+      "run",
+      "nav2_lifecycle_manager",
+      "lifecycle_manager",
+      "--ros-args",
+      "-p",
+      "autostart:=true",
+      "-p",
+      "use_sim_time:=false",
+      "-p",
+      "node_names:=[map_server,planner_server]"
+    ]
+  ],
+  "search": {
+    "frontier_cells": 128,
+    "clusters": 13,
+    "small_clusters": 12,
+    "observation_regions": 6,
+    "geometric_views": 1944,
+    "occluded_views": 1766,
+    "excluded_cells": 0,
+    "reachable_cells": 15004,
+    "candidates": 178,
+    "reason": "CANDIDATES"
+  },
+  "source_sha256": {
+    "route_core.py": "8941653bc9469ad8a93d03cd9333dc7a629fa98a96fc9afecc80643f6e371c12",
+    "verify_exploration_planner.py": "bcf2f4d9cd4e9c91ed5551e3c22d360636656ab72c1730a11b0ef96b2a3224fa",
+    "exploration_memory.py": "eb7b48b2bbe6ac55d44e240aeea295a8f1eac80aa7169f5f6dc0ce08d38d63e3",
+    "route_planner.py": "f9b436c5743b819f71b62be8bb911aabe4e525026e9c664efda5eba2fe6a6b83",
+    "frontier_core.py": "4d7d27589d16b007ff9bdd90b9c345dcee3158056e730103b110fed01de4e4eb"
+  },
+  "input_map_sha256": "a6f67ab4c4bddcf6b383b90c280413999d9071e73eb73bbb4bf1474f8fad8b52",
+  "begun": true,
+  "done": true,
+  "reason": "CANDIDATES",
+  "target": {
+    "x": -2.810917032211881,
+    "y": 3.33277694892598,
+    "yaw": 1.6375172754523954,
+    "frontier_cells": 15,
+    "cell": [
+      146,
+      43
+    ],
+    "frontier_group": 11,
+    "small_frontier": true,
+    "path_distance_m": 2.3000000342726707,
+    "predicted_gain_m2": 1.025948198129205,
+    "visible_gain_m2": 0.03500000104308129,
+    "target_visible_gain_m2": 0.03500000104308129,
+    "information_gain_m2": 1.025948198129205,
+    "visible_cells": [
+      28629,
+      28828,
+      29027,
+      29226,
+      29426,
+      29625,
+      29824,
+      30023,
+      30222,
+      30421,
+      30620,
+      30819,
+      31217,
+      31416
+    ],
+    "target_visible_cells": [
+      28629,
+      28828,
+      29027,
+      29226,
+      29426,
+      29625,
+      29824,
+      30023,
+      30222,
+      30421,
+      30620,
+      30819,
+      31217,
+      31416
+    ],
+    "initial_turn_rad": 0.9505468408120752,
+    "goal_margin_m": 0.5700000000000001,
+    "estimated_cost_s": 16.215848287969283,
+    "score": -0.06326824103863671,
+    "stage": "fine",
+    "observation_region": 0,
+    "nav2_path": {
+      "length_m": 2.038764867221439,
+      "initial_yaw": 0.5666616178372892,
+      "arrival_yaw": 1.6375172754523954,
+      "initial_turn_rad": 0.5666616178372892,
+      "path_turn_rad": 1.746994828056308,
+      "inflation_integral_m": 0.0,
+      "maximum_cost": 0,
+      "estimated_cost_s": 15.06071097853967,
+      "stop_approach_points": [
+        [
+          -2.788750272374605,
+          3.135010787323276
+        ],
+        [
+          -2.789142995463953,
+          3.1600077359379473
+        ],
+        [
+          -2.789563184374023,
+          3.185003921613154
+        ],
+        [
+          -2.7899999672174456,
+          3.2100001072883604
+        ],
+        [
+          -2.7899999672174456,
+          3.2600001080334184
+        ],
+        [
+          -2.7899999672174456,
+          3.3100001087784765
+        ],
+        [
+          -2.810917032211881,
+          3.33277694892598
+        ]
+      ]
+    },
+    "route_reason": "nav2_information_visit_order",
+    "nav2_anchor_index": 6,
+    "nav2_chosen_index": 6,
+    "nav2_visit_order": [
+      6,
+      1,
+      2,
+      4,
+      3,
+      5
+    ],
+    "nav2_visit_cost_s": 243.3041765977717,
+    "nav2_visit_objective": "information_completion_with_travel_budget",
+    "nav2_minimum_visit_cost_s": 243.1702258771304,
+    "nav2_visit_cost_budget_s": 255.32873717098693,
+    "nav2_baseline_information_latency_m2_s": 206.76699311849148,
+    "nav2_information_latency_m2_s": 196.11883096132618,
+    "nav2_information_order_used": true
+  },
+  "shutdown": [
+    {
+      "process_group": 124396,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 124395,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 124394,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    },
+    {
+      "process_group": 124393,
+      "signals": [
+        "SIGINT"
+      ],
+      "remaining_pids": [],
+      "returncode": 0
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "algorithm": "v11 safe-geodesic regional representatives + directed Nav2 open visit order",
+  "source_sha256": {
+    "ros2_ws/src/smartcar_slam/scripts/route_core.py": "bd842521931a02102cd059baa8cc0e44fd4c2c79007a9e49adca18c0e1647918",
+    "ros2_ws/src/smartcar_slam/scripts/exploration_memory.py": "f6d726fb1bf679a4d9dfc2f6332a3c85b1fe138f852115bdbee60dde318971ef",
+    "ros2_ws/src/smartcar_slam/scripts/route_planner.py": "2ec21267408c28f75495726b5dfc9874bf739d6231ab5716815a5fe047597780",
+    "ros2_ws/src/smartcar_slam/scripts/frontier_core.py": "2ae4d0611ca8bd26cdf093f7a2a152f472982eca2df73602ab7873e69c69a22f",
+    "ros2_ws/src/smartcar_slam/scripts/explore.py": "b426c6ff3799e20aa9f612d9e016d0912880a9a0e86fab3fafbf14ba2ffeb02b"
+  },
+  "transit_clearance_m": 0.37,
+  "terminal_margin_m": 0.57,
+  "position_tolerance_m": 0.15,
+  "linear_mps": 0.2,
+  "angular_rps": 0.35,
+  "sliding_mode_or_PI_changed": false,
+  "formal_runs": [
+    "final_v11_discovery_r1b",
+    "final_v11_office",
+    "final_v11_discovery_r2"
+  ],
+  "development": [
+    "pilot_v7_discovery",
+    "after_discovery_r1 (v8)",
+    "after_office (v8, stopped before replacement)",
+    "final_v9_discovery_r1: two-hop ablation, full record retained; later v9 queue stops on source hash mismatch",
+    "final_v10_discovery_r1: actual matrices but candidate pool region imbalance; retained partial run",
+    "final_v10_discovery_r1: naturally VIEWPOINTS_EXHAUSTED_PARTIAL before late finish attempt; request unavailable and not sent",
+    "final_v10_office and final_v11_discovery_r1: overlapping owned simulations triggered unchanged protection; explicit finish/save, initial v11 attempt FAIL retained"
+  ],
+  "comparison": "Report all failures and partial results; observable proxy and center-space coverage separated; performance against an earlier unsafe termination is not equivalent-task completion improvement.",
+  "fine_phase": "At most 8 representatives; safe-map geodesic regions of radius 3m before candidate budget allocation; directed actual Nav2 matrix and minimum open visit order. Geodesic distances only group regions; actual Nav2 paths determine order.",
+  "serial_validation": {
+    "mutex": "out/exploration-tail-20261022/simulation.lock",
+    "fresh_domains": [
+      164,
+      165,
+      166,
+      167,
+      168
+    ],
+    "requires_no_unfinished_previous_run": true,
+    "changes_to_protection": false
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "after_detour_01": {
+    "result": "FAIL",
+    "error": null,
+    "action_status": 4,
+    "checks": {
+      "startup_ready": true,
+      "stopped": false,
+      "obstacle_inserted_during_action": true,
+      "single_goal_only": true,
+      "expected_action_result": true,
+      "original_path_straight": true,
+      "new_path_detours": true,
+      "actual_vehicle_detours": true,
+      "reached_goal_area": true,
+      "no_automatic_full_map_clears": true
+    },
+    "duration_wall_s": 237.90075804700064
+  },
+  "after_through_01": {
+    "result": "PASS",
+    "error": null,
+    "action_status": 6,
+    "checks": {
+      "blockers_present_before_goal": true,
+      "startup_ready": true,
+      "stopped": true,
+      "single_goal_for_blocked_phase": true,
+      "expected_action_result": true,
+      "both_blockers_observed": true,
+      "blockers_retained_until_abort": true,
+      "no_automatic_full_map_clears": true
+    },
+    "duration_wall_s": 135.41819863599994
+  },
+  "after_two_doors_01": {
+    "result": "FAIL",
+    "error": "60 秒内未就绪；生命周期：{'controller_server': 'active', 'amcl': 'inactive', 'map_server': 'inactive', 'smoother_server': 'active', 'planner_server': 'inactive', 'behavior_server': 'inactive', 'bt_navigator': 'inactive', 'waypoint_follower': 'inactive', 'velocity_smoother': 'inactive'}",
+    "action_status": null,
+    "checks": {
+      "blockers_present_before_goal": true
+    },
+    "duration_wall_s": 71.8780375310007
+  },
+  "after_two_doors_02": {
+    "result": "FAIL",
+    "error": null,
+    "action_status": 6,
+    "checks": {
+      "blockers_present_before_goal": true,
+      "startup_ready": true,
+      "stopped": true,
+      "single_goal_only": true,
+      "expected_action_result": true,
+      "both_blockers_observed": true,
+      "blockers_retained_until_abort": true,
+      "new_goal_after_removal_succeeded": false,
+      "reopened_stopped": true,
+      "removed_blocker_cleared_by_scan": false
+    },
+    "duration_wall_s": 107.91972508099934
+  },
+  "after_two_doors_03": {
+    "result": "FAIL",
+    "error": null,
+    "action_status": 6,
+    "checks": {
+      "blockers_present_before_goal": true,
+      "startup_ready": true,
+      "stopped": true,
+      "single_goal_for_blocked_phase": true,
+      "expected_action_result": true,
+      "both_blockers_observed": true,
+      "blockers_retained_until_abort": true,
+      "observation_goal_succeeded": true,
+      "new_goal_after_removal_succeeded": true,
+      "reopened_stopped": false,
+      "removed_blocker_cleared_by_scan": true,
+      "no_automatic_full_map_clears": true
+    },
+    "duration_wall_s": 318.672640703001
+  },
+  "baseline_two_doors_01": {
+    "result": "FAIL",
+    "error": "目标执行超时",
+    "action_status": null,
+    "checks": {
+      "blockers_present_before_goal": true,
+      "startup_ready": true
+    },
+    "duration_wall_s": 177.3457752559998
+  }
+}

@@ -1,0 +1,34 @@
+.....F............................                                       [100%]
+=================================== FAILURES ===================================
+_______ test_nav2_insertion_finishes_small_local_region_before_far_trip ________
+
+    def test_nav2_insertion_finishes_small_local_region_before_far_trip():
+        """实际候选间路径显示插入便宜时，低于旧0.8平方米门槛的小区也先补。"""
+        far={'x':8.,'y':1.,'frontier_group':0,'stage':'fine','visible_cells':[1,2,3,4],
+             'visible_gain_m2':.1,'predicted_gain_m2':.2,'path_distance_m':8.}
+        local={'x':1.,'y':2.,'frontier_group':1,'stage':'fine','visible_cells':[5],
+               'visible_gain_m2':.0025,'predicted_gain_m2':.01,'path_distance_m':1.}
+        a={'estimated_cost_s':42.,'length_m':8.,'arrival_yaw':0.}
+        b={'estimated_cost_s':8.,'length_m':1.,'arrival_yaw':0.}
+        edge={'estimated_cost_s':40.,'length_m':7.,'arrival_yaw':0.}
+        selected=rank_routes([far,local],[a,b],{(1,0):edge})
+        assert selected['x']==local['x'] and selected['route_reason']=='nav2_open_visit_order'
+        assert selected['nav2_visit_cost_s']==48.
+        local['visible_cells']=[1]
+>       assert len(shortlist([{**far,'path_distance_m':8.},{**local,'path_distance_m':1.}],6))==1
+
+ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ros2_ws/src/smartcar_slam/scripts/route_core.py:52: in shortlist
+    for target in sorted(local,key=lambda c:-c['visible_gain_m2']/c['estimated_cost_s']):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+c = {'frontier_group': 1, 'path_distance_m': 1.0, 'predicted_gain_m2': 0.01, 'stage': 'fine', ...}
+
+>   for target in sorted(local,key=lambda c:-c['visible_gain_m2']/c['estimated_cost_s']):
+E   KeyError: 'estimated_cost_s'
+
+ros2_ws/src/smartcar_slam/scripts/route_core.py:52: KeyError
+=========================== short test summary info ============================
+FAILED ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py::test_nav2_insertion_finishes_small_local_region_before_far_trip
+1 failed, 33 passed in 0.70s

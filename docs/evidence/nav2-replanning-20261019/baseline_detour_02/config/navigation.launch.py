@@ -1,0 +1,111 @@
+"""Start one simulator, saved-map AMCL and Nav2; never starts SLAM."""
+import math
+import os
+from pathlib import Path
+import time
+import yaml
+from ament_index_python.packages import get_package_share_directory, get_package_prefix
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction, TimerAction, RegisterEventHandler, EmitEvent
+from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+
+
+def start(context):
+    share = Path(get_package_share_directory('smartcar_nav2'))
+    sim = Path(get_package_share_directory('smartcar_sim'))
+    value = lambda name: LaunchConfiguration(name).perform(context)
+    map_path = Path(value('map')).expanduser().resolve()
+    params = Path(value('params_file')).expanduser().resolve()
+    if not map_path.is_file() or not params.is_file():
+        raise RuntimeError(f'Missing map YAML or Nav2 parameters: {map_path}, {params}')
+    metadata = yaml.safe_load(map_path.read_text())
+    image = map_path.parent / metadata['image']
+    if not image.is_file() or not math.isfinite(float(metadata['resolution'])) or metadata['resolution'] <= 0:
+        raise RuntimeError('Map YAML requires an existing image and positive resolution.')
+    initial = {k: float(value('initial_'+k)) for k in ['x', 'y', 'yaw']}
+    if not all(math.isfinite(v) for v in initial.values()):
+        raise RuntimeError('Initial pose must be finite.')
+    servers = [('nav2_controller', 'controller_server'), ('nav2_smoother', 'smoother_server'),
+               ('nav2_planner', 'planner_server'), ('nav2_behaviors', 'behavior_server'),
+               ('nav2_bt_navigator', 'bt_navigator'), ('nav2_waypoint_follower', 'waypoint_follower'),
+               ('nav2_velocity_smoother', 'velocity_smoother')]
+    for package, executable in servers + [('nav2_amcl', 'amcl'), ('nav2_map_server', 'map_server'),
+                                           ('smartcar_nav2', 'navigation_gate.py')]:
+        path = Path(get_package_prefix(package))/'lib'/package/executable
+        if not os.access(path, os.X_OK):
+            raise RuntimeError(f'Missing executable, install dependencies/rebuild before starting: {path}')
+    # A second simulator or SLAM would mix clocks, scans and map->odom authorities.
+    import rclpy
+    rclpy.init(args=[])
+    probe = rclpy.create_node('navigation_startup_check')
+    try:
+        until = time.monotonic() + 1.0
+        while time.monotonic() < until:
+            rclpy.spin_once(probe, timeout_sec=.1)
+        conflicts = [topic for topic in ['/clock', '/map', '/sim/scan', '/sim/odom', '/nav/safe_cmd_vel']
+                     if probe.count_publishers(topic)]
+        if conflicts:
+            raise RuntimeError('Stop the previous simulation/SLAM/Nav2 first. Existing publishers: '+', '.join(conflicts))
+    finally:
+        probe.destroy_node()
+        rclpy.shutdown()
+    common = [str(params), {'use_sim_time': True}]
+    actions = [IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(str(sim/'launch/sim.launch.py')),
+        launch_arguments={'world': value('world'), 'headless': value('headless'),
+                          'rviz': 'false', 'lidar': 'true', 'camera': 'false',
+                          'cmd_vel_topic': '/nav/safe_cmd_vel'}.items())]
+    actions += [
+        Node(package='nav2_map_server', executable='map_server', name='map_server',
+             parameters=common+[{'yaml_filename': str(map_path)}], output='screen'),
+        Node(package='nav2_amcl', executable='amcl', name='amcl',
+             parameters=common+[{'initial_pose.x': initial['x'], 'initial_pose.y': initial['y'],
+                                 'initial_pose.z': 0.0, 'initial_pose.yaw': initial['yaw']}], output='screen')]
+    for package, name in servers:
+        remaps = []
+        extra = []
+        if name in ['controller_server', 'behavior_server']:
+            remaps = [('cmd_vel', '/nav/cmd_vel_raw')]
+        elif name == 'velocity_smoother':
+            remaps = [('cmd_vel', '/nav/cmd_vel_raw'), ('cmd_vel_smoothed', '/nav/cmd_vel')]
+        elif name == 'bt_navigator':
+            extra = [{'default_nav_to_pose_bt_xml': str(share/'config/navigate_recovery.xml')}]
+        server = Node(package=package, executable=name, name=name, parameters=common+extra,
+                      remappings=remaps, output='screen')
+        actions.extend([server, RegisterEventHandler(OnProcessExit(target_action=server,
+                        on_exit=[EmitEvent(event=Shutdown(reason=name+' exited'))]))])
+    for suffix, names in [('localization', ['map_server', 'amcl']),
+                          ('navigation', [name for _, name in servers])]:
+        manager = Node(package='nav2_lifecycle_manager', executable='lifecycle_manager',
+                            name='lifecycle_manager_'+suffix,
+                            parameters=[{'use_sim_time': True, 'autostart': True, 'bond_timeout': 8.0,
+                                         'node_names': names}], output='screen')
+        # Give local DDS discovery and software-rendered sensors time before lifecycle RPCs.
+        actions.append(TimerAction(period=2.0 if suffix == 'localization' else 5.0, actions=[manager]))
+    gate = Node(package='smartcar_nav2', executable='navigation_gate.py', name='navigation_gate', output='screen')
+    actions.extend([gate, RegisterEventHandler(OnProcessExit(target_action=gate,
+                    on_exit=[EmitEvent(event=Shutdown(reason='Navigation command gate exited'))]))])
+    if value('rviz').lower() == 'true':
+        actions.append(Node(package='rviz2', executable='rviz2',
+                            arguments=['-d', str(share/'rviz/navigation.rviz')],
+                            parameters=[{'use_sim_time': True}], output='screen'))
+    return actions
+
+
+def generate_launch_description():
+    share = Path(get_package_share_directory('smartcar_nav2'))
+    # 示例地图随包安装，无需依赖开发者机器上的工作空间绝对路径。
+    return LaunchDescription([
+        DeclareLaunchArgument('world', default_value='office_loop'),
+        DeclareLaunchArgument('map', default_value=str(share/'maps/office_01/map.yaml')),
+        DeclareLaunchArgument('params_file', default_value=str(share/'config/nav2.yaml')),
+        DeclareLaunchArgument('rviz', default_value='false', choices=['true', 'false']),
+        DeclareLaunchArgument('headless', default_value='false', choices=['true', 'false']),
+        DeclareLaunchArgument('initial_x', default_value='0.0'),
+        DeclareLaunchArgument('initial_y', default_value='0.0'),
+        DeclareLaunchArgument('initial_yaw', default_value='0.0'),
+        OpaqueFunction(function=start)])

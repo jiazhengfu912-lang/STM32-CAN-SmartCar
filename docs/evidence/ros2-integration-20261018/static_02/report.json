@@ -1,0 +1,38 @@
+{
+  "scope": "MODEL_AND_OFFLINE_SOFTWARE_CHECKS_ONLY",
+  "ubuntu_humble_build": "NOT_CHECKED_BY_THIS_TOOL",
+  "gazebo_physics": "NOT_CHECKED_BY_THIS_TOOL",
+  "gazebo_gui": "NOT_CHECKED_BY_THIS_TOOL",
+  "camera_and_lidar_messages": "NOT_CHECKED_BY_THIS_TOOL",
+  "physical_vehicle": "NOT_CHECKED_BY_THIS_TOOL",
+  "checks": {
+    "python_syntax": {
+      "passed": true,
+      "errors": []
+    },
+    "xml_well_formed": {
+      "passed": true,
+      "errors": [],
+      "note": "XML syntax plus unit-test semantic checks; Fortress GUI config is an XML fragment with multiple top-level elements. Not a Fortress schema check."
+    },
+    "fortress_bridge_yaml": {
+      "passed": true
+    },
+    "rviz_yaml": {
+      "passed": true
+    },
+    "unit_and_geometry_tests": {
+      "passed": true,
+      "tests": 20,
+      "failures": 0,
+      "errors": 0
+    },
+    "linux_file_newlines": {
+      "passed": true
+    },
+    "archived_cad_mesh_hashes": {
+      "passed": true
+    }
+  },
+  "result": "PASS"
+}

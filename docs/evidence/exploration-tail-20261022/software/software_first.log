@@ -1,0 +1,19 @@
+.F.......................                                                [100%]
+=================================== FAILURES ===================================
+__________ test_disconnected_frontier_cannot_be_reached_through_wall ___________
+
+    def test_disconnected_frontier_cannot_be_reached_through_wall():
+        """隔离墙把前沿全部隔断时，不能给出穿墙目标或完成结论。"""
+        grid=room();grid[:,25:27]=100
+        goals,details=select_frontiers(grid,.1,(0.,0.),(1.5,3.))
+>       assert not goals and details['reason']=='NO_REACHABLE_FRONTIERS'
+E       AssertionError: assert (not [] and 'NO_OBSERVABLE_FRONTIERS' == 'NO_REACHABLE_FRONTIERS'
+E         - NO_REACHABLE_FRONTIERS
+E         ?     ^^^^
+E         + NO_OBSERVABLE_FRONTIERS
+E         ?    ++++ ^)
+
+ros2_ws/src/smartcar_slam/tests/test_frontier_core.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED ros2_ws/src/smartcar_slam/tests/test_frontier_core.py::test_disconnected_frontier_cannot_be_reached_through_wall
+1 failed, 24 passed in 0.54s

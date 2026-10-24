@@ -1,0 +1,152 @@
+{
+  "results": {
+    "gazebo_two_doors_01": {
+      "result": "PASS",
+      "scope": "SIMULATION_ONLY",
+      "tf_fault_status": null,
+      "action_status": 6,
+      "checks": {
+        "blockers_present_before_goal": true,
+        "startup_ready": true,
+        "reset_startup_all_active": true,
+        "reset_does_not_resume_motion": true,
+        "stopped": true,
+        "single_goal_for_blocked_phase": true,
+        "expected_action_result": true,
+        "both_blockers_observed": true,
+        "blockers_retained_until_abort": true,
+        "no_automatic_full_map_clears": true
+      },
+      "stop_evidence": {
+        "verified": true,
+        "samples": 37,
+        "duration_wall_s": 1.4427820199998678,
+        "max_linear_mps": 0.018575000756615445,
+        "max_angular_rps": 5.88418203051333e-10,
+        "wait_wall_s": 1.5041555650004739
+      },
+      "reset_stop_evidence": {
+        "verified": true,
+        "samples": 29,
+        "duration_wall_s": 1.0316071510005713,
+        "max_linear_mps": 3.6199896091181473e-19,
+        "max_angular_rps": 9.65879332900648e-19,
+        "wait_wall_s": 1.0570770850008557
+      },
+      "duration_wall_s": 68.16719320999982
+    },
+    "after_final": {
+      "result": "PASS",
+      "scope": "SYNTHETIC_ROS_NO_ACTUATION",
+      "tf_fault_status": 6,
+      "action_status": null,
+      "checks": {
+        "tf_fault_aborts": true,
+        "tf_fault_zero_output": true,
+        "repeat_reset_startup": true,
+        "reset_does_not_resume": true,
+        "new_valid_goal_succeeds": true,
+        "valid_far_goal_runs": true,
+        "cancel_terminates": true,
+        "active_goal_reset_terminates": true,
+        "active_reset_no_resume": true
+      },
+      "stop_evidence": null,
+      "reset_stop_evidence": null,
+      "duration_wall_s": 8.84492496799976
+    },
+    "gazebo_detour_reset_01": {
+      "result": "PASS",
+      "scope": "SIMULATION_ONLY",
+      "tf_fault_status": null,
+      "action_status": 4,
+      "checks": {
+        "startup_ready": true,
+        "reset_startup_all_active": true,
+        "reset_does_not_resume_motion": true,
+        "stopped": true,
+        "obstacle_inserted_during_action": true,
+        "single_goal_only": true,
+        "expected_action_result": true,
+        "original_path_straight": true,
+        "new_path_detours": true,
+        "actual_vehicle_detours": true,
+        "reached_goal_area": true,
+        "no_automatic_full_map_clears": true
+      },
+      "stop_evidence": {
+        "verified": true,
+        "samples": 43,
+        "duration_wall_s": 1.4594545090003521,
+        "max_linear_mps": 5.524469770534779e-11,
+        "max_angular_rps": 0.025419756227277518,
+        "wait_wall_s": 3.038692498999808
+      },
+      "reset_stop_evidence": {
+        "verified": true,
+        "samples": 27,
+        "duration_wall_s": 1.0165807630000927,
+        "max_linear_mps": 4.48988466614955e-19,
+        "max_angular_rps": 1.1108264247841329e-18,
+        "wait_wall_s": 1.0612882570003421
+      },
+      "duration_wall_s": 171.48660656899847
+    },
+    "baseline": {
+      "result": "FAIL",
+      "scope": "SYNTHETIC_ROS_NO_ACTUATION",
+      "tf_fault_status": 4,
+      "action_status": null,
+      "checks": {
+        "tf_fault_aborts": false,
+        "repeat_reset_startup": false
+      },
+      "stop_evidence": null,
+      "reset_stop_evidence": null,
+      "duration_wall_s": 16.008905413998946
+    },
+    "after_01": {
+      "result": "FAIL",
+      "scope": "SYNTHETIC_ROS_NO_ACTUATION",
+      "tf_fault_status": 6,
+      "action_status": null,
+      "checks": {
+        "tf_fault_aborts": true,
+        "tf_fault_zero_output": true,
+        "repeat_reset_startup": false
+      },
+      "stop_evidence": null,
+      "reset_stop_evidence": null,
+      "duration_wall_s": 10.670037709000098
+    },
+    "after_02": {
+      "result": "PASS",
+      "scope": "SYNTHETIC_ROS_NO_ACTUATION",
+      "tf_fault_status": 6,
+      "action_status": null,
+      "checks": {
+        "tf_fault_aborts": true,
+        "tf_fault_zero_output": true,
+        "repeat_reset_startup": true,
+        "reset_does_not_resume": true,
+        "new_valid_goal_succeeds": true,
+        "valid_far_goal_runs": true,
+        "cancel_terminates": true
+      },
+      "stop_evidence": null,
+      "reset_stop_evidence": null,
+      "duration_wall_s": 7.299148551999679
+    }
+  },
+  "build": "build_final.log PASS; initial compile error retained in build.log",
+  "tests": "40 pytest / colcon 47 including 7 wrappers, 0 errors/failures/skips",
+  "system_libraries_modified": false,
+  "hardware": "NOT_CONNECTED; ROS hardware bridge NOT_IMPLEMENTED",
+  "git": "local only; no commit/push/merge",
+  "limitations": [
+    "synthetic input test uses a fixed zero pose and future path stamp offset 3 s, not a physical robot",
+    "current user GUI session was not restarted; future launch uses new executable",
+    "detour sample ran before a constructor cleanup that removed transient duplicate logger warnings; final binary verified in after_final, colcon and two_doors",
+    "arbitrary GUI goals, moving obstacles and long-duration operation not fully verified"
+  ]
+}

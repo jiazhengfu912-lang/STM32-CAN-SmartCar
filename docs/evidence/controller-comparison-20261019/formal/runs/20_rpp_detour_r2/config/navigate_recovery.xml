@@ -1,0 +1,27 @@
+
+<!--
+  每秒重规划；自动恢复不清空代价地图，保留视野外已发现的堵路障碍。
+  障碍移走后仍由新鲜雷达射线清除。规划/跟踪失败统一进入有限恢复，
+  不以内层反复清图“成功”重置失败计数，四次恢复后向用户返回失败。
+-->
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="4" name="NavigateRecovery">
+      <PipelineSequence name="NavigateWithReplanning">
+        <RateController hz="1.0">
+          <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+        </RateController>
+        <FollowPath path="{path}" controller_id="FollowPath"/>
+      </PipelineSequence>
+      <ReactiveFallback name="RecoveryFallback">
+        <GoalUpdated/>
+        <RoundRobin name="RecoveryActions">
+          <Wait wait_duration="1"/>
+          <Spin spin_dist="1.57"/>
+          <Wait wait_duration="2"/>
+          <BackUp backup_dist="0.15" backup_speed="0.05"/>
+        </RoundRobin>
+      </ReactiveFallback>
+    </RecoveryNode>
+  </BehaviorTree>
+</root>

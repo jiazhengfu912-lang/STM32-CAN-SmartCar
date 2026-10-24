@@ -1,0 +1,65 @@
+[
+  {
+    "name": "watchdog_v15_r1",
+    "command": [
+      "/usr/bin/python3",
+      "ros2_ws/tools/verify_exploration.py",
+      "--output",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/watchdog_v15_r1",
+      "--case",
+      "watchdog",
+      "--world",
+      "discovery_lab",
+      "--domain-id",
+      "70",
+      "--max-sim-seconds",
+      "180",
+      "--timeout",
+      "500",
+      "--record-pose"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "watchdog_v15_r2",
+    "command": [
+      "/usr/bin/python3",
+      "ros2_ws/tools/verify_exploration.py",
+      "--output",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/watchdog_v15_r2",
+      "--case",
+      "watchdog",
+      "--world",
+      "discovery_lab",
+      "--domain-id",
+      "71",
+      "--max-sim-seconds",
+      "180",
+      "--timeout",
+      "500",
+      "--record-pose"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "complete_v15",
+    "command": [
+      "/usr/bin/python3",
+      "ros2_ws/tools/verify_exploration.py",
+      "--output",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/complete_v15",
+      "--case",
+      "complete",
+      "--world",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/complete_room/source/world.sdf",
+      "--domain-id",
+      "72",
+      "--max-sim-seconds",
+      "180",
+      "--timeout",
+      "500",
+      "--record-pose"
+    ],
+    "returncode": 0
+  }
+]

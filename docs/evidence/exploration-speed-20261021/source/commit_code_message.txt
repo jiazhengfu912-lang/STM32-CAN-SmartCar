@@ -1,0 +1,5 @@
+feat: add efficient autonomous exploration and map export checks
+
+Start SLAM from an empty map, select safe online frontiers, navigate through the existing gated RPP chain, and save only after verified stopping. Score observation gain against travel and turning time, reduce fixed waits, and prefer local completion before long departures.
+
+Add a mapping-only robust SLAM profile after reproducing false loop closures from recorded scans, and preserve unknown cells when exporting maps. Include isolated exploration, reload, and controller comparison tools. Firmware and hardware interfaces remain unchanged.

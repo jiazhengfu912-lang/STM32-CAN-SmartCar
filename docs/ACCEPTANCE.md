@@ -1,4 +1,688 @@
-# SmartCar 验收记录与调参波形 · 更新至 2026-09-20
+# SmartCar 验收记录与调参波形 · 更新至 2026-10-23
+
+<!-- exploration-handoff-v17:start -->
+## 2026-10-24 探索v17：近静止耗时与Frontier交接
+
+本轮判定：**整体近静止耗时和探索覆盖吞吐目标尚未达成，v17保留为待优化实验版本。** 用户于2026-10-24授权提交并推送本轮代码、文档和完整实验记录；归档不代表效率验收通过，证据目录保留提交前的原始快照。办公室交接中位数3.512→2.732仿真秒（降低22.2%），实验室2.652→2.689秒（增加1.4%，基本持平）。不能将办公室的局部交接改善扩大为全任务提速。交接任务构成不同：实验室20→13次、办公室18→29次；目标内容不同，中位数变化也可能受任务构成影响，不能作为独立因果证据。
+
+95%→98%同覆盖区间：实验室用时96.629→128.009秒（+32.5%）、近静止10.275→12.074秒（+17.5%）、路程11.480→16.344米（+42.4%）；办公室用时237.926→248.803秒（+4.6%）、近静止23.129→31.954秒（+38.2%）、路程28.274→27.674米（-2.1%）。固定参考面积吞吐分别下降24.5%和4.4%。
+
+局部等待有可见改善：该区间关联等地图的近静止时间，实验室1.342→0.437秒、办公室3.268→0.420秒；生命周期就绪等待分别3.350→0、8.819→0秒。搜索/查询阶段与行驶/访问顺序的变化抵消了这些收益；这些是事件关联和真实路径证据，不是唯一因果或CPU测量。
+
+覆盖与质量也有取舍：实验室最终几何可观测已知99.821%→99.243%、未知参考面积0.1275→0.5400m²，不能以更早退出/更短总路程称更快完成；办公室98.779%→99.520%、未知1.3225→0.5200m²，但总行程增加。两场景均为partial。导出地图几何P95实验室0.060→0.060m、办公室0.080→0.110m；新地图均通过真实Nav2地图服务器逐格重载，几何代理不代表实车精度。
+
+下一瓶颈的证据已经保留：实验室同覆盖区间的实际行驶增长，办公室搜索/查询阶段的停留增加。后续需要联合评估访问顺序与候选计算负担，不能仅削减交接等待或用更多目标数证明吞吐提高。
+
+
+本轮以冻结v15为基线，串行运行相同实验室/办公室及恢复、小房间回归。发现最初隔离基线CMake构建等级为空、新版为RelWithDebInfo后，保留旧轮次为开发参考，并补跑两轮RelWithDebInfo匹配基线；下方正式表仅使用匹配基线。原流程在目标结果后才搜索，并让搜索、查询和派发共享1秒节流，造成空等。v16开发轮出现同覆盖区间退化，保留但未采用；v17移除跨目标预备候选，以最新地图重新选择，等价缓存射线模板并限制区域广搜范围，移除共享交接节流，同批复用几何检查；已有完整新鲜观测证据时免除额外等帧。NavFn/RPP、SLAM、速度、到达容差和停机保护未改。固件源码v131、设备最后确认v127，未连接硬件，PI未在Gazebo中执行。
+
+所有下图P/I均为前→后不变：右反向P 0.45→0.45、其余P 0.30→0.30；稳态I 0.010→0.010、启动I 0.030→0.030，每10 ms积分、电机轴rpm、D=0。图中的算法版本是探索版本，不能当作固件或实车安装版本。
+
+软件构建通过；v17的105项colcon检查0错误、0失败、0跳过，数量包含包装，不是105轮Gazebo。v16曾有108项软件检查通过，但运动吞吐仍退化，软件检查不能替代性能验证。v17移除未采用预备逻辑及对应测试，新增限界广搜回归。初次隔离构建漏拷地图、初次测试误扫描到归档工作区的命令错误也保留日志；最终结果以重新执行成功的日志为准。测试未结束时读取到的中间缺结果日志已明确标注，最终报告在所有测试结束后重新读取。
+
+近静止按原始里程计`|v|<0.02 m/s`且`|w|<0.05 rad/s`判定，超过1仿真秒的缺口断线并单列，不补点、不平滑。阶段与速度的时间关联不能当CPU耗时。区间统计只使用完整落入窗口的原始采样间隔；相较历史工具的末端采样规则可有一个样本的边界差异，本轮新旧同规则。
+
+|场景/覆盖区间|用时 v15→v17 s|近静止 v15→v17 s|路程 v15→v17 m|参考面积吞吐变化|
+|---|---:|---:|---:|---:|
+|discovery / 0.9->0.95|8.842→80.589|0.000→6.429|1.683→10.434|-89.0%|
+|discovery / 0.9->0.98|105.471→208.598|10.275→18.503|13.165→26.779|-49.4%|
+|discovery / 0.95->0.98|96.629→128.009|10.275→12.074|11.480→16.344|-24.5%|
+|discovery / 0.98->0.99|182.372→90.964|18.195→3.958|15.465→12.455|100.5%|
+|office / 0.9->0.95|23.659→16.813|4.139→3.080|3.083→1.661|40.7%|
+|office / 0.9->0.98|261.585→265.616|27.268→35.034|31.361→29.339|-1.5%|
+|office / 0.95->0.98|237.926→248.803|23.129→31.954|28.274→27.674|-4.4%|
+
+|场景|交接次数 v15→v17|交接中位数 s|累计交接间隔 s|交接内近静止 s|
+|---|---:|---:|---:|---:|
+|discovery|20→13|2.651→2.689|61.043→36.516|60.123→35.629|
+|office|18→29|3.512→2.732|66.221→77.551|65.355→76.385|
+
+|轮次|结果/终止原因|几何可观测已知/自由 %|参考未知 m²|总路程 m|导出占据表面 P95 m|
+|---|---|---:|---:|---:|---:|
+|before_v15_office|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.344 / 95.445|0.7100|70.173|0.120|
+|before_v15_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.278 / 95.110|0.5150|54.233|0.070|
+|before_v15_matched_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.821 / 95.506|0.1275|92.610|0.060|
+|before_v15_matched_office|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|98.779 / 94.549|1.3225|57.461|0.080|
+|final_v16_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.481 / 95.005|0.3700|76.659|0.060|
+|final_v16_office|FAIL / `INTERRUPTED_PARTIAL`|缺测 / 缺测|缺测|缺测|缺测|
+|final_v17_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.243 / 94.843|0.5400|54.569|0.060|
+|final_v17_office|PASS / `NO_OBSERVABLE_FRONTIERS_PARTIAL`|99.520 / 95.043|0.5200|90.705|0.110|
+|watchdog_v17|PASS / `USER_FINISHED_PARTIAL`|31.458 / 30.568|48.8825|0.122|0.050|
+|complete_v17|PASS / `NO_FRONTIERS`|100.000 / 96.022|0.0000|1.443|0.045|
+
+目标次数不同，交接累计量需要结合中位数与同覆盖区间判断；吞吐按固定参考面积/实测用时计算，不以更多零碎目标充当有效覆盖。partial仍是部分图，单场景一对样本不构成统计显著性或实车结论。
+
+### discovery：同尺度前后原始波形与覆盖
+
+算法v15→v17；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，PI未在Gazebo执行。目标是减少交接空等，实测变化见上表，覆盖与吞吐分别判断。
+
+![discovery 原始里程计；橙色为目标结果到下一次发目标的交接区间](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_wave_discovery.png)
+
+![discovery 逐次交接与完整采样覆盖尾段](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_coverage_discovery.png)
+
+### office：同尺度前后原始波形与覆盖
+
+算法v15→v17；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，PI未在Gazebo执行。目标是减少交接空等，实测变化见上表，覆盖与吞吐分别判断。
+
+![office 原始里程计；橙色为目标结果到下一次发目标的交接区间](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_wave_office.png)
+
+![office 逐次交接与完整采样覆盖尾段](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_coverage_office.png)
+
+### v16开发退化：保留同覆盖阈值的反例
+
+v16实验室95%→98%相对原开发参考从94.039秒增至231.298秒；原参考的编译等级不同，此处只保留问题记录，不作v17正式量化对照，不能因交接更快就称覆盖吞吐改善。办公室在4个目标后提前失败/中断（已记录运动7.336米）、没有最终地图，不作为路线性能样本；原日志错误和缺测均保留，归因不超出证据。P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，PI未在Gazebo执行。
+
+![v16真实退化 handoff_wave](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_handoff_wave_discovery.png)
+
+![v16真实退化 handoff_coverage](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_handoff_coverage_discovery.png)
+
+### before_v15_office（v15开发参考，编译等级不同）
+
+实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![before_v15_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_office_velocity.png)
+
+![before_v15_office 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_office_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_office_velocity.svg)。
+
+### before_v15_discovery（v15开发参考，编译等级不同）
+
+实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![before_v15_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_discovery_velocity.png)
+
+![before_v15_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_discovery_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_discovery_velocity.svg)。
+
+### before_v15_matched_discovery（v15匹配构建基线）
+
+实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![before_v15_matched_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_discovery_velocity.png)
+
+![before_v15_matched_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_discovery_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_matched_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_discovery_velocity.svg)。
+
+### before_v15_matched_office（v15匹配构建基线）
+
+实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![before_v15_matched_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_office_velocity.png)
+
+![before_v15_matched_office 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_office_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_matched_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_office_velocity.svg)。
+
+### final_v16_discovery（v16退化/提前中断，未采用）
+
+实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v16预备搜索，保留失败；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![final_v16_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_discovery_velocity.png)
+
+![final_v16_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_discovery_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v16_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_discovery_velocity.svg)。
+
+### final_v16_office（v16退化/提前中断，未采用）
+
+实测：FAIL，`INTERRUPTED_PARTIAL`，complete=False；算法：v16预备搜索，保留失败；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![final_v16_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_office_velocity.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v16_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_office_velocity.svg)。
+
+### final_v17_discovery（v17修改后）
+
+实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![final_v17_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_discovery_velocity.png)
+
+![final_v17_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_discovery_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v17_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_discovery_velocity.svg)。
+
+### final_v17_office（v17修改后）
+
+实测：PASS，`NO_OBSERVABLE_FRONTIERS_PARTIAL`，complete=False；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![final_v17_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_office_velocity.png)
+
+![final_v17_office 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_office_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v17_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_office_velocity.svg)。
+
+### watchdog_v17（v17修改后）
+
+实测：PASS，`USER_FINISHED_PARTIAL`，complete=False；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![watchdog_v17 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/watchdog_v17_velocity.png)
+
+![watchdog_v17 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/watchdog_v17_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/watchdog_v17/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/watchdog_v17_velocity.svg)。
+
+### complete_v17（v17修改后）
+
+实测：PASS，`NO_FRONTIERS`，complete=True；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
+
+![complete_v17 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/complete_v17_velocity.png)
+
+![complete_v17 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/complete_v17_map.png)
+
+[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/complete_v17/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/complete_v17_velocity.svg)。
+
+详见[算法与测量方法](EXPLORATION_HANDOFF.md)、[本轮完整证据](evidence/exploration-handoff-20261024/README.md)、[派生指标](evidence/exploration-handoff-20261024/analysis/final_v17/metrics.json)。
+
+<!-- exploration-handoff-v17:end -->
+
+
+## 2026-10-23：尾段补盲与恢复修复（v14路线 / v15恢复）
+
+用户要求按“漏覆盖 → 尾段折返 → 终止原因”开始优化。算法修改包括小前沿保留、指定前沿可见性、替代观察余量、实际停车末段检查、按任务的有限访问记忆、面积收益、区域候选预算和实际 Nav2 有向开放访问顺序；v14 在接近最短整批行驶成本的预算内优先完成高收益观测；v15补充生命周期查询超时回收、显式恢复后重新确认及具体等待原因。v15未重跑大场景，性能图明确使用v14记录。终止需连续确认，冷却不当完成。没有扩大速度、容差或关闭保护。
+
+STM32 源码 v131，设备最后确认 v127，本轮未连接。P 右反 0.45→0.45，其余 0.30→0.30；I 稳态 0.010→0.010、启动 0.030→0.030，每 10 ms 按电机轴 rpm 误差累计，D=0。PI 未修改、未在 Gazebo 运行。NavFn/RPP、SLAM 配置、0.20 m/s、±0.35 rad/s、到达容差及原保护保持。波形为真实 ROS 仿真速度消息，全采样逐点、长缺口断线，不平滑、不补点。
+
+[算法说明](EXPLORATION_TAIL.md) · [全部结果/失败/原始数据](evidence/exploration-tail-20261022/README.md) · [完整指标](evidence/exploration-tail-20261022/analysis_final_v15/metrics.json)
+
+|轮次|结果 / 终止|complete|中心已观测自由 %|几何可观测已知 %|几何可观测自由 %|未知代理 m²|行程 m|结束仿真秒|
+|---|---|---|---:|---:|---:|---:|---:|---:|
+|[final_v14_discovery_r1](evidence/exploration-tail-20261022/runs/final_v14_discovery_r1/result.json)|PASS / `USER_FINISHED_PARTIAL`|False|100.000|99.316|94.784|0.488|56.539|555.508|
+|[final_v14_discovery_r2](evidence/exploration-tail-20261022/runs/final_v14_discovery_r2/result.json)|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|False|100.000|99.337|95.299|0.473|49.229|450.071|
+|[final_v14_office](evidence/exploration-tail-20261022/runs/final_v14_office/result.json)|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|False|100.000|99.591|95.622|0.443|87.131|760.603|
+
+这些结果分别报告任务状态和几何代理，功能 PASS 不等于全部可观测区域已覆盖。尾段时间与里程按同一稳定覆盖阈值比较，具体数值见证据入口；早期异常退出不能作为等价完成时间。
+
+**v13 开发轮不能认定“尾段长途折返已解决”。** 该版实验室首轮 95%→98% 路程 11.091→12.995 m、用时 82.471→103.062 仿真秒，均退化；同时未知参考面积 0.8575→0.4375 m²，可观测自由比例 95.313%→95.099%。实际 Nav2 固定矩阵顺序有收益，整场执行收益仍需继续优化，不能用软件通过或更多已知格替代此结论。
+
+### v14 路线性能与 v15 恢复验证
+
+102 项 colcon 检查，0 错误、0 失败、0 跳过（数量包含测试包装，不是同等数量的Gazebo实验）；软件检查与运动性能分别评价。
+
+实测判断：补盲范围扩大，办公室未知参考面积降至0.4425m²；但相对原v6，三轮95%→98%里程仍高0.6%—1.6%，用时仍高16.6%—33.4%，不能宣称整体更快或折返问题已完全解决。新增耗时中约56%—69%落在近静止区间，说明减少停靠与等待仍是后续重点；该分类不是对规划CPU耗时的直接测量。
+
+- final_v14_discovery_r1（PROTECTED_INTERRUPTED_FINISHED）：`USER_FINISHED_PARTIAL` / complete=False；未知参考面积 0.8575→0.4875 m²，几何可观测已知 99.316%、已知自由 94.784%；总行程 56.539 m。95%→98% 实际 96.179 仿真秒 / 11.265 m，相对原 v6 的用时/里程变化 +16.6% / +1.6%。v13 同场景首轮该区间为 103.062 秒 / 12.995 m。
+- final_v14_discovery_r2（NATURAL_TERMINATION）：`NAV2_UNREACHABLE_FRONTIERS_PARTIAL` / complete=False；未知参考面积 0.8575→0.4725 m²，几何可观测已知 99.337%、已知自由 95.299%；总行程 49.229 m。95%→98% 实际 105.130 仿真秒 / 11.161 m，相对原 v6 的用时/里程变化 +27.5% / +0.6%。v13 同场景首轮该区间为 103.062 秒 / 12.995 m。
+- final_v14_office（NATURAL_TERMINATION）：`NAV2_UNREACHABLE_FRONTIERS_PARTIAL` / complete=False；未知参考面积 1.7600→0.4425 m²，几何可观测已知 99.591%、已知自由 95.622%；总行程 87.131 m。95%→98% 实际 144.681 仿真秒 / 14.940 m，相对原 v6 的用时/里程变化 +33.4% / +1.4%。v13 同场景首轮该区间为 336.364 秒 / 38.178 m。
+
+95%→98% 阶段的原始速度积分分解如下；近静止不直接等同于规划耗时，原地转向不直接等同于某一控制状态。超过1仿真秒的缺口单列，不补点。
+
+|轮次|近静止 s|原地转向 s|平移 s|未分类缺口 s|
+|---|---:|---:|---:|---:|
+|before_discovery|2.281|14.759|65.420|0.000|
+|final_v13_discovery_r1|9.111|14.681|79.269|0.000|
+|final_v13_discovery_r2|20.043|17.137|81.200|0.000|
+|final_v14_discovery_r1|11.663|15.580|68.936|0.000|
+|final_v14_discovery_r2|17.111|17.558|70.471|0.000|
+|before_office|6.575|11.760|90.125|0.000|
+|final_v13_office|36.168|58.656|241.536|0.000|
+|final_v14_office|26.904|19.766|98.006|0.000|
+
+v14失联回归的首次FAIL保留：停车锁存和不自动续行通过，显式恢复后超时、缺失最终地图。v15仅修复恢复就绪查询并新增等待诊断；以下是独立新回归，不能替代v14大场景性能数据。
+
+- watchdog_v15_r1: PASS，失联停车锁存通过、心跳恢复不续行通过、显式恢复新目标通过、显式暂停停车通过、停车保存通过。
+- watchdog_v15_r2: PASS，失联停车锁存通过、心跳恢复不续行通过、显式恢复新目标通过、显式暂停停车通过、停车保存通过。
+- complete_v15: PASS，前沿消失完成通过、停车验证通过、地图保存通过。
+
+
+所有大场景若仍为 partial，就不报告全图完成；更多已知、更多自由和更高几何准确度分别判断。同覆盖阈值数据有退化时保留，不以静态矩阵结果替代实际执行。三轮样本不构成统计显著性或实车性能结论。
+
+逐格重载：final_v14_discovery_r1 PASS，未知格 1905→1905；final_v14_discovery_r2 PASS，未知格 1866→1866；final_v14_office PASS，未知格 2419→2419。
+最终新图短目标导航：PASS，目标到达、实际运动及持续停车通过。v13 首次启动未就绪 FAIL 和相同参数重试 PASS 均保留。
+
+### discovery_lab：同尺度前后比较
+
+P/I 前后值均沿用本节开头的明确数值，PI 未在仿真运行。原 v6 与最终 v14 使用相同场景、速度/保护和空白图入口。修改原因是小前沿过滤与错误观察任务造成漏覆盖，以及尾段缺少区域访问前瞻。地图黑/白/灰分别为占据/自由/未知，轨迹为被动真值记录，不向探索器反馈。
+
+![discovery_lab 同尺度地图与实际轨迹](evidence/exploration-tail-20261022/analysis_final_v15/map_comparison_discovery_lab.png)
+
+![discovery_lab 同尺度真实命令与里程计波形](evidence/exploration-tail-20261022/analysis_final_v15/velocity_comparison_discovery_lab.png)
+
+![discovery_lab 完整与最后10%观测曲线](evidence/exploration-tail-20261022/analysis_final_v15/formal_coverage_discovery_lab.png)
+
+### office_loop：同尺度前后比较
+
+P/I 前后值均沿用本节开头的明确数值，PI 未在仿真运行。原 v6 与最终 v14 使用相同场景、速度/保护和空白图入口。修改原因是小前沿过滤与错误观察任务造成漏覆盖，以及尾段缺少区域访问前瞻。地图黑/白/灰分别为占据/自由/未知，轨迹为被动真值记录，不向探索器反馈。
+
+![office_loop 同尺度地图与实际轨迹](evidence/exploration-tail-20261022/analysis_final_v15/map_comparison_office_loop.png)
+
+![office_loop 同尺度真实命令与里程计波形](evidence/exploration-tail-20261022/analysis_final_v15/velocity_comparison_office_loop.png)
+
+![office_loop 完整与最后10%观测曲线](evidence/exploration-tail-20261022/analysis_final_v15/formal_coverage_office_loop.png)
+
+### v14 失败与 v15 恢复回归逐点波形（旧开发失败保留在下节）
+
+以下各图 P/I 前后均为 P 右反 0.45→0.45、其余 0.30→0.30；I 稳态 0.010→0.010、启动 0.030→0.030，10 ms / 电机轴 rpm，D=0。PI 未修改且未执行；算法版本、原因与实测终止逐图标明，原始异常与缺测保持。
+
+**complete_v14**：v14 小房间自动完成分支回归，不外推大场景全覆盖。 实测 `NO_FRONTIERS`，complete=True，路程 1.404 m；停车验证 True。P/I 沿用上段明确值。
+
+![complete_v14 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final_v15/complete_v14_velocity.png)
+
+**complete_v15**：v15 自动完成/停车保存回归；路线和观测模块与v14相同。 实测 `NO_FRONTIERS`，complete=True，路程 0.363 m；停车验证 True。P/I 沿用上段明确值。
+
+![complete_v15 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final_v15/complete_v15_velocity.png)
+
+**watchdog_v14**：失败保留：失联停车与心跳恢复不续行通过，显式恢复后40秒未发出新目标，验收超时中断；未保存最终地图，不补造最终覆盖率。 实测 `INTERRUPTED_PARTIAL`，complete=False，路程 未达到/缺测 m；停车验证 False。P/I 沿用上段明确值。
+
+![watchdog_v14 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final_v15/watchdog_v14_velocity.png)
+
+**watchdog_v15_r1**：v15 显式恢复/生命周期新鲜性回归第1轮，实际结果见checks，不与v14性能数据混同。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 0.106 m；停车验证 True。P/I 沿用上段明确值。
+
+![watchdog_v15_r1 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final_v15/watchdog_v15_r1_velocity.png)
+
+**watchdog_v15_r2**：v15 同条件失联回归重复轮，保留实际故障和缺测。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 0.114 m；停车验证 True。P/I 沿用上段明确值。
+
+![watchdog_v15_r2 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final_v15/watchdog_v15_r2_velocity.png)
+
+### v14 保存地图的新图导航回归
+
+P/I 前后沿用本节明确值，PI 未在 Gazebo 运行。此项加载 v14 导出的新图，使用原普通 AMCL/NavFn/RPP 导航入口和原 0.30 m/s、0.60 rad/s 配置，验证一个短目标及持续停车；它不使用自主探索的 0.20/0.35 覆盖，不代表任意目标导航通过。实际结果以该用例 result.json 为准。
+
+![v14 新图短目标完整速度与命令](evidence/exploration-tail-20261022/diagnostics/new_map_navigation_v14/velocity.png)
+
+![v14 新图短目标实际轨迹](evidence/exploration-tail-20261022/diagnostics/new_map_navigation_v14/trajectory.png)
+
+v15在显式恢复时清除旧生命周期查询，要求关键节点重新active，超时请求回收重查；原日志不足以确定v14恢复超时的唯一根因，v15新增等待原因日志并做独立复测。v14路线/观测/安全余量模块的哈希保持，完整性能数据仍标注v14。
+最终构建、测试、重载地图和新图短目标导航的实测结果见证据入口软件/诊断日志；没有把未通过项改写成通过。全部变化留在本地，未提交、未推送、未合并、未连接实车。
+
+## 2026-10-22：可观测补盲、实际 Nav2 区域访问与终止诊断（v13）
+
+用户要求按“漏覆盖 → 尾段折返 → 终止原因”开始优化。算法修改包括小前沿保留、指定前沿可见性、替代观察余量、实际停车末段检查、按任务的有限访问记忆、面积收益、区域候选预算和实际 Nav2 有向开放访问顺序。终止需连续确认，冷却不当完成。没有扩大速度、容差或关闭保护。
+
+STM32 源码 v131，设备最后确认 v127，本轮未连接。P 右反 0.45→0.45，其余 0.30→0.30；I 稳态 0.010→0.010、启动 0.030→0.030，每 10 ms 按电机轴 rpm 误差累计，D=0。PI 未修改、未在 Gazebo 运行。NavFn/RPP、SLAM 配置、0.20 m/s、±0.35 rad/s、到达容差及原保护保持。波形为真实 ROS 仿真速度消息，全采样逐点、长缺口断线，不平滑、不补点。
+
+[算法说明](EXPLORATION_TAIL.md) · [全部结果/失败/原始数据](evidence/exploration-tail-20261022/README.md) · [完整指标](evidence/exploration-tail-20261022/analysis_final/metrics.json)
+
+|轮次|结果 / 终止|complete|中心已观测自由 %|几何可观测已知 %|几何可观测自由 %|未知代理 m²|行程 m|结束仿真秒|
+|---|---|---|---:|---:|---:|---:|---:|---:|
+|[final_v13_discovery_r1](evidence/exploration-tail-20261022/runs/final_v13_discovery_r1/result.json)|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|False|100.000|99.387|95.099|0.438|57.657|491.917|
+|[final_v13_discovery_r2](evidence/exploration-tail-20261022/runs/final_v13_discovery_r2/result.json)|PASS / `START_POSE_UNSAFE_PARTIAL`|False|100.000|99.327|94.819|0.480|54.032|541.304|
+|[final_v13_office](evidence/exploration-tail-20261022/runs/final_v13_office/result.json)|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|False|100.000|98.915|94.246|1.175|72.872|657.596|
+
+这些结果分别报告任务状态和几何代理，功能 PASS 不等于全部可观测区域已覆盖。尾段时间与里程按同一稳定覆盖阈值比较，具体数值见证据入口；早期异常退出不能作为等价完成时间。
+
+**本轮尚不能认定“尾段长途折返已解决”。** 实验室首轮 95%→98% 路程 11.091→12.995 m、用时 82.471→103.062 仿真秒，均退化；同时未知参考面积 0.8575→0.4375 m²，可观测自由比例 95.313%→95.099%。实际 Nav2 固定矩阵顺序有收益，整场执行收益仍需继续优化，不能用软件通过或更多已知格替代此结论。
+
+### discovery_lab：同尺度前后比较
+
+P/I 前后值均沿用本节开头的明确数值，PI 未在仿真运行。原 v6 与最终 v13 使用相同场景、速度/保护和空白图入口。修改原因是小前沿过滤与错误观察任务造成漏覆盖，以及尾段缺少区域访问前瞻。地图黑/白/灰分别为占据/自由/未知，轨迹为被动真值记录，不向探索器反馈。
+
+![discovery_lab 同尺度地图与实际轨迹](evidence/exploration-tail-20261022/analysis_final/map_comparison_discovery_lab.png)
+
+![discovery_lab 同尺度真实命令与里程计波形](evidence/exploration-tail-20261022/analysis_final/velocity_comparison_discovery_lab.png)
+
+![discovery_lab 完整与最后10%观测曲线](evidence/exploration-tail-20261022/analysis_final/formal_coverage_discovery_lab.png)
+
+### office_loop：同尺度前后比较
+
+P/I 前后值均沿用本节开头的明确数值，PI 未在仿真运行。原 v6 与最终 v13 使用相同场景、速度/保护和空白图入口。修改原因是小前沿过滤与错误观察任务造成漏覆盖，以及尾段缺少区域访问前瞻。地图黑/白/灰分别为占据/自由/未知，轨迹为被动真值记录，不向探索器反馈。
+
+![office_loop 同尺度地图与实际轨迹](evidence/exploration-tail-20261022/analysis_final/map_comparison_office_loop.png)
+
+![office_loop 同尺度真实命令与里程计波形](evidence/exploration-tail-20261022/analysis_final/velocity_comparison_office_loop.png)
+
+![office_loop 完整与最后10%观测曲线](evidence/exploration-tail-20261022/analysis_final/formal_coverage_office_loop.png)
+
+### 失败、提前结束与开发版：全部逐点波形
+
+以下各图 P/I 前后均为 P 右反 0.45→0.45、其余 0.30→0.30；I 稳态 0.010→0.010、启动 0.030→0.030，10 ms / 电机轴 rpm，D=0。PI 未修改且未执行；算法版本、原因与实测终止逐图标明，原始异常与缺测保持。
+
+**after_discovery_r1**：v8 异步搜索/访问记忆；到达后位置退出安全区，后续改为检查实际停车末段。 实测 `START_POSE_UNSAFE_PARTIAL`，complete=False，路程 37.697 m；停车验证 True。P/I 沿用上段明确值。
+
+![after_discovery_r1 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/after_discovery_r1_velocity.png)
+
+**after_office**：v8 开发轮显式结束后替换；保留全过程，不计入最终性能样本。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 16.717 m；停车验证 True。P/I 沿用上段明确值。
+
+![after_office 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/after_office_velocity.png)
+
+**before_discovery**：本轮新跑的原 v6 基线；算法前沿消失不等于几何代理全覆盖。 实测 `NO_FRONTIERS`，complete=True，路程 43.822 m；停车验证 True。P/I 沿用上段明确值。
+
+![before_discovery 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/before_discovery_velocity.png)
+
+**before_office**：本轮新跑的原 v6 基线；终止搜索原因为 ROBOT_NOT_IN_SAFE_SPACE，被旧汇总名合并。 实测 `NO_REACHABLE_FRONTIERS_PARTIAL`，complete=False，路程 43.524 m；停车验证 True。P/I 沿用上段明确值。
+
+![before_office 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/before_office_velocity.png)
+
+**complete_v13**：独立可观测小房间的自动完成分支回归；不外推到大场景全覆盖。 实测 `NO_FRONTIERS`，complete=True，路程 1.657 m；停车验证 True。P/I 沿用上段明确值。
+
+![complete_v13 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/complete_v13_velocity.png)
+
+**final_v10_discovery_r1**：v10 开放顺序；有限预算偏向同一区域，且观察目标可见性不够精确。自然部分结束；晚到的 finish 请求未发送，审计保留。 实测 `VIEWPOINTS_EXHAUSTED_PARTIAL`，complete=False，路程 53.144 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v10_discovery_r1 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v10_discovery_r1_velocity.png)
+
+**final_v10_office**：开发队列发生两套自有仿真重叠，原雷达/心跳保护暂停；显式结束保存。环境中断样本，不用于性能对比。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 23.063 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v10_office 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v10_office_velocity.png)
+
+**final_v11_discovery_r1**：与上一开发轮重叠的启动失败，FAIL 原样保留；保护未放宽。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 0.003 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v11_discovery_r1 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v11_discovery_r1_velocity.png)
+
+**final_v11_discovery_r1b**：v11 串行重试及区域预算；自然部分结束。22 次选中批次中 9 次看不到所分配前沿，后续增加指定目标可见性。 实测 `NO_OBSERVABLE_FRONTIERS_PARTIAL`，complete=False，路程 63.115 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v11_discovery_r1b 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v11_discovery_r1b_velocity.png)
+
+**final_v11_discovery_r2**：v11 自然视点耗尽，25 目标、66.291 m，未解决尾段跨区。 实测 `VIEWPOINTS_EXHAUSTED_PARTIAL`，complete=False，路程 66.291 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v11_discovery_r2 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v11_discovery_r2_velocity.png)
+
+**final_v11_office**：v11 初始已知区域仅 292 个安全通行格，统一宽观察余量导致 0 候选；v13 同图只读回放得到 72 个原 0.40 m 合法候选，另做新运动验证。 实测 `NO_REACHABLE_FRONTIERS_PARTIAL`，complete=False，路程 0.000 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v11_office 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v11_office_velocity.png)
+
+**final_v12_discovery_r1**：v12 已修正指定前沿可见性；旧访问抑制与按边界格数收益仍低效。26 目标、92.650 m，自然视点耗尽，完整保留。 实测 `VIEWPOINTS_EXHAUSTED_PARTIAL`，complete=False，路程 92.650 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v12_discovery_r1 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v12_discovery_r1_velocity.png)
+
+**final_v9_discovery_r1**：v9 两段插入前瞻；尾段仍反复跨区，显式结束保存；68.598 m 不作为改善证据。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 68.598 m；停车验证 True。P/I 沿用上段明确值。
+
+![final_v9_discovery_r1 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/final_v9_discovery_r1_velocity.png)
+
+**pilot_v7_discovery**：保留小前沿后过早插入零散补盲，频繁短目标；显式结束保存，未达完整任务结论。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 11.392 m；停车验证 True。P/I 沿用上段明确值。
+
+![pilot_v7_discovery 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/pilot_v7_discovery_velocity.png)
+
+**watchdog_v13**：SIGSTOP/SIGCONT 注入：独立验收器继续记录速度，检查失联锁存、不自动续行和显式继续/暂停/结束保存。 实测 `USER_FINISHED_PARTIAL`，complete=False，路程 0.046 m；停车验证 True。P/I 沿用上段明确值。
+
+![watchdog_v13 原始全采样速度与命令](evidence/exploration-tail-20261022/analysis_final/watchdog_v13_velocity.png)
+
+### 最终新图导航回归
+
+P/I 前后沿用本节明确值，PI 未在 Gazebo 运行。此项加载 v13 导出的新图，使用原普通 AMCL/NavFn/RPP 导航入口和原 0.30 m/s、0.60 rad/s 配置，验证一个短目标及持续停车；它不使用自主探索的 0.20/0.35 覆盖，不代表任意目标导航通过。实际结果以该用例 result.json 为准。
+
+![v13 新图短目标完整速度与命令](evidence/exploration-tail-20261022/diagnostics/new_map_navigation_v13/velocity.png)
+
+![v13 新图短目标实际轨迹](evidence/exploration-tail-20261022/diagnostics/new_map_navigation_v13/trajectory.png)
+
+最终构建、测试、重载地图和新图短目标导航的实测结果见证据入口软件/诊断日志；没有把未通过项改写成通过。全部变化留在本地，未提交、未推送、未合并、未连接实车。
+
+### v13 新图导航同参数独立重试
+
+首次用例在发导航目标前启动未就绪，日志为生命周期服务响应超时，FAIL 和完整波形保留。相同源代码、地图和导航参数的独立重试通过到达、实际运动和持续停车；不放宽启动/安全条件。P 右反0.45→0.45、其余0.30→0.30，I稳态0.010→0.010、启动0.030→0.030（10ms/电机轴rpm），D=0，PI未在Gazebo运行。普通AMCL/NavFn/RPP算法未改。
+
+![v13 新图导航同参数重试完整速度](evidence/exploration-tail-20261022/diagnostics/new_map_navigation_v13_retry1/velocity.png)
+
+## 2026-10-21—22：自主探索效率优化（仿真）
+
+用户授权优化陌生环境自主探索速度并提交推送。优化使用在线地图估计信息收益/预计耗时，减少低收益短目标、到达强制转向和固定等待，远行前检查附近补盲；仍使用NavFn A*/RPP，0.20m/s、±0.35rad/s及原停车保护保持。自主模式另加SLAM匹配覆盖配置；手动建图、AMCL默认、固件与实车接口保持。[操作与原理](EXPLORATION_SPEED.md) · [报表、全部尝试和原始文件](evidence/exploration-speed-20261021/README.md)。
+
+**STM32源码v131；设备最后确认v127，本轮未连接。P右反0.45→0.45，其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D=0。PI未改、未在Gazebo运行。** 算法变化为上述前沿策略及自主SLAM配置，NavFn/RPP本体不改；波形为真实ROS消息，不是实车轮速或电流。所有点保留、长缺口断线，不平滑、补点或删除异常。
+
+|实验室两轮|优化前|最终v6|说明|
+|---|---:|---:|---|
+|同一95%参考观测指标平均用时/仿真秒|371.608|114.425|减少69.2%；连续3次真实地图更新确认|
+|任务结束平均用时/仿真秒|558.464|346.659|减少37.9%；前后都为部分结束，不能称全图完成|
+|目标数平均|25|10|减少频繁交接|
+|里程计路程平均/m|32.287|42.462|第二轮路程增加，不宣称所有路线更短|
+|累计转角平均/rad|87.342|45.466|转向开销减少|
+|近静止平均/仿真秒|93.320|23.676|实际消息派生，定义见离线工具|
+|最终占据格至场景表面距离P95/m|0.568 / 0.832|0.065 / 0.064|仿真代理，未配准；不等于完整地图准确率|
+
+固定参考分母由SDF**仅离线**计算：与出生点连通、距障碍至少0.37m的机器人中心区，以5cm采样；实验室38.615m²。观测比例不等于全部地面覆盖、障碍召回率或物理测绘精度，真值从不反馈给探索器、SLAM或控制。最终两轮参考观测均99.676%，原始终止原因均为`NO_REACHABLE_FRONTIERS_PARTIAL / complete=false`，停车并保存，不冒充完整建图。基线几何质量较差，同一观测指标也不等于同等几何质量。
+
+![同场景逐帧参考观测比例，办公室与实验室分开显示](evidence/exploration-speed-20261021/plots/coverage.png)
+
+![实验室第一对完整起停速度，同一时间和速度尺度，固件v131及PI不变](evidence/exploration-speed-20261021/plots/velocity_discovery_r1.png)
+
+![实验室第二对完整起停速度，同一坐标尺度，第二轮路程增加亦保留](evidence/exploration-speed-20261021/plots/velocity_discovery_r2.png)
+
+![实验室真实末图前后对照，同坐标尺度](evidence/exploration-speed-20261021/plots/maps_discovery_r1.png)
+
+上述图P右反0.45→0.45、其余0.30→0.30，I稳态0.010→0.010、启动0.030→0.030/10ms；PI未执行。基线/最终v6前沿和SLAM配置分别标注，NavFn/RPP及速度/保护上限保持。图与[逐轮指标](evidence/exploration-speed-20261021/summary.json)共同评价耗时、停等、转角和地图质量，不能只依据单条速度曲线。
+
+开发v5在返回走廊时地图变差。对已保存处理后扫描及原始轮式位姿做离线重放，最终失败栅格与实测**逐格相同且哈希相同**，复现271.5/327.5秒错误闭环，细响应约0.734/0.724。禁闭环消融及保留闭环、门槛0.65→0.80的重放均使P95从0.426m降至0.061m。最终v6保留闭环、Huber损失及更严格候选条件，再执行上述两轮新仿真；重放不代替新环境验证，更严格条件也可能漏掉真实闭环。全部开发失败、提前结束和环境中断保留，不计作最终重复。
+
+自动地图导出另修复`free_thresh: 0.25→0.196`，使PGM未知灰度205经Nav2重载仍为未知。最终两张图真实逐格重载均通过，分别2624→2624、2349→2349未知格；实际PGM另算几何P95约0.070/0.060m，均通过相同门槛，不以在线末帧代替交付图。旧阈值失败记录保留。手动保存工具和历史地图未改，不据此宣称旧图已修复。
+
+办公室独立对照同样通过：95%参考观测指标442.327→114.972仿真秒（减少74.0%），部分任务结束752.538→712.894秒（仅减少5.3%，尾段长途补盲仍明显）；参考观测终值93.198%→100%，在线末图几何代理P95约1.071→0.076m，实际PGM约0.080m。仍为`NO_REACHABLE_FRONTIERS_PARTIAL`；参考中心区全被观测也不能当成全部空间/表面完成。办公室结果单列，不混入实验室平均值。
+
+![办公室前后完整速度，原始长途补盲与停等保留](evidence/exploration-speed-20261021/plots/velocity_office.png)
+
+![办公室地图几何随实际更新变化，虚线为终图门槛](evidence/exploration-speed-20261021/plots/quality_world_office_loop.png)
+
+P右反0.45→0.45、其余0.30→0.30，I稳态0.010→0.010、启动0.030→0.030/10ms，固件v131、PI未执行；算法为基线与最终v6的前沿/SLAM配置，NavFn/RPP和运动/保护边界保持。地图中途偏差曾超过终图门槛，回访及闭环后降低，不能只截取最佳时段。
+
+![早期开发三轮完整波形，包括提前结束和受阻](evidence/exploration-speed-20261021/plots/velocity_development_early.png)
+
+![开发后期完整波形，包括环境中断、完整结束及地图质量失败](evidence/exploration-speed-20261021/plots/velocity_development_late.png)
+
+![开发地图质量时间序列，失败仍保留](evidence/exploration-speed-20261021/plots/quality_development.png)
+
+上述开发图同为源码v131、P右反0.45→0.45/其余0.30→0.30、I稳态0.010→0.010/启动0.030→0.030每10ms；PI未执行，探索配置按v1—v5区分，均不是最终v6重复。所有异常、提前结束和缺测保留，环境中断不计入速度比较。
+
+![最终v6任务失联、进程恢复保持锁存及显式控制的完整速度](evidence/exploration-speed-20261021/plots/velocity_watchdog.png)
+
+![最终v6可观测小房间自动完成与停车保存](evidence/exploration-speed-20261021/plots/velocity_complete_room.png)
+
+上述保护图P右反0.45→0.45/其余0.30→0.30、I稳态0.010→0.010/启动0.030→0.030每10ms；源码v131、PI未运行，最终v6前沿/SLAM配置。实际SIGSTOP后停止锁存、SIGCONT不续跑、显式继续选新目标、暂停及结束保存通过；可观测房间`NO_FRONTIERS / complete=true`通过，不能推广为实验室或办公室完整结束。
+
+最终实验室新地图在独立AMCL导航启动中重载成功，短距离目标到达并持续停车通过；不是只检查文件存在。
+
+![最终导出地图重载AMCL后的导航与停车](evidence/exploration-speed-20261021/diagnostics/new-map-navigation/velocity.png)
+
+图为源码v131，P右反0.45→0.45/其余0.30→0.30、I稳态0.010→0.010/启动0.030→0.030每10ms，PI未执行；本图为常规AMCL/NavFn/RPP单目标回归，目标来自独立验证器，非探索期间真值引导。仅覆盖一次新图短距离导航，不代表任意目标/实车通过。
+
+三包构建与77项colcon检查通过，软件测试与Gazebo、实车结论分开。全部原始数据/源码及失败已归档；最终提交/推送/CI以本轮分支与PR为准。未合并PR，实车桥尚未实现。
+
+## 2026-10-21后续：全新discovery_lab场景与用户自主建图验收准备
+
+用户要求独立新场景供亲自验收。新增10×8m非对称实验室，全部墙体/障碍布局本轮重新设计，不复用办公室布局，不向探索器提供预存地图或SDF真值。[启动和验收步骤](DISCOVERY_LAB_ACCEPTANCE.md) · [全部5次运行、失败与源码](evidence/discovery-lab-20261021/README.md)。
+
+短测发现门控晚订阅会漏收静止SLAM非持久的首个pose，导致90秒无目标。修复为唯一SLAM图源、新鲜地图和原TF时间窗联合判断SLAM定位；不改变AMCL来源，时间回退等待新地图，原扫描/里程计/时钟/碰撞/失联停车阈值不放宽。实际延迟到首帧地图3.016秒后创建门控，此后0个pose仍能就绪，检查期间安全输出全零。
+
+![新场景静止基线、漏收pose失败及修复后逐点起停速度，保持相同纵轴](evidence/discovery-lab-20261021/plots/velocity.png)
+
+**STM32源码v131：P右反0.45→0.45，其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。** PI未改、未运行；前沿探索/SLAM Toolbox/NavFn A*/RPP算法本体不变，建图0.20m/s、±0.35rad/s不变。新增场景并修复建图门控启动；同场景失败和最终90秒短测全部保留。图来自真实ROS/Gazebo消息，全部点、长缺口断线，无平滑、补点或删异常；不是实车电机轮速/电流。
+
+最终短测自动发5目标、4到达、末个90仿真秒预算取消，行驶4.047m，已知格2967→22194；持续停车后地图四件套保存通过，`TIME_LIMIT_PARTIAL / complete=false`。三包构建和64项colcon检查零失败。助手完成短时启动/运动/保存检查，整张新场景探索、GUI、几何精度和导出后重载仍由后续验收区分，不宣称全覆盖；用户启动使用1800仿真秒预算。
+
+![同一新场景静止SLAM与最终短测实际地图增长，不以面积代替完整覆盖](evidence/discovery-lab-20261021/plots/map_growth.png)
+
+![新场景90秒自主短测首帧及结束图，同坐标尺度，保留东侧大片未知](evidence/discovery-lab-20261021/plots/maps.png)
+
+图上版本、PI和算法说明同上；初次离线检查探针落入箱体边界导致的FAIL、实际启动FAIL、诊断复测和最终修复分别保留。原始133份文件哈希一致，前轮自主建图634份及控制器比较2228份证据未改，自建运行组无残留；未操作用户GUI/硬件、实车桥未实现、未提交/推送/合并。
+
+## 2026-10-21：陌生环境自主探索建图（仅软件/仿真）
+
+用户要求无需键盘遥控或人工导航目标。新增`smartcar_nav2/exploration.launch.py`：空白在线SLAM→前沿聚类→在已知自由区选择观察点→NavFn/RPP导航→继续观测→停车保存。建图模式不启动AMCL/map_server，SLAM独占地图及map→odom。探索器只发送导航动作，速度仍经过原平滑器、导航门控和底层超时保护；新增自主任务失联锁存，恢复心跳不自行续行。[操作说明](AUTONOMOUS_MAPPING.md) · [全部运行与失败](evidence/autonomous-mapping-20261021/README.md)。
+
+**STM32源码v131：P右反0.45→0.45，其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。** PI未改、未运行。新增探索决策、地图来源检查、任务心跳及保存流程；NavFn、RPP、SLAM算法本体不改。建图专用巡航0.30→0.20m/s、原地转向0.60→0.35rad/s、平滑器角速度上限0.80→0.35、加速度0.50→0.25m/s²/1.50→0.50rad/s²，目的为减少轮滑和扫描匹配退化。原`nav2.yaml`、`slam.yaml`和已知地图导航默认未改，全部原停车/TF/传感器阈值不放宽。
+
+| 运行 | 实际结果 | 验收边界 |
+|---|---|---|
+| office_loop静止基线 | 20秒已知格2107→2107，无移动 | 单独SLAM不具备自主探索 |
+| office_02 | 自动30目标，29到达，末个600仿真秒预算取消；里程计路程28.021m；停车、PGM/YAML/posegraph/data保存通过 | `TIME_LIMIT_PARTIAL`，不说成全覆盖 |
+| 同轮地图 | 已知格2106→44826，自由格1956→40756 | 面积增长不等于地图几何准确 |
+| complete_room最终接口 | 4×4m可观测房间自动观察目标成功，前沿稳定消失后停车保存 | `NO_FRONTIERS / complete=true`，仅本算法阈值下完成 |
+| watchdog_04最终接口 | 冻结任务进程后停车锁存，恢复进程不续跑；显式继续、暂停、结束保存均通过 | 实际SIGSTOP/SIGCONT及服务响应，不是仅单元测试 |
+| 两次地图重载 | office_02输出、最终保存接口输出分别在新AMCL仿真中导航成功并停稳 | 各一次短距离使用验证，不覆盖任意路线 |
+
+![同一任务首帧与最终实时SLAM地图，坐标尺度一致，灰色为未知或未发布区域](evidence/autonomous-mapping-20261021/plots/office_02_maps.png)
+
+图上P/I与版本如上不变；新增前沿探索，不预载office_01，不把Gazebo几何交给探索器或SLAM。前沿长度阈值0.8m、多代表点搜索，通行圆与原Nav2一致为0.37m，观察目标额外要求0.40m已知自由圆。部分地图、受阻、预算耗尽、人工结束和异常分开标记，避免把未完成任务说成完全建图。
+
+![同场景静止基线及自动探索实收地图面积，基线没有外推或补造](evidence/autonomous-mapping-20261021/plots/map_growth.png)
+
+![office_02完整逐点里程计与安全命令，包含起停及预算取消](evidence/autonomous-mapping-20261021/plots/office_02_velocity.png)
+
+以上P/I、版本和算法如上；原始CSV点未平滑、删异常或补点，长缺口断线。是Gazebo/ROS数据，不是实车左右轮编码器或电流。观测栅格面积不等于可通行覆盖率。原始地图占据值NPZ及同名SVG保留。
+
+![同一办公室同尺度保留早期地图偏差与组合调整后地图](evidence/autonomous-mapping-20261021/plots/quality_before_after.png)
+
+![最终办公室地图与仅作离线验收的SDF几何参考，未拟合配准](evidence/autonomous-mapping-20261021/plots/office_02_reference.png)
+
+图旁P/I未改；早期office_01采用导航速度及较少前沿代表点，office_02采用上述组合改动，非同轨迹单变量试验。占据格中心到原场景障碍表面的距离中位数0.191→0.0258m，P95为1.391→0.142m；5cm地图分辨率下，0.15m内支持比例47.06%→97.30%。**这是固定初始map/world坐标下的仿真几何代理，不是“地图准确率”、全部障碍召回率或实车精度；未拟合坐标、删点或以面积代替精度。** 早期room_03和office_01虽通过移动/保存功能检查但地图质量差，原图和所有异常均保留。
+
+![相同冻结/恢复及显式控制协议下，图片保存失败与独立保存器修复后的完整速度记录](evidence/autonomous-mapping-20261021/plots/export_before_after.png)
+
+![最终版任务失联停车与显式恢复波形，标出SIGSTOP/SIGCONT/服务调用](evidence/autonomous-mapping-20261021/plots/watchdog_04_velocity.png)
+
+图上P/I不变。watchdog_03安全停止通过但SLAM图片保存返回255，内部保存器2秒订阅等待失败；最终改用独立Nav2保存服务、瞬态地图缓存和10秒只读保存等待，SLAM仍保存图结构，watchdog_04与complete_room验证后又进行最终接口地图重载。只改变保存等待，不扩大任何运动保护容差。目标由实时地图自动决定，两轮不保证轨迹相同；原失败未覆盖。
+
+版本需分阶段读取：office_02验证最终运动/几何方案；其后修正图片保存接口并增加建图专用RViz显示，最终接口由故障、自动完成及重载三类运行验证。逐轮`source/`保留真实执行源码，`source_current/`为最终代码，不混称同一个实测版本。嵌套参数作用域错误、ClockType兼容错误、恢复进程时旧输入误结束、保存255、早期偏差和末次位姿采样缺测全部保留。
+
+三包构建通过，54个pytest、colcon63项含9个包装零错误/失败/跳过。全部13次运行原始证据、361份原始文件哈希核对一致，最终自建测试命名空间无进程残留。未连接硬件、未实现实车桥，固件/协议/控制台/场景模型未改，用户窗口未重启或发送目标；本轮未提交/推送/合并。
+
+[运行总表](evidence/autonomous-mapping-20261021/trials.json) · [地图质量代理](evidence/autonomous-mapping-20261021/map_quality_proxy.json) · [最终软件测试](evidence/autonomous-mapping-20261021/logs/exploration-20261021-tests-final.log) · [原始完整性](evidence/autonomous-mapping-20261021/integrity.json) · [进程审计](evidence/autonomous-mapping-20261021/process_audit.json) · [SHA256](evidence/autonomous-mapping-20261021/SHA256.json)。
+
+## 2026-10-19—20：DWB、RPP、MPPI 对比（仅软件/仿真）
+
+完成36轮正式矩阵：三种局部控制器×直线、过门、途中加箱体、双出口封堵×3次重复。工程上优先验证**MPPI性能候选**，生产默认RPP保持；严格预设门槛无全部通过者，不能宣称已得到完整验收的最优算法。全部失败、超时和启动未就绪记录保留，见[完整选型及限制](evidence/controller-comparison-20261019/README.md)、[HTML报表](evidence/controller-comparison-20261019/formal/REPORT.html)。
+
+| 控制器 | 可达目标完成 | 封堵正确退出停车 | 途中绕障到达 | 已发目标 | 启动未就绪 |
+|---|---:|---:|---:|---:|---:|
+| DWB | 5/9 | 3/3 | 0/3 | 11 | 1 |
+| RPP | 7/9 | 3/3 | 2/3 | 11 | 1 |
+| MPPI | 7/9 | 3/3 | 2/3 | 11 | 1 |
+
+DWB两次在同一门口附近无进展、有限恢复后自行ABORTED，第二组绕障三者都在240秒单调墙钟预算后取消；后三次未发目标的失败为导航系统启动未就绪，不能归因局部控制器。33次已发目标轮次都验证持续停车。模型重叠采样点和安全命令限幅违规均0；二维模型几何代理不是接触或实车碰撞证据。内部进程关闭升级异常完整保留，最终自建进程组无残留。
+
+**STM32源码v131：P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。** PI未改、未运行；对比改变ROS局部控制器DWB/RPP/MPPI，Nav2均1.1.20。共同NavFn A*、1Hz重规划、代价地图、定位、最多4轮不清图恢复、保护及到达容差不变。为最终角速度一致，仅三个测试副本将共同平滑器±0.8降至±0.6rad/s；前进0.30m/s，生产参数未改。此处“前后”为既有RPP基线与三种冻结测试配置，不是固件修复前后。
+
+![本轮全部36轮任务结果与完成场景效率，含失败分母](evidence/controller-comparison-20261019/formal/plots/overview.png)
+
+图中P/I、版本及算法如上。正式协议先要求全部任务通过再排名，因此正式效率分数均不合格；事后仅在正确次数并列最多的RPP/MPPI中按原权重比较成功场景均值，探索代价MPPI0.367、RPP0.633，只用于验证优先级，未删除失败或改写正式门槛。MPPI完成绕障平均56.743仿真秒，RPP61.879秒，分别n=2；对应进程CPU9.766%和6.824%（一个核=100）。RPP直线/过门角速度总变差更小，算力和模型间隙更保守，不能概括MPPI处处更平滑或普遍最优。
+
+![直线：全部本轮逐点速度和派生模型间隙，含未就绪失败](evidence/controller-comparison-20261019/formal/plots/straight_traces.png)
+
+![过门：全部本轮逐点速度和派生模型间隙，含未就绪失败](evidence/controller-comparison-20261019/formal/plots/turn_traces.png)
+
+![途中加箱体：本轮逐点速度、恢复、停止与派生模型间隙，失败保留](evidence/controller-comparison-20261019/formal/plots/detour_traces.png)
+
+![途中加箱体：本轮全部真实轨迹，DWB在左门附近未完成](evidence/controller-comparison-20261019/formal/plots/detour_trajectory.png)
+
+![双出口封堵：本轮全部逐点速度和派生模型间隙，期望有限失败停车](evidence/controller-comparison-20261019/formal/plots/two_doors_traces.png)
+
+以上每图P/I前后不变、算法对比如上。记录来自本轮Gazebo/ROS实收点，不是左右轮编码器或电机电流；原始CSV/JSON完整保留，无平滑、删异常或补点，长缺口断线，SVG同名保存。几何间隙为世界位姿与带padding矩形/已知场景几何派生量。系统日历与单调计时差约3653秒、主机GUI负载和RTF变化均保留，耗时不由UTC相减。仅3次重复、随机种子未统一、RPP已有调参而另外两者按同版官方示例适配，不能作统计显著性或普遍算法结论。
+
+三包构建和45个pytest通过，colcon53项含8个包装，零错误/失败/跳过；不是36轮仿真全部通过。正式665份原始文件哈希一致，含预检共755份核对一致；302份大JSONL无损gzip并逐份解压验证，所有中间失败和关闭阶段中断保留。原始未压缩目录仍在本机忽略路径。未连接硬件、未实现实车桥，用户原窗口和默认RPP未修改，本轮未提交/推送/合并。
+
+[全部轮次CSV](evidence/controller-comparison-20261019/formal/trials.csv) · [分场景数据/标准差](evidence/controller-comparison-20261019/formal/case_summary.csv) · [正式协议](evidence/controller-comparison-20261019/formal/protocol.json) · [原始数据完整性](evidence/controller-comparison-20261019/integrity.json) · [压缩原字节映射](evidence/controller-comparison-20261019/compression.json) · [SHA256](evidence/controller-comparison-20261019/SHA256.json)。
+
+## 2026-10-19：TF失败误报到达与Reset清理卡住（仅软件/仿真）
+
+现场约6m目标3.752秒即报告成功，前一刻map→odom变换落后0.776秒、超过0.5秒容差；随后Reset停在控制器清理。隔离复现确认两处问题：Nav2 1.1.20忽略到达检查的目标变换失败；tf2 0.25.23的TF到达与MessageFilter异步请求存在锁序反转，可冻结观测并阻塞清理。现场旧日志、真实GDB堆栈、基线和全部中间失败均保存。
+
+新增仓库本地控制/规划服务，目标TF失败停车并返回失败，禁止用默认零位姿判到达；代价图TF、扫描过滤与超时回调串行执行，清理先停止回调线程再析构资源。保留原MessageFilter、marking/clearing、NavFn/RPP、全部速度/到达/TF容差和门控保护；不覆盖系统ROS库。Reset重建代价图，显式新目标才会继续，不自动重发旧任务。
+
+**STM32源码v131：P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。**PI、启动、IMU与固件导航算法未改、未运行；上层修改TF错误处理、动作调度及回调执行策略。以下是本轮控制器真实输出/ROS仿真记录，不是实车左右轮速或电机输出。
+
+![同样合成故障输入下，修改前错误成功且发出非零速度，修改后失败且零输出](evidence/nav2-tf-reset-20261019/comparison/tf_fault.png)
+
+图中P/I未变、算法改动如上。车体合成位姿固定为零、目标5m，路径时间故意超前最新TF 3秒；复现相同失败路径，时间差不是现场0.776秒。原系统返回4，修复返回6并保持零命令。所有散点为真实命令/动作响应，没有驱动订阅者；不以此图证明物理运动性能。
+
+![Reset清理前后实收响应，对数轴；基线超时不算完成](evidence/nav2-tf-reset-20261019/comparison/lifecycle.png)
+
+图中P/I未变、改变回调串行策略。原第1次cleanup超过8秒无响应；最终版本5次空闲重复清理和第6次执行中清理均返回，重启后不续跑旧目标；显式有效目标、持续执行和取消通过。首次编译缺少头文件、首次封装第二轮配置超时完整保留，最终构建和40个pytest通过（colcon47项含7个包装，零错误/失败/跳过）。
+
+![两轮完整Reset/Startup后，中途插障碍仍绕行到达并持续停车](evidence/nav2-tf-reset-20261019/gazebo_detour_reset_01/velocity.png)
+
+图中P/I、NavFn/RPP及保护未改。office_loop目标(4.5,0,0)只发一次，车x约0.45m插入(2,0)处0.4×0.5×0.6m箱体。两轮Reset后九节点active、无目标时静止；原目标实际绕行成功，世界终点约(4.4716,0.0773,0.099rad)。43个连续新鲜样本约1.459秒满足|vx|<0.02m/s、|wz|<0.03rad/s、位移<0.02m、安全命令新鲜且为零。此样本后仅调整构造时释放旧代价图的顺序消除短暂日志重名；最终二进制另有下图及完整软件回归。
+
+![最终版本双门封堵：两个已观测障碍保留到ABORTED](evidence/nav2-tf-reset-20261019/gazebo_two_doors_01/obstacle_memory.png)
+
+图中P/I未改、TF/调度修改如上。球/方块位置和上一轮双门验收一致，静态且从启动前存在；Reset/Startup后只发一次目的地。两处均观测后没有归零，有限恢复返回ABORTED，整图清空调用0。计数仍为±0.7m区域内静态底图原空闲的致命格，非物体分割。
+
+![同轮失败后持续停车，保留完整控制器/安全输出/odom和门控](evidence/nav2-tf-reset-20261019/gazebo_two_doors_01/velocity.png)
+
+图中P/I和阈值未改，37个新鲜样本约1.443秒满足相同静止判据，最大线速度0.01858m/s、安全命令为零。全部点原样保留，无平滑、补点或删异常，长缺口断线。两轮Gazebo自建进程组仅SIGINT即退出，无遗留。未重启用户旧窗口、未连接硬件，实车桥未实现，未提交/推送/合并；用户手动GUI、任意路线/移动障碍/长期运行仍须分别验证。
+
+[本轮详细工况、失败与边界](evidence/nav2-tf-reset-20261019/README.md) · [汇总JSON](evidence/nav2-tf-reset-20261019/summary.json) · [故障注入结果](evidence/nav2-tf-reset-20261019/after_final/result.json) · [绕行结果](evidence/nav2-tf-reset-20261019/gazebo_detour_reset_01/result.json) · [双门结果](evidence/nav2-tf-reset-20261019/gazebo_two_doors_01/result.json) · [SHA256](evidence/nav2-tf-reset-20261019/SHA256.json)。
+
+---
+
+## 2026-10-19：双通道封堵后的障碍记忆与有限恢复（仅仿真）
+
+用户手动堵住两处出口后，小车反复往返。只读现场规划日志记录6次全局整图清空；隔离仿真按现场球体/方块位置复现：原BT约44.04墙钟秒已看到两障碍，之后5次全局清空令视野外障碍格归零，再次选择旧通路，160秒仍未结束后验收器取消。不能把用户取消或验收器超时写成导航自行ABORTED。根因不只是局部地图，而是自动恢复清空全局障碍记忆，以及内层重试反复绕过外层有限恢复预算。
+
+单目标和连续多目标树均改为不自动清空两图，规划/跟踪失败统一进入最多4次外层恢复（等待、碰撞检查下转向、等待、短距离后退）。启动器显式绑定两棵树，避免连续多目标仍回落到系统旧树。全局圆形轮廓0.35m、局部矩形、NavFn A*、RPP、扫描marking/clearing、速度及停机保护不变；移走障碍后通过新射线正常清除，不靠关闭clearing或长期重放旧扫描来保存障碍。
+
+**STM32源码v131：P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，10ms按电机轴rpm误差累计，D=0。**固件PI、起步、IMU及相对导航算法未改、未运行。上层规划/跟踪算法未换，恢复/失败处理策略改变。下面为本轮真实Gazebo/ROS记录，未平滑、补点或删异常，长缺口断线；不是实车波形。
+
+![修改前：全局清图后视野外已知堵路障碍格归零，路线反复切换](evidence/nav2-blocked-passages-20261019/baseline_two_doors_01/obstacle_memory.png)
+
+图中P/I未改、采用旧清图恢复策略；红线对应真实日志中的全局清空。统计范围为障碍中心±0.7m、静态底图原为空闲而实际全局图为致命值100的格子，排除已知墙格；仍可能含定位/栅格误差，不是物体分割或尺寸测量。两障碍在仿真中一直保持存在。
+
+![修改后：两处记忆保留到无路可走；移除右箱体并重新观察后，旧格正常清除](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.png)
+
+图中P/I未改、新恢复策略不清图。初始(-2.99,1.91,0)，目标map(1.03,-2.92,0)，球体/方块按用户世界位置建模并设为静态。先发一次目标，两障碍逐渐被扫描确认，均保留到ABORTED且持续停车；随后明确移走右箱体，显式发观察目标(3,2.7)重新看到通道，再显式发原目的地，SUCCEEDED并停稳。三个目标各有明确操作，不自动续跑已失败任务；整轮全局和局部清空调用均0。
+
+![同轮完整速度、门控、封堵失败停车及恢复通路后的到达停车](evidence/nav2-blocked-passages-20261019/after_two_doors_04/velocity.png)
+
+图中P/I、固件和保护均未改，仅上层恢复算法改变。两次停车各有42个新鲜样本，窗口约1.46秒，满足|vx|<0.02m/s、|wz|<0.03rad/s、窗口位移<0.02m且新鲜安全命令为零；移除后到达窗口角速度最大约0.01066rad/s。无法看到旧障碍位置时会保留旧格，不能要求删除Gazebo物体后机器人立即凭空知道空闲。
+
+![连续多目标动作入口也保留堵路信息，有限恢复后ABORTED并停车](evidence/nav2-blocked-passages-20261019/after_through_01/velocity.png)
+
+此图P/I未改，使用新多目标恢复树；实际ROS动作入口包含已到达起点和封堵后的目的地，不代表任意GUI队列通过。两处记忆保留，0次整图清空，停止检查通过。
+
+全部失败保留：一次AMCL生命周期服务应答超时，未发目标；一次移除箱体后因柜子遮挡而未充分重观测，直接重发远目标仍失败；重新观察后导航成功的一轮，以及普通绕行回归的一轮，固定3墙钟秒采集尚含减速尾段，停车检查FAIL。最终验收改为最多等15墙钟秒寻找上述连续静止窗口，**增加采集等待，没有改控制/故障超时或放宽静止阈值**。各轮实际结果保持原样，详见完整说明。
+
+三包构建、39个pytest通过（colcon45项含6个CTest包装，0错误/失败/跳过）。用户原场景和窗口未重启/改动，已保存恢复模板和手动启动脚本。未连接或烧录硬件、未实现实车桥，未提交/推送/合并。用户下一轮手动GUI验证、其它地图/移动障碍/长期运行仍需各自记录。
+
+![同一新恢复策略下，中途遇到单箱体仍能自动绕行、到达和停车](evidence/nav2-blocked-passages-20261019/after_detour_02/velocity.png)
+
+此图P/I未改，恢复算法改变但NavFn/RPP与保护不变。普通绕行回归PASS，原目标SUCCEEDED、实际轨迹改道、清图次数0，47个连续新鲜样本约1.46秒满足停车判据，新鲜安全命令为零。该窗口角速度最大约0.01554rad/s；未以动作成功直接代替停稳证据。[本轮绕行结果](evidence/nav2-blocked-passages-20261019/after_detour_02/result.json)。
+
+[本轮工况、全部尝试及恢复场景步骤](evidence/nav2-blocked-passages-20261019/README.md) · [双门封堵/移除后重新观察结果](evidence/nav2-blocked-passages-20261019/after_two_doors_04/result.json) · [连续多目标入口结果](evidence/nav2-blocked-passages-20261019/after_through_01/result.json) · [障碍记忆CSV](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.csv) · [原始速度CSV](evidence/nav2-blocked-passages-20261019/after_two_doors_04/velocity.csv) · [记忆SVG](evidence/nav2-blocked-passages-20261019/after_two_doors_04/obstacle_memory.svg) · [软件测试](evidence/nav2-blocked-passages-20261019/ros_tests.log) · [SHA256](evidence/nav2-blocked-passages-20261019/SHA256.json)。
+
+---
+
+## 2026-10-19：导航途中遇障重规划与转向空间修复（仅仿真）
+
+用户报告遇障停住后Goal failed。原配置实测在约1.21秒内已经生成绕行路径，但路径从箱体侧面窄缝通过，门控累计569条`OBSTACLE_NEAR_TURN`，控制器多次`Failed to make progress`；180秒未结束后验收器取消。**这次基线没有等到顶层ABORTED，不把主动取消写成Goal failed。**首次测试因验收器未启动世界位姿记录桥，60秒未就绪且未发目标，也完整保留。
+
+全局规划由矩形轮廓改为半径0.35m保守圆，保留0.02m padding；覆盖局部带padding矩形的约0.3245m最大转弯半径及半个0.05m栅格余量。NavFn A*、RPP、每秒重规划、局部矩形、速度、碰撞预测、近障保护与所有超时不变。算法没有换成其它规划/控制器，改变的是规划碰撞空间；可能改走更长路线或排除只适合固定姿态的窄缝。
+
+**STM32 v131，P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，10ms按电机轴rpm误差累计，D=0。**固件轮速PI、起步、IMU和相对导航均未改、未在Gazebo执行。下面波形直接来自本轮Gazebo/ROS实收点，未平滑/补点/删异常，长缺口断线；不是实物轮速波形。
+
+![修改前：新路径存在但近障转向门控长期阻止运动，保留180秒超时](evidence/nav2-replanning-20261019/baseline_detour_02/velocity.png)
+
+图中P/I同上未改，全局为原矩形。控制器持续请求速度而保护输出基本为零，证明仅“生成新路径”不足以完成绕行；原因是规划预留空间小于执行转向要求。原始扫描、代价图、路径、故障与超时取消记录均保留。
+
+![修改后：自动改道、到达与持续停车，原始速度和保护状态](evidence/nav2-replanning-20261019/after_detour_01/velocity.png)
+
+图中P/I同上未改，采用保守圆形全局轮廓，局部矩形及保护不变。在office_loop中向map(4.5,0,0)只发一次目标，车辆x约0.45m时插入中心(2,0)、0.4×0.5×0.6m箱体，约2.67墙钟秒收到绕行路径；该延迟包括运行负载，不是上限。车辆经左门→上方两间房→右门绕过，返回SUCCEEDED，最终世界位姿约(4.4532,0.0693,0.0981rad)，86条连续停车样本通过；该轮无近障转向门控阻塞。启动和并行负载中的扫描过期告警原样保留，未调整保护阈值。前后运行部分时间在不同ROS域/随机Gazebo分区并行，不能当同负载性能比较。
+
+![同轮新旧规划路径和完整实收车辆轨迹，坐标范围与修改前一致](evidence/nav2-replanning-20261019/after_detour_01/trajectory.png)
+
+图中P/I同上未改，修改全局规划轮廓的原因是让规划器选择有转弯空间的路线。橙色原路径、绿色首条绕行路径来自map，蓝色世界轨迹仅用于验收，按AMCL近似对齐；不从两者差标定定位误差。离线模型轮廓到箱体最小间隙约0.625m，不是实车间隙/接触传感器实测。
+
+![目标被障碍完全占据：有限恢复后ABORTED并停车](evidence/nav2-replanning-20261019/after_blocked_01/velocity.png)
+
+图中P/I未改、采用同一修改后配置，向同一目标只发一次，随后以1.2×1.85×0.6m箱体占住目标；原有恢复后返回ABORTED，70条持续停车样本通过。此工况是目标占据，不能推广为所有完全封路；目标距离超出局部4m窗口，局部图没有箱体格属于窗口范围，实际全局图已标记障碍。
+
+三包构建通过，34个pytest通过（colcon39项含5个CTest包装，0错误/失败/跳过）；新增全局转弯空间与双代价图扫描输入回归。全部自建进程退出，未打开用户RViz、未连接硬件、未提交/推送/合并。移动障碍、多目标GUI、其它门口/地图、长期运行与实车仍待各自验收。
+
+[工况/限制和全部尝试](evidence/nav2-replanning-20261019/README.md) · [修改后结果](evidence/nav2-replanning-20261019/after_detour_01/result.json) · [目标占据结果](evidence/nav2-replanning-20261019/after_blocked_01/result.json) · [原始世界位姿CSV](evidence/nav2-replanning-20261019/after_detour_01/world_pose.csv) · [原始速度CSV](evidence/nav2-replanning-20261019/after_detour_01/velocity.csv) · [速度SVG](evidence/nav2-replanning-20261019/after_detour_01/velocity.svg) · [软件测试](evidence/nav2-replanning-20261019/ros_tests.log) · [证据SHA256](evidence/nav2-replanning-20261019/SHA256.json)。
+
+---
+
+## 2026-10-18—19：ROS 2 仿真、SLAM 与 Nav2 迁入同一仓库
+
+本轮新增 `ros2_ws`，让原来独立目录中的 `smartcar_sim`、`smartcar_slam`、`smartcar_nav2`、office_01 栅格地图与底层固件一起版本管理；新增可移植环境、依赖/构建/测试入口、CI 和硬件接口说明。导航默认地图从安装包加载，不再固定开发机旧目录。原单包不完整打包入口停用，静态检查改为写新目录，避免覆盖历史证据。原固件、协议与电脑控制台未修改。
+
+**P 右反 0.45→0.45、其余 0.30→0.30；I 稳态 0.010→0.010、启动 0.030→0.030，每 10 ms 按电机轴 rpm 误差累加，D=0。** STM32 v131 轮速 PI、起步、IMU 与相对坐标导航算法均未改，也未在本轮 Gazebo 中执行；图上标注的参数仅用于追溯固件未变。本轮改动原因是整合上层源码并消除旧目录依赖，不是实车调参。
+
+三包本机编译通过；32 个 pytest 用例通过（colcon 合计 36 项含 CTest 包装）。在新仓库构建产物上实际启动无界面 Fortress 6.18.0、办公室场景、模拟 C1、AMCL 与 Nav2，域 88/随机 Gazebo 分区隔离。九个生命周期节点、地图/扫描/里程计/时钟和 TF 就绪后，发送 `map(1.5, 0, 0)`，返回 `SUCCEEDED`；里程计净位移 1.39869 m。配置位置容差为 0.15 m，成功不表示精确落在数值目标上。摄像头、GUI、实车均未参与。
+
+![ROS 2 迁入仓库后实际 Gazebo 单目标速度记录；仅仿真，非 STM32 实测](evidence/ros2-integration-20261018/runtime_01/velocity.png)
+
+图中保留启动、运行、减速和关闭阶段全部实收点，无平滑或补造。目标后检查到连续 1.46754 s / 68 个里程计样本低于 0.02 m/s 与 0.03 rad/s，位移 0.000674 m，末次新鲜安全速度为零；窗口保留减速尾段，线速度峰值 0.01470 m/s。图中速度来自 Gazebo 里程计与 ROS 命令，不能用于证明实物轮速 PI 性能。
+
+![同轮实际 Gazebo 原始里程计轨迹；非独立真值或实物轨迹](evidence/ros2-integration-20261018/runtime_01/trajectory.png)
+
+首轮静态检查将 Fortress 原生多顶层 GUI 配置误报为非法 XML，已修正检查器并保留首次 FAIL 与复测 PASS。实际运行保留 VMware/EGL 警告、唯一 goal checker 提示，以及成功后主动 SIGINT 关闭期间的 -2 退出记录；运行结果与关闭时间线可复核，测试自建进程组无遗留。
+
+**原固件全套主机回归本轮未全通过**：27 个协议用例通过，Boot Guard 的 `test_current_built_images` 因新克隆目录没有 `out/app/app.bin` 报错，后续套件未继续。没有借用历史镜像或跳过检查改成成功；本机未配置原 Keil 构建环境，未重新构建/安装固件。与基线核对的 576 个原有固件/协议/控制台文件保持一致。
+
+**结论：三包构建、软件测试与本轮实际单目标仿真通过；硬件桥、真实 C1、实车里程计/标定与运动尚未接通/验收。** 临时障碍、恢复、多目标、未知初始位置重定位、GUI 和长期稳定性没有在迁入仓库后重新验证；原工作空间历史结果不代替本轮证据。没有本轮实物 CSV/波形，未连接设备，也未降低硬件限速或停机保护。
+
+[本轮工况与完整说明](evidence/ros2-integration-20261018/README.md) · [结果 JSON](evidence/ros2-integration-20261018/runtime_01/result.json) · [原始里程计 CSV](evidence/ros2-integration-20261018/runtime_01/odom.csv) · [原始安全命令 CSV](evidence/ros2-integration-20261018/runtime_01/safe_cmd_vel.csv) · [速度 SVG](evidence/ros2-integration-20261018/runtime_01/velocity.svg) · [完整运行日志](evidence/ros2-integration-20261018/runtime_01/launch.log) · [失败的固件回归日志](evidence/ros2-integration-20261018/firmware_tests_full.log) · [摘要](evidence/ros2-integration-20261018/summary.json) · [证据校验](evidence/ros2-integration-20261018/SHA256.json)。
+
+---
 
 ## v127：MPU6050、导航外环与相对里程计的软件交付
 

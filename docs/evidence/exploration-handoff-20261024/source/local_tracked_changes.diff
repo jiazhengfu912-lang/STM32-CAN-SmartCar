@@ -1,0 +1,788 @@
+diff --git a/HANDOFF.md b/HANDOFF.md
+index 8305e7c..8a2c4e3 100644
+--- a/HANDOFF.md
++++ b/HANDOFF.md
+@@ -1,5 +1,23 @@
+ # SmartCar 项目上下文交接
+ 
++<!-- exploration-handoff-current:start -->
++## 2026-10-24 Frontier交接与近静止优化：当前v17
++
++**效率状态：目标尚未达成。办公室记录到交接中位下降22.2%，实验室基本持平；两场景95%→98%近静止与用时均有退化，详见本轮实测结论。v17是本地待优化实现。**
++
++
++本轮实现事件驱动交接、完整新鲜观测证据免额外等帧、同批安全/终点几何复用，以及保持选点结果的射线模板和限界区域广搜。v16跨目标预备候选发生开发退化，已移除，原数据和源码保留；当前每次从最新地图与实际位姿重新生成完整候选。NavFn/RPP、SLAM、速度、到达容差和停机保护未改。
++
++实验室交接中位数 2.651→2.689 仿真秒；95%→98%参考观测区间 96.629→128.009 仿真秒。 办公室交接中位数 3.512→2.732 仿真秒；95%→98%参考观测区间 237.926→248.803 仿真秒。 交接等待与有效覆盖吞吐分开判断，部分图不称全图完成。正式对照统一RelWithDebInfo编译等级；原构建等级不同的两轮作为开发参考保留，不作最终量化基线。
++
++105项colcon检查零错误/失败/跳过；12张真实快照的全部候选、收益和排序与原v15字节一致，离线用时改善因快照而异；失联锁存、不自动续行、显式恢复/暂停/保存和小房间NO_FRONTIERS完成回归通过。大场景仍为partial，单场景一对样本不构成统计显著或实车结论。
++
++详见[本轮实测结论](docs/evidence/exploration-handoff-20261024/final_conclusion.md)、[算法与测量方法](docs/EXPLORATION_HANDOFF.md)和[直接嵌入波形的验收正文](docs/ACCEPTANCE.md)。
++
++本轮未执行提交、推送、合并、烧录或实车运动。固件源码仍v131、设备最后确认v127，未连接硬件。基线HEAD为cbc270e；当前Git状态以实时检查为准，以下旧日期的推送授权、HEAD、测试数量与未提交表述均为对应历史阶段。
++<!-- exploration-handoff-current:end -->
++
++
+ <!-- exploration-tail-current:start -->
+ ## 2026-10-23 尾段优化：v14 路线 / v15 恢复修复已归档
+ 
+diff --git a/README.md b/README.md
+index 0c3a3d7..0a9b416 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,6 @@
+ # STM32-CAN-SmartCar
+ 
+-**新对话接手入口：[当前工程完整交接 README（2026-10-22）](README_HANDOFF.md)**。其中汇总当前分支与作者更正后的提交、功能、验证边界、启动命令、证据及下一轮接手提示词；历史阶段状态以该文档注明的最新核对为准。
++**新对话接手入口：[当前工程完整交接 README（2026-10-24）](README_HANDOFF.md)**。其中汇总当前分支与作者更正后的提交、功能、验证边界、启动命令、证据及下一轮接手提示词；历史阶段状态以该文档注明的最新核对为准。
+ 
+ 本仓库同时保存 **STM32/ESP32 底层控制** 和 **ROS 2 Humble 上层仿真、二维 SLAM、Nav2 导航**。
+ 新增的 [`ros2_ws/`](ros2_ws/README.md) 可在 Ubuntu 22.04 / Gazebo Fortress 中编译运行，
+@@ -9,6 +9,7 @@
+ 亲自验证陌生环境自动建图：[全新discovery_lab场景及启动步骤](docs/DISCOVERY_LAB_ACCEPTANCE.md)。
+ 自主探索的目标选择、转向和等待优化见[效率优化说明](docs/EXPLORATION_SPEED.md)。
+ 本地后续的补盲、实际 Nav2 区域访问与终止诊断见[尾段优化说明](docs/EXPLORATION_TAIL.md)及[最新实测结论](docs/evidence/exploration-tail-20261022/final_conclusion.md)。
++Frontier目标交接与近静止优化见[当前v17说明](docs/EXPLORATION_HANDOFF.md)和[匹配构建的实测结论](docs/evidence/exploration-handoff-20261024/final_conclusion.md)。
+ ROS 2 当前仍通过 Gazebo 驱动车辆；**尚未接通实车 ROS 底盘接口**。
+ 上下层使用同一仓库管理，不把 Nav2 编译进 STM32。
+ 
+diff --git a/README_HANDOFF.md b/README_HANDOFF.md
+index 7efa62b..30e0c64 100644
+--- a/README_HANDOFF.md
++++ b/README_HANDOFF.md
+@@ -1,5 +1,23 @@
+ # SmartCar 当前工程交接 README
+ 
++<!-- exploration-handoff-current:start -->
++## 2026-10-24 Frontier交接与近静止优化：当前v17
++
++**效率状态：目标尚未达成。办公室记录到交接中位下降22.2%，实验室基本持平；两场景95%→98%近静止与用时均有退化，详见本轮实测结论。v17是本地待优化实现。**
++
++
++本轮实现事件驱动交接、完整新鲜观测证据免额外等帧、同批安全/终点几何复用，以及保持选点结果的射线模板和限界区域广搜。v16跨目标预备候选发生开发退化，已移除，原数据和源码保留；当前每次从最新地图与实际位姿重新生成完整候选。NavFn/RPP、SLAM、速度、到达容差和停机保护未改。
++
++实验室交接中位数 2.651→2.689 仿真秒；95%→98%参考观测区间 96.629→128.009 仿真秒。 办公室交接中位数 3.512→2.732 仿真秒；95%→98%参考观测区间 237.926→248.803 仿真秒。 交接等待与有效覆盖吞吐分开判断，部分图不称全图完成。正式对照统一RelWithDebInfo编译等级；原构建等级不同的两轮作为开发参考保留，不作最终量化基线。
++
++105项colcon检查零错误/失败/跳过；12张真实快照的全部候选、收益和排序与原v15字节一致，离线用时改善因快照而异；失联锁存、不自动续行、显式恢复/暂停/保存和小房间NO_FRONTIERS完成回归通过。大场景仍为partial，单场景一对样本不构成统计显著或实车结论。
++
++详见[本轮实测结论](docs/evidence/exploration-handoff-20261024/final_conclusion.md)、[算法与测量方法](docs/EXPLORATION_HANDOFF.md)和[直接嵌入波形的验收正文](docs/ACCEPTANCE.md)。
++
++本轮未执行提交、推送、合并、烧录或实车运动。固件源码仍v131、设备最后确认v127，未连接硬件。基线HEAD为cbc270e；当前Git状态以实时检查为准，以下旧日期的推送授权、HEAD、测试数量与未提交表述均为对应历史阶段。
++<!-- exploration-handoff-current:end -->
++
++
+ <!-- exploration-tail-current:start -->
+ ## 2026-10-23 尾段优化：v14 路线 / v15 恢复修复已归档
+ 
+diff --git a/docs/ACCEPTANCE.md b/docs/ACCEPTANCE.md
+index 58861b5..c4f268b 100644
+--- a/docs/ACCEPTANCE.md
++++ b/docs/ACCEPTANCE.md
+@@ -1,5 +1,184 @@
+ # SmartCar 验收记录与调参波形 · 更新至 2026-10-23
+ 
++<!-- exploration-handoff-v17:start -->
++## 2026-10-24 探索v17：近静止耗时与Frontier交接
++
++本轮判定：**整体近静止耗时和探索覆盖吞吐目标尚未达成，v17保留为本地待优化实现，未提交或推送。** 办公室交接中位数3.512→2.732仿真秒（降低22.2%），实验室2.652→2.689秒（增加1.4%，基本持平）。不能将办公室的局部交接改善扩大为全任务提速。交接任务构成不同：实验室20→13次、办公室18→29次；目标内容不同，中位数变化也可能受任务构成影响，不能作为独立因果证据。
++
++95%→98%同覆盖区间：实验室用时96.629→128.009秒（+32.5%）、近静止10.275→12.074秒（+17.5%）、路程11.480→16.344米（+42.4%）；办公室用时237.926→248.803秒（+4.6%）、近静止23.129→31.954秒（+38.2%）、路程28.274→27.674米（-2.1%）。固定参考面积吞吐分别下降24.5%和4.4%。
++
++局部等待有可见改善：该区间关联等地图的近静止时间，实验室1.342→0.437秒、办公室3.268→0.420秒；生命周期就绪等待分别3.350→0、8.819→0秒。搜索/查询阶段与行驶/访问顺序的变化抵消了这些收益；这些是事件关联和真实路径证据，不是唯一因果或CPU测量。
++
++覆盖与质量也有取舍：实验室最终几何可观测已知99.821%→99.243%、未知参考面积0.1275→0.5400m²，不能以更早退出/更短总路程称更快完成；办公室98.779%→99.520%、未知1.3225→0.5200m²，但总行程增加。两场景均为partial。导出地图几何P95实验室0.060→0.060m、办公室0.080→0.110m；新地图均通过真实Nav2地图服务器逐格重载，几何代理不代表实车精度。
++
++下一瓶颈的证据已经保留：实验室同覆盖区间的实际行驶增长，办公室搜索/查询阶段的停留增加。后续需要联合评估访问顺序与候选计算负担，不能仅削减交接等待或用更多目标数证明吞吐提高。
++
++
++本轮以冻结v15为基线，串行运行相同实验室/办公室及恢复、小房间回归。发现最初隔离基线CMake构建等级为空、新版为RelWithDebInfo后，保留旧轮次为开发参考，并补跑两轮RelWithDebInfo匹配基线；下方正式表仅使用匹配基线。原流程在目标结果后才搜索，并让搜索、查询和派发共享1秒节流，造成空等。v16开发轮出现同覆盖区间退化，保留但未采用；v17移除跨目标预备候选，以最新地图重新选择，等价缓存射线模板并限制区域广搜范围，移除共享交接节流，同批复用几何检查；已有完整新鲜观测证据时免除额外等帧。NavFn/RPP、SLAM、速度、到达容差和停机保护未改。固件源码v131、设备最后确认v127，未连接硬件，PI未在Gazebo中执行。
++
++所有下图P/I均为前→后不变：右反向P 0.45→0.45、其余P 0.30→0.30；稳态I 0.010→0.010、启动I 0.030→0.030，每10 ms积分、电机轴rpm、D=0。图中的算法版本是探索版本，不能当作固件或实车安装版本。
++
++软件构建通过；v17的105项colcon检查0错误、0失败、0跳过，数量包含包装，不是105轮Gazebo。v16曾有108项软件检查通过，但运动吞吐仍退化，软件检查不能替代性能验证。v17移除未采用预备逻辑及对应测试，新增限界广搜回归。初次隔离构建漏拷地图、初次测试误扫描到归档工作区的命令错误也保留日志；最终结果以重新执行成功的日志为准。测试未结束时读取到的中间缺结果日志已明确标注，最终报告在所有测试结束后重新读取。
++
++近静止按原始里程计`|v|<0.02 m/s`且`|w|<0.05 rad/s`判定，超过1仿真秒的缺口断线并单列，不补点、不平滑。阶段与速度的时间关联不能当CPU耗时。区间统计只使用完整落入窗口的原始采样间隔；相较历史工具的末端采样规则可有一个样本的边界差异，本轮新旧同规则。
++
++|场景/覆盖区间|用时 v15→v17 s|近静止 v15→v17 s|路程 v15→v17 m|参考面积吞吐变化|
++|---|---:|---:|---:|---:|
++|discovery / 0.9->0.95|8.842→80.589|0.000→6.429|1.683→10.434|-89.0%|
++|discovery / 0.9->0.98|105.471→208.598|10.275→18.503|13.165→26.779|-49.4%|
++|discovery / 0.95->0.98|96.629→128.009|10.275→12.074|11.480→16.344|-24.5%|
++|discovery / 0.98->0.99|182.372→90.964|18.195→3.958|15.465→12.455|100.5%|
++|office / 0.9->0.95|23.659→16.813|4.139→3.080|3.083→1.661|40.7%|
++|office / 0.9->0.98|261.585→265.616|27.268→35.034|31.361→29.339|-1.5%|
++|office / 0.95->0.98|237.926→248.803|23.129→31.954|28.274→27.674|-4.4%|
++
++|场景|交接次数 v15→v17|交接中位数 s|累计交接间隔 s|交接内近静止 s|
++|---|---:|---:|---:|---:|
++|discovery|20→13|2.651→2.689|61.043→36.516|60.123→35.629|
++|office|18→29|3.512→2.732|66.221→77.551|65.355→76.385|
++
++|轮次|结果/终止原因|几何可观测已知/自由 %|参考未知 m²|总路程 m|导出占据表面 P95 m|
++|---|---|---:|---:|---:|---:|
++|before_v15_office|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.344 / 95.445|0.7100|70.173|0.120|
++|before_v15_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.278 / 95.110|0.5150|54.233|0.070|
++|before_v15_matched_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.821 / 95.506|0.1275|92.610|0.060|
++|before_v15_matched_office|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|98.779 / 94.549|1.3225|57.461|0.080|
++|final_v16_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.481 / 95.005|0.3700|76.659|0.060|
++|final_v16_office|FAIL / `INTERRUPTED_PARTIAL`|缺测 / 缺测|缺测|缺测|缺测|
++|final_v17_discovery|PASS / `NAV2_UNREACHABLE_FRONTIERS_PARTIAL`|99.243 / 94.843|0.5400|54.569|0.060|
++|final_v17_office|PASS / `NO_OBSERVABLE_FRONTIERS_PARTIAL`|99.520 / 95.043|0.5200|90.705|0.110|
++|watchdog_v17|PASS / `USER_FINISHED_PARTIAL`|31.458 / 30.568|48.8825|0.122|0.050|
++|complete_v17|PASS / `NO_FRONTIERS`|100.000 / 96.022|0.0000|1.443|0.045|
++
++目标次数不同，交接累计量需要结合中位数与同覆盖区间判断；吞吐按固定参考面积/实测用时计算，不以更多零碎目标充当有效覆盖。partial仍是部分图，单场景一对样本不构成统计显著性或实车结论。
++
++### discovery：同尺度前后原始波形与覆盖
++
++算法v15→v17；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，PI未在Gazebo执行。目标是减少交接空等，实测变化见上表，覆盖与吞吐分别判断。
++
++![discovery 原始里程计；橙色为目标结果到下一次发目标的交接区间](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_wave_discovery.png)
++
++![discovery 逐次交接与完整采样覆盖尾段](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_coverage_discovery.png)
++
++### office：同尺度前后原始波形与覆盖
++
++算法v15→v17；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，PI未在Gazebo执行。目标是减少交接空等，实测变化见上表，覆盖与吞吐分别判断。
++
++![office 原始里程计；橙色为目标结果到下一次发目标的交接区间](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_wave_office.png)
++
++![office 逐次交接与完整采样覆盖尾段](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_handoff_coverage_office.png)
++
++### v16开发退化：保留同覆盖阈值的反例
++
++v16实验室95%→98%相对原开发参考从94.039秒增至231.298秒；原参考的编译等级不同，此处只保留问题记录，不作v17正式量化对照，不能因交接更快就称覆盖吞吐改善。办公室在4个目标后提前失败/中断（已记录运动7.336米）、没有最终地图，不作为路线性能样本；原日志错误和缺测均保留，归因不超出证据。P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，PI未在Gazebo执行。
++
++![v16真实退化 handoff_wave](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_handoff_wave_discovery.png)
++
++![v16真实退化 handoff_coverage](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_handoff_coverage_discovery.png)
++
++### before_v15_office（v15开发参考，编译等级不同）
++
++实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![before_v15_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_office_velocity.png)
++
++![before_v15_office 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_office_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_office_velocity.svg)。
++
++### before_v15_discovery（v15开发参考，编译等级不同）
++
++实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![before_v15_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_discovery_velocity.png)
++
++![before_v15_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_discovery_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_discovery_velocity.svg)。
++
++### before_v15_matched_discovery（v15匹配构建基线）
++
++实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![before_v15_matched_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_discovery_velocity.png)
++
++![before_v15_matched_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_discovery_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_matched_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_discovery_velocity.svg)。
++
++### before_v15_matched_office（v15匹配构建基线）
++
++实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v15原交接与v14观测/路线；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![before_v15_matched_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_office_velocity.png)
++
++![before_v15_matched_office 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_office_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/before_v15_matched_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/before_v15_matched_office_velocity.svg)。
++
++### final_v16_discovery（v16退化/提前中断，未采用）
++
++实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v16预备搜索，保留失败；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![final_v16_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_discovery_velocity.png)
++
++![final_v16_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_discovery_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v16_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_discovery_velocity.svg)。
++
++### final_v16_office（v16退化/提前中断，未采用）
++
++实测：FAIL，`INTERRUPTED_PARTIAL`，complete=False；算法：v16预备搜索，保留失败；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![final_v16_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_office_velocity.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v16_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v16_office_velocity.svg)。
++
++### final_v17_discovery（v17修改后）
++
++实测：PASS，`NAV2_UNREACHABLE_FRONTIERS_PARTIAL`，complete=False；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![final_v17_discovery 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_discovery_velocity.png)
++
++![final_v17_discovery 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_discovery_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v17_discovery/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_discovery_velocity.svg)。
++
++### final_v17_office（v17修改后）
++
++实测：PASS，`NO_OBSERVABLE_FRONTIERS_PARTIAL`，complete=False；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![final_v17_office 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_office_velocity.png)
++
++![final_v17_office 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_office_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/final_v17_office/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/final_v17_office_velocity.svg)。
++
++### watchdog_v17（v17修改后）
++
++实测：PASS，`USER_FINISHED_PARTIAL`，complete=False；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![watchdog_v17 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/watchdog_v17_velocity.png)
++
++![watchdog_v17 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/watchdog_v17_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/watchdog_v17/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/watchdog_v17_velocity.svg)。
++
++### complete_v17（v17修改后）
++
++实测：PASS，`NO_FRONTIERS`，complete=True；算法：v17最新地图搜索、等价射线模板/限界广搜、事件交接、完整新鲜观测复用；P右反向0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10 ms、电机轴rpm、D=0，Gazebo未执行PI。保留启动、行驶、停顿、停车及故障缺测。
++
++![complete_v17 独立验收器原始速度与安全输出](evidence/exploration-handoff-20261024/analysis/final_v17/complete_v17_velocity.png)
++
++![complete_v17 最终地图与真实轨迹；红点为几何代理未知](evidence/exploration-handoff-20261024/analysis/final_v17/complete_v17_map.png)
++
++[原始数据与全部检查](evidence/exploration-handoff-20261024/runs/complete_v17/result.json)；[SVG速度波形](evidence/exploration-handoff-20261024/analysis/final_v17/complete_v17_velocity.svg)。
++
++详见[算法与测量方法](EXPLORATION_HANDOFF.md)、[本轮完整证据](evidence/exploration-handoff-20261024/README.md)、[派生指标](evidence/exploration-handoff-20261024/analysis/final_v17/metrics.json)。
++
++<!-- exploration-handoff-v17:end -->
++
++
+ ## 2026-10-23：尾段补盲与恢复修复（v14路线 / v15恢复）
+ 
+ 用户要求按“漏覆盖 → 尾段折返 → 终止原因”开始优化。算法修改包括小前沿保留、指定前沿可见性、替代观察余量、实际停车末段检查、按任务的有限访问记忆、面积收益、区域候选预算和实际 Nav2 有向开放访问顺序；v14 在接近最短整批行驶成本的预算内优先完成高收益观测；v15补充生命周期查询超时回收、显式恢复后重新确认及具体等待原因。v15未重跑大场景，性能图明确使用v14记录。终止需连续确认，冷却不当完成。没有扩大速度、容差或关闭保护。
+diff --git a/docs/PROGRESS.md b/docs/PROGRESS.md
+index d25f32e..2b0bd69 100644
+--- a/docs/PROGRESS.md
++++ b/docs/PROGRESS.md
+@@ -1,5 +1,23 @@
+ # 当前进度与后续计划
+ 
++<!-- exploration-handoff-current:start -->
++## 2026-10-24 Frontier交接与近静止优化：当前v17
++
++**效率状态：目标尚未达成。办公室记录到交接中位下降22.2%，实验室基本持平；两场景95%→98%近静止与用时均有退化，详见本轮实测结论。v17是本地待优化实现。**
++
++
++本轮实现事件驱动交接、完整新鲜观测证据免额外等帧、同批安全/终点几何复用，以及保持选点结果的射线模板和限界区域广搜。v16跨目标预备候选发生开发退化，已移除，原数据和源码保留；当前每次从最新地图与实际位姿重新生成完整候选。NavFn/RPP、SLAM、速度、到达容差和停机保护未改。
++
++实验室交接中位数 2.651→2.689 仿真秒；95%→98%参考观测区间 96.629→128.009 仿真秒。 办公室交接中位数 3.512→2.732 仿真秒；95%→98%参考观测区间 237.926→248.803 仿真秒。 交接等待与有效覆盖吞吐分开判断，部分图不称全图完成。正式对照统一RelWithDebInfo编译等级；原构建等级不同的两轮作为开发参考保留，不作最终量化基线。
++
++105项colcon检查零错误/失败/跳过；12张真实快照的全部候选、收益和排序与原v15字节一致，离线用时改善因快照而异；失联锁存、不自动续行、显式恢复/暂停/保存和小房间NO_FRONTIERS完成回归通过。大场景仍为partial，单场景一对样本不构成统计显著或实车结论。
++
++详见[本轮实测结论](evidence/exploration-handoff-20261024/final_conclusion.md)、[算法与测量方法](EXPLORATION_HANDOFF.md)和[直接嵌入波形的验收正文](ACCEPTANCE.md)。
++
++本轮未执行提交、推送、合并、烧录或实车运动。固件源码仍v131、设备最后确认v127，未连接硬件。基线HEAD为cbc270e；当前Git状态以实时检查为准，以下旧日期的推送授权、HEAD、测试数量与未提交表述均为对应历史阶段。
++<!-- exploration-handoff-current:end -->
++
++
+ 2026-10-23 后续：[尾段补盲与实际 Nav2 区域访问](EXPLORATION_TAIL.md)已实现 v14 路线和 v15 恢复修复，102 项 colcon 检查，0 错误、0 失败、0 跳过。小前沿/替代视角/指定目标复查、有限访问记忆与细分终止已落地；v13 实测尾段退化保留，v14 增加有总成本预算回退的信息完成时延排序。最终各场景的覆盖、同阈值里程、失败及边界见[本轮结论](evidence/exploration-tail-20261022/final_conclusion.md)。部分任务不称全图完成，软件通过不等于效率均改善；用户已明确授权本轮代码、交接文档与完整证据提交推送当前功能分支，实际状态以实时 Git 为准。未合并或连接硬件。
+ 
+ 更新：2026-10-23。项目状态：**开发中，当前源码 v131，设备最后确认运行 v127，整体实物验收未完成**。
+diff --git a/ros2_ws/README.md b/ros2_ws/README.md
+index abe38a6..56fd638 100644
+--- a/ros2_ws/README.md
++++ b/ros2_ws/README.md
+@@ -1,5 +1,7 @@
+ # SmartCar ROS 2 上层工作空间
+ 
++Frontier交接、近静止时间与覆盖吞吐的当前v17验证见[说明](../docs/EXPLORATION_HANDOFF.md)和[本轮结果](../docs/evidence/exploration-handoff-20261024/final_conclusion.md)。
++
+ 自主探索当前的补盲策略、实际 Nav2 路径比较与终止原因见 [尾段优化说明](../docs/EXPLORATION_TAIL.md)，原始逐轮结果见 [本轮证据](../docs/evidence/exploration-tail-20261022/README.md)。
+ 
+ 这里包含小车的 Gazebo 仿真、二维 SLAM 和 Nav2 导航。底层 STM32、ESP32、CAN 与控制台工程保留在仓库原目录；本工作空间中的仿真节点通过 ROS 话题控制 Gazebo，不能据此宣称已经接通实车。
+diff --git a/ros2_ws/src/smartcar_slam/CMakeLists.txt b/ros2_ws/src/smartcar_slam/CMakeLists.txt
+index ca3346a..06729df 100644
+--- a/ros2_ws/src/smartcar_slam/CMakeLists.txt
++++ b/ros2_ws/src/smartcar_slam/CMakeLists.txt
+@@ -5,7 +5,7 @@ install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+ install(FILES README.md LICENSE DESTINATION share/${PROJECT_NAME})
+ install(PROGRAMS scripts/save_map.py scripts/check_slam.py scripts/explore.py DESTINATION lib/${PROJECT_NAME})
+ install(FILES scripts/map_validation.py scripts/frontier_core.py scripts/exploration_memory.py
+-  scripts/route_core.py scripts/route_planner.py scripts/readiness_core.py DESTINATION lib/${PROJECT_NAME})
++  scripts/route_core.py scripts/route_planner.py scripts/readiness_core.py scripts/handoff_core.py DESTINATION lib/${PROJECT_NAME})
+ if(BUILD_TESTING)
+   find_package(ament_cmake_pytest REQUIRED)
+   ament_add_pytest_test(map_validation tests/test_map_validation.py)
+diff --git a/ros2_ws/src/smartcar_slam/scripts/explore.py b/ros2_ws/src/smartcar_slam/scripts/explore.py
+index 3689ecc..7d41e12 100755
+--- a/ros2_ws/src/smartcar_slam/scripts/explore.py
++++ b/ros2_ws/src/smartcar_slam/scripts/explore.py
+@@ -33,6 +33,7 @@ from frontier_core import select_frontiers, dilate, visible_unknown_cells, targe
+ from exploration_memory import ViewpointMemory, EmptyConfirmation, navigation_failure
+ from route_planner import RoutePlanner
+ from readiness_core import LifecycleReadiness
++from handoff_core import assigned_target_known
+ 
+ 
+ class Explorer(Node):
+@@ -45,7 +46,7 @@ class Explorer(Node):
+         self.folder.mkdir(parents=True,exist_ok=False)
+         self.max_sim=float(self.declare_parameter('max_sim_seconds',900.).value)
+         if not math.isfinite(self.max_sim) or self.max_sim<=0:raise ValueError('max_sim_seconds须为有限正数')
+-        self.wall_start=time.monotonic();self.sim_start=None;self.map_msg=None;self.map_wall=None
++        self.wall_start=time.monotonic();self.sim_start=None;self.map_msg=None;self.map_wall=None;self.map_sim=None
+         self.status='WAITING';self.reason=None;self.gate={};self.gate_wall=None
+         self.goal=None;self.sending=None;self.result=None;self.cancel_future=None
+         self.goal_wall=None;self.goal_sim=None;self.goals=[];self.excluded=[];self.failures=0
+@@ -53,7 +54,7 @@ class Explorer(Node):
+         self.await_map_version=None
+         self.odom_window=deque();self.safe=(0.,0.);self.safe_wall=None
+         self.stop_sent=False;self.stop_deadline=None;self.save_future=None;self.save_phase=None;self.save_deadline=None
+-        self.stop_verified=False;self.last_status=0.;self.streams={};self.last_plan=0.
++        self.stop_verified=False;self.last_status=0.;self.streams={};self.search_retry_wall=0.;self.tick_previous=None
+         self.resume_deadline=None
+         self.memory=ViewpointMemory();self.pending_memory=None;self.last_search_details={}
+         self.search_pool=ThreadPoolExecutor(max_workers=1);self.search_future=None;self.search_context=None
+@@ -78,7 +79,7 @@ class Explorer(Node):
+         self.create_service(Trigger,'/exploration/finish',self.finish_service)
+         # 任务存活和墙钟预算不能随Gazebo暂停或低实时系数一起停摆。
+         self.create_timer(.2,self.tick,clock=RclpyClock(clock_type=ClockType.STEADY_TIME))
+-        self.event('session_started',scope='SIMULATION_ONLY',prior_map_loaded=False,algorithm='v15 fresh lifecycle readiness / unchanged v14 observation and route policy + RPP / SLAM Toolbox')
++        self.event('session_started',scope='SIMULATION_ONLY',prior_map_loaded=False,algorithm='v17 fresh-map frontier search / equivalent ray and region acceleration / event-driven handoff / batch geometry cache + RPP / SLAM Toolbox')
+         self.write_summary()
+ 
+     def sim(self):
+@@ -113,7 +114,7 @@ class Explorer(Node):
+             not all(math.isfinite(v) for v in [msg.info.origin.position.x,msg.info.origin.position.y,q.x,q.y,q.z,q.w]) or
+             abs(q.x)+abs(q.y)+abs(q.z)>1.e-6 or abs(abs(q.w)-1)>1.e-6):
+             self.map_wall=None;return
+-        initial=self.map_msg is None;self.map_msg=msg;self.map_wall=time.monotonic();self.map_version+=1
++        initial=self.map_msg is None;self.map_msg=msg;self.map_wall=time.monotonic();self.map_sim=self.sim();self.map_version+=1
+         a=np.asarray(msg.data);self.row('map_updates',['sim_s','width','height','resolution','free','occupied','unknown'],
+             [self.sim(),msg.info.width,msg.info.height,msg.info.resolution,int(((a>=0)&(a<=20)).sum()),int((a>=65).sum()),int((a<0).sum())])
+         if initial:self.map_snapshot('map_initial');self.event('first_online_map',known_cells=int((a>=0).sum()))
+@@ -138,7 +139,7 @@ class Explorer(Node):
+         if self.status=='RESUMING' and not self.gate.get('stop_latched'):
+             self.status='WAITING';self.next_sim=self.sim()+3.;self.event('resume_confirmed')
+         if self.gate.get('stop_latched') and self.reason is None and self.status not in ['PAUSED','RESUMING']:
+-            self.status='PAUSED';self.cancel();self.route.cancel();self.search_future=None;self.empty.clear();self.event('external_stop_paused')
++            self.status='PAUSED';self.cancel();self.route.cancel();self.discard_search('external_stop');self.empty.clear();self.event('external_stop_paused')
+ 
+     def latch(self,enabled):
+         """只在用户显式恢复时解除锁存；自动结束和故障只请求锁存停车。"""
+@@ -154,7 +155,7 @@ class Explorer(Node):
+         if self.reason is not None:
+             response.success=False;response.message='任务正在结束或已保存；重新启动须使用新目录';return response
+         if request.data:
+-            self.status='PAUSED';self.cancel();self.route.cancel();self.search_future=None;self.empty.clear();self.latch(True);self.event('user_paused')
++            self.status='PAUSED';self.cancel();self.route.cancel();self.discard_search('user_pause');self.empty.clear();self.latch(True);self.event('user_paused')
+         else:
+             if self.goal is not None or self.sending is not None or self.result is not None:
+                 self.cancel();self.latch(True)
+@@ -175,7 +176,7 @@ class Explorer(Node):
+     def finish(self,reason):
+         """完成、受阻、预算耗尽和故障均有终止原因，不把部分地图说成完全建图。"""
+         if self.reason is not None:return
+-        self.reason=reason;self.status='STOPPING';self.stop_deadline=time.monotonic()+30.;self.cancel();self.route.cancel();self.search_future=None
++        self.reason=reason;self.status='STOPPING';self.stop_deadline=time.monotonic()+30.;self.cancel();self.route.cancel();self.discard_search('mission_stopping')
+         self.event('mission_stopping',reason=reason)
+ 
+     def write_summary(self,error=None):
+@@ -183,7 +184,7 @@ class Explorer(Node):
+         report={'state':self.status,'reason':self.reason,'complete':self.reason=='NO_FRONTIERS' and self.status=='DONE',
+                 'stop_verified':self.stop_verified,'scope':'SIMULATION_ONLY','prior_map_loaded':False,
+                 'goals':self.goals,'navigation_failures':self.failures,'duration_wall_s':time.monotonic()-self.wall_start,
+-                'termination_details':self.last_search_details,'exploration_algorithm':'v15 fresh lifecycle readiness / unchanged v14 observation and route policy',
++                'termination_details':self.last_search_details,'exploration_algorithm':'v17 fresh-map frontier search / equivalent ray and region acceleration / event-driven handoff / batch geometry cache',
+                 'wait_reason':self.wait_reason,'navigation_readiness':self.lifecycle_ready.snapshot(time.monotonic()),
+                 'firmware_source_version':131,'pi_changed':False,'pi_exercised':False,
+                 'not_verified':['physical vehicle','all unseen spaces','unreachable rooms','arbitrary environments']}
+@@ -222,6 +223,7 @@ class Explorer(Node):
+                     self.lifecycle_futures[name]=client.call_async(GetState.Request());self.lifecycle_ready.requested(name,now)
+         ready=self.lifecycle_ready.ready(now)
+         if not ready:self.waiting('LIFECYCLE_NOT_FRESH_ACTIVE',now,**self.lifecycle_ready.snapshot(now))
++        elif self.wait_reason=='LIFECYCLE_NOT_FRESH_ACTIVE':self.wait_reason=None
+         return ready
+ 
+     def waiting(self, reason, now, **details):
+@@ -272,11 +274,39 @@ class Explorer(Node):
+     def empty_search(self, details, sim):
+         """分别确认冷却、视点耗尽、规划受阻和起点异常，不把过滤结果冒充全图完成。"""
+         self.last_search_details=details;reason=details['reason']
++        self.search_retry_wall=time.monotonic()+1.
+         if self.empty.observe(reason,sim,self.map_version):
+             reasons={'NO_FRONTIERS':'NO_FRONTIERS','ROBOT_NOT_IN_SAFE_SPACE':'START_POSE_UNSAFE_PARTIAL',
+                      'NO_SAFE_KNOWN_SPACE':'NO_SAFE_KNOWN_SPACE_PARTIAL'}
+             self.finish(reasons.get(reason,reason+'_PARTIAL'))
+ 
++    def discard_search(self, reason):
++        """暂停、失败和过期只丢弃纯计算结果，不把旧结果带入下一导航任务。"""
++        if self.search_future is not None:
++            self.search_future.cancel();self.event('frontier_preparation_discarded',reason=reason)
++        self.search_future=None;self.search_context=None
++
++    def start_search(self, robot, yaw, sim, source_goal=None):
++        """快照地图后在单个后台工作线程搜索；不提前发送任何Nav2动作。"""
++        msg=self.map_msg;grid=np.asarray(msg.data).reshape(msg.info.height,msg.info.width).copy()
++        origin=(msg.info.origin.position.x,msg.info.origin.position.y);res=msg.info.resolution
++        self.search_context={'grid':grid,'resolution':res,'origin':origin,'version':self.map_version,
++                             'robot':robot,'yaw':yaw,'sim_s':sim,'wall_s':time.monotonic(),'source_goal':source_goal}
++        self.search_future=self.search_pool.submit(select_frontiers,grid,res,origin,robot,robot_yaw=yaw)
++        self.event('frontier_search_started',source_goal=source_goal,map_version=self.map_version,robot=robot)
++
++
++    def pipeline_phase(self):
++        """记录真实状态机阶段供离线归因，不用速度阈值反推规划CPU时间。"""
++        if self.reason is not None or self.status in ['PAUSED','RESUMING','DONE','ERROR']:return self.status
++        if self.goal is not None or self.sending is not None:return 'NAVIGATING'
++        if self.await_map_version is not None:return 'OBSERVATION_MAP_WAIT'
++        if self.route.busy:return 'NAV2_ROUTE_QUERY'
++        if self.route.done:return 'READY_TO_SEND'
++        if self.search_future is not None:return 'FRONTIER_SEARCH'
++        if self.wait_reason is not None:return 'READINESS_WAIT'
++        return 'WAITING'
++
+     def launch_target(self, target, now, sim):
+         """发目标前再核对最新地图安全圆和观测价值；保留原Nav2到达容差及速度边界。"""
+         msg=self.map_msg;grid=np.asarray(msg.data).reshape(msg.info.height,msg.info.width)
+@@ -299,7 +329,7 @@ class Explorer(Node):
+         cells=np.asarray(target['visible_cells']);yy,xx=np.divmod(cells,source.shape[1])
+         target['observation_world']=[list(p) for p in zip(source_origin[0]+(xx+.5)*source_res,source_origin[1]+(yy+.5)*source_res)]
+         target['target_observation_world']=wanted
+-        self.goals.append({**target,'sent_sim_s':sim,'action_status':None})
++        self.goals.append({**target,'sent_sim_s':sim,'sent_map_version':self.map_version,'action_status':None})
+         self.wait_reason=None
+         self.goal_wall=now;self.goal_sim=sim;self.status='EXPLORING';self.empty.clear()
+         self.sending=self.navigator.send_goal_async(request);self.event('goal_sent',target=target);self.write_summary()
+@@ -333,7 +363,7 @@ class Explorer(Node):
+                 handle=self.sending.result();self.sending=None
+                 if handle is None or not handle.accepted:
+                     self.failures+=int(navigation_failure(self.goals[-1],6));self.goals[-1]['action_status']=6;self.pending_memory=(self.goals[-1],6)
+-                    self.event('goal_rejected');self.next_sim=sim+3.
++                    self.event('goal_rejected');self.discard_search('goal_rejected');self.next_sim=sim+3.
+                 else:
+                     self.goal=handle;self.result=handle.get_result_async()
+                     if self.status=='PAUSED' or self.reason is not None:self.cancel()
+@@ -342,11 +372,20 @@ class Explorer(Node):
+                 self.pending_memory=(self.goals[-1],status)
+                 if self.reason is None:self.failures+=int(navigation_failure(self.goals[-1],status,self.status=='PAUSED'))
+                 self.event('goal_result',status=status)
++                if status!=4:self.discard_search('navigation_not_successful')
+                 if status==5 and self.cancel_future is None and self.reason is None:
+                     self.status='PAUSED';self.empty.clear();self.latch(True);self.event('external_cancel_paused')
+-                self.goal=None;self.result=None;self.cancel_future=None;self.next_sim=sim+.2
+-                # 使用到达之后的新地图再选目标，替代每个目标固定空等3秒。
++                self.goal=None;self.result=None;self.cancel_future=None;self.next_sim=sim
++                # 指定格已有新图观测证据时复用，否则继续等到达后的新地图。
+                 self.await_map_version=self.map_version;self.write_summary()
++                target=self.goals[-1];msg=self.map_msg
++                if (status==4 and not target.get('timed_out') and msg is not None and self.map_wall is not None and
++                    self.map_version>target['sent_map_version'] and self.map_sim is not None and 0.<=sim-self.map_sim<=1.):
++                    grid=np.asarray(msg.data).reshape(msg.info.height,msg.info.width)
++                    origin=(msg.info.origin.position.x,msg.info.origin.position.y)
++                    if assigned_target_known(grid,msg.info.resolution,origin,target['target_observation_world']):
++                        self.await_map_version=None
++                        self.event('observation_already_current',map_version=self.map_version,map_age_sim_s=sim-self.map_sim)
+             if self.status in ['DONE','ERROR']:return
+             if self.reason is not None:self.saving(now);return
+             if self.status=='PAUSED':return
+@@ -361,14 +400,16 @@ class Explorer(Node):
+                 if now-self.wall_start>120:self.finish('STARTUP_FAILED_PARTIAL')
+                 return
+             if self.map_wall is None or now-self.map_wall>10 or now-self.gate_wall>1.5:
+-                self.status='PAUSED';self.cancel();self.route.cancel();self.search_future=None;self.empty.clear();self.latch(True)
++                self.status='PAUSED';self.cancel();self.route.cancel();self.discard_search('stale_input');self.empty.clear();self.latch(True)
+                 self.event('input_stale_paused');self.write_summary();return
+             if self.goal is not None:
+                 if (sim-self.goal_sim>120 or now-self.goal_wall>600) and self.cancel_future is None:
+                     self.goals[-1]['timed_out']=True;self.cancel()
+                     self.failures+=int(navigation_failure(self.goals[-1],5));self.event('goal_timeout_cancel')
++                if self.cancel_future is None:
++                    self.navigation_ready(now)
+                 return
+-            if self.sending is not None or sim<self.next_sim or now-self.last_plan<1.:return
++            if self.sending is not None or sim<self.next_sim:return
+             if self.await_map_version is not None:
+                 if self.map_version<=self.await_map_version:return
+                 self.await_map_version=None
+@@ -387,7 +428,7 @@ class Explorer(Node):
+             yaw=math.atan2(2*(q.w*q.z+q.x*q.y),1-2*(q.y*q.y+q.z*q.z))
+             if self.route.busy:return
+             if self.route.done:
+-                self.route.done=False;self.last_plan=now
++                self.route.done=False
+                 if self.route.abandoned:return
+                 if self.route.target is not None:
+                     self.empty.candidates(planned=True)
+@@ -397,19 +438,19 @@ class Explorer(Node):
+                 else:self.empty_search({**self.last_search_details,'reason':self.route.reason},sim)
+                 return
+             if self.search_future is None:
+-                msg=self.map_msg;grid=np.asarray(msg.data).reshape(msg.info.height,msg.info.width).copy()
+-                origin=(msg.info.origin.position.x,msg.info.origin.position.y);res=msg.info.resolution
+-                self.search_context=(grid,res,origin,self.map_version,robot,yaw)
+-                self.search_future=self.search_pool.submit(select_frontiers,grid,res,origin,robot,robot_yaw=yaw)
+-                self.last_plan=now;return
++                if now>=self.search_retry_wall:self.start_search(robot,yaw,sim)
++                return
+             if not self.search_future.done():return
+-            candidates,details=self.search_future.result();self.search_future=None
+-            grid,res,origin,version,start,start_yaw=self.search_context
++            context=self.search_context
++            candidates,details=self.search_future.result();self.search_future=None;self.search_context=None
++            grid,res,origin,version,start,start_yaw=[context[key] for key in ['grid','resolution','origin','version','robot','yaw']]
++            self.event('frontier_search_finished',source_goal=context['source_goal'],
++                       elapsed_wall_s=now-context['wall_s'],elapsed_sim_s=sim-context['sim_s'],candidates=len(candidates))
+             candidates,memory=self.memory.filter(candidates,grid,res,origin,sim)
+             details.update(memory);details['available_candidates']=len(candidates)
+             if not candidates and details['reason']=='CANDIDATES':
+                 details['reason']='VIEWPOINTS_COOLDOWN' if memory['cooling_views'] else 'VIEWPOINTS_EXHAUSTED'
+-            self.last_search_details=details;self.last_plan=now;self.event('frontier_search',robot=start,**details)
++            self.last_search_details=details;self.event('frontier_search',robot=start,**details)
+             if not candidates:self.empty_search(details,sim);return
+             self.empty.candidates()
+             if not self.route.begin(candidates,start,start_yaw,grid,res,origin,version):
+@@ -420,6 +461,11 @@ class Explorer(Node):
+             self.latch(True);self.event('error',error=str(exc));self.write_summary(str(exc))
+         finally:
+             self.heartbeat_pub.publish(Empty())
++            self.row('pipeline',['sim_s','state','phase','goal_index','map_version','search_busy','route_busy','wait_reason','tick_interval_wall_s'],
++                [sim,self.status,self.pipeline_phase(),len(self.goals)-1,self.map_version,
++                 self.search_future is not None,self.route.busy,self.wait_reason,
++                 None if self.tick_previous is None else now-self.tick_previous])
++            self.tick_previous=now
+             if now-self.last_status>1.:
+                 msg=String();msg.data=json.dumps({'state':self.status,'reason':self.reason,'goals':len(self.goals),
+                     'failures':self.failures,'stop_verified':self.stop_verified,'output_dir':str(self.folder)})
+diff --git a/ros2_ws/src/smartcar_slam/scripts/frontier_core.py b/ros2_ws/src/smartcar_slam/scripts/frontier_core.py
+index 8df4586..3854b00 100644
+--- a/ros2_ws/src/smartcar_slam/scripts/frontier_core.py
++++ b/ros2_ws/src/smartcar_slam/scripts/frontier_core.py
+@@ -1,5 +1,6 @@
+ """仅从在线栅格和当前位姿选择安全、可达的未知区观察点，不读取场景真值。"""
+ from collections import deque
++from functools import lru_cache
+ import math
+ import numpy as np
+ 
+@@ -16,12 +17,13 @@ def dilate(mask, radius):
+     return out
+ 
+ 
+-def reachable_distances(safe, start):
++def reachable_distances(safe, start, max_steps=None):
+     """同样四邻接安全广搜，使用原生列表避免逐栅格NumPy标量开销阻塞任务心跳。"""
+     h,w=safe.shape;allowed=safe.ravel().tolist();distance=[-1]*(h*w);parent=[-1]*(h*w)
+     first=start[0]*w+start[1];distance[first]=0;queue=deque([first])
+     while queue:
+         cell=queue.popleft();y,x=divmod(cell,w)
++        if max_steps is not None and distance[cell]>=max_steps:continue
+         neighbors=[]
+         if y:neighbors.append(cell-w)
+         if y+1<h:neighbors.append(cell+w)
+@@ -48,14 +50,23 @@ def path_headings(safe, parent, start, goal, resolution):
+     return math.atan2(first_y-sy,first_x-sx),math.atan2(gy-last_y,gx-last_x)
+ 
+ 
+-def predicted_gain(grid, resolution, origin, point, radius=3., rays=72):
+-    """仅从当前地图射线估计未知区观测面积，已知墙体遮挡后的未知区不计收益。"""
++@lru_cache(maxsize=8)
++def gain_ray_template(resolution, radius, rays):
++    """只缓存与地图内容无关的射线偏移，保持原运算顺序和半格采样。"""
+     angles=np.arange(rays)*2*math.pi/rays;step=resolution/2
+     ranges=np.arange(step,radius+step/2,step)
+-    xs=np.floor((point[0]+np.cos(angles[:,None])*ranges-origin[0])/resolution).astype(int)
+-    ys=np.floor((point[1]+np.sin(angles[:,None])*ranges-origin[1])/resolution).astype(int)
++    dx=np.cos(angles[:,None])*ranges;dy=np.sin(angles[:,None])*ranges
++    for array in [ranges,dx,dy]:array.setflags(write=False)
++    return step,ranges,dx,dy
++
++
++def predicted_gain(grid, resolution, origin, point, radius=3., rays=72):
++    """仅从当前地图射线估计未知区观测面积，已知墙体遮挡后的未知区不计收益。"""
++    step,ranges,dx,dy=gain_ray_template(resolution,radius,rays)
++    xs=np.floor((point[0]+dx-origin[0])/resolution).astype(int)
++    ys=np.floor((point[1]+dy-origin[1])/resolution).astype(int)
+     h,w=grid.shape;inside=(xs>=0)&(xs<w)&(ys>=0)&(ys<h)
+-    values=grid[np.clip(ys,0,h-1),np.clip(xs,0,w-1)]
++    values=grid[np.minimum(np.maximum(ys,0),h-1),np.minimum(np.maximum(xs,0),w-1)]
+     blocked=np.maximum.accumulate((~inside)|(values>20),axis=1)
+     return float((((values<0)&~blocked)*ranges).sum())*step*2*math.pi/rays
+ 
+@@ -130,7 +141,7 @@ def assign_observation_regions(candidates, safe, resolution, radius=3.):
+     remaining=set(range(len(candidates)));regions=0
+     for index,target in enumerate(candidates):
+         if index not in remaining:continue
+-        distances,_=reachable_distances(safe,tuple(target['cell']))
++        distances,_=reachable_distances(safe,tuple(target['cell']),max_steps=int(math.ceil(radius/resolution)))
+         members=[i for i in remaining if distances[tuple(candidates[i]['cell'])]>=0 and
+                  distances[tuple(candidates[i]['cell'])]*resolution<=radius]
+         for i in members:candidates[i]['observation_region']=regions
+diff --git a/ros2_ws/src/smartcar_slam/scripts/route_planner.py b/ros2_ws/src/smartcar_slam/scripts/route_planner.py
+index 160f1b6..15bb8ac 100644
+--- a/ros2_ws/src/smartcar_slam/scripts/route_planner.py
++++ b/ros2_ws/src/smartcar_slam/scripts/route_planner.py
+@@ -24,6 +24,9 @@ class RoutePlanner:
+         if self.busy or self.retired or not self.client.server_is_ready() or not self.costmap_client.service_is_ready():return False
+         self.batch+=1;self.busy=True;self.done=False;self.abandoned=False;self.target=None;self.reason=None
+         self.robot=robot;self.yaw=yaw;self.grid=grid;self.resolution=resolution;self.origin=origin;self.version=version
++        # 同批只读地图的安全膨胀只算一次；具体路径的停车末段仍逐条检查。
++        free=(grid>=0)&(grid<=20);self.safe_observer=free&~dilate(~free,.4/resolution)
++        self.endpoint_checks={};self.started_wall=time.monotonic();self.started_sim=self.node.sim()
+         self.candidates=shortlist(candidates,8)
+         self.costs=[None]*len(self.candidates);self.edges={};self.queue=[];self.pairs=False
+         self.deadline=time.monotonic()+10.;self.handle=None
+@@ -48,7 +51,8 @@ class RoutePlanner:
+         self.reason=reason or self.reason or ('CANDIDATES' if self.target else 'NAV2_UNREACHABLE_FRONTIERS')
+         self.node.event('planning_batch_finished',batch=self.batch,reason=self.reason,
+                         candidates=len(self.candidates),valid_paths=sum(x is not None for x in self.costs),
+-                        pair_paths=len(self.edges),selected=self.target)
++                        pair_paths=len(self.edges),selected=self.target,
++                        elapsed_wall_s=time.monotonic()-self.started_wall,elapsed_sim_s=self.node.sim()-self.started_sim)
+ 
+     def costmap_ready(self, future):
+         """从实际全局代价图获取膨胀代价，保存原值和时间戳，不用SLAM占据值冒充。"""
+@@ -118,20 +122,22 @@ class RoutePlanner:
+             self.node.event('planning_error',batch=self.batch,error=str(exc));self.finish('NAV2_PLANNING_ERROR')
+ 
+     def received(self, future):
+-        """验证返回终点仍有观察价值，并保留完整路径、结果和实际规划CPU时间。"""
++        """验证返回终点仍有观察价值，并保留完整路径、结果和Nav2报告的规划时长。"""
+         try:
+             if self.retired:return
+             response=future.result();result=response.result;points=[(p.pose.position.x,p.pose.position.y) for p in result.path.poses]
+             cost=path_cost(points,self.start_yaw,self.costmap) if response.status==4 else None
+             if cost is not None:
+                 end=points[-1];ix=int((end[0]-self.origin[0])/self.resolution);iy=int((end[1]-self.origin[1])/self.resolution)
+-                safe=(self.grid>=0)&(self.grid<=20)&~dilate(~((self.grid>=0)&(self.grid<=20)),.4/self.resolution)
+-                visible=visible_unknown_cells(self.grid,self.resolution,self.origin,end)
+                 target=self.candidates[self.edge[1]]
+-                approach=stopping_approach(points,(target['x'],target['y']),safe,self.resolution,self.origin)
+-                if not (0<=ix<self.grid.shape[1] and 0<=iy<self.grid.shape[0] and safe[iy,ix]
+-                        and approach and set(visible)&set(target.get('target_visible_cells',target['visible_cells']))
+-                        and math.dist(end,(target['x'],target['y']))<=.15):cost=None
++                key=(self.edge[1],*end)
++                if key not in self.endpoint_checks:
++                    visible=visible_unknown_cells(self.grid,self.resolution,self.origin,end)
++                    self.endpoint_checks[key]=bool(0<=ix<self.grid.shape[1] and 0<=iy<self.grid.shape[0] and self.safe_observer[iy,ix]
++                        and set(visible)&set(target.get('target_visible_cells',target['visible_cells']))
++                        and math.dist(end,(target['x'],target['y']))<=.15)
++                approach=stopping_approach(points,(target['x'],target['y']),self.safe_observer,self.resolution,self.origin)
++                if not (self.endpoint_checks[key] and approach):cost=None
+                 else:cost['stop_approach_points']=approach
+             elapsed=result.planning_time.sec+result.planning_time.nanosec/1.e9
+             self.record(cost,points,elapsed,response.status);self.handle=None;self.advance()
+diff --git a/ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py b/ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py
+index 7792ca1..feb5233 100644
+--- a/ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py
++++ b/ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py
+@@ -8,6 +8,60 @@ from frontier_core import select_frontiers,visible_unknown_cells,assign_observat
+ from exploration_memory import ViewpointMemory,EmptyConfirmation,navigation_failure
+ from route_core import path_cost,rank_routes,shortlist,open_visit_order,stopping_approach,information_gain,information_visit_order
+ from readiness_core import LifecycleReadiness
++from handoff_core import assigned_target_known
++
++
++def test_bounded_region_search_matches_full_distances_without_crossing_wall():
++    """半径内保持完整广搜的距离与连通性，边界外不继续扩张；隔墙近点仍不可达。"""
++    from frontier_core import reachable_distances
++    safe=np.ones((30,30),dtype=bool);safe[:,10]=False;safe[20,10]=True
++    full,_=reachable_distances(safe,(5,5));limited,_=reachable_distances(safe,(5,5),max_steps=8)
++    within=(full>=0)&(full<=8)
++    assert np.array_equal(limited[within],full[within])
++    assert (limited[~within]==-1).all()
++    assert limited[5,9]==4 and limited[13,5]==8 and limited[14,5]==-1 and limited[5,11]==-1
++
++
++def test_extra_map_wait_is_avoidable_only_when_every_assigned_cell_is_known():
++    """任一指定目标仍未知、越界或目标为空都不能用已有地图免除下一帧等待。"""
++    grid=np.zeros((50,60),dtype=np.int16);grid[20,25]=-1
++    wanted=[(.775,.775),(1.275,1.025)]
++    assert not assigned_target_known(grid,.05,(0.,0.),wanted)
++    grid[20,25]=100
++    assert assigned_target_known(grid,.05,(0.,0.),wanted)
++    assert not assigned_target_known(grid,.05,(0.,0.),wanted+[(5.,5.)])
++    assert not assigned_target_known(grid,.05,(0.,0.),[])
++
++
++
++
++
++
++
++
++
++
++def test_cached_endpoint_still_checks_each_paths_early_stopping_clearance(monkeypatch):
++    """同终点可复用射线结果，但第二条贴障停车末段仍必须独立拒绝。"""
++    from types import SimpleNamespace as Item
++    import route_planner as planner
++    grid=np.zeros((100,100),dtype=np.int16);grid[40:60,40:60]=100;grid[50,90]=-1
++    target={'x':3.475,'y':2.525,'visible_cells':[5090],'target_visible_cells':[5090]}
++    checks=[];records=[];events=[];original=planner.visible_unknown_cells
++    def visible(*args,**kwargs):
++        """计数真实射线调用，保留原算法以检查障碍和指定目标。"""
++        checks.append(1);return original(*args,**kwargs)
++    monkeypatch.setattr(planner,'visible_unknown_cells',visible)
++    obj=Item(retired=False,grid=grid,resolution=.05,origin=(0.,0.),start_yaw=0.,costmap=None,
++             safe_observer=(grid==0)&~dilate(grid!=0,8.),endpoint_checks={},edge=(None,0),candidates=[target],
++             record=lambda cost,*unused:records.append(cost),advance=lambda:None,
++             node=Item(event=lambda *args,**kw:events.append((args,kw))))
++    for xs in [np.linspace(4.475,3.475,41),np.linspace(3.025,3.475,19)]:
++        points=[Item(pose=Item(position=Item(x=float(x),y=2.525))) for x in xs]
++        response=Item(status=4,result=Item(path=Item(poses=points),planning_time=Item(sec=0,nanosec=0)))
++        planner.RoutePlanner.received(obj,Item(result=lambda:response))
++    assert not events and len(checks)==1
++    assert records[0] is not None and records[1] is None
+ 
+ 
+ def test_lifecycle_active_evidence_expires_without_a_fresh_response():
+diff --git a/ros2_ws/tools/report_exploration_tail.py b/ros2_ws/tools/report_exploration_tail.py
+index fc744b9..ab55eba 100644
+--- a/ros2_ws/tools/report_exploration_tail.py
++++ b/ros2_ws/tools/report_exploration_tail.py
+@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
+ from report_exploration_speed import evaluate,reference_points
+ from plot_exploration import read,line
+ 
+-TITLE=('Exploration recovery v15 / route performance v14 / baseline v6 as labeled | SIMULATION ONLY | firmware source v131\n'
++TITLE=('Exploration algorithm versions as labeled | SIMULATION ONLY | firmware source v131\n'
+        'P right reverse .45 -> .45, others .30 -> .30; I steady .010 -> .010, start .030 -> .030 / 10 ms\n'
+        'PI NOT exercised; target visibility / regional Nav2 open order; NavFn / RPP and motion limits unchanged')
+ plt.rcParams['path.simplify']=False
+@@ -31,7 +31,9 @@ ALGORITHMS={
+     'v12':'assigned-target visibility / original legal margin + actual stopping approach',
+     'v13':'assigned-target visibility / task-aware memory / area gain / regional Nav2 open order',
+     'v14':'v13 observation fixes + information completion order within near-minimum Nav2 travel budget',
+-    'v15':'fresh lifecycle readiness + explicit resume reset; unchanged v14 observation and route policy'}
++    'v15':'fresh lifecycle readiness + explicit resume reset; unchanged v14 observation and route policy',
++    'v16':'bounded approach frontier preparation / event-driven handoff / per-batch geometry cache',
++    'v17':'fresh-map candidates / equivalent ray templates and bounded regions / event-driven handoff'}
+ 
+ 
+ def geometry_distance(x,y,geometry):
+@@ -108,7 +110,7 @@ def map_values(data,x,y):
+ def save(fig,folder,name):
+     """保存全部采样点的PNG和SVG，图上明确PI与算法及仿真边界。"""
+     version='v6' if name.startswith('before_') else ('v8' if name.startswith('after_') else None)
+-    matched=re.search(r'(?:final_|pilot_|watchdog_|complete_)(v\d+)',name)
++    matched=re.search(r'(?:before_|final_|pilot_|watchdog_|complete_)(v\d+)',name)
+     if matched:version=matched.group(1)
+     title=TITLE
+     if version:
+diff --git a/ros2_ws/tools/verify_exploration.py b/ros2_ws/tools/verify_exploration.py
+index 7ad6c6a..08a2782 100644
+--- a/ros2_ws/tools/verify_exploration.py
++++ b/ros2_ws/tools/verify_exploration.py
+@@ -60,7 +60,7 @@ def verify(a,ws):
+     frozen=a.output/'source';frozen.mkdir()
+     snapshots=a.output/'map_snapshots';snapshots.mkdir()
+     sources=[ws/'src/smartcar_slam/scripts'/n for n in
+-             ['explore.py','frontier_core.py','exploration_memory.py','route_core.py','route_planner.py','readiness_core.py']
++             ['explore.py','frontier_core.py','exploration_memory.py','route_core.py','route_planner.py','readiness_core.py','handoff_core.py']
+              if (ws/'src/smartcar_slam/scripts'/n).is_file()]
+     sources +=[ws/'src/smartcar_nav2/launch'/n for n in ['navigation.launch.py','exploration.launch.py']]
+     sources +=[ws/'src/smartcar_nav2/scripts'/n for n in ['navigation_gate.py','gate_core.py']]

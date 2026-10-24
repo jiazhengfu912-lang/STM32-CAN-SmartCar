@@ -1,0 +1,63 @@
+{
+  "result": "FAIL",
+  "scope": "SIMULATION_ONLY",
+  "case": "detour",
+  "started_utc": "2026-10-19T07:01:00.861419+00:00",
+  "domain_id": 89,
+  "ign_partition": "smartcar-replan-4402385028594e85b406f168451683b5",
+  "goal": [
+    4.5,
+    0.0,
+    0.0
+  ],
+  "goal_send_count": 0,
+  "checks": {},
+  "firmware_source_version": 131,
+  "pi_exercised": false,
+  "pi_changed": false,
+  "not_verified": [
+    "physical vehicle",
+    "moving obstacles",
+    "arbitrary routes",
+    "multi-goal GUI"
+  ],
+  "obstacle": {
+    "x": 2.0,
+    "y": 0.0,
+    "dx": 0.4,
+    "dy": 0.5,
+    "dz": 0.6
+  },
+  "source_sha256": {
+    "ros2_ws/tools/verify_replanning.py": "2fa4b5051769ccf7379f62f4a27c3edfe1f4d7c190cab59831e6eebcd11a6600",
+    "ros2_ws/tools/verify_navigation.py": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "ef29d16737e69511d9b344e072fe26e3c7f0a428ddcd63dfcf0b45ba076080fd",
+    "ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml": "ac3cc08e144859b1efc4c5a9103b906114efe21f53b564276a2702ce0c7fc8d7",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "412cbced6a3b9f6efbb2f5d74000ca98fcf7342da5d29ae877cf7cd5dfe8a6a1"
+  },
+  "error": "60 秒内未就绪；生命周期：{'waypoint_follower': 'active', 'controller_server': 'active', 'planner_server': 'active', 'map_server': 'active', 'amcl': 'active', 'smoother_server': 'active', 'behavior_server': 'active', 'bt_navigator': 'active', 'velocity_smoother': 'active'}",
+  "shutdown": {
+    "process_group": 13315,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "paths_received": 0,
+  "duration_wall_s": 62.25137642199934,
+  "raw_sha256": {
+    "velocity.csv": "19f12781e42412b5a88d0eef1920775d72f441d2c5d6d9475cad3760eef7370d",
+    "scan.jsonl": "c9b06b71116a11b524be3c67228ff161eeba55e844689d976072bcbe25bf0d45",
+    "launch.log": "875ea34e7811a571ba3e2c6c0d56f4b0d6c645f064a490b99dceb054d85c0e0d",
+    "exception.log": "1d4d2d48a3034a71b5e68e8fa254b04bc787ce7dc84ba0f69c6a72eac50caa47",
+    "safety.jsonl": "1a0e08c1d6c6b39426c35569caee1654182a5934a15677099af78ee591f8e59a",
+    "odom.csv": "1bbef7dc938e878f0b4609949b002d49a9f6b5fa905c1ba2d3c8856142278986",
+    "amcl.jsonl": "d37985622397c80282e25f362ec904fe9c0b9334f4e7dd78690502e7981cebc5",
+    "clock.jsonl": "b19b63dc59e1de20575ff19c5957452676acd100dd922ca41deba84629252f41",
+    "global_costmap_costmap.jsonl": "b8647cb9b829484811b477d11e8cdefdf9ac32384ce9914214e5a71f371daad5",
+    "local_costmap_costmap.jsonl": "5039175cbf239462c8a5110fce43446a5bb6bceccf3a298646341a0794c7844c",
+    "map.jsonl": "2f97496ac2755edbe74a5a2e5cd4cd34f158b6a129327017d441e755d0373d28",
+    "events.jsonl": "5395ca033dce538affcde06284ee9f8a4f9a773962d497544ed2c3688534d745"
+  }
+}

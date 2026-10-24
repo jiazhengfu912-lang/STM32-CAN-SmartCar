@@ -1,0 +1,23 @@
+Starting >>> smartcar_sim
+Finished <<< smartcar_sim [1.31s]
+Starting >>> smartcar_nav2
+Starting >>> smartcar_slam
+Finished <<< smartcar_slam [0.68s]
+--- stderr: smartcar_nav2
+/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp: In member function ‘geometry_msgs::msg::PoseStamped smartcar_nav2::SafeControllerServer::checkedGoalPose()’:
+/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp:47:24: error: ‘PlannerException’ is not a member of ‘nav2_core’
+   47 |       throw nav2_core::PlannerException("Goal transform unavailable: refusing goal completion");
+      |                        ^~~~~~~~~~~~~~~~
+/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp: In member function ‘bool smartcar_nav2::SafeControllerServer::checkedGoalReached()’:
+/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp:58:24: error: ‘PlannerException’ is not a member of ‘nav2_core’
+   58 |       throw nav2_core::PlannerException("Robot transform unavailable: refusing goal completion");
+      |                        ^~~~~~~~~~~~~~~~
+gmake[2]: *** [CMakeFiles/safe_controller_server.dir/build.make:76: CMakeFiles/safe_controller_server.dir/src/safe_controller_server.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/safe_controller_server.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
+---
+Failed   <<< smartcar_nav2 [25.6s, exited with code 2]
+
+Summary: 2 packages finished [27.6s]
+  1 package failed: smartcar_nav2
+  1 package had stderr output: smartcar_nav2

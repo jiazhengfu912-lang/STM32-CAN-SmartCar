@@ -1,0 +1,97 @@
+[INFO] [1792403155.446180832] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792403155.451333643] [controller_server]: Creating controller server
+[INFO] [1792403155.460077855] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792403155.465135695] [local_costmap.local_costmap]: Creating Costmap
+[WARN] [1792403155.465551020] [rcl.logging_rosout]: Publisher already registered for provided node name. If this is due to multiple nodes with the same name then all logs for that logger name will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.
+[INFO] [1792403155.473507266] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792403155.473952479] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792403155.474286820] [local_costmap.local_costmap]: Destroying
+[INFO] [1792403155.479687068] [controller_server]: Configuring controller interface
+[INFO] [1792403155.479827642] [controller_server]: getting goal checker plugins..
+[INFO] [1792403155.479848455] [controller_server]: Controller frequency set to 10.0000Hz
+[INFO] [1792403155.479869579] [local_costmap.local_costmap]: Configuring
+[INFO] [1792403155.483421180] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792403155.487192047] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1792403155.488920990] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792403155.488943981] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1792403155.489091479] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792403155.495349249] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792403155.495806379] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1792403155.496136557] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1792403155.496196095] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1792403155.496774201] [controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403155.497895912] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1792403155.503932803] [controller_server]: Activating
+[INFO] [1792403155.503970859] [local_costmap.local_costmap]: Activating
+[INFO] [1792403155.503977718] [local_costmap.local_costmap]: Checking transform
+[INFO] [1792403155.504044805] [local_costmap.local_costmap]: start
+[INFO] [1792403155.705317952] [controller_server]: Activating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403155.705374914] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1792403156.734810906] [controller_server]: Received FollowPath goal with checked TF completion
+[ERROR] [1792403156.734984240] [tf_help]: Transform data too old when converting from map to odom
+[ERROR] [1792403156.735008107] [tf_help]: Data time: 24s 361944044ns, Transform time: 21s 331477107ns
+[ERROR] [1792403156.735025928] [controller_server]: Goal transform unavailable: refusing goal completion
+[WARN] [1792403156.735087432] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1792403156.739558164] [controller_server]: Deactivating
+[INFO] [1792403156.739597068] [controller_server]: Deactivating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403156.739614430] [local_costmap.local_costmap]: Deactivating
+[INFO] [1792403156.904436507] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1792403156.917991607] [controller_server]: Cleaning up
+[INFO] [1792403156.918028637] [controller_server]: Cleaning up controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403156.918675554] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1792403156.934567517] [controller_server]: Configuring controller interface
+[INFO] [1792403156.934637074] [controller_server]: getting goal checker plugins..
+[INFO] [1792403156.934652582] [controller_server]: Controller frequency set to 10.0000Hz
+[INFO] [1792403156.934675804] [local_costmap.local_costmap]: Configuring
+[INFO] [1792403156.936170015] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792403156.936228059] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1792403156.936512192] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792403156.936518993] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1792403156.936568837] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792403156.940755226] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792403156.940896470] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1792403156.940927879] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1792403156.940941066] [controller_server]: Controller Server has general_goal_checker general_goal_checker  goal checkers available.
+[INFO] [1792403156.940955751] [controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403156.941966906] [controller_server]: Controller Server has FollowPath FollowPath  controllers available.
+[INFO] [1792403156.947006238] [controller_server]: Activating
+[INFO] [1792403156.947039345] [local_costmap.local_costmap]: Activating
+[INFO] [1792403156.947043965] [local_costmap.local_costmap]: Checking transform
+[INFO] [1792403156.947058158] [local_costmap.local_costmap]: Timed out waiting for transform from base_footprint to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1792403157.447141960] [local_costmap.local_costmap]: start
+[INFO] [1792403157.647708638] [controller_server]: Activating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403157.647770643] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1792403157.649496783] [controller_server]: Deactivating
+[INFO] [1792403157.649519831] [controller_server]: Deactivating controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403157.649535649] [local_costmap.local_costmap]: Deactivating
+[INFO] [1792403157.847670239] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1792403157.859725308] [controller_server]: Cleaning up
+[INFO] [1792403157.859757086] [controller_server]: Cleaning up controller: FollowPath of type regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403157.860369877] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1792403157.867871809] [controller_server]: Configuring controller interface
+[INFO] [1792403157.867911330] [controller_server]: getting goal checker plugins..
+[INFO] [1792403157.867923394] [controller_server]: Controller frequency set to 10.0000Hz
+[INFO] [1792403157.867952801] [local_costmap.local_costmap]: Configuring
+[INFO] [1792403157.871153344] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792403157.871216151] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1792403157.871820603] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792403157.871831667] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1792403157.871879348] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792403157.877865682] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792403157.878034565] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1792403157.878075170] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1792403157.878090212] [controller_server]: Controller Server has general_goal_checker general_goal_checker general_goal_checker  goal checkers available.
+[INFO] [1792403157.878103629] [controller_server]: Created controller : FollowPath of type nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+[INFO] [1792403157.879549929] [controller_server]: Controller Server has FollowPath FollowPath FollowPath  controllers available.
+[INFO] [1792403165.872470997] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792403165.872584983] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1792403165.872619837] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

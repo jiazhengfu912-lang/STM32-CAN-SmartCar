@@ -1,0 +1,7 @@
+before_v15_discovery 0
+Traceback (most recent call last):
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/out/exploration-handoff-20261024/run_serial.py", line 39, in <module>
+    if baseline.exists():
+  File "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/out/exploration-handoff-20261024/run_serial.py", line 16, in run
+    if hashlib.sha256((root/path).read_bytes()).hexdigest()!=expected:raise RuntimeError('Frozen source changed: '+path)
+RuntimeError: Frozen source changed: ros2_ws/src/smartcar_slam/scripts/explore.py

@@ -1,0 +1,48 @@
+{
+  "target": "Ubuntu22.04 / ROS2 Humble / Gazebo Fortress",
+  "user_choice": "User will transfer with Xftp and run in Ubuntu; no SSH login requested after this choice.",
+  "local_docker_probe": {
+    "result": "UNAVAILABLE",
+    "observed_error": "failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; The system cannot find the file specified.",
+    "action": "Did not start or install Docker; no container runtime validation claimed."
+  },
+  "manufacturer_c1_pdf": {
+    "result": "READ_BLOCKED",
+    "observed_error": "HTTP Error 403: Forbidden",
+    "action": "Retained explicitly provisional enclosure/scan-plane dimensions; used official product specifications only for nominal scan parameters."
+  },
+  "initial_offline_verifier": {
+    "result": "ERROR_THEN_FIXED",
+    "observed_error": "UnicodeDecodeError: 'gbk' codec can't decode byte 0x80",
+    "fix": "Explicit UTF-8 when reading YAML containing Chinese comments; final tests.log records successful rerun."
+  },
+  "initial_preview_renderer": {
+    "result": "DEPENDENCY_MISSING_THEN_FIXED",
+    "observed_error": "ModuleNotFoundError: No module named 'matplotlib'",
+    "fix": "Installed plotting dependencies only into out/sim_tools_env; rendered and visually inspected model_preview.png."
+  },
+  "physics_or_hardware_samples": "Windows handoff had no runtime samples. Ubuntu 2026-10-16 collected ACTUAL_GAZEBO_ROS_MESSAGES and independent Gazebo scene poses in verification_runs/ubuntu_20261016. PHYSICAL_HARDWARE: NONE.",
+  "ubuntu_validation": {
+    "timestamp": "2026-10-16T17:38:24.873119+08:00",
+    "workspace": "/home/jiazhengfu/Projects/smartcar_sim_ws",
+    "ubuntu": "22.04.5",
+    "ros_distro": "humble",
+    "gazebo_sim": "6.18.0 (Fortress)",
+    "renderer": "Mesa llvmpipe LLVM 15.0.7 (software rendering)",
+    "dependency_installation": "All required packages already installed; no sudo or apt mutation needed in this run. Installer completeness improved for future fresh machines.",
+    "report": "/home/jiazhengfu/Projects/smartcar_sim_ws/verification_runs/ubuntu_20261016/REPORT.md",
+    "results": {
+      "observe_01": "PASS",
+      "motion_01": "PASS",
+      "motion_02": "PASS",
+      "lidar_01": "PASS",
+      "sensors_preview_01": "PASS",
+      "sensors_1080p_01": "PASS",
+      "keyboard_01": "PASS",
+      "observe_final": "PASS"
+    },
+    "hardware_verified": false,
+    "camera_fov_verified": false,
+    "camera_15fps_verified": false
+  }
+}

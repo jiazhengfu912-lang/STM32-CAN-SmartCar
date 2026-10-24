@@ -1,0 +1,66 @@
+test_clock_rollback_is_stopped (test_model.GuardTests) ... ok
+test_initially_stopped (test_model.GuardTests) ... ok
+test_new_message_rearms_but_zero_is_immediate (test_model.GuardTests) ... ok
+test_nonfinite_command_cancels_motion (test_model.GuardTests) ... ok
+test_output_does_not_extend_user_command (test_model.GuardTests) ... ok
+test_timeout_boundary_without_new_message (test_model.GuardTests) ... ok
+test_velocity_limits_both_directions (test_model.GuardTests) ... ok
+test_actual_base_and_upper_deck_dimensions (test_model.ModelTests) ... ok
+test_c1_nominal_scan_and_camera_profiles (test_model.ModelTests) ... ok
+test_cad_transform_is_rotation_not_mirror (test_model.ModelTests) ... ok
+test_camera_optical_axis_faces_forward (test_model.ModelTests) ... ok
+test_casters_have_swivel_and_roll_and_same_ground (test_model.ModelTests) ... ok
+test_meshes_portable_closed_and_in_metres (test_model.ModelTests) ... ok
+test_positive_inertias_and_triangle_inequality (test_model.ModelTests) ... ok
+test_urdf_and_sdf_joint_origins_match (test_model.ModelTests) ... ok
+test_urdf_is_connected_tree_with_six_moving_joints (test_model.ModelTests) ... ok
+test_wheel_dimensions_track_and_ground (test_model.ModelTests) ... ok
+test_bundled_and_absolute_selection (test_worlds.WorldTests) ... ok
+test_collision_and_visual_match_and_doors_are_clear (test_worlds.WorldTests) ... ok
+test_missing_world_and_wrong_template_fail_early (test_worlds.WorldTests) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.061s
+
+OK
+
+{
+  "scope": "MODEL_AND_OFFLINE_SOFTWARE_CHECKS_ONLY",
+  "ubuntu_humble_build": "NOT_CHECKED_BY_THIS_TOOL",
+  "gazebo_physics": "NOT_CHECKED_BY_THIS_TOOL",
+  "gazebo_gui": "NOT_CHECKED_BY_THIS_TOOL",
+  "camera_and_lidar_messages": "NOT_CHECKED_BY_THIS_TOOL",
+  "physical_vehicle": "NOT_CHECKED_BY_THIS_TOOL",
+  "checks": {
+    "python_syntax": {
+      "passed": true,
+      "errors": []
+    },
+    "xml_well_formed": {
+      "passed": false,
+      "errors": [
+        "config/gazebo_gui.config: junk after document element: line 7, column 0"
+      ],
+      "note": "XML syntax plus unit-test semantic checks; not an installed Fortress schema check."
+    },
+    "fortress_bridge_yaml": {
+      "passed": true
+    },
+    "rviz_yaml": {
+      "passed": true
+    },
+    "unit_and_geometry_tests": {
+      "passed": true,
+      "tests": 20,
+      "failures": 0,
+      "errors": 0
+    },
+    "linux_file_newlines": {
+      "passed": true
+    },
+    "archived_cad_mesh_hashes": {
+      "passed": true
+    }
+  },
+  "result": "FAIL"
+}

@@ -1,0 +1,21 @@
+Starting >>> smartcar_sim
+Finished <<< smartcar_sim [2.75s]
+Starting >>> smartcar_slam
+Finished <<< smartcar_slam [2.33s]
+Starting >>> smartcar_nav2
+--- stderr: smartcar_nav2
+CMake Error at ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:105 (message):
+  ament_cmake_symlink_install_directory() can't find
+  '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/out/exploration-handoff-20261024/before_ws/src/smartcar_nav2/../../maps/office_01'
+Call Stack (most recent call first):
+  ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:328 (ament_cmake_symlink_install_directory)
+  cmake_install.cmake:46 (include)
+
+
+---
+Failed   <<< smartcar_nav2 [32.3s, exited with code 1]
+[Processing: smartcar_nav2]
+
+Summary: 2 packages finished [38.1s]
+  1 package failed: smartcar_nav2
+  1 package had stderr output: smartcar_nav2

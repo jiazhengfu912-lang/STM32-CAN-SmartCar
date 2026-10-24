@@ -1,0 +1,51 @@
+[INFO] [1792429002.955063304] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792429003.036608729] [controller_server]: Creating controller server
+[INFO] [1792429003.148128202] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792429003.148677852] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792429003.168572414] [local_costmap.local_costmap]: Destroying
+[INFO] [1792429003.402164397] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792429003.402829691] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792429010.026477379] [controller_server]: Configuring controller interface
+[INFO] [1792429010.027814077] [controller_server]: getting goal checker plugins..
+[INFO] [1792429010.035469539] [controller_server]: Controller frequency set to 10.0000Hz
+[INFO] [1792429010.035543910] [local_costmap.local_costmap]: Configuring
+[INFO] [1792429010.279990786] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792429010.311410739] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1792429010.379033012] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792429010.379083294] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1792429010.394864177] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792429010.590205401] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792429010.594456189] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1792429010.603406928] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1792429010.614512659] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1792429010.627099774] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[INFO] [1792429010.639295080] [controller_server]: Setting transform_tolerance to 0.500000
+[INFO] [1792429010.784617057] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[INFO] [1792429010.789390985] [controller_server]: Critic plugin initialized
+[INFO] [1792429010.789585261] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[INFO] [1792429010.789730300] [controller_server]: Critic plugin initialized
+[INFO] [1792429010.795937386] [controller_server]: Using critic "ObstacleFootprint" (dwb_critics::ObstacleFootprintCritic)
+[INFO] [1792429010.796415548] [controller_server]: Critic plugin initialized
+[INFO] [1792429010.796627335] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[INFO] [1792429010.797328248] [controller_server]: Critic plugin initialized
+[INFO] [1792429010.797484600] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[INFO] [1792429010.800207476] [controller_server]: Critic plugin initialized
+[INFO] [1792429010.800284789] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[INFO] [1792429010.805724351] [controller_server]: Critic plugin initialized
+[INFO] [1792429010.807354760] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[INFO] [1792429010.809187869] [controller_server]: Critic plugin initialized
+[INFO] [1792429010.809219601] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1792454417.483638750] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792454417.483798028] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1792454417.483930478] [controller_server]: Cleaning up
+[INFO] [1792454417.490330314] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1792454417.858208740] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

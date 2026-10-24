@@ -1,0 +1,201 @@
+{
+  "result": "PASS",
+  "case": "autonomous",
+  "scope": "SIMULATION_ONLY",
+  "domain_id": 161,
+  "partition": "smartcar-explore-fa85c8226d184d9698c84f88f81fef7d",
+  "checks": {
+    "finished_and_saved": true,
+    "stop_verified": true,
+    "no_prior_map": true,
+    "one_slam_map_source": true,
+    "no_amcl_or_map_server": true,
+    "mission_state_recorded": true,
+    "autonomous_goals": true,
+    "map_grew": true,
+    "multiple_observations": true,
+    "actual_motion": true
+  },
+  "source_sha256": {
+    "ros2_ws/src/smartcar_slam/scripts/explore.py": "c1e06b11be93596a93c300e9f93a1307db63fa1c7e700fab1b791ad2a10d7843",
+    "ros2_ws/src/smartcar_slam/scripts/frontier_core.py": "2385fd74a2fbad5ac9f0ffb4ca7ae7f9ec68354dd3c9af394d32592de9ad7d34",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "faa65a7bc3f8d81d25964667968d328d7e2e80ad1f6157698e7d582ee9c94987",
+    "ros2_ws/src/smartcar_nav2/launch/exploration.launch.py": "0ae70078079cb339752b194da459d59e330432bdc837cc21aa02f674f251abc5",
+    "ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py": "4cb5a0944cad47b32372b1dee6d75e17e8830a2683c1017c133a44063643e59a",
+    "ros2_ws/src/smartcar_nav2/scripts/gate_core.py": "057db5ad4333c5762a122474d0b0c5aa9303d726d8e49a8daa11a35939e90494",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_slam/config/slam.yaml": "46df8388b28828c643ee57df703d550bdc3a1683a15e7994076f0ccc6c3ad262",
+    "ros2_ws/tools/verify_exploration.py": "3cf4c6acadc3e857336d7f965c9cd161d2d6b55bd68b22e18d27622ebd732051"
+  },
+  "world": {
+    "selection": "discovery_lab",
+    "sha256": "753b7d90ca5ab85cc03184ee6793e84f9f54513e82f0587954efb94a79917d96"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "exploration.launch.py",
+    "world:=discovery_lab",
+    "headless:=true",
+    "rviz:=false",
+    "output_dir:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/discovery-lab-20261021-smoke-final/mission",
+    "max_sim_seconds:=90.0"
+  ],
+  "session": {
+    "state": "DONE",
+    "reason": "TIME_LIMIT_PARTIAL",
+    "complete": false,
+    "stop_verified": true,
+    "scope": "SIMULATION_ONLY",
+    "prior_map_loaded": false,
+    "goals": [
+      {
+        "x": -0.08615235842610947,
+        "y": 0.3256465238879871,
+        "yaw": 2.5535900500422257,
+        "frontier_cells": 962,
+        "path_distance_m": 0.45000000670552254,
+        "score": -3.711249836554133,
+        "sent_sim_s": 6.631,
+        "action_status": 4
+      },
+      {
+        "x": -0.7361523681118642,
+        "y": -0.6923714381809436,
+        "yaw": -2.289626326416521,
+        "frontier_cells": 242,
+        "path_distance_m": 1.650000024586916,
+        "score": -0.4371032466743454,
+        "sent_sim_s": 20.371,
+        "action_status": 4
+      },
+      {
+        "x": -0.6971640580685987,
+        "y": 0.5482645087652123,
+        "yaw": 2.297438667476622,
+        "frontier_cells": 144,
+        "path_distance_m": 1.2000000178813934,
+        "score": -0.4099689379136584,
+        "sent_sim_s": 35.808,
+        "action_status": 4
+      },
+      {
+        "x": -1.3471640677543535,
+        "y": 0.5982645095102703,
+        "yaw": 0.9272952180016122,
+        "frontier_cells": 78,
+        "path_distance_m": 0.9000000134110451,
+        "score": -0.28490505490507556,
+        "sent_sim_s": 55.701,
+        "action_status": 4
+      },
+      {
+        "x": -2.597164086380805,
+        "y": 0.7482645117454445,
+        "yaw": 2.4805494847391065,
+        "frontier_cells": 37,
+        "path_distance_m": 1.600000023841858,
+        "score": 0.7839117872374002,
+        "sent_sim_s": 76.683,
+        "action_status": 5
+      }
+    ],
+    "navigation_failures": 0,
+    "duration_wall_s": 121.89460525200047,
+    "firmware_source_version": 131,
+    "pi_changed": false,
+    "pi_exercised": false,
+    "not_verified": [
+      "physical vehicle",
+      "all unseen spaces",
+      "unreachable rooms",
+      "arbitrary environments"
+    ]
+  },
+  "effective_parameters": {
+    "controller_server": {
+      "FollowPath.desired_linear_vel": 0.2,
+      "FollowPath.rotate_to_heading_angular_vel": 0.35
+    },
+    "velocity_smoother": {
+      "max_velocity": [
+        0.2,
+        0.0,
+        0.35
+      ],
+      "max_accel": [
+        0.25,
+        0.0,
+        0.5
+      ]
+    }
+  },
+  "travel_m": 4.047388314922645,
+  "map_initial": {
+    "wall_s": 5.672069420999833,
+    "known": 2967,
+    "free": 2879,
+    "occupied": 88,
+    "resolution": 0.05000000074505806,
+    "width": 198,
+    "height": 158
+  },
+  "map_final": {
+    "wall_s": 123.68537080799979,
+    "known": 22194,
+    "free": 20900,
+    "occupied": 1294,
+    "resolution": 0.05000000074505806,
+    "width": 199,
+    "height": 159
+  },
+  "shutdown": {
+    "process_group": 33377,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "duration_wall_s": 126.78451921300075,
+  "raw_sha256": {
+    "gate.csv": "d0a9cfe34f381ae1530e5e97fa614bd1f3e60562d20516636a7b01f0e971b24b",
+    "launch.log": "8478698989d8e34824dba359d8c8f58016f30a2bbf0e1dbd62bacbb44e0324b0",
+    "odom.csv": "27386d1b6733fa34a9cdd4cdec77b45e11408102e86dcb46207ec757ff79e5e1",
+    "verifier_events.jsonl": "0ddf15b9ee291036314a69442c52a5f2b40db3f55eab7e6bc1563925442961e8",
+    "maps.csv": "67f0864f18230ff0fbf31f2ee77a073edb4950ff12b4e4cd17372fdc818e086f",
+    "commands.csv": "908d264e52b34f657db13b597c75db4d47a15818054216c82a459dd25e3ab7eb",
+    "ros_logs/behavior_server_33427_1792590849440.log": "2c063d409dbe5fe096512222415ae7613f92cadf3ddf9d935a6d6edbcca29492",
+    "ros_logs/parameter_bridge_33402_1792590849482.log": "3508f8b755e777e8efd338de33895e70f38ecd1e7c50a9fb5e015d9c49ec5fcc",
+    "ros_logs/smoother_server_33422_1792590849408.log": "d69019cbfe24c7d40aebeb1df43621231a48e16801a8643f4c30973f725ca8ac",
+    "ros_logs/parameter_bridge_33406_1792590849412.log": "6047c64ec201f2cdf179576dc822d1087813d64fd2df18d4f4b99bfa7fb68a79",
+    "ros_logs/python3_33404_1792590849850.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/safe_planner_server_33424_1792590849433.log": "7e90bfa062cd87f8d7a7d48a081c1c9b74a3a854a27af7e1a61540aa7646714e",
+    "ros_logs/python3_33377_1792590848170.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/python3_33498_1792590850091.log": "dc53219d5003fb8631a33986c7d1dd770c7a5cb3c7446ef8d19d49fa90997af7",
+    "ros_logs/map_saver_server_33482_1792590849469.log": "7f620c95b31b4b06a2bcc62245273938382e480358d82542f1cef1499b9e1915",
+    "ros_logs/python3_33492_1792590850040.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/python3_33353_1792590847931.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/async_slam_toolbox_node_33408_1792590849378.log": "f681a91b3fd74c9d3f0e8478911992901ea1ae9a3150a39551830a0ceb54276e",
+    "ros_logs/robot_state_publisher_33400_1792590849346.log": "8b7d5dd67b99e1b964173e2d682ae5edfe59a95abd93dc1ae6d64d861c77c932",
+    "ros_logs/velocity_smoother_33465_1792590849482.log": "95df9f8ab26d9887e43ac9f263f5ec3362b9303c83a0db0654e36e35663b4219",
+    "ros_logs/waypoint_follower_33443_1792590849427.log": "e5f2fc935c17f251a54e33c5448119700c7b239f90470b1ce37cb3554634e0b6",
+    "ros_logs/safe_controller_server_33412_1792590849421.log": "a9dc960a99047a34d1713716a49218dc350e9fa22ed5e2e63675f4f5eff81317",
+    "ros_logs/lifecycle_manager_33670_1792590854469.log": "b49b1702841827f03a1e523ccc10e37431d68a575e8cb1ae38259f3dcec5f8bb",
+    "ros_logs/bt_navigator_33438_1792590849465.log": "83c2cfb27d9d483579e3cc804522f27a9d577633ce97f8c55642d0c50b2c3322",
+    "ros_logs/2026-10-21-21-54-08-135979-ubuntu2204-33377/launch.log": "72afdbcc7244b3f1e8bf2bb1606fc866ac7f6383fa0fddf2e3eae545a8d85709",
+    "mission/session.json": "d0f639209901b1bd1b967c8daa2cac1f37cf89b7cf5dff3220c53d4d30273dba",
+    "mission/map_initial.npz": "a21fee17100d2c74d11bccd3fc5e260bffdeab904b6de7b9ce253f0260bb0a31",
+    "mission/map.posegraph": "5a74b41618611032645ce756978b621d535c844feb6eada6e424c98ce11aeebd",
+    "mission/map_updates.csv": "27ff82faa9bbacca131a2eeb85d55c06a4488540ff845cac259c477b90f052f6",
+    "mission/safe_cmd_vel.csv": "8c297f50f12183797ae4d6c2cb03c509f96dd573f010c86b381198acdd68a98d",
+    "mission/safety.csv": "5202eac7e82b692955c70b34b96e87b1401409d19c0dd8fffabb0dcf45fb03b5",
+    "mission/map.pgm": "5e35fc5386e0f990179ae8b7f73ce9379c5d19ff0137bc82daa9e6713fbded14",
+    "mission/odom.csv": "28c6d2e1267bcc07fa05afab0fbb8c8eea21c6fddefe1f04aabdf76db44db6a7",
+    "mission/map.yaml": "9b782d103802f9d9bcf21ff31b4305b2a8873282d5df020e2e2df25ef70a8023",
+    "mission/map_final.npz": "79bd155ade2670704fcc4c8109062dc86f631332b6e301b20e3ad4a7f969d565",
+    "mission/map.data": "a652a3de13a3ddd65933d2076bc924f0386fe29ad72e44f00ae12843bf28b632",
+    "mission/events.jsonl": "5d72a6d61023770f3d994290e2807010f2a870624de5c022e08b2dcd630e5975"
+  }
+}

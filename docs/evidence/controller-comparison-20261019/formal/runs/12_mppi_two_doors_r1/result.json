@@ -1,0 +1,157 @@
+{
+  "result": "PASS",
+  "scope": "SIMULATION_ONLY",
+  "case": "two_doors",
+  "started_utc": "2026-10-19T16:13:06.727286+00:00",
+  "domain_id": 111,
+  "ign_partition": "smartcar-replan-12f5a712ede14f339d24fff25997a33b",
+  "goal": [
+    1.03,
+    -2.92,
+    0.0
+  ],
+  "goal_send_count": 1,
+  "checks": {
+    "blockers_present_before_goal": true,
+    "startup_ready": true,
+    "stopped": true,
+    "single_goal_for_blocked_phase": true,
+    "expected_action_result": true,
+    "both_blockers_observed": true,
+    "blockers_retained_until_abort": true,
+    "no_automatic_full_map_clears": true
+  },
+  "firmware_source_version": 131,
+  "pi_exercised": false,
+  "pi_changed": false,
+  "not_verified": [
+    "physical vehicle",
+    "moving obstacles",
+    "arbitrary routes",
+    "multi-goal GUI"
+  ],
+  "obstacle": {
+    "x": 4.5,
+    "y": 0.0,
+    "dx": 1.2,
+    "dy": 1.85,
+    "dz": 0.6
+  },
+  "blockers": [
+    {
+      "name": "blocked_left",
+      "shape": "sphere",
+      "x": -2.9082,
+      "y": 0.2833,
+      "z": 0.5,
+      "radius": 0.5
+    },
+    {
+      "name": "blocked_right",
+      "shape": "box",
+      "x": 3.0925,
+      "y": 0.8227,
+      "z": 0.5,
+      "size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "reopen_requested": false,
+  "action_type": "NavigateToPose",
+  "reset_cycles_requested": 0,
+  "source_sha256": {
+    "ros2_ws/tools/verify_replanning.py": "631dfadab8876bef6539b001214b1030df2581242c54a6654eae1dc775d00583",
+    "ros2_ws/tools/verify_navigation.py": "0fc8b5b4226c4f3c10019042211ff2475f021da6ba0279eee7b7257e65bd6cb3",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_nav2/config/navigate_recovery.xml": "c2366b36a4d12b1bc29d3b003651f9a6bb797dd013a01c2517364d5be2778556",
+    "ros2_ws/src/smartcar_nav2/config/navigate_through_recovery.xml": "0c869e8b78530b398af4fee458133158463b4e6c2f2cda025c95a8e9c58594e5",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "ec0bbd3203a523ea50079f5e38eeda3718e1f22f636b00152039d8cd33a6bc2b",
+    "ros2_ws/src/smartcar_nav2/src/safe_controller_server.cpp": "c0a3212dcf32b832f09a32d30a741e9f8da8ba6c1e20ecb8a5464960a0a896cf",
+    "ros2_ws/src/smartcar_nav2/src/safe_costmap.hpp": "886d6dec8b80a39f6ce775657a3056d332719792c2e7f723da34e161f0f937d2",
+    "ros2_ws/src/smartcar_nav2/src/safe_planner_server.cpp": "e2ec842f1dae3c285a759c55bc8d420100cb77cfcb04edb6cbac4fd94a673ffc"
+  },
+  "params_override_sha256": "0c680d1adc7f8de131558d8f46f7fc03e9fc570b26a57da5f23e083a389d62d0",
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false",
+    "params_file:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/configs/mppi.yaml",
+    "world:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/controller-comparison-20261019-formal-v2/runs/12_mppi_two_doors_r1/test_world.sdf",
+    "initial_x:=-2.99",
+    "initial_y:=1.91"
+  ],
+  "lifecycle_states": {
+    "waypoint_follower": "active",
+    "amcl": "active",
+    "velocity_smoother": "active",
+    "smoother_server": "active",
+    "behavior_server": "active",
+    "controller_server": "active",
+    "bt_navigator": "active",
+    "planner_server": "active",
+    "map_server": "active"
+  },
+  "action_status": 6,
+  "stop_evidence": {
+    "verified": true,
+    "samples": 16,
+    "duration_wall_s": 1.3294142519953311,
+    "max_linear_mps": 0.01795000077184916,
+    "max_angular_rps": 5.993442074206598e-10,
+    "wait_wall_s": 1.6693968379986472
+  },
+  "stop_samples": 16,
+  "final_world_pose": [
+    0.5466959883313272,
+    2.825918404211789,
+    1.6380834858966944
+  ],
+  "global_clear_calls": 0,
+  "local_clear_calls": 0,
+  "shutdown": {
+    "process_group": 58043,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "truth_bridge_shutdown": {
+    "process_group": 58044,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "paths_received": 77,
+  "duration_wall_s": 168.82688396699814,
+  "raw_sha256": {
+    "velocity.csv": "04e2a724098993431825d1f5069ed5dc239d118744289436522591b813fd77e4",
+    "world_pose.csv": "1d6b4886a22a54f313e7023f30376ca5fd07b8cef149e68e27fff47aad56900c",
+    "scan.jsonl": "c175b4b42c1815e140749d194d6165f6bb1de3ee541c1160a40d73298463a0ef",
+    "launch.log": "474c0fecbe991a38aa247cec06448b9142123b19c68d6b80b25dfd91c2863f71",
+    "test_world.sdf": "2eeae2a7911a39b622afbe47528fc20d639ae2b1a85bb158cb94ccd33361ec9c",
+    "safety.jsonl": "636d6a693edaabc4e0923f3d969d6b48ff1b9a418fc8a7d1adb73a60fc76096f",
+    "odom.csv": "b660b0934f6d6a33f2897ef6d10805f1197edcaaf3422d03a20e5f29e9a81e4d",
+    "truth_bridge.log": "a05401e659f8e6d6312858fa7237ccdc6a1add4ad3b675f262619ddd6a3b3922",
+    "amcl.jsonl": "52c274a2e6f6b65d135ea4446176b1b4d54ac3979e499afdd678bc9edf8bb032",
+    "behavior_tree.jsonl": "f52b3369feaf254ffeff0a2286245b54ae4be2ffcb642fbc74c850bebb94c5b9",
+    "clock.jsonl": "88e4b0fd0fe189944eb380f02e931f6ee83aa8d1335aec1688d2f35a1c7c74cc",
+    "feedback.jsonl": "05cf4cc87cc74f2be37aa9681642f4c5d5a9eec21475c23423e20f815557eac2",
+    "global_costmap_costmap.jsonl": "53b777136c4805d8071b5da6ce4d41ce67406e7a096571d2958955ba6c9b5024",
+    "local_costmap_costmap.jsonl": "767c96d2310092ed9da53d5d9de067f2486610259f41cedf145f511dd55888f2",
+    "plans.jsonl": "7034b2da27b220b1ad705fcd77f9fc3d56817a4478d29c9e7993242496713d0a",
+    "resources.csv": "95473907769d13737877ea5da32e15e35a214d607709b5bbecdae957635c5fd8",
+    "world_pose.jsonl": "4ca87bf9054e49104c544fbbd644d8696edb4048266dcdeb1611cecb01633c03",
+    "map.jsonl": "da7737aa77318e2889c2074ce46db7867d8e846bd2f5ba71574615fb3c6563ba",
+    "events.jsonl": "4e3163221674404ff770cb6ee305c84d3ffe91b2c8de3200be56867474d2c52f",
+    "obstacle_memory.csv": "d7b3b1b6f4508fbb86b83758c8a9c1556d09c222ae0ec1bfde59e3c91f40a36d"
+  }
+}

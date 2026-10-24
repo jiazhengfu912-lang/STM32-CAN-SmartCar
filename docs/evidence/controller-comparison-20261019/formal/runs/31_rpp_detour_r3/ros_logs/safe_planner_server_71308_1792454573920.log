@@ -1,0 +1,57 @@
+[INFO] [1792454574.721581677] [planner_server]: 
+	planner_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792454574.774568480] [planner_server]: Creating
+[INFO] [1792454575.113055036] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792454575.113659788] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792454575.114022655] [global_costmap.global_costmap]: Destroying
+[INFO] [1792454575.327650287] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792454575.339829570] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792454582.287332749] [planner_server]: Configuring
+[INFO] [1792454582.288125003] [global_costmap.global_costmap]: Configuring
+[INFO] [1792454582.422856573] [global_costmap.global_costmap]: Using plugin "static_layer"
+[INFO] [1792454582.444679569] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[INFO] [1792454582.463858373] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[INFO] [1792454582.463899603] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792454582.473620163] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[INFO] [1792454582.517926737] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792454582.517965705] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[INFO] [1792454582.544403896] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792454582.675621305] [global_costmap.global_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792454582.685750776] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[INFO] [1792454582.685803605] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[INFO] [1792454582.695023217] [planner_server]: Planner Server has GridBased  planners available.
+[INFO] [1792454582.695801903] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 239 X 200 at 0.050000 m/pix
+[INFO] [1792454585.153653219] [planner_server]: Activating
+[INFO] [1792454585.153724248] [global_costmap.global_costmap]: Activating
+[INFO] [1792454585.153740188] [global_costmap.global_costmap]: Checking transform
+[INFO] [1792454585.153809220] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation at time 0.140000, but only time 0.600000 is in the buffer, when looking up transform from frame [base_footprint] to frame [map]
+[INFO] [1792454585.655508716] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation at time 0.200000, but only time 0.600000 is in the buffer, when looking up transform from frame [base_footprint] to frame [map]
+[INFO] [1792454586.156052010] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 0.300000 but the earliest data is at time 0.600000, when looking up transform from frame [base_footprint] to frame [map]
+[INFO] [1792454586.653908848] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 0.380000 but the earliest data is at time 0.600000, when looking up transform from frame [base_footprint] to frame [map]
+[INFO] [1792454587.153873477] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 0.460000 but the earliest data is at time 0.600000, when looking up transform from frame [base_footprint] to frame [map]
+[INFO] [1792454587.659166114] [global_costmap.global_costmap]: start
+[INFO] [1792454588.721458503] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[INFO] [1792454588.735252832] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[ERROR] [1792454722.267909805] [planner_server]: Failed to create a plan from potential when a legal potential was found. This shouldn't happen.
+[WARN] [1792454722.274645362] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792454722.274749649] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (4.50, 0.00)
+[WARN] [1792454722.274770873] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[INFO] [1792454787.495675837] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792454787.495759581] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[INFO] [1792454787.495831721] [planner_server]: Deactivating
+[INFO] [1792454787.495872614] [global_costmap.global_costmap]: Deactivating
+[INFO] [1792454787.660736447] [planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[INFO] [1792454787.660824698] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[INFO] [1792454787.744697881] [planner_server]: Cleaning up
+[INFO] [1792454787.948372018] [global_costmap.global_costmap]: Cleaning up
+[INFO] [1792454787.962319185] [planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[INFO] [1792454787.962395020] [planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[INFO] [1792454787.988882743] [planner_server]: Destroying bond (planner_server) to lifecycle manager.

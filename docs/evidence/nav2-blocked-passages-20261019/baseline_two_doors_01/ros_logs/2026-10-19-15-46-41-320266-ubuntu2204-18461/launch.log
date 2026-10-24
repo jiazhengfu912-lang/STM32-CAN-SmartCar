@@ -1,0 +1,53 @@
+1792396001.3209791 [INFO] [launch]: All log files can be found below /home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/nav2-blocked-passages-20261019/baseline_two_doors_01/ros_logs/2026-10-19-15-46-41-320266-ubuntu2204-18461
+1792396001.3210926 [INFO] [launch]: Default logging verbosity is set to INFO
+1792396003.4804134 [INFO] [ign-1]: process started with pid [18494]
+1792396003.4805725 [INFO] [robot_state_publisher-2]: process started with pid [18496]
+1792396003.4806170 [INFO] [parameter_bridge-3]: process started with pid [18498]
+1792396003.4806535 [INFO] [cmd_guard.py-4]: process started with pid [18500]
+1792396003.4806876 [INFO] [parameter_bridge-5]: process started with pid [18502]
+1792396003.4807198 [INFO] [map_server-6]: process started with pid [18504]
+1792396003.4807513 [INFO] [amcl-7]: process started with pid [18508]
+1792396003.4807997 [INFO] [controller_server-8]: process started with pid [18510]
+1792396003.4808359 [INFO] [smoother_server-9]: process started with pid [18512]
+1792396003.4808691 [INFO] [planner_server-10]: process started with pid [18514]
+1792396003.4809024 [INFO] [behavior_server-11]: process started with pid [18524]
+1792396003.4809349 [INFO] [bt_navigator-12]: process started with pid [18528]
+1792396003.4809666 [INFO] [waypoint_follower-13]: process started with pid [18530]
+1792396003.4809985 [INFO] [velocity_smoother-14]: process started with pid [18546]
+1792396003.4810302 [INFO] [navigation_gate.py-15]: process started with pid [18550]
+1792396005.4880850 [INFO] [lifecycle_manager-16]: process started with pid [18697]
+1792396008.7037215 [INFO] [lifecycle_manager-17]: process started with pid [18751]
+1792396175.4250412 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1792396175.7271733 [INFO] [lifecycle_manager-17]: sending signal 'SIGINT' to process[lifecycle_manager-17]
+1792396175.7404292 [INFO] [lifecycle_manager-16]: sending signal 'SIGINT' to process[lifecycle_manager-16]
+1792396175.7417774 [INFO] [navigation_gate.py-15]: sending signal 'SIGINT' to process[navigation_gate.py-15]
+1792396175.7527759 [INFO] [velocity_smoother-14]: sending signal 'SIGINT' to process[velocity_smoother-14]
+1792396175.7554302 [INFO] [waypoint_follower-13]: sending signal 'SIGINT' to process[waypoint_follower-13]
+1792396175.7571187 [INFO] [bt_navigator-12]: sending signal 'SIGINT' to process[bt_navigator-12]
+1792396175.7595878 [INFO] [behavior_server-11]: sending signal 'SIGINT' to process[behavior_server-11]
+1792396175.7625592 [INFO] [planner_server-10]: sending signal 'SIGINT' to process[planner_server-10]
+1792396175.7664440 [INFO] [smoother_server-9]: sending signal 'SIGINT' to process[smoother_server-9]
+1792396175.7682250 [INFO] [controller_server-8]: sending signal 'SIGINT' to process[controller_server-8]
+1792396175.7688847 [ERROR] [behavior_server-11]: process has died [pid 18524, exit code -2, cmd '/opt/ros/humble/lib/nav2_behaviors/behavior_server --ros-args -r __node:=behavior_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_xbmjsbq1 -r cmd_vel:=/nav/cmd_vel_raw'].
+1792396175.7689817 [ERROR] [velocity_smoother-14]: process has died [pid 18546, exit code -2, cmd '/opt/ros/humble/lib/nav2_velocity_smoother/velocity_smoother --ros-args -r __node:=velocity_smoother --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_icknin2q -r cmd_vel:=/nav/cmd_vel_raw -r cmd_vel_smoothed:=/nav/cmd_vel'].
+1792396175.7691870 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 18498]
+1792396175.7703533 [INFO] [amcl-7]: sending signal 'SIGINT' to process[amcl-7]
+1792396175.7818501 [INFO] [map_server-6]: sending signal 'SIGINT' to process[map_server-6]
+1792396175.7940187 [INFO] [parameter_bridge-5]: sending signal 'SIGINT' to process[parameter_bridge-5]
+1792396175.7980151 [ERROR] [waypoint_follower-13]: process has died [pid 18530, exit code -2, cmd '/opt/ros/humble/lib/nav2_waypoint_follower/waypoint_follower --ros-args -r __node:=waypoint_follower --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_novf92r8'].
+1792396175.7985752 [ERROR] [smoother_server-9]: process has died [pid 18512, exit code -2, cmd '/opt/ros/humble/lib/nav2_smoother/smoother_server --ros-args -r __node:=smoother_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_zix1kc5f'].
+1792396175.7986600 [ERROR] [lifecycle_manager-16]: process has died [pid 18697, exit code -2, cmd '/opt/ros/humble/lib/nav2_lifecycle_manager/lifecycle_manager --ros-args -r __node:=lifecycle_manager_localization --params-file /tmp/launch_params_791cx8bl'].
+1792396175.7987146 [ERROR] [map_server-6]: process has died [pid 18504, exit code -2, cmd '/opt/ros/humble/lib/nav2_map_server/map_server --ros-args -r __node:=map_server --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_g6z11xwr --params-file /tmp/launch_params_u8v8c2f_'].
+1792396175.7987635 [ERROR] [amcl-7]: process has died [pid 18508, exit code -2, cmd '/opt/ros/humble/lib/nav2_amcl/amcl --ros-args -r __node:=amcl --params-file /home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/src/smartcar_nav2/config/nav2.yaml --params-file /tmp/launch_params_2z09yvhq --params-file /tmp/launch_params_3k10gx6r'].
+1792396175.8038533 [INFO] [cmd_guard.py-4]: sending signal 'SIGINT' to process[cmd_guard.py-4]
+1792396175.8056495 [ERROR] [navigation_gate.py-15]: process has died [pid 18550, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_nav2/lib/smartcar_nav2/navigation_gate.py --ros-args -r __node:=navigation_gate'].
+1792396175.8186626 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1792396175.8274920 [INFO] [ign-1]: sending signal 'SIGINT' to process[ign-1]
+1792396175.8309174 [ERROR] [cmd_guard.py-4]: process has died [pid 18500, exit code -2, cmd '/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/install/smartcar_sim/lib/smartcar_sim/cmd_guard.py --ros-args -r __node:=sim_cmd_guard -r /sim/cmd_vel:=/nav/safe_cmd_vel'].
+1792396175.8310447 [ERROR] [robot_state_publisher-2]: process has died [pid 18496, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args --params-file /tmp/launch_params_qe0d3fd2'].
+1792396176.0256033 [INFO] [controller_server-8]: process has finished cleanly [pid 18510]
+1792396176.0284452 [INFO] [lifecycle_manager-17]: process has finished cleanly [pid 18751]
+1792396176.0873439 [INFO] [bt_navigator-12]: process has finished cleanly [pid 18528]
+1792396176.0908873 [INFO] [ign-1]: process has finished cleanly [pid 18494]
+1792396176.1986060 [INFO] [planner_server-10]: process has finished cleanly [pid 18514]
+1792396176.7539072 [ERROR] [parameter_bridge-5]: process has died [pid 18502, exit code -11, cmd '/opt/ros/humble/lib/ros_gz_bridge/parameter_bridge /sim/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan --ros-args -r __node:=laser_bridge --params-file /tmp/launch_params_d673betw'].

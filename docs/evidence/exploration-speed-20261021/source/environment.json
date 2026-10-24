@@ -1,0 +1,45 @@
+{
+  "recorded_utc": "2026-10-22T03:55:21.370960+00:00",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "logical_cpus": 4,
+  "memory_total": "MemTotal:        6067308 kB",
+  "cpu_model": "Intel(R) Core(TM) i7-14700HX",
+  "scope": "SIMULATION_ONLY, no hardware queried; snapshot while office baseline runs",
+  "commands": {
+    "packages": {
+      "command": [
+        "dpkg-query",
+        "-W",
+        "-f=${Package} ${Version}\n",
+        "ros-humble-slam-toolbox",
+        "ros-humble-nav2-regulated-pure-pursuit-controller",
+        "ros-humble-rclpy",
+        "libignition-gazebo6"
+      ],
+      "returncode": 0,
+      "stdout": "libignition-gazebo6 6.18.0-1~jammy\nros-humble-nav2-regulated-pure-pursuit-controller 1.1.20-1jammy.20260915.232155\nros-humble-rclpy 3.3.22-1jammy.20260907.213431\nros-humble-slam-toolbox 2.6.10-1jammy.20260916.003050\n",
+      "stderr": ""
+    },
+    "git_head": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stdout": "bef40ae9a8cca4eee6004a7495876a11e89495a5\n",
+      "stderr": ""
+    },
+    "git_branch": {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "returncode": 0,
+      "stdout": "feat/ros2-simulation-navigation\n",
+      "stderr": ""
+    }
+  }
+}

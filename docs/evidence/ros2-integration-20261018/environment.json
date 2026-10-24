@@ -1,0 +1,42 @@
+{
+  "checked_utc": "2026-10-19T05:44:16.898703+00:00",
+  "os_release": "PRETTY_NAME=\"Ubuntu 22.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.5 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy\n",
+  "base_commit": "19d6c23d5f27f123485fc55d72b5523fad34d182",
+  "commands": [
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "exit_code": 0,
+      "output": "Linux ubuntu2204 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64 x86_64 x86_64 GNU/Linux\n"
+    },
+    {
+      "argv": [
+        "dpkg-query",
+        "-W",
+        "-f=${binary:Package}\t${Version}\t${db:Status-Abbrev}\n",
+        "ros-humble-ros-base",
+        "ros-humble-rclcpp",
+        "ros-humble-ros-gz-bridge",
+        "ros-humble-nav2-bringup",
+        "ros-humble-slam-toolbox",
+        "ignition-gazebo6",
+        "libignition-gazebo6",
+        "python3-colcon-core"
+      ],
+      "exit_code": 1,
+      "output": "dpkg-query: no packages found matching ignition-gazebo6\nlibignition-gazebo6:amd64\t6.18.0-1~jammy\tii \npython3-colcon-core\t0.21.3+upstream-1\tii \nros-humble-nav2-bringup\t1.1.20-1jammy.20260916.005516\tii \nros-humble-rclcpp\t16.0.21-1jammy.20260907.213403\tii \nros-humble-ros-base\t0.10.0-1jammy.20260908.101203\tii \nros-humble-ros-gz-bridge\t0.244.26-1jammy.20260915.210000\tii \nros-humble-slam-toolbox\t2.6.10-1jammy.20260916.003050\tii \n"
+    },
+    {
+      "argv": [
+        "ign",
+        "gazebo",
+        "--versions"
+      ],
+      "exit_code": 0,
+      "output": "6.18.0\n"
+    }
+  ],
+  "hardware_connected_for_this_task": false
+}

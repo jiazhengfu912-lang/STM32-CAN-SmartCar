@@ -1,0 +1,53 @@
+[INFO] [1792395231.087382356] [planner_server]: 
+	planner_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792395231.091349869] [planner_server]: Creating
+[INFO] [1792395231.119688113] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792395231.120589708] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792395239.678258700] [planner_server]: Configuring
+[INFO] [1792395239.678312744] [global_costmap.global_costmap]: Configuring
+[INFO] [1792395239.701434772] [global_costmap.global_costmap]: Using plugin "static_layer"
+[INFO] [1792395239.707382732] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[INFO] [1792395239.713971861] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[INFO] [1792395239.714004514] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792395239.715613365] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[INFO] [1792395239.733559347] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792395239.733623621] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[INFO] [1792395239.736619035] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792395239.754845477] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 239 X 200 at 0.050000 m/pix
+[INFO] [1792395239.754929551] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[INFO] [1792395239.754950221] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[INFO] [1792395239.755133790] [planner_server]: Planner Server has GridBased  planners available.
+[INFO] [1792395241.962301845] [planner_server]: Activating
+[INFO] [1792395241.962340633] [global_costmap.global_costmap]: Activating
+[INFO] [1792395241.962351150] [global_costmap.global_costmap]: Checking transform
+[INFO] [1792395241.962524055] [global_costmap.global_costmap]: start
+[INFO] [1792395242.974863143] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[INFO] [1792395242.979102665] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[WARN] [1792395447.780398249] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792395447.780607835] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792395447.780631739] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[INFO] [1792395447.878697198] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[INFO] [1792395448.033091338] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[ERROR] [1792395465.984173093] [planner_server]: Failed to create a plan from potential when a legal potential was found. This shouldn't happen.
+[WARN] [1792395465.984235240] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792395465.984243704] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792395465.984252282] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[INFO] [1792395466.078789790] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[WARN] [1792395466.974145744] [planner_server]: Planner loop missed its desired rate of 2.0000 Hz. Current loop rate is 1.7668 Hz
+[WARN] [1792395483.831003323] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792395483.831072502] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792395483.831083440] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[INFO] [1792395483.927215733] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[WARN] [1792395500.679991874] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792395500.680108483] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792395500.680129730] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[INFO] [1792395500.730124335] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[WARN] [1792395516.378596402] [planner_server]: GridBased: failed to create plan with tolerance 0.20.
+[WARN] [1792395516.378650173] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (1.03, -2.92)
+[WARN] [1792395516.378660066] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[INFO] [1792395516.479580685] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap

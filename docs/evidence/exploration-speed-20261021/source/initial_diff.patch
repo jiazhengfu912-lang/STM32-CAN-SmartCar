@@ -1,0 +1,864 @@
+diff --git a/HANDOFF.md b/HANDOFF.md
+index ffa32ae..410a392 100644
+--- a/HANDOFF.md
++++ b/HANDOFF.md
+@@ -1,5 +1,35 @@
+ # SmartCar 项目上下文交接
+ 
++## 后续更新：2026-10-21 全新场景供用户自主建图验收
++
++- 用户要求此前未出现过的场景并亲自验收。新增10×8m非对称`discovery_lab`物理场景，独立墙体/障碍布局；不加载这个场景的预存地图。[完整命令和完成判据](docs/DISCOVERY_LAB_ACCEPTANCE.md)。入口`ros2 launch smartcar_nav2 exploration.launch.py world:=discovery_lab rviz:=true headless:=false max_sim_seconds:=1800`。
++- 实测发现SLAM静止非持久首个pose被门控漏收，90秒无目标；修复为唯一SLAM图源/新鲜地图/原时效TF联合就绪，时间回退等新地图，原AMCL来源及运动/失联保护不变。延迟到首个地图3秒后创建门控、此后0个pose的测试通过。
++- 最终90秒短测5个自动目标、4到达、末个预算取消，4.047m，已知格2967→22194；停车和四件套保存PASS，明确部分图。全图完整探索、GUI及该新场景几何精度验收待用户执行，不把短测称为全覆盖。
++- 三包构建/64项colcon检查通过，全部5次运行与失败保留，[证据](docs/evidence/discovery-lab-20261021/README.md)和波形直接嵌入ACCEPTANCE。原始133份哈希一致，前轮证据均未改，自建进程无残留。
++- 原用户修改保留；仍未提交/推送/合并，HEAD bef40ae9a8cca4eee6004a7495876a11e89495a5、同一功能分支，PR #1检查时open。未操作用户窗口和硬件，实车桥未实现。
++
++---
++
++## 后续更新：2026-10-21 自主探索建图
++
++- 用户新增陌生环境无需手动驾驶建图的要求。已加入`ros2 launch smartcar_nav2 exploration.launch.py world:=office_loop rviz:=true`，[操作说明](docs/AUTONOMOUS_MAPPING.md)、[本轮证据](docs/evidence/autonomous-mapping-20261021/README.md)。从空白在线地图自动选前沿目标，NavFn/RPP移动，SLAM持续建图，停车保存栅格和图结构。
++- 建图模式不启动AMCL/map_server，新增地图来源检查、任务墙钟心跳及失联锁存；恢复进程不自动续行，必须显式继续。已知地图入口默认仍AMCL/RPP，原nav2/slam YAML及保护阈值未改。建图专用覆盖为0.20m/s和±0.35rad/s，前沿通行圆0.37m、观察余量0.40m。
++- office_02自动30目标29到达，末个测试预算取消，保存部分地图而非全覆盖；已知格2106→44826。离线场景表面对照距离中位数约0.0258m/P95约0.142m，只是5cm分辨率仿真代理，不是实车精度或地图准确率。早期偏差、所有失败和缺测保留。
++- 随后修复SLAM图片保存CLI偶发超时，改为独立Nav2保存器（10秒保存等待，非运动容差），SLAM序列化图结构；最终接口通过故障暂停/显式恢复、可观测房间自动完成及新地图重载导航。逐轮源码区分运动版和最终保存版，波形直接嵌入ACCEPTANCE。
++- 三包构建和54个pytest通过，colcon63项含9包装零失败。13次运行、361份原始文件核验一致，自建进程无残留。用户原窗口未操作，未连接硬件，实车桥仍未实现。
++- 保留此前未提交的控制器对比代码/文档/证据；本轮新增也未提交或推送，HEAD仍bef40ae9a8cca4eee6004a7495876a11e89495a5。不得自动提交/推送/合并或执行实车运动。
++
++---
++
++## 后续更新：2026-10-20 控制器对比
++
++- 新任务完成DWB/RPP/MPPI的36轮正式隔离对比，[报表与全部失败](docs/evidence/controller-comparison-20261019/README.md)、[复现步骤](docs/CONTROLLER_BENCHMARK.md)。DWB8/12、RPP/MPPI各10/12；三者封堵退出均3/3，33次发目标均持续停车。各一次启动未就绪及第二组绕障超时单独分类，不归因为算法能力。
++- 严格完整验收无全部通过者；事后工程候选优先验证MPPI，生产默认RPP不变。仅测试副本统一平滑器角速度±0.6，生产YAML、保护及固件未改。未操作用户已有Gazebo/RViz，未连接实车。
++- 三包构建、45个pytest通过，colcon53项含8包装零失败。正式665份原始哈希一致，全部预检共755份核对一致，大JSONL无损压缩并保留原字节哈希。波形直接嵌入ACCEPTANCE。
++- 本轮比较工具、测试、文档与证据尚未提交/推送；HEAD仍bef40ae9a8cca4eee6004a7495876a11e89495a5。此前提交授权对应上一轮修复，不自动提交、推送或合并本轮新任务。
++
++---
++
+ ## 后续更新：2026-10-19 导航修复与提交授权
+ 
+ 下方第1—11节保留14:40交接时的历史快照；其中“仅交接”“未授权提交”等描述已由后续用户指令更新。用户已明确要求修复遇障导航，并在完成验证后要求“提交并推送”；当前授权提交、推送当前功能分支，不包含合并PR或实车操作。
+diff --git a/README.md b/README.md
+index ad6a128..ad9829b 100644
+--- a/README.md
++++ b/README.md
+@@ -2,7 +2,9 @@
+ 
+ 本仓库同时保存 **STM32/ESP32 底层控制** 和 **ROS 2 Humble 上层仿真、二维 SLAM、Nav2 导航**。
+ 新增的 [`ros2_ws/`](ros2_ws/README.md) 可在 Ubuntu 22.04 / Gazebo Fortress 中编译运行，
+-支持键盘驾驶、C1 雷达仿真、建图保存、AMCL 定位、单点/多点导航、规划、碰撞检查与恢复。
++支持键盘驾驶、C1 雷达仿真、[自主探索建图](docs/AUTONOMOUS_MAPPING.md)、建图保存、AMCL 定位、单点/多点导航、规划、碰撞检查与恢复。
++
++亲自验证陌生环境自动建图：[全新discovery_lab场景及启动步骤](docs/DISCOVERY_LAB_ACCEPTANCE.md)。
+ ROS 2 当前仍通过 Gazebo 驱动车辆；**尚未接通实车 ROS 底盘接口**。
+ 上下层使用同一仓库管理，不把 Nav2 编译进 STM32。
+ 
+diff --git a/docs/ACCEPTANCE.md b/docs/ACCEPTANCE.md
+index c34f383..269ba6b 100644
+--- a/docs/ACCEPTANCE.md
++++ b/docs/ACCEPTANCE.md
+@@ -1,4 +1,99 @@
+-# SmartCar 验收记录与调参波形 · 更新至 2026-10-19
++# SmartCar 验收记录与调参波形 · 更新至 2026-10-21
++
++## 2026-10-21后续：全新discovery_lab场景与用户自主建图验收准备
++
++用户要求独立新场景供亲自验收。新增10×8m非对称实验室，全部墙体/障碍布局本轮重新设计，不复用办公室布局，不向探索器提供预存地图或SDF真值。[启动和验收步骤](DISCOVERY_LAB_ACCEPTANCE.md) · [全部5次运行、失败与源码](evidence/discovery-lab-20261021/README.md)。
++
++短测发现门控晚订阅会漏收静止SLAM非持久的首个pose，导致90秒无目标。修复为唯一SLAM图源、新鲜地图和原TF时间窗联合判断SLAM定位；不改变AMCL来源，时间回退等待新地图，原扫描/里程计/时钟/碰撞/失联停车阈值不放宽。实际延迟到首帧地图3.016秒后创建门控，此后0个pose仍能就绪，检查期间安全输出全零。
++
++![新场景静止基线、漏收pose失败及修复后逐点起停速度，保持相同纵轴](evidence/discovery-lab-20261021/plots/velocity.png)
++
++**STM32源码v131：P右反0.45→0.45，其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。** PI未改、未运行；前沿探索/SLAM Toolbox/NavFn A*/RPP算法本体不变，建图0.20m/s、±0.35rad/s不变。新增场景并修复建图门控启动；同场景失败和最终90秒短测全部保留。图来自真实ROS/Gazebo消息，全部点、长缺口断线，无平滑、补点或删异常；不是实车电机轮速/电流。
++
++最终短测自动发5目标、4到达、末个90仿真秒预算取消，行驶4.047m，已知格2967→22194；持续停车后地图四件套保存通过，`TIME_LIMIT_PARTIAL / complete=false`。三包构建和64项colcon检查零失败。助手完成短时启动/运动/保存检查，整张新场景探索、GUI、几何精度和导出后重载仍由后续验收区分，不宣称全覆盖；用户启动使用1800仿真秒预算。
++
++![同一新场景静止SLAM与最终短测实际地图增长，不以面积代替完整覆盖](evidence/discovery-lab-20261021/plots/map_growth.png)
++
++![新场景90秒自主短测首帧及结束图，同坐标尺度，保留东侧大片未知](evidence/discovery-lab-20261021/plots/maps.png)
++
++图上版本、PI和算法说明同上；初次离线检查探针落入箱体边界导致的FAIL、实际启动FAIL、诊断复测和最终修复分别保留。原始133份文件哈希一致，前轮自主建图634份及控制器比较2228份证据未改，自建运行组无残留；未操作用户GUI/硬件、实车桥未实现、未提交/推送/合并。
++
++## 2026-10-21：陌生环境自主探索建图（仅软件/仿真）
++
++用户要求无需键盘遥控或人工导航目标。新增`smartcar_nav2/exploration.launch.py`：空白在线SLAM→前沿聚类→在已知自由区选择观察点→NavFn/RPP导航→继续观测→停车保存。建图模式不启动AMCL/map_server，SLAM独占地图及map→odom。探索器只发送导航动作，速度仍经过原平滑器、导航门控和底层超时保护；新增自主任务失联锁存，恢复心跳不自行续行。[操作说明](AUTONOMOUS_MAPPING.md) · [全部运行与失败](evidence/autonomous-mapping-20261021/README.md)。
++
++**STM32源码v131：P右反0.45→0.45，其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。** PI未改、未运行。新增探索决策、地图来源检查、任务心跳及保存流程；NavFn、RPP、SLAM算法本体不改。建图专用巡航0.30→0.20m/s、原地转向0.60→0.35rad/s、平滑器角速度上限0.80→0.35、加速度0.50→0.25m/s²/1.50→0.50rad/s²，目的为减少轮滑和扫描匹配退化。原`nav2.yaml`、`slam.yaml`和已知地图导航默认未改，全部原停车/TF/传感器阈值不放宽。
++
++| 运行 | 实际结果 | 验收边界 |
++|---|---|---|
++| office_loop静止基线 | 20秒已知格2107→2107，无移动 | 单独SLAM不具备自主探索 |
++| office_02 | 自动30目标，29到达，末个600仿真秒预算取消；里程计路程28.021m；停车、PGM/YAML/posegraph/data保存通过 | `TIME_LIMIT_PARTIAL`，不说成全覆盖 |
++| 同轮地图 | 已知格2106→44826，自由格1956→40756 | 面积增长不等于地图几何准确 |
++| complete_room最终接口 | 4×4m可观测房间自动观察目标成功，前沿稳定消失后停车保存 | `NO_FRONTIERS / complete=true`，仅本算法阈值下完成 |
++| watchdog_04最终接口 | 冻结任务进程后停车锁存，恢复进程不续跑；显式继续、暂停、结束保存均通过 | 实际SIGSTOP/SIGCONT及服务响应，不是仅单元测试 |
++| 两次地图重载 | office_02输出、最终保存接口输出分别在新AMCL仿真中导航成功并停稳 | 各一次短距离使用验证，不覆盖任意路线 |
++
++![同一任务首帧与最终实时SLAM地图，坐标尺度一致，灰色为未知或未发布区域](evidence/autonomous-mapping-20261021/plots/office_02_maps.png)
++
++图上P/I与版本如上不变；新增前沿探索，不预载office_01，不把Gazebo几何交给探索器或SLAM。前沿长度阈值0.8m、多代表点搜索，通行圆与原Nav2一致为0.37m，观察目标额外要求0.40m已知自由圆。部分地图、受阻、预算耗尽、人工结束和异常分开标记，避免把未完成任务说成完全建图。
++
++![同场景静止基线及自动探索实收地图面积，基线没有外推或补造](evidence/autonomous-mapping-20261021/plots/map_growth.png)
++
++![office_02完整逐点里程计与安全命令，包含起停及预算取消](evidence/autonomous-mapping-20261021/plots/office_02_velocity.png)
++
++以上P/I、版本和算法如上；原始CSV点未平滑、删异常或补点，长缺口断线。是Gazebo/ROS数据，不是实车左右轮编码器或电流。观测栅格面积不等于可通行覆盖率。原始地图占据值NPZ及同名SVG保留。
++
++![同一办公室同尺度保留早期地图偏差与组合调整后地图](evidence/autonomous-mapping-20261021/plots/quality_before_after.png)
++
++![最终办公室地图与仅作离线验收的SDF几何参考，未拟合配准](evidence/autonomous-mapping-20261021/plots/office_02_reference.png)
++
++图旁P/I未改；早期office_01采用导航速度及较少前沿代表点，office_02采用上述组合改动，非同轨迹单变量试验。占据格中心到原场景障碍表面的距离中位数0.191→0.0258m，P95为1.391→0.142m；5cm地图分辨率下，0.15m内支持比例47.06%→97.30%。**这是固定初始map/world坐标下的仿真几何代理，不是“地图准确率”、全部障碍召回率或实车精度；未拟合坐标、删点或以面积代替精度。** 早期room_03和office_01虽通过移动/保存功能检查但地图质量差，原图和所有异常均保留。
++
++![相同冻结/恢复及显式控制协议下，图片保存失败与独立保存器修复后的完整速度记录](evidence/autonomous-mapping-20261021/plots/export_before_after.png)
++
++![最终版任务失联停车与显式恢复波形，标出SIGSTOP/SIGCONT/服务调用](evidence/autonomous-mapping-20261021/plots/watchdog_04_velocity.png)
++
++图上P/I不变。watchdog_03安全停止通过但SLAM图片保存返回255，内部保存器2秒订阅等待失败；最终改用独立Nav2保存服务、瞬态地图缓存和10秒只读保存等待，SLAM仍保存图结构，watchdog_04与complete_room验证后又进行最终接口地图重载。只改变保存等待，不扩大任何运动保护容差。目标由实时地图自动决定，两轮不保证轨迹相同；原失败未覆盖。
++
++版本需分阶段读取：office_02验证最终运动/几何方案；其后修正图片保存接口并增加建图专用RViz显示，最终接口由故障、自动完成及重载三类运行验证。逐轮`source/`保留真实执行源码，`source_current/`为最终代码，不混称同一个实测版本。嵌套参数作用域错误、ClockType兼容错误、恢复进程时旧输入误结束、保存255、早期偏差和末次位姿采样缺测全部保留。
++
++三包构建通过，54个pytest、colcon63项含9个包装零错误/失败/跳过。全部13次运行原始证据、361份原始文件哈希核对一致，最终自建测试命名空间无进程残留。未连接硬件、未实现实车桥，固件/协议/控制台/场景模型未改，用户窗口未重启或发送目标；本轮未提交/推送/合并。
++
++[运行总表](evidence/autonomous-mapping-20261021/trials.json) · [地图质量代理](evidence/autonomous-mapping-20261021/map_quality_proxy.json) · [最终软件测试](evidence/autonomous-mapping-20261021/logs/exploration-20261021-tests-final.log) · [原始完整性](evidence/autonomous-mapping-20261021/integrity.json) · [进程审计](evidence/autonomous-mapping-20261021/process_audit.json) · [SHA256](evidence/autonomous-mapping-20261021/SHA256.json)。
++
++## 2026-10-19—20：DWB、RPP、MPPI 对比（仅软件/仿真）
++
++完成36轮正式矩阵：三种局部控制器×直线、过门、途中加箱体、双出口封堵×3次重复。工程上优先验证**MPPI性能候选**，生产默认RPP保持；严格预设门槛无全部通过者，不能宣称已得到完整验收的最优算法。全部失败、超时和启动未就绪记录保留，见[完整选型及限制](evidence/controller-comparison-20261019/README.md)、[HTML报表](evidence/controller-comparison-20261019/formal/REPORT.html)。
++
++| 控制器 | 可达目标完成 | 封堵正确退出停车 | 途中绕障到达 | 已发目标 | 启动未就绪 |
++|---|---:|---:|---:|---:|---:|
++| DWB | 5/9 | 3/3 | 0/3 | 11 | 1 |
++| RPP | 7/9 | 3/3 | 2/3 | 11 | 1 |
++| MPPI | 7/9 | 3/3 | 2/3 | 11 | 1 |
++
++DWB两次在同一门口附近无进展、有限恢复后自行ABORTED，第二组绕障三者都在240秒单调墙钟预算后取消；后三次未发目标的失败为导航系统启动未就绪，不能归因局部控制器。33次已发目标轮次都验证持续停车。模型重叠采样点和安全命令限幅违规均0；二维模型几何代理不是接触或实车碰撞证据。内部进程关闭升级异常完整保留，最终自建进程组无残留。
++
++**STM32源码v131：P右反0.45→0.45、其余0.30→0.30；I稳态0.010→0.010、启动0.030→0.030，每10ms按电机轴rpm误差累计，D0。** PI未改、未运行；对比改变ROS局部控制器DWB/RPP/MPPI，Nav2均1.1.20。共同NavFn A*、1Hz重规划、代价地图、定位、最多4轮不清图恢复、保护及到达容差不变。为最终角速度一致，仅三个测试副本将共同平滑器±0.8降至±0.6rad/s；前进0.30m/s，生产参数未改。此处“前后”为既有RPP基线与三种冻结测试配置，不是固件修复前后。
++
++![本轮全部36轮任务结果与完成场景效率，含失败分母](evidence/controller-comparison-20261019/formal/plots/overview.png)
++
++图中P/I、版本及算法如上。正式协议先要求全部任务通过再排名，因此正式效率分数均不合格；事后仅在正确次数并列最多的RPP/MPPI中按原权重比较成功场景均值，探索代价MPPI0.367、RPP0.633，只用于验证优先级，未删除失败或改写正式门槛。MPPI完成绕障平均56.743仿真秒，RPP61.879秒，分别n=2；对应进程CPU9.766%和6.824%（一个核=100）。RPP直线/过门角速度总变差更小，算力和模型间隙更保守，不能概括MPPI处处更平滑或普遍最优。
++
++![直线：全部本轮逐点速度和派生模型间隙，含未就绪失败](evidence/controller-comparison-20261019/formal/plots/straight_traces.png)
++
++![过门：全部本轮逐点速度和派生模型间隙，含未就绪失败](evidence/controller-comparison-20261019/formal/plots/turn_traces.png)
++
++![途中加箱体：本轮逐点速度、恢复、停止与派生模型间隙，失败保留](evidence/controller-comparison-20261019/formal/plots/detour_traces.png)
++
++![途中加箱体：本轮全部真实轨迹，DWB在左门附近未完成](evidence/controller-comparison-20261019/formal/plots/detour_trajectory.png)
++
++![双出口封堵：本轮全部逐点速度和派生模型间隙，期望有限失败停车](evidence/controller-comparison-20261019/formal/plots/two_doors_traces.png)
++
++以上每图P/I前后不变、算法对比如上。记录来自本轮Gazebo/ROS实收点，不是左右轮编码器或电机电流；原始CSV/JSON完整保留，无平滑、删异常或补点，长缺口断线，SVG同名保存。几何间隙为世界位姿与带padding矩形/已知场景几何派生量。系统日历与单调计时差约3653秒、主机GUI负载和RTF变化均保留，耗时不由UTC相减。仅3次重复、随机种子未统一、RPP已有调参而另外两者按同版官方示例适配，不能作统计显著性或普遍算法结论。
++
++三包构建和45个pytest通过，colcon53项含8个包装，零错误/失败/跳过；不是36轮仿真全部通过。正式665份原始文件哈希一致，含预检共755份核对一致；302份大JSONL无损gzip并逐份解压验证，所有中间失败和关闭阶段中断保留。原始未压缩目录仍在本机忽略路径。未连接硬件、未实现实车桥，用户原窗口和默认RPP未修改，本轮未提交/推送/合并。
++
++[全部轮次CSV](evidence/controller-comparison-20261019/formal/trials.csv) · [分场景数据/标准差](evidence/controller-comparison-20261019/formal/case_summary.csv) · [正式协议](evidence/controller-comparison-20261019/formal/protocol.json) · [原始数据完整性](evidence/controller-comparison-20261019/integrity.json) · [压缩原字节映射](evidence/controller-comparison-20261019/compression.json) · [SHA256](evidence/controller-comparison-20261019/SHA256.json)。
+ 
+ ## 2026-10-19：TF失败误报到达与Reset清理卡住（仅软件/仿真）
+ 
+diff --git a/docs/PROGRESS.md b/docs/PROGRESS.md
+index 3349111..2f80d47 100644
+--- a/docs/PROGRESS.md
++++ b/docs/PROGRESS.md
+@@ -1,6 +1,8 @@
+ # 当前进度与后续计划
+ 
+-更新：2026-10-19。项目状态：**开发中，当前源码 v131，设备最后确认运行 v127，整体实物验收未完成**。
++更新：2026-10-21。项目状态：**开发中，当前源码 v131，设备最后确认运行 v127，整体实物验收未完成**。
++
++2026-10-21后续：新建此前未出现的10×8m非对称`discovery_lab`场景，供[用户亲自验收自主建图](DISCOVERY_LAB_ACCEPTANCE.md)。短测发现并修复建图门控漏收静止SLAM首帧pose而一直等待的问题，迟加入门控测试通过；最终90仿真秒自动5目标4到达、末个预算取消，停车保存部分地图。三包构建和64项colcon检查通过，[全部5次运行及失败](evidence/discovery-lab-20261021/README.md)保留；完整覆盖、GUI和该场景几何精度尚待验收。未操作硬件，未提交/推送/合并。
+ 
+ v127已安装到STM32，ESP32网关也已同步，安装及遥测通信通过；MPU6050采样失败，用户报告主控3.3V轨异常升至4.6V，硬件修复前停止通电测试。v128增加[单目标相对坐标导航](COORDINATE_NAVIGATION.md)，代码、离线仿真、浏览器测试及两端构建已完成，未烧录。P1–P5实物验收仍待完成，v125低速起转问题保持原结论。
+ 
+@@ -18,6 +20,10 @@ v130完成[STM32 BSP分层](BSP.md)：按CAN/UART/I2C/System模块封装当前PC
+ 
+ 2026-10-19再次修复：[TF失败误判到达与Reset卡住](evidence/nav2-tf-reset-20261019/README.md)。本地Nav2控制服务检查目标TF失败并停车上报，控制/规划代价图将TF与扫描过滤回调串行执行，避免本机tf2 0.25.23锁序反转；未替换系统库、未扩大容差。真实服务故障注入、5次空闲及执行中Reset、有效新目标/取消通过；Gazebo两轮完整Reset后绕行到达停车、最终版本双门封堵有限失败停车通过，清图调用0。三包构建、40个pytest通过（colcon47项含包装），全部中间失败和前后波形保留。用户旧窗口需手动重启加载新程序；没有改动当前会话、固件或保护，未实现实车桥。验收后用户已明确授权提交并推送当前功能分支；本次提交包含代码、全部证据及交接文档，PR未合并，推送与新CI以远端实际状态为准。
+ 
++2026-10-19—20：[DWB/RPP/MPPI对比报表](evidence/controller-comparison-20261019/README.md)完成36轮正式隔离仿真。DWB8/12、RPP10/12、MPPI10/12结果符合预期，三者封堵退出均3/3；已发目标33轮均持续停车。存在各一次未发目标的启动未就绪及三次绕障墙钟超时，严格门槛无全部通过者。工程候选优先验证MPPI，已有RPP默认保留；MPPI完成绕障较快而CPU更高，不能宣称普遍最优。三包构建、45个pytest/colcon53项通过，全部失败、原始文件、哈希与逐点图归档；未连接硬件、未提交/推送/合并本轮修改。
++
++2026-10-21：新增[陌生环境自主探索建图](AUTONOMOUS_MAPPING.md)，从空白SLAM图自动选前沿、Nav2移动避障、继续观测并停车保存。办公室自动30目标29到达、末个预算取消，明确部分地图；最终保存接口通过可观测房间自动完成、任务进程冻结/恢复/显式继续及地图导出重载。建图模式唯一SLAM地图/TF源、任务失联停车锁存，默认已知地图AMCL/RPP和原保护不变。建图专用慢速及多前沿候选组合改善本次仿真几何对照，不能用面积增长或功能PASS代替地图质量。54个pytest/colcon63项通过，[全部13次尝试、失败与波形](evidence/autonomous-mapping-20261021/README.md)归档。实车桥未实现，未操作硬件，未提交/推送本轮修改。
++
+ | 模块/里程碑 | 当前进度 | 验证边界 |
+ |---|---|---|
+ | ROS 2 仿真、SLAM、Nav2 | 三包、单目标、选定途中遇障改道和目标占据失败停车已验证 | 实车桥待实现；更多障碍、移动物体、多目标GUI与长期运行仍待验证 |
+diff --git a/ros2_ws/README.md b/ros2_ws/README.md
+index ce1daab..a96b735 100644
+--- a/ros2_ws/README.md
++++ b/ros2_ws/README.md
+@@ -81,6 +81,16 @@ ros2 run smartcar_slam save_map.py --output-dir "$SMARTCAR_WS/maps/my_office_01"
+ 
+ YAML/PGM 供定位导航使用；`.posegraph/.data` 用于以后恢复 SLAM 图结构继续建图。仓库附带的 office_01 没有原图结构，不能直接用它恢复原来的建图任务。
+ 
++**陌生环境自主探索建图（无需键盘或人工目标）**：
++
++```bash
++ros2 launch smartcar_nav2 exploration.launch.py world:=office_loop rviz:=true
++```
++
++先退出旧导航/建图启动，避免重复模拟时钟和定位发布者。该模式从空白地图自动选择前沿目标，采用建图专用慢速RPP，经原门控保护行驶；结束后停车并保存栅格和SLAM图结构。默认新建`~/smartcar_maps/explore_日期_时间`；暂停、显式继续、结束保存、部分地图原因及实际验证范围见[完整说明](../docs/AUTONOMOUS_MAPPING.md)。当前只驱动Gazebo，实车桥尚未实现。
++
++全新场景亲自验收使用`world:=discovery_lab rviz:=true headless:=false max_sim_seconds:=1800`，布局、完整命令及完成判据见[用户验收步骤](../docs/DISCOVERY_LAB_ACCEPTANCE.md)。
++
+ **在保存地图上自主导航**：
+ 
+ ```bash
+@@ -114,6 +124,8 @@ python3 ros2_ws/tools/verify_navigation.py \
+ 
+ ## 验证范围
+ 
++DWB、RPP、MPPI 的隔离对比入口与统计口径见 [控制器对比说明](../docs/CONTROLLER_BENCHMARK.md)。该测试会主动运行新建的仿真并发目标，生成独立参数副本及CSV/HTML报表，不切换用户窗口中的控制器。
++
+ - `tools/test.bash` 验证模型/软件逻辑，不等于实际 Gazebo 运行、完成导航或实车验收。
+ - 仿真只读观察器为 `check_runtime.py`、`check_slam.py` 和 `check_navigation.py`；各自使用条件见包内 README。带 `--motion`、`--drive-square` 的测试会主动运动，必须按对应场地要求单独运行。
+ - 原工作空间曾验证基础运动、传感器、建图、选定导航目标、一个临时静态障碍及部分故障注入，完整历史证据留在原工作空间，未全部导入此仓库。
+diff --git a/ros2_ws/src/smartcar_nav2/CMakeLists.txt b/ros2_ws/src/smartcar_nav2/CMakeLists.txt
+index e0ca948..b5c27cd 100644
+--- a/ros2_ws/src/smartcar_nav2/CMakeLists.txt
++++ b/ros2_ws/src/smartcar_nav2/CMakeLists.txt
+@@ -26,5 +26,6 @@ if(BUILD_TESTING)
+   ament_add_pytest_test(recovery_policy tests/test_recovery_policy.py)
+   ament_add_pytest_test(controller_runtime tests/test_controller_runtime.py TIMEOUT 90
+     ENV SMARTCAR_TEST_CONTROLLER=$<TARGET_FILE:safe_controller_server>)
++  ament_add_pytest_test(controller_benchmark tests/test_controller_benchmark.py)
+ endif()
+ ament_package()
+diff --git a/ros2_ws/src/smartcar_nav2/README.md b/ros2_ws/src/smartcar_nav2/README.md
+index 172f052..4ef3bd6 100644
+--- a/ros2_ws/src/smartcar_nav2/README.md
++++ b/ros2_ws/src/smartcar_nav2/README.md
+@@ -1,6 +1,6 @@
+ # SmartCar Nav2 自主导航
+ 
+-ROS 2 Humble / Gazebo Fortress，使用已保存的二维地图、C1 雷达和轮式里程计。导航模式启动 AMCL，不启动 SLAM Toolbox；AMCL 独占 map→odom，地图固定不再继续建图。
++ROS 2 Humble / Gazebo Fortress，使用已保存的二维地图、C1 雷达和轮式里程计。默认已知地图导航启动AMCL，AMCL独占map→odom，地图固定。陌生环境使用独立的[自主探索入口](../../../docs/AUTONOMOUS_MAPPING.md)，由SLAM替代AMCL/map_server，自动选择目标、避障移动和保存地图。
+ 
+ ## 安装与构建
+ 
+diff --git a/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py b/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py
+index b7deb98..e13d2a7 100644
+--- a/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py
++++ b/ros2_ws/src/smartcar_nav2/launch/navigation.launch.py
+@@ -1,4 +1,4 @@
+-"""Start one simulator, saved-map AMCL and Nav2; never starts SLAM."""
++"""启动一套仿真和Nav2；默认已知地图AMCL，显式slam模式使用在线建图。"""
+ import math
+ import os
+ from pathlib import Path
+@@ -18,18 +18,20 @@ def start(context):
+     share = Path(get_package_share_directory('smartcar_nav2'))
+     sim = Path(get_package_share_directory('smartcar_sim'))
+     value = lambda name: LaunchConfiguration(name).perform(context)
++    mapping = value('slam').lower() == 'true'
+     map_path = Path(value('map')).expanduser().resolve()
+     params = Path(value('params_file')).expanduser().resolve()
+     bt_xml = Path(value('bt_xml')).expanduser().resolve()
+     through_bt_xml = Path(value('through_poses_bt_xml')).expanduser().resolve()
+-    if not map_path.is_file() or not params.is_file():
++    if not params.is_file() or (not mapping and not map_path.is_file()):
+         raise RuntimeError(f'Missing map YAML or Nav2 parameters: {map_path}, {params}')
+     if not bt_xml.is_file() or not through_bt_xml.is_file():
+         raise RuntimeError(f'Missing navigation behavior tree: {bt_xml}, {through_bt_xml}')
+-    metadata = yaml.safe_load(map_path.read_text())
+-    image = map_path.parent / metadata['image']
+-    if not image.is_file() or not math.isfinite(float(metadata['resolution'])) or metadata['resolution'] <= 0:
+-        raise RuntimeError('Map YAML requires an existing image and positive resolution.')
++    if not mapping:
++        metadata = yaml.safe_load(map_path.read_text())
++        image = map_path.parent / metadata['image']
++        if not image.is_file() or not math.isfinite(float(metadata['resolution'])) or metadata['resolution'] <= 0:
++            raise RuntimeError('Map YAML requires an existing image and positive resolution.')
+     initial = {k: float(value('initial_'+k)) for k in ['x', 'y', 'yaw']}
+     if not all(math.isfinite(v) for v in initial.values()):
+         raise RuntimeError('Initial pose must be finite.')
+@@ -37,6 +39,7 @@ def start(context):
+                ('smartcar_nav2', 'planner_server'), ('nav2_behaviors', 'behavior_server'),
+                ('nav2_bt_navigator', 'bt_navigator'), ('nav2_waypoint_follower', 'waypoint_follower'),
+                ('nav2_velocity_smoother', 'velocity_smoother')]
++    if mapping:servers.append(('nav2_map_server','map_saver_server'))
+     for package, executable in servers + [('nav2_amcl', 'amcl'), ('nav2_map_server', 'map_server'),
+                                            ('smartcar_nav2', 'navigation_gate.py')]:
+         binary = 'safe_'+executable if package == 'smartcar_nav2' and executable in ['controller_server', 'planner_server'] else executable
+@@ -64,7 +67,13 @@ def start(context):
+         launch_arguments={'world': value('world'), 'headless': value('headless'),
+                           'rviz': 'false', 'lidar': 'true', 'camera': 'false',
+                           'cmd_vel_topic': '/nav/safe_cmd_vel'}.items())]
+-    actions += [
++    if mapping:
++        slam = Path(get_package_share_directory('smartcar_slam'))
++        actions.append(IncludeLaunchDescription(PythonLaunchDescriptionSource(str(slam/'launch/slam.launch.py')),
++                        launch_arguments={'use_sim_time':'true','map_file':'',
++                                          'params_file':str(slam/'config/slam.yaml')}.items()))
++    else:
++        actions += [
+         Node(package='nav2_map_server', executable='map_server', name='map_server',
+              parameters=common+[{'yaml_filename': str(map_path)}], output='screen'),
+         Node(package='nav2_amcl', executable='amcl', name='amcl',
+@@ -81,25 +90,40 @@ def start(context):
+             # 单目标与连续多目标均保留已观测的堵路信息，避免落回自动清图的默认树。
+             extra = [{'default_nav_to_pose_bt_xml': str(bt_xml),
+                       'default_nav_through_poses_bt_xml': str(through_bt_xml)}]
++        if mapping:
++            # 未知环境建图采用较慢运动和转向，减轻轮滑与扫描匹配退化；原导航默认不变。
++            if name=='controller_server':
++                extra += [{'FollowPath.desired_linear_vel':.2,'FollowPath.rotate_to_heading_angular_vel':.35,
++                           'FollowPath.max_angular_accel':.5}]
++            elif name=='velocity_smoother':
++                extra += [{'max_velocity':[.2,0.,.35],'min_velocity':[-.1,0.,-.35],
++                           'max_accel':[.25,0.,.5]}]
++            elif name=='behavior_server':extra += [{'max_rotational_vel':.35,'rotational_acc_lim':.5}]
++            elif name=='map_saver_server':
++                extra += [{'save_map_timeout':10.,'map_subscribe_transient_local':True,
++                           'free_thresh_default':.25,'occupied_thresh_default':.65}]
+         binary = 'safe_'+name if package == 'smartcar_nav2' else name
+         server = Node(package=package, executable=binary, name=name, parameters=common+extra,
+                       remappings=remaps, output='screen')
+         actions.extend([server, RegisterEventHandler(OnProcessExit(target_action=server,
+                         on_exit=[EmitEvent(event=Shutdown(reason=name+' exited'))]))])
+-    for suffix, names in [('localization', ['map_server', 'amcl']),
+-                          ('navigation', [name for _, name in servers])]:
++    managers = [('navigation', [name for _, name in servers])]
++    if not mapping:managers.insert(0, ('localization', ['map_server', 'amcl']))
++    for suffix, names in managers:
+         manager = Node(package='nav2_lifecycle_manager', executable='lifecycle_manager',
+                             name='lifecycle_manager_'+suffix,
+                             parameters=[{'use_sim_time': True, 'autostart': True, 'bond_timeout': 8.0,
+                                          'node_names': names}], output='screen')
+         # Give local DDS discovery and software-rendered sensors time before lifecycle RPCs.
+         actions.append(TimerAction(period=2.0 if suffix == 'localization' else 5.0, actions=[manager]))
+-    gate = Node(package='smartcar_nav2', executable='navigation_gate.py', name='navigation_gate', output='screen')
++    gate = Node(package='smartcar_nav2', executable='navigation_gate.py', name='navigation_gate',
++                parameters=[{'localization_source':'slam' if mapping else 'amcl',
++                             'exploration_watchdog':value('exploration_watchdog').lower()=='true'}], output='screen')
+     actions.extend([gate, RegisterEventHandler(OnProcessExit(target_action=gate,
+                     on_exit=[EmitEvent(event=Shutdown(reason='Navigation command gate exited'))]))])
+     if value('rviz').lower() == 'true':
+         actions.append(Node(package='rviz2', executable='rviz2',
+-                            arguments=['-d', str(share/'rviz/navigation.rviz')],
++                            arguments=['-d', str(share/('rviz/exploration.rviz' if mapping else 'rviz/navigation.rviz'))],
+                             parameters=[{'use_sim_time': True}], output='screen'))
+     return actions
+ 
+@@ -109,6 +133,8 @@ def generate_launch_description():
+     # 示例地图随包安装，无需依赖开发者机器上的工作空间绝对路径。
+     return LaunchDescription([
+         DeclareLaunchArgument('world', default_value='office_loop'),
++        DeclareLaunchArgument('slam', default_value='false', choices=['true','false']),
++        DeclareLaunchArgument('exploration_watchdog', default_value='false', choices=['true','false']),
+         DeclareLaunchArgument('map', default_value=str(share/'maps/office_01/map.yaml')),
+         DeclareLaunchArgument('params_file', default_value=str(share/'config/nav2.yaml')),
+         DeclareLaunchArgument('bt_xml', default_value=str(share/'config/navigate_recovery.xml')),
+diff --git a/ros2_ws/src/smartcar_nav2/package.xml b/ros2_ws/src/smartcar_nav2/package.xml
+index e9a4351..4a204c8 100644
+--- a/ros2_ws/src/smartcar_nav2/package.xml
++++ b/ros2_ws/src/smartcar_nav2/package.xml
+@@ -13,6 +13,7 @@
+   <depend>nav_2d_utils</depend>
+   <depend>tf2_ros</depend>
+   <exec_depend>smartcar_sim</exec_depend>
++  <exec_depend>smartcar_slam</exec_depend>
+   <exec_depend>navigation2</exec_depend>
+   <exec_depend>nav2_bringup</exec_depend>
+   <exec_depend>nav2_rviz_plugins</exec_depend>
+@@ -31,5 +32,7 @@
+   <exec_depend>rosgraph_msgs</exec_depend>
+   <exec_depend>python3-yaml</exec_depend>
+   <test_depend>ament_cmake_pytest</test_depend>
++  <test_depend>python3-numpy</test_depend>
++  <test_depend>python3-matplotlib</test_depend>
+   <export><build_type>ament_cmake</build_type></export>
+ </package>
+diff --git a/ros2_ws/src/smartcar_nav2/scripts/gate_core.py b/ros2_ws/src/smartcar_nav2/scripts/gate_core.py
+index 5144906..5dcb6a0 100644
+--- a/ros2_ws/src/smartcar_nav2/scripts/gate_core.py
++++ b/ros2_ws/src/smartcar_nav2/scripts/gate_core.py
+@@ -2,6 +2,25 @@
+ import math
+ 
+ 
++def map_authority_ok(source, publishers, nodes):
++    """建图和已知地图分别要求唯一地图发布者，并拒绝两套定位同时运行。"""
++    if source=='slam':
++        return publishers==['slam_toolbox'] and not {'amcl','map_server'}.intersection(nodes)
++    if source=='amcl':
++        return publishers==['map_server'] and 'slam_toolbox' not in nodes
++    return False
++
++
++def slam_localization_ok(now, map_time, sim_time, tf_stamp, values):
++    """用持续有效的SLAM地图/TF确认定位，避免静止时漏收一次性pose而死等。"""
++    if map_time is None or sim_time is None or len(values)!=7:
++        return False
++    if not all(math.isfinite(v) for v in [now,map_time,sim_time,tf_stamp,*values]):
++        return False
++    return (0<=now-map_time<=10. and -1.<=sim_time-tf_stamp<=1.5 and
++            abs(sum(v*v for v in values[3:])-1.)<=.01)
++
++
+ class NavigationGate:
+     def __init__(self):
+         self.command = (0., 0.)
+diff --git a/ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py b/ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py
+index 8fb259c..0571286 100755
+--- a/ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py
++++ b/ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py
+@@ -9,22 +9,28 @@ from rclpy.node import Node
+ from rclpy.qos import qos_profile_sensor_data
+ from rclpy.executors import ExternalShutdownException
+ from geometry_msgs.msg import Twist, PoseWithCovarianceStamped
+-from nav_msgs.msg import Odometry
++from nav_msgs.msg import Odometry, OccupancyGrid
+ from sensor_msgs.msg import LaserScan
+ from rosgraph_msgs.msg import Clock
+-from std_msgs.msg import String
++from std_msgs.msg import String, Empty
+ from std_srvs.srv import SetBool
+ from action_msgs.srv import CancelGoal
+ from ament_index_python.packages import get_package_share_directory
+ from tf2_ros import Buffer, TransformListener
+ from rclpy.time import Time
+-from gate_core import NavigationGate
++from gate_core import NavigationGate, map_authority_ok, slam_localization_ok
+ 
+ 
+ class GateNode(Node):
+     def __init__(self):
+         super().__init__('navigation_gate')
+         self.core = NavigationGate()
++        self.source = self.declare_parameter('localization_source','amcl').value
++        if self.source not in ['amcl','slam']:raise ValueError('localization_source须为amcl或slam')
++        self.map_time = None
++        self.exploration_watchdog=self.declare_parameter('exploration_watchdog',False).value
++        self.exploration_time=None;self.watchdog_tripped=False
++        if self.exploration_watchdog:self.create_subscription(Empty,'/exploration/heartbeat',self.heartbeat,10)
+         config = json.loads((Path(get_package_share_directory('smartcar_sim'))/'config/robot_parameters.json').read_text())
+         self.laser_xy = config['lidar']['mount_xyz_relative_to_axle_m'][:2]
+         self.buffer = Buffer()
+@@ -35,7 +41,12 @@ class GateNode(Node):
+         self.create_subscription(LaserScan, '/sim/scan', self.scan, qos_profile_sensor_data)
+         self.create_subscription(Odometry, '/sim/odom', self.odom, 10)
+         self.create_subscription(Clock, '/clock', self.clock, qos_profile_sensor_data)
+-        self.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.pose, 10)
++        if self.source=='amcl':
++            self.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.pose, 10)
++        if self.source=='slam':
++            from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
++            self.create_subscription(OccupancyGrid,'/map',self.map,
++                QoSProfile(depth=1,durability=DurabilityPolicy.TRANSIENT_LOCAL,reliability=ReliabilityPolicy.RELIABLE))
+         self.cancel_clients = [self.create_client(CancelGoal, name+'/_action/cancel_goal')
+                                for name in ['/navigate_to_pose', '/navigate_through_poses', '/follow_waypoints']]
+         self.create_service(SetBool, '/navigation/stop', self.stop)
+@@ -73,18 +84,38 @@ class GateNode(Node):
+             self.core.odom_time = time.monotonic()
+ 
+     def clock(self, msg):
+-        self.core.receive_clock(msg.clock.sec+msg.clock.nanosec/1e9, time.monotonic())
++        value=msg.clock.sec+msg.clock.nanosec/1e9
++        # 仿真时间回退后必须收到新地图，不能用回退前的地图重新置为已定位。
++        if self.source=='slam' and self.core.clock_value is not None and value<self.core.clock_value:
++            self.map_time=None
++        self.core.receive_clock(value, time.monotonic())
+ 
+     def pose(self, msg):
+         p, q = msg.pose.pose.position, msg.pose.pose.orientation
+         self.core.localized = msg.header.frame_id == 'map' and all(math.isfinite(v) for v in [p.x,p.y,q.z,q.w])
+ 
++    def map(self, msg):
++        """建图必须持续提供有效地图；失效或中断不能只靠旧位姿继续探索。"""
++        self.map_time = time.monotonic() if (msg.header.frame_id=='map' and msg.info.resolution>0 and
++                                             msg.info.width*msg.info.height==len(msg.data) and len(msg.data)>0) else None
++
++    def heartbeat(self, msg):
++        """接收自主任务存活信号；恢复心跳不能自动解除已锁存的停车。"""
++        self.exploration_time=time.monotonic()
++
++    def cancel_navigation(self):
++        """故障或显式停车均请求取消动作，避免旧目标在解除停车后自动续行。"""
++        for client in self.cancel_clients:
++            if client.service_is_ready():client.call_async(CancelGoal.Request())
++
+     def stop(self, request, response):
++        if (not request.data and self.exploration_watchdog and
++            (self.exploration_time is None or time.monotonic()-self.exploration_time>1.)):
++            response.success=False;response.message='Explorer heartbeat unavailable; stop remains latched.';return response
+         self.core.estop = request.data
+         if request.data:
+-            for client in self.cancel_clients:
+-                if client.service_is_ready():
+-                    client.call_async(CancelGoal.Request())
++            self.cancel_navigation()
++        else:self.watchdog_tripped=False
+         self.publish()
+         response.success = True
+         response.message = 'Stop latched; active NavigateToPose cancellation requested.' if request.data else 'Stop released; send a new goal.'
+@@ -92,14 +123,35 @@ class GateNode(Node):
+ 
+     def publish(self):
+         now = time.monotonic()
++        explorer_missing=self.exploration_watchdog and (self.exploration_time is None or now-self.exploration_time>1.)
++        if explorer_missing and self.exploration_time is not None and not self.watchdog_tripped:
++            self.watchdog_tripped=True;self.core.estop=True;self.cancel_navigation()
+         if now-self.last_interface_check > 1.:
+             self.interfaces_ok = (self.count_publishers('/sim/scan') == 1 and
+                                   self.count_publishers('/sim/drive_cmd_vel') == 1 and
+                                   self.count_publishers('/nav/safe_cmd_vel') == 1 and
+-                                  [p.node_name for p in self.get_publishers_info_by_topic('/map')] == ['map_server'])
++                                  (not self.exploration_watchdog or self.count_publishers('/exploration/heartbeat')==1) and
++                                  map_authority_ok(self.source,
++                                    [p.node_name for p in self.get_publishers_info_by_topic('/map')],
++                                    [name for name,_ in self.get_node_names_and_namespaces()]))
+             self.last_interface_check = now
++        if self.source=='slam':
++            # SLAM静止时的/pose非持久且可能只发一次；改查唯一SLAM源的实时地图和原阈值TF。
++            self.core.localized=False
++            if self.interfaces_ok:
++                try:
++                    transform=self.buffer.lookup_transform('map','odom',Time())
++                    stamp=transform.header.stamp.sec+transform.header.stamp.nanosec/1e9
++                    t,q=transform.transform.translation,transform.transform.rotation
++                    self.core.localized=slam_localization_ok(now,self.map_time,self.core.clock_value,stamp,
++                                                            [t.x,t.y,t.z,q.x,q.y,q.z,q.w])
++                except Exception:
++                    pass
+         vx, wz, reason = self.core.output(now)
++        if explorer_missing:vx,wz,reason=0.,0.,'EXPLORER_UNAVAILABLE'
+         if reason == 'READY':
++            if self.source=='slam' and (self.map_time is None or now-self.map_time>10.):
++                vx,wz,reason=0.,0.,'MAP_STALE'
+             if not self.interfaces_ok:
+                 vx, wz, reason = 0., 0., 'INTERFACE_CONFLICT'
+             try:
+diff --git a/ros2_ws/src/smartcar_nav2/tests/test_gate_core.py b/ros2_ws/src/smartcar_nav2/tests/test_gate_core.py
+index 35b796a..cf2eda9 100644
+--- a/ros2_ws/src/smartcar_nav2/tests/test_gate_core.py
++++ b/ros2_ws/src/smartcar_nav2/tests/test_gate_core.py
+@@ -78,3 +78,30 @@ def test_turn_checks_swept_radius_and_clear_side():
+     assert gate.output(1.1)[2] == 'OBSTACLE_NEAR_TURN'
+     gate.points = [(0., .6)]
+     assert gate.output(1.1)[2] == 'READY'
++
++
++def test_map_authority_is_exclusive_for_mapping_and_localization():
++    """建图允许SLAM唯一发布，但不能以换来源为由允许AMCL或多图源混入。"""
++    check=module.map_authority_ok
++    assert check('slam',['slam_toolbox'],['slam_toolbox','planner_server'])
++    assert check('amcl',['map_server'],['amcl','map_server'])
++    assert not check('slam',['slam_toolbox'],['slam_toolbox','amcl'])
++    assert not check('slam',['slam_toolbox','map_server'],['slam_toolbox'])
++    assert not check('slam',['map_server'],['map_server'])
++    assert not check('amcl',['map_server'],['map_server','slam_toolbox'])
++
++
++def test_slam_startup_uses_live_map_and_tf_without_one_shot_pose():
++    """晚于首个pose订阅时仍可就绪，但缺地图、过期/非法TF必须停车。"""
++    check=module.slam_localization_ok
++    identity=[0.,0.,0.,0.,0.,0.,1.]
++    assert check(20.,19.,12.,11.9,identity)
++    assert not check(20.,None,12.,11.9,identity)
++    assert not check(20.,9.,12.,11.9,identity)
++    assert not check(20.,21.,12.,11.9,identity)
++    assert not check(20.,19.,None,11.9,identity)
++    assert not check(20.,19.,12.,10.4,identity)
++    assert not check(20.,19.,12.,13.1,identity)
++    assert not check(20.,19.,12.,11.9,[0.]*7)
++    for bad in [math.inf,math.nan,-math.inf]:
++        assert not check(20.,19.,12.,11.9,[bad,*identity[1:]])
+diff --git a/ros2_ws/src/smartcar_sim/worlds/README.md b/ros2_ws/src/smartcar_sim/worlds/README.md
+index 68c90d4..963bc9a 100644
+--- a/ros2_ws/src/smartcar_sim/worlds/README.md
++++ b/ros2_ws/src/smartcar_sim/worlds/README.md
+@@ -7,6 +7,9 @@
+ | `smartcar`（默认） | 现有约6×6m房间，保留用户添加的隔墙 |
+ | `smartcar_original` | 用户此前备份的基础房间 |
+ | `office_loop` | 新增12×10m四房间场景，中央走廊和上下两条绕行通路 |
++| `discovery_lab` | 2026-10-21独立新建的10×8m非对称实验室，错位门洞、遮挡房间、工作台及圆柱；用于用户自主建图验收 |
++
++`discovery_lab`的墙体与障碍布局在本轮新定义，不复用旧办公室布局。场景文件是Gazebo物理环境，不是预先建好的二维导航地图；自主探索时SLAM从零生成`/map`。启动与完成判据见[新场景自主建图验收](../../../../docs/DISCOVERY_LAB_ACCEPTANCE.md)。
+ 
+ ## 切换到四房间场景
+ 
+diff --git a/ros2_ws/src/smartcar_slam/CMakeLists.txt b/ros2_ws/src/smartcar_slam/CMakeLists.txt
+index e5cfa24..2519081 100644
+--- a/ros2_ws/src/smartcar_slam/CMakeLists.txt
++++ b/ros2_ws/src/smartcar_slam/CMakeLists.txt
+@@ -3,10 +3,11 @@ project(smartcar_slam)
+ find_package(ament_cmake REQUIRED)
+ install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+ install(FILES README.md LICENSE DESTINATION share/${PROJECT_NAME})
+-install(PROGRAMS scripts/save_map.py scripts/check_slam.py DESTINATION lib/${PROJECT_NAME})
+-install(FILES scripts/map_validation.py DESTINATION lib/${PROJECT_NAME})
++install(PROGRAMS scripts/save_map.py scripts/check_slam.py scripts/explore.py DESTINATION lib/${PROJECT_NAME})
++install(FILES scripts/map_validation.py scripts/frontier_core.py DESTINATION lib/${PROJECT_NAME})
+ if(BUILD_TESTING)
+   find_package(ament_cmake_pytest REQUIRED)
+   ament_add_pytest_test(map_validation tests/test_map_validation.py)
++  ament_add_pytest_test(frontier_core tests/test_frontier_core.py)
+ endif()
+ ament_package()
+diff --git a/ros2_ws/src/smartcar_slam/README.md b/ros2_ws/src/smartcar_slam/README.md
+index 9b26c01..eb5dda3 100644
+--- a/ros2_ws/src/smartcar_slam/README.md
++++ b/ros2_ws/src/smartcar_slam/README.md
+@@ -1,6 +1,6 @@
+ # SmartCar 二维 SLAM
+ 
+-在既有 Humble/Fortress 小车上使用 SLAM Toolbox，将 `/sim/scan` 与里程计 TF 组合为 `/map`，新增 `map → odom` 坐标变换。当前不启动自主导航。此包从既有仿真工程导入，原 SLAM 验收完整记录保留在原工作空间；本仓库的目录移植验收以 [本轮证据](../../../docs/evidence/ros2-integration-20261018/) 为准，软件测试与实际运行结果分别记录。
++在既有 Humble/Fortress 小车上使用 SLAM Toolbox，将 `/sim/scan` 与里程计 TF 组合为 `/map`，新增 `map → odom` 坐标变换。默认`slam.launch.py`/`mapping.launch.py`只负责建图；[自主探索建图](../../../docs/AUTONOMOUS_MAPPING.md)由`smartcar_nav2/exploration.launch.py`同时启动本包探索器与导航。此包从既有仿真工程导入，原 SLAM 验收完整记录保留在原工作空间；本仓库的目录移植验收以 [本轮证据](../../../docs/evidence/ros2-integration-20261018/) 为准，软件测试与实际运行结果分别记录。
+ 
+ 每个终端先在本仓库根目录执行，脚本自动设置工作空间路径：
+ 
+@@ -21,7 +21,7 @@ source ros2_ws/tools/env.bash
+ bash "$SMARTCAR_WS/tools/test.bash"
+ ```
+ 
+-`nav2_map_server` 在建图模式中仅用于地图保存，不会启动 Nav2 导航。
++单独SLAM入口中的`nav2_map_server`仅用于地图保存；自主探索入口还会启动Nav2规划、跟踪及独立图片保存服务。
+ 
+ ## 已有仿真时，只接入 SLAM
+ 
+diff --git a/ros2_ws/src/smartcar_slam/package.xml b/ros2_ws/src/smartcar_slam/package.xml
+index db11835..f61868c 100644
+--- a/ros2_ws/src/smartcar_slam/package.xml
++++ b/ros2_ws/src/smartcar_slam/package.xml
+@@ -15,6 +15,10 @@
+   <exec_depend>rclpy</exec_depend>
+   <exec_depend>sensor_msgs</exec_depend>
+   <exec_depend>nav_msgs</exec_depend>
++  <exec_depend>nav2_msgs</exec_depend>
++  <exec_depend>lifecycle_msgs</exec_depend>
++  <exec_depend>std_msgs</exec_depend>
++  <exec_depend>std_srvs</exec_depend>
+   <exec_depend>geometry_msgs</exec_depend>
+   <exec_depend>rosgraph_msgs</exec_depend>
+   <exec_depend>tf2_ros</exec_depend>
+diff --git a/ros2_ws/tools/verify_navigation.py b/ros2_ws/tools/verify_navigation.py
+index 4b4286c..db6c414 100644
+--- a/ros2_ws/tools/verify_navigation.py
++++ b/ros2_ws/tools/verify_navigation.py
+@@ -29,6 +29,9 @@ def arguments():
+     parser.add_argument('--domain-id', type=int, default=88)
+     parser.add_argument('--startup-timeout', type=float, default=60.)
+     parser.add_argument('--goal-timeout', type=float, default=120.)
++    parser.add_argument('--world',default='office_loop',help='与被验证地图对应的仿真场景')
++    parser.add_argument('--map-file',type=Path,help='显式验证新建地图；默认保持原示例地图')
++    parser.add_argument('--evidence-label',default='ROS integration 20261018')
+     parser.add_argument('--_environment-ready', action='store_true', help=argparse.SUPPRESS)
+     args = parser.parse_args()
+     if args.domain_id == 86 or not 0 <= args.domain_id <= 232:
+@@ -36,6 +39,9 @@ def arguments():
+     if not 0 < args.startup_timeout <= 60 or not math.isfinite(args.goal_timeout) or args.goal_timeout <= 0:
+         parser.error('启动等待须为 0..60 秒，目标等待须为有限正数。')
+     args.output = args.output.expanduser().resolve()
++    if args.map_file:
++        args.map_file=args.map_file.expanduser().resolve()
++        if not args.map_file.is_file():parser.error('地图文件不存在')
+     return args
+ 
+ 
+@@ -104,7 +110,7 @@ def stop_group(process, log_event, pump=None):
+     return result
+ 
+ 
+-def create_plots(output):
++def create_plots(output, label='ROS integration 20261018'):
+     """离线读取原始 CSV 逐点作图；无平滑、无插值，长缺口断线。"""
+     import matplotlib
+     matplotlib.use('Agg')
+@@ -127,7 +133,7 @@ def create_plots(output):
+         return xs, ys
+ 
+     odom, commands = read('odom.csv'), read('safe_cmd_vel.csv')
+-    title = ('ROS integration 20261018 / firmware source v131 / SIMULATION_ONLY\n'
++    title = (label+' / firmware source v131 / SIMULATION_ONLY\n'
+              'STM32 P: right reverse .45 -> .45, others .30 -> .30; '
+              'I: steady .010 -> .010, start .030 -> .030 / 10 ms\n'
+              'PI not exercised; firmware algorithm unchanged; Gazebo DiffDrive + Nav2 single goal')
+@@ -187,6 +193,13 @@ def verify(args, workspace):
+                                'recovery behaviors', 'multi-goal navigation', 'arbitrary localization'],
+               'measurement': 'Gazebo-generated ROS odometry, not external physical ground truth'}
+     report['verifier_sha256'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
++    if args.map_file:
++        import yaml
++        image=args.map_file.parent/yaml.safe_load(args.map_file.read_text())['image']
++        report['map_override']={'yaml':str(args.map_file),'yaml_sha256':hashlib.sha256(args.map_file.read_bytes()).hexdigest(),
++                                'image_sha256':hashlib.sha256(image.read_bytes()).hexdigest()}
++        (args.output/'map_used.yaml').write_bytes(args.map_file.read_bytes())
++        (args.output/'map_used.pgm').write_bytes(image.read_bytes())
+     streams, writers, counts = {}, {}, {}
+     events = (args.output/'events.jsonl').open('w', buffering=1)
+ 
+@@ -297,7 +310,8 @@ def verify(args, workspace):
+                      'behavior_server', 'bt_navigator', 'waypoint_follower', 'velocity_smoother']:
+             lifecycle_clients[name] = node.create_client(GetState, '/'+name+'/get_state')
+         launch_command = ['ros2', 'launch', 'smartcar_nav2', 'navigation.launch.py',
+-                          'headless:=true', 'rviz:=false']
++                          'headless:=true', 'rviz:=false', 'world:='+args.world]
++        if args.map_file:launch_command.append('map:='+str(args.map_file))
+         report['launch_command'] = launch_command
+         process = subprocess.Popen(launch_command, cwd=workspace, env=os.environ.copy(),
+                                    stdout=launch_log, stderr=subprocess.STDOUT, start_new_session=True)
+@@ -431,7 +445,7 @@ def verify(args, workspace):
+         report['sample_counts'] = counts
+         report['duration_wall_s'] = time.monotonic()-started
+         try:
+-            create_plots(args.output)
++            create_plots(args.output,args.evidence_label)
+             report['plots'] = ['velocity.png', 'velocity.svg', 'trajectory.png', 'trajectory.svg']
+         except Exception as exc:
+             report['plot_error'] = str(exc)
+diff --git a/ros2_ws/tools/verify_replanning.py b/ros2_ws/tools/verify_replanning.py
+index 1a14eab..a39de6c 100644
+--- a/ros2_ws/tools/verify_replanning.py
++++ b/ros2_ws/tools/verify_replanning.py
+@@ -24,7 +24,8 @@ def arguments():
+     """指定全新输出、障碍工况与隔离域，不接入实车或默认用户域。"""
+     p = argparse.ArgumentParser(description=__doc__)
+     p.add_argument('--output', required=True, type=Path)
+-    p.add_argument('--case', choices=['detour', 'blocked', 'two_doors'], default='detour')
++    p.add_argument('--case', choices=['straight', 'turn', 'detour', 'blocked', 'two_doors'], default='detour')
++    p.add_argument('--params-file', type=Path, help='本轮独立参数，不修改默认导航配置')
+     p.add_argument('--reopen', action='store_true', help='双门封堵失败后移走右门箱体，并显式发送一个新目标')
+     p.add_argument('--through-poses', action='store_true', help='使用连续多目标动作入口和对应行为树')
+     p.add_argument('--reset-cycles', type=int, default=0, help='目标发送前通过真实生命周期管理器执行 Reset/Startup')
+@@ -44,6 +45,9 @@ def arguments():
+     if a.obstacle_x-.2-a.insert_x < .6:
+         p.error('障碍插入时距车辆参考点须至少 0.6 m。')
+     a.output = a.output.expanduser().resolve()
++    if a.params_file:
++        a.params_file = a.params_file.expanduser().resolve()
++        if not a.params_file.is_file():p.error('参数文件不存在。')
+     if a.bt_xml:
+         a.bt_xml = a.bt_xml.expanduser().resolve()
+         if not a.bt_xml.is_file():
+@@ -103,7 +107,8 @@ def verify(a, ws):
+     report = {'result': 'FAIL', 'scope': 'SIMULATION_ONLY', 'case': a.case,
+               'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+               'domain_id': a.domain_id, 'ign_partition': partition,
+-              'goal': [1.03, -2.92, 0.] if two_doors else [4.5, 0., 0.], 'goal_send_count': 0, 'checks': {},
++              'goal': [1.03, -2.92, 0.] if two_doors else ([3., 2.7, math.pi/2] if a.case == 'turn' else [4.5, 0., 0.]),
++              'goal_send_count': 0, 'checks': {},
+               'firmware_source_version': 131, 'pi_exercised': False, 'pi_changed': False,
+               'not_verified': ['physical vehicle', 'moving obstacles', 'arbitrary routes', 'multi-goal GUI']}
+     # 完全封堵工况把目标区域占满；不把全局另有通路的走廊封条称为无路可走。
+@@ -130,6 +135,9 @@ def verify(a, ws):
+     (a.output/'config').mkdir()
+     for p in source_paths:
+         (a.output/'config'/p.name).write_bytes(p.read_bytes())
++    if a.params_file:
++        (a.output/'config/nav2.yaml').write_bytes(a.params_file.read_bytes())
++        report['params_override_sha256'] = hashlib.sha256(a.params_file.read_bytes()).hexdigest()
+     if a.bt_xml:
+         report['bt_override_sha256'] = hashlib.sha256(a.bt_xml.read_bytes()).hexdigest()
+         (a.output/'config/executed_bt.xml').write_bytes(a.bt_xml.read_bytes())
+@@ -140,6 +148,9 @@ def verify(a, ws):
+     process = truth_bridge = node = handle = None
+     result_future = None
+     launch_log = (a.output/'launch.log').open('w', buffering=1)
++    resource_pid = None
++    resource_poll = 0.
++    cpu_previous = None
+ 
+     def stream(name):
+         """逐条写入原始记录，异常和关闭过程也保留。"""
+@@ -149,7 +160,9 @@ def verify(a, ws):
+ 
+     def event(name, **values):
+         """记录墙钟时间与真实操作结果。"""
+-        item = {'wall_s': time.monotonic()-started, 'event': name, **values}
++        clock = latest.get('clock')
++        item = {'wall_s': time.monotonic()-started, 'sim_s': clock.clock.sec+clock.clock.nanosec*1e-9 if clock else None,
++                'event': name, **values}
+         stream('events.jsonl').write(json.dumps(item, ensure_ascii=False)+'\n')
+         print(json.dumps(item, ensure_ascii=False), flush=True)
+ 
+@@ -243,9 +256,31 @@ def verify(a, ws):
+ 
+     def spin():
+         """持续采样并检查 launch 未提前退出。"""
++        nonlocal resource_pid, resource_poll, cpu_previous
+         rclpy.spin_once(node, timeout_sec=.025)
+         if process is not None and process.poll() is not None:
+             raise RuntimeError('launch 提前退出：'+str(process.returncode))
++        now = time.monotonic()
++        if process is not None and now >= resource_poll:
++            resource_poll = now+1.
++            if resource_pid is None:
++                for entry in Path('/proc').iterdir():
++                    if not entry.name.isdigit():continue
++                    try:
++                        fields=(entry/'stat').read_text().rsplit(')',1)[1].split()
++                        command=(entry/'cmdline').read_bytes().split(b'\0')
++                        if int(fields[2]) == process.pid and command and command[0].endswith(b'/safe_controller_server'):
++                            resource_pid=int(entry.name);break
++                    except (OSError,ValueError):pass
++            if resource_pid is not None:
++                try:
++                    fields=Path(f'/proc/{resource_pid}/stat').read_text().rsplit(')',1)[1].split()
++                    cpu=(int(fields[11])+int(fields[12]))/os.sysconf('SC_CLK_TCK')
++                    percent=100*(cpu-cpu_previous[1])/(now-cpu_previous[0]) if cpu_previous else 0.
++                    cpu_previous=(now,cpu)
++                    csv_row('resources.csv',['pid','cpu_total_s','cpu_percent_one_core','rss_bytes','host_load1'],
++                            [resource_pid,cpu,percent,int(fields[21])*os.sysconf('SC_PAGE_SIZE'),os.getloadavg()[0]])
++                except (OSError,ValueError):pass
+ 
+     def wait(future, timeout):
+         """有界等待请求，始终处理采样订阅。"""
+@@ -353,6 +388,7 @@ def verify(a, ws):
+         clients = {n: node.create_client(GetState, '/'+n+'/get_state') for n in names}
+         states, futures = {}, {}
+         launch_args = ['ros2', 'launch', 'smartcar_nav2', 'navigation.launch.py', 'headless:=true', 'rviz:=false']
++        if a.params_file:launch_args.append('params_file:='+str(a.params_file))
+         if a.bt_xml:
+             launch_args.append(('through_poses_bt_xml' if a.through_poses else 'bt_xml')+':='+str(a.bt_xml))
+         if two_doors:
+@@ -444,7 +480,8 @@ def verify(a, ws):
+         goal.pose.header.frame_id = 'map'; goal.pose.header.stamp = node.get_clock().now().to_msg()
+         goal.pose.pose.position.x = report['goal'][0]
+         goal.pose.pose.position.y = report['goal'][1]
+-        goal.pose.pose.orientation.w = 1.
++        goal.pose.pose.orientation.z = math.sin(report['goal'][2]/2)
++        goal.pose.pose.orientation.w = math.cos(report['goal'][2]/2)
+         if a.through_poses:
+             final_pose = goal.pose
+             goal = NavigateThroughPoses.Goal()
+@@ -461,13 +498,19 @@ def verify(a, ws):
+         until = time.monotonic()+a.goal_timeout
+         while not result_future.done() and time.monotonic() < until:
+             spin()
+-            if not two_doors and inserted_at is None and latest['truth'][1] >= a.insert_x and paths:
++            if a.case in ['detour','blocked'] and inserted_at is None and latest['truth'][1] >= a.insert_x and paths:
+                 event('obstacle_request', robot=latest['truth'], box=box)
+                 gazebo_create()
+                 inserted_at = time.monotonic()-started
+                 report['inserted_wall_s'] = inserted_at
+                 event('obstacle_inserted', box=box, robot=latest['truth'])
+         if not result_future.done():
++            event('goal_timeout')
++            wait(handle.cancel_goal_async(), 3.)
++            report['stop_evidence'] = wait_stopped()
++            report['checks']['stopped'] = report['stop_evidence']['verified']
++            report['final_world_pose'] = latest['truth'][1:]
++            if result_future.done():report['action_status'] = result_future.result().status
+             raise TimeoutError('目标执行超时')
+         result = result_future.result()
+         report['action_status'] = result.status
+@@ -476,13 +519,16 @@ def verify(a, ws):
+         report['stop_evidence'] = wait_stopped()
+         report['checks']['stopped'] = report['stop_evidence']['verified']
+         report['stop_samples'] = report['stop_evidence'].get('samples', 0)
+-        if not two_doors:
++        if a.case in ['detour', 'blocked']:
+             report['checks']['obstacle_inserted_during_action'] = inserted_at is not None
+         report['checks']['single_goal_only'] = report['goal_send_count'] == 1
+         if two_doors:
+             report['checks']['single_goal_for_blocked_phase'] = report['checks'].pop('single_goal_only')
+-        report['checks']['expected_action_result'] = result.status == (4 if a.case == 'detour' else 6)
++        report['checks']['expected_action_result'] = result.status == (6 if a.case in ['blocked','two_doors'] else 4)
+         report['final_world_pose'] = latest['truth'][1:]
++        if a.case in ['straight','turn']:
++            report['checks']['reached_goal_area'] = math.hypot(latest['truth'][1]-report['goal'][0],latest['truth'][2]-report['goal'][1]) < .25
++            report['checks']['reached_goal_heading'] = abs(math.atan2(math.sin(latest['truth'][3]-report['goal'][2]),math.cos(latest['truth'][3]-report['goal'][2]))) < .3
+         if a.case == 'detour' and inserted_at is not None:
+             before = [p for p in paths if p['wall_s'] < inserted_at]
+             after = [p for p in paths if p['wall_s'] >= inserted_at]

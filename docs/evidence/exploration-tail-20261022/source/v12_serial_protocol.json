@@ -1,0 +1,48 @@
+{
+  "algorithm": "v12 target-specific frontier visibility, original legal observer clearance with actual Nav2 stopping-approach validation, geodesic regional representatives and open visit order",
+  "source_sha256": {
+    "ros2_ws/src/smartcar_slam/scripts/route_core.py": "83db1bda33baf75a85c8c1e6c80fce3f70d57fe4ad7a5233fd1dbd52d83033c8",
+    "ros2_ws/src/smartcar_slam/scripts/exploration_memory.py": "f6d726fb1bf679a4d9dfc2f6332a3c85b1fe138f852115bdbee60dde318971ef",
+    "ros2_ws/src/smartcar_slam/scripts/route_planner.py": "f9b436c5743b819f71b62be8bb911aabe4e525026e9c664efda5eba2fe6a6b83",
+    "ros2_ws/src/smartcar_slam/scripts/frontier_core.py": "ad4f28960339411b8506b91186fcbbaba365758dce4346f1c0bbf34828e2286f",
+    "ros2_ws/src/smartcar_slam/scripts/explore.py": "5a351f89f2c0cf6b8c2ef6bd16d10183047a1d8bf3f24748e22d99acec9f75db"
+  },
+  "transit_clearance_m": 0.37,
+  "terminal_margin_m": null,
+  "position_tolerance_m": 0.15,
+  "linear_mps": 0.2,
+  "angular_rps": 0.35,
+  "sliding_mode_or_PI_changed": false,
+  "formal_runs": [
+    "final_v12_discovery_r1",
+    "final_v12_office",
+    "final_v12_discovery_r2"
+  ],
+  "development": [
+    "pilot_v7_discovery",
+    "after_discovery_r1 (v8)",
+    "after_office (v8, stopped before replacement)",
+    "final_v9_discovery_r1: two-hop ablation, full record retained; later v9 queue stops on source hash mismatch",
+    "final_v10_discovery_r1: actual matrices but candidate pool region imbalance; retained partial run",
+    "final_v10_discovery_r1: naturally VIEWPOINTS_EXHAUSTED_PARTIAL before late finish attempt; request unavailable and not sent",
+    "final_v10_office and final_v11_discovery_r1: overlapping owned simulations triggered unchanged protection; explicit finish/save, initial v11 attempt FAIL retained",
+    "final_v11_discovery_r1b: completed NO_OBSERVABLE_FRONTIERS_PARTIAL; target audit found 9/22 selected batches did not see assigned frontier; retained full before-fix trace"
+  ],
+  "comparison": "Report all failures and partial results; observable proxy and center-space coverage separated; performance against an earlier unsafe termination is not equivalent-task completion improvement.",
+  "fine_phase": "At most 8 representatives; safe-map geodesic regions of radius 3m before candidate budget allocation; directed actual Nav2 matrix and minimum open visit order. Geodesic distances only group regions; actual Nav2 paths determine order.",
+  "serial_validation": {
+    "mutex": "out/exploration-tail-20261022/simulation.lock",
+    "fresh_domains": [
+      197,
+      198,
+      199,
+      200,
+      201
+    ],
+    "requires_no_unfinished_previous_run": true,
+    "changes_to_protection": false
+  },
+  "observation_clearance_m": 0.4,
+  "stopping_approach": "All actual returned path samples within 0.15m position tolerance plus one map resolution must retain original 0.40m known-free observer clearance; recheck latest map before send. No Nav2 tolerance or protection parameter changed.",
+  "target_visibility": "Every candidate must directly observe unknown cells adjacent to its assigned frontier group; selected target cells and stopping segment rechecked before navigation; unique target cells never dropped by a global overlap ratio."
+}

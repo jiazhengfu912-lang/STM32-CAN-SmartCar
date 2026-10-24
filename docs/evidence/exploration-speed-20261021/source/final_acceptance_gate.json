@@ -1,0 +1,16 @@
+{
+  "version": "v4, declared before v4 runtime",
+  "scope": "Selected Gazebo worlds only; no physical vehicle claims",
+  "required_primary_pairs": 2,
+  "secondary_world": "office_loop",
+  "same_milestone": "95 percent observed reference reachable center-space, confirmed over 3 map updates",
+  "timing": "Mean primary simulation time to the same milestone must improve; all failed/partial outcomes kept",
+  "map_final": {
+    "surface_distance_p95_max_m": 0.15,
+    "occupied_support_within_015m_min": 0.95,
+    "observed_fraction_min": 0.95,
+    "max_fraction_loss_vs_paired_before": 0.005
+  },
+  "safety": "All tested tasks must verify sustained stop and save; watchdog recovery cannot auto-resume; motion and sensor limits unchanged",
+  "complete": "Always report complete and reason separately; partial endings do not count as completed whole-map exploration"
+}

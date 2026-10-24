@@ -1,0 +1,24 @@
+[INFO] [1792421482.078913309] [amcl]: 
+	amcl lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792421482.083427481] [amcl]: Creating
+[INFO] [1792421485.463677980] [amcl]: Configuring
+[INFO] [1792421485.463750157] [amcl]: initTransforms
+[INFO] [1792421485.520635243] [amcl]: initPubSub
+[INFO] [1792421485.573218098] [amcl]: Subscribed to map topic.
+[INFO] [1792421485.609623011] [amcl]: Received a 239 X 200 map @ 0.050 m/pix
+[INFO] [1792421485.749724736] [amcl]: Activating
+[INFO] [1792421485.749768543] [amcl]: initialPoseReceived
+[INFO] [1792421485.749946063] [amcl]: Setting pose (0.548000): 0.000 0.000 0.000
+[INFO] [1792421485.750667205] [amcl]: Creating bond (amcl) to lifecycle manager.
+[INFO] [1792421485.889314898] [amcl]: createLaserObject
+[INFO] [1792421544.278550193] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792421544.278628361] [amcl]: Running Nav2 LifecycleNode rcl preshutdown (amcl)
+[INFO] [1792421544.278674949] [amcl]: Deactivating
+[INFO] [1792421544.278692186] [amcl]: Destroying bond (amcl) to lifecycle manager.
+[INFO] [1792421544.289174780] [amcl]: Cleaning up
+[WARN] [1792421544.306928049] [rcl_lifecycle]: No transition matching 4 found for current state cleaningup
+[WARN] [1792421544.306941339] [rcl_lifecycle]: No transition matching 4 found for current state cleaningup
+[ERROR] [1792421544.306948283] [amcl]: Unable to start transition 4 from current state cleaningup: Transition is not registered., at ./src/rcl_lifecycle.c:355
+[INFO] [1792421544.506820276] [amcl]: Destroying bond (amcl) to lifecycle manager.

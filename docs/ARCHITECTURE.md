@@ -1,5 +1,10 @@
 # V1 架构与接口
 
+> 本文主体保留早期 V1/v125 协议演进记录，不能当作当前 v131 全量接口规范。
+> 当前 IMU/里程计和相对坐标导航见 [ICM-42688-P](ICM42688_UPGRADE.md)、
+> [坐标导航](COORDINATE_NAVIGATION.md)。ROS 2 上下层分工、实际协议及接入缺口见
+> [ROS 2 实车对接](ROS2_HARDWARE_INTEGRATION.md)。版本以 `drive.h` 为准。
+
 ## 分工与硬件
 
 电脑浏览器 → 本机 Python 服务 → ESP32（HTTP 管理 + UDP 速度心跳）→ USART1 → STM32 HAL App → CAN1 → C610/M2006。

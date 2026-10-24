@@ -1,0 +1,13 @@
+# 自主探索叠加配置；基础slam.yaml及手动建图入口保持。
+# 重复走廊实测出现SLAM位置突跳；保留闭环，收紧候选一致性并抑制异常约束。
+# Humble 2.6.10支持HuberLoss：
+# https://github.com/SteveMacenski/slam_toolbox/blob/2.6.10/solvers/ceres_solver.cpp
+slam_toolbox:
+  ros__parameters:
+    ceres_loss_function: HuberLoss
+    do_loop_closing: true
+    loop_match_minimum_chain_size: 15
+    loop_match_maximum_variance_coarse: 0.5
+    loop_match_minimum_response_coarse: 0.5
+    # 同一扫描离线重放：错误闭环细响应0.734/0.724；提高要求，仍保留闭环功能。
+    loop_match_minimum_response_fine: 0.8

@@ -1,0 +1,21 @@
+........F..................................                              [100%]
+=================================== FAILURES ===================================
+______ test_wide_room_prefers_goal_margin_for_original_arrival_tolerance _______
+
+    def test_wide_room_prefers_goal_margin_for_original_arrival_tolerance():
+        """宽处优先更大停点余量，不放宽到达或碰撞容差。"""
+        g=np.zeros((120,120),dtype=np.int16);g[0,:]=g[-1,:]=g[:,0]=g[:,-1]=100;g[50:60,80:90]=-1
+        goals,_=select_frontiers(g,.05,(0.,0.),(3.,3.))
+        from frontier_core import dilate
+        safe=(g==0)&~dilate(g!=0,.37/.05)
+        assert goals
+        for goal in goals:
+            for angle in np.linspace(0,2*np.pi,48):
+                x=int((goal['x']+.15*np.cos(angle))/.05);y=int((goal['y']+.15*np.sin(angle))/.05)
+>               assert safe[y,x]
+E               assert False
+
+ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py:123: AssertionError
+=========================== short test summary info ============================
+FAILED ros2_ws/src/smartcar_slam/tests/test_exploration_routes.py::test_wide_room_prefers_goal_margin_for_original_arrival_tolerance
+1 failed, 42 passed in 1.84s

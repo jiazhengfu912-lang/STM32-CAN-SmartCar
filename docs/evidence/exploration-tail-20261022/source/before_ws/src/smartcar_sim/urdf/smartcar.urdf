@@ -1,0 +1,664 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="smartcar">
+  <link name="base_footprint" />
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint" />
+    <child link="base_link" />
+    <origin xyz="0 0 0.0325" rpy="0 0 0" />
+  </joint>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.06 0 0.07" />
+      <mass value="3.0" />
+      <inertia ixx="0.0185" iyy="0.0208" izz="0.0265" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="base_link_visual_0">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/01_main_chassis.stl" />
+      </geometry>
+      <material name="base_link_color_0">
+        <color rgba="0.08 0.35 0.42 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_1">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/right_m2006_bracket.stl" />
+      </geometry>
+      <material name="base_link_color_1">
+        <color rgba="0.8 0.32 0.06 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_2">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/left_m2006_bracket.stl" />
+      </geometry>
+      <material name="base_link_color_2">
+        <color rgba="0.8 0.32 0.06 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_3">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/battery_rear_stop.stl" />
+      </geometry>
+      <material name="base_link_color_3">
+        <color rgba="0.8 0.32 0.06 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_4">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/battery_front_stop.stl" />
+      </geometry>
+      <material name="base_link_color_4">
+        <color rgba="0.8 0.32 0.06 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_5">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/upper_existing_power_box_v6_tray.stl" />
+      </geometry>
+      <material name="base_link_color_5">
+        <color rgba="0.75 0.75 0.78 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_6">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/upper_existing_power_box_v6_lid.stl" />
+      </geometry>
+      <material name="base_link_color_6">
+        <color rgba="0.75 0.75 0.78 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_7">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/02_upper_electronics_deck.stl" />
+      </geometry>
+      <material name="base_link_color_7">
+        <color rgba="0.4 0.56 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_8">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/03_lidar_adapter_plate.stl" />
+      </geometry>
+      <material name="base_link_color_8">
+        <color rgba="0.8 0.32 0.06 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_9">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://smartcar_sim/models/smartcar/meshes/upper_front_camera_adapter.stl" />
+      </geometry>
+      <material name="base_link_color_9">
+        <color rgba="0.8 0.32 0.06 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_10">
+      <origin xyz="0.047 -0 0.0535" rpy="0 0 0" />
+      <geometry>
+        <box size="0.13 0.073 0.044" />
+      </geometry>
+      <material name="base_link_color_10">
+        <color rgba="0.08 0.18 0.45 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_11">
+      <origin xyz="0.0925 0.07 0.1205" rpy="0 0 0" />
+      <geometry>
+        <box size="0.085 0.056 0.03" />
+      </geometry>
+      <material name="base_link_color_11">
+        <color rgba="0.07 0.35 0.16 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_12">
+      <origin xyz="0.093 -0 0.1135" rpy="0 0 0" />
+      <geometry>
+        <box size="0.05 0.05 0.016" />
+      </geometry>
+      <material name="base_link_color_12">
+        <color rgba="0.07 0.35 0.16 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_13">
+      <origin xyz="0.1105 -0.078 0.1115" rpy="0 0 0" />
+      <geometry>
+        <box size="0.055 0.03 0.012" />
+      </geometry>
+      <material name="base_link_color_13">
+        <color rgba="0.08 0.16 0.5 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_14">
+      <origin xyz="0.097 0.0855 0.0415" rpy="0 0 0" />
+      <geometry>
+        <box size="0.05 0.035 0.02" />
+      </geometry>
+      <material name="base_link_color_14">
+        <color rgba="0.08 0.09 0.1 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_15">
+      <origin xyz="0.097 -0.0855 0.0415" rpy="0 0 0" />
+      <geometry>
+        <box size="0.05 0.035 0.02" />
+      </geometry>
+      <material name="base_link_color_15">
+        <color rgba="0.08 0.09 0.1 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_16">
+      <origin xyz="-0.022 0.095 0.064" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.065" />
+      </geometry>
+      <material name="base_link_color_16">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_17">
+      <origin xyz="0.172 0.095 0.064" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.065" />
+      </geometry>
+      <material name="base_link_color_17">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_18">
+      <origin xyz="-0.022 -0.095 0.064" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.065" />
+      </geometry>
+      <material name="base_link_color_18">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_19">
+      <origin xyz="0.172 -0.095 0.064" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.065" />
+      </geometry>
+      <material name="base_link_color_19">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_20">
+      <origin xyz="0.063 0.03 0.1255" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.05" />
+      </geometry>
+      <material name="base_link_color_20">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_21">
+      <origin xyz="0.123 0.03 0.1255" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.05" />
+      </geometry>
+      <material name="base_link_color_21">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_22">
+      <origin xyz="0.063 -0.03 0.1255" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.05" />
+      </geometry>
+      <material name="base_link_color_22">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_23">
+      <origin xyz="0.123 -0.03 0.1255" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.05" />
+      </geometry>
+      <material name="base_link_color_23">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_24">
+      <origin xyz="0 0.08 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.0122" length="0.0478" />
+      </geometry>
+      <material name="base_link_color_24">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_25">
+      <origin xyz="0 -0.08 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.0122" length="0.0478" />
+      </geometry>
+      <material name="base_link_color_25">
+        <color rgba="0.55 0.58 0.6 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_26">
+      <origin xyz="0.009 0 0.077" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.0855 0.0015" />
+      </geometry>
+      <material name="base_link_color_26">
+        <color rgba="0.04 0.04 0.04 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_27">
+      <origin xyz="0.009 0.042 0.05175" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.0015 0.0525" />
+      </geometry>
+      <material name="base_link_color_27">
+        <color rgba="0.04 0.04 0.04 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_28">
+      <origin xyz="0.009 -0.042 0.05175" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.0015 0.0525" />
+      </geometry>
+      <material name="base_link_color_28">
+        <color rgba="0.04 0.04 0.04 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_29">
+      <origin xyz="0.085 0 0.077" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.0855 0.0015" />
+      </geometry>
+      <material name="base_link_color_29">
+        <color rgba="0.04 0.04 0.04 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_30">
+      <origin xyz="0.085 0.042 0.05175" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.0015 0.0525" />
+      </geometry>
+      <material name="base_link_color_30">
+        <color rgba="0.04 0.04 0.04 1" />
+      </material>
+    </visual>
+    <visual name="base_link_visual_31">
+      <origin xyz="0.085 -0.042 0.05175" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.0015 0.0525" />
+      </geometry>
+      <material name="base_link_color_31">
+        <color rgba="0.04 0.04 0.04 1" />
+      </material>
+    </visual>
+    <collision name="base_link_collision_0">
+      <origin xyz="0.08 0 0.027" rpy="0 0 0" />
+      <geometry>
+        <box size="0.24 0.22 0.009" />
+      </geometry>
+    </collision>
+    <collision name="base_link_collision_1">
+      <origin xyz="0.08 0 0.0985" rpy="0 0 0" />
+      <geometry>
+        <box size="0.23 0.21 0.004" />
+      </geometry>
+    </collision>
+    <collision name="base_link_collision_2">
+      <origin xyz="0.047 0 0.0535" rpy="0 0 0" />
+      <geometry>
+        <box size="0.13 0.073 0.044" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_wheel_link">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.08" />
+      <inertia ixx="2.5985000000000003e-05" iyy="4.2250000000000004e-05" izz="2.5985000000000003e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="left_wheel_link_visual_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.0325" length="0.027" />
+      </geometry>
+      <material name="left_wheel_link_color_0">
+        <color rgba="0.035 0.035 0.04 1" />
+      </material>
+    </visual>
+    <visual name="left_wheel_link_visual_1">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.018" length="0.0274" />
+      </geometry>
+      <material name="left_wheel_link_color_1">
+        <color rgba="0.28 0.3 0.33 1" />
+      </material>
+    </visual>
+    <visual name="left_wheel_link_visual_2">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.045 0.0278 0.003" />
+      </geometry>
+      <material name="left_wheel_link_color_2">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision name="left_wheel_link_collision_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.0325" length="0.027" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="right_wheel_link">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.08" />
+      <inertia ixx="2.5985000000000003e-05" iyy="4.2250000000000004e-05" izz="2.5985000000000003e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="right_wheel_link_visual_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.0325" length="0.027" />
+      </geometry>
+      <material name="right_wheel_link_color_0">
+        <color rgba="0.035 0.035 0.04 1" />
+      </material>
+    </visual>
+    <visual name="right_wheel_link_visual_1">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.018" length="0.0274" />
+      </geometry>
+      <material name="right_wheel_link_color_1">
+        <color rgba="0.28 0.3 0.33 1" />
+      </material>
+    </visual>
+    <visual name="right_wheel_link_visual_2">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.045 0.0278 0.003" />
+      </geometry>
+      <material name="right_wheel_link_color_2">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision name="right_wheel_link_collision_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.0325" length="0.027" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_caster_swivel">
+    <inertial>
+      <origin xyz="0 0 -0.01" />
+      <mass value="0.02" />
+      <inertia ixx="4.166666666666667e-06" iyy="4.166666666666667e-06" izz="3e-06" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="left_caster_swivel_visual_0">
+      <origin xyz="0 0 0.004" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.011" length="0.012" />
+      </geometry>
+      <material name="left_caster_swivel_color_0">
+        <color rgba="0.5 0.52 0.54 1" />
+      </material>
+    </visual>
+    <visual name="left_caster_swivel_visual_1">
+      <origin xyz="-0.0085 -0.01325 -0.012" rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.0018 0.027" />
+      </geometry>
+      <material name="left_caster_swivel_color_1">
+        <color rgba="0.5 0.52 0.54 1" />
+      </material>
+    </visual>
+    <visual name="left_caster_swivel_visual_2">
+      <origin xyz="-0.0085 0.01325 -0.012" rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.0018 0.027" />
+      </geometry>
+      <material name="left_caster_swivel_color_2">
+        <color rgba="0.5 0.52 0.54 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="left_caster_wheel">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.04" />
+      <inertia ixx="5.687499999999999e-06" iyy="8.000000000000001e-06" izz="5.687499999999999e-06" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="left_caster_wheel_visual_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.02" length="0.0225" />
+      </geometry>
+      <material name="left_caster_wheel_color_0">
+        <color rgba="0.2 0.2 0.22 1" />
+      </material>
+    </visual>
+    <collision name="left_caster_wheel_collision_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.02" length="0.0225" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="right_caster_swivel">
+    <inertial>
+      <origin xyz="0 0 -0.01" />
+      <mass value="0.02" />
+      <inertia ixx="4.166666666666667e-06" iyy="4.166666666666667e-06" izz="3e-06" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="right_caster_swivel_visual_0">
+      <origin xyz="0 0 0.004" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.011" length="0.012" />
+      </geometry>
+      <material name="right_caster_swivel_color_0">
+        <color rgba="0.5 0.52 0.54 1" />
+      </material>
+    </visual>
+    <visual name="right_caster_swivel_visual_1">
+      <origin xyz="-0.0085 -0.01325 -0.012" rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.0018 0.027" />
+      </geometry>
+      <material name="right_caster_swivel_color_1">
+        <color rgba="0.5 0.52 0.54 1" />
+      </material>
+    </visual>
+    <visual name="right_caster_swivel_visual_2">
+      <origin xyz="-0.0085 0.01325 -0.012" rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.0018 0.027" />
+      </geometry>
+      <material name="right_caster_swivel_color_2">
+        <color rgba="0.5 0.52 0.54 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="right_caster_wheel">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.04" />
+      <inertia ixx="5.687499999999999e-06" iyy="8.000000000000001e-06" izz="5.687499999999999e-06" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="right_caster_wheel_visual_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.02" length="0.0225" />
+      </geometry>
+      <material name="right_caster_wheel_color_0">
+        <color rgba="0.2 0.2 0.22 1" />
+      </material>
+    </visual>
+    <collision name="right_caster_wheel_collision_0">
+      <origin xyz="0 0 0" rpy="1.570796327 0 0" />
+      <geometry>
+        <cylinder radius="0.02" length="0.0225" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="lidar_link">
+    <inertial>
+      <origin xyz="0 0 0.0225" />
+      <mass value="0.11" />
+      <inertia ixx="5.156249999999999e-05" iyy="5.156249999999999e-05" izz="6.599999999999999e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="lidar_link_visual_0">
+      <origin xyz="0 0 0.0225" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.045" />
+      </geometry>
+      <material name="lidar_link_color_0">
+        <color rgba="0.09 0.1 0.11 1" />
+      </material>
+    </visual>
+    <collision name="lidar_link_collision_0">
+      <origin xyz="0 0 0.0225" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.06 0.045" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="laser_frame" />
+  <link name="camera_link">
+    <inertial>
+      <origin xyz="-0.0145 0 0" />
+      <mass value="0.08" />
+      <inertia ixx="2.3126666666666667e-05" iyy="1.7666666666666668e-05" izz="1.3793333333333334e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="camera_link_visual_0">
+      <origin xyz="-0.0145 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.011 0.036 0.036" />
+      </geometry>
+      <material name="camera_link_color_0">
+        <color rgba="0.06 0.07 0.08 1" />
+      </material>
+    </visual>
+    <visual name="camera_link_visual_1">
+      <origin xyz="-0.0045 0 0" rpy="0 1.570796327 0" />
+      <geometry>
+        <cylinder radius="0.009" length="0.009" />
+      </geometry>
+      <material name="camera_link_color_1">
+        <color rgba="0.18 0.25 0.3 1" />
+      </material>
+    </visual>
+    <visual name="camera_link_visual_2">
+      <origin xyz="-0.014 0 -0.02625" rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.038 0.0015" />
+      </geometry>
+      <material name="camera_link_color_2">
+        <color rgba="0.3 0.32 0.34 1" />
+      </material>
+    </visual>
+    <visual name="camera_link_visual_3">
+      <origin xyz="-0.014 -0.018 -0.009" rpy="0 0 0" />
+      <geometry>
+        <box size="0.01 0.002 0.033" />
+      </geometry>
+      <material name="camera_link_color_3">
+        <color rgba="0.3 0.32 0.34 1" />
+      </material>
+    </visual>
+    <visual name="camera_link_visual_4">
+      <origin xyz="-0.014 0.018 -0.009" rpy="0 0 0" />
+      <geometry>
+        <box size="0.01 0.002 0.033" />
+      </geometry>
+      <material name="camera_link_color_4">
+        <color rgba="0.3 0.32 0.34 1" />
+      </material>
+    </visual>
+    <collision name="camera_link_collision_0">
+      <origin xyz="-0.0125 0 -0.0045" rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.038 0.045" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="camera_optical_frame" />
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="left_wheel_link" />
+    <origin xyz="0 0.126 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="5" velocity="20" />
+    <dynamics damping="0.001" friction="0" />
+  </joint>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="right_wheel_link" />
+    <origin xyz="0 -0.126 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="5" velocity="20" />
+    <dynamics damping="0.001" friction="0" />
+  </joint>
+  <joint name="left_caster_swivel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="left_caster_swivel" />
+    <origin xyz="0.17 0.078 0.0125" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit effort="5" velocity="20" />
+    <dynamics damping="0.0005" friction="0" />
+  </joint>
+  <joint name="left_caster_roll_joint" type="continuous">
+    <parent link="left_caster_swivel" />
+    <child link="left_caster_wheel" />
+    <origin xyz="-0.017 0 -0.025" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="5" velocity="20" />
+    <dynamics damping="0.0001" friction="0" />
+  </joint>
+  <joint name="right_caster_swivel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="right_caster_swivel" />
+    <origin xyz="0.17 -0.078 0.0125" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit effort="5" velocity="20" />
+    <dynamics damping="0.0005" friction="0" />
+  </joint>
+  <joint name="right_caster_roll_joint" type="continuous">
+    <parent link="right_caster_swivel" />
+    <child link="right_caster_wheel" />
+    <origin xyz="-0.017 0 -0.025" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="5" velocity="20" />
+    <dynamics damping="0.0001" friction="0" />
+  </joint>
+  <joint name="lidar_mount_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="lidar_link" />
+    <origin xyz="0.093 0 0.1545" rpy="0 0 0" />
+  </joint>
+  <joint name="laser_frame_joint" type="fixed">
+    <parent link="lidar_link" />
+    <child link="laser_frame" />
+    <origin xyz="0 0 0.033" rpy="0 0 0" />
+  </joint>
+  <joint name="camera_mount_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera_link" />
+    <origin xyz="0.197 0 0.1335" rpy="0 0 0" />
+  </joint>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link" />
+    <child link="camera_optical_frame" />
+    <origin xyz="0 0 0" rpy="-1.570796327 0 -1.570796327" />
+  </joint>
+</robot>

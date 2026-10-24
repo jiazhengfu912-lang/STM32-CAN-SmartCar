@@ -1,0 +1,220 @@
+[INFO] [1792421824.279750385] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792421824.333049154] [controller_server]: Creating controller server
+[INFO] [1792421824.556451788] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792421824.557034081] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792421824.562234717] [local_costmap.local_costmap]: Destroying
+[INFO] [1792421824.743285274] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792421824.743658451] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1792421830.621160508] [controller_server]: Configuring controller interface
+[INFO] [1792421830.623467515] [controller_server]: getting goal checker plugins..
+[INFO] [1792421830.626421013] [controller_server]: Controller frequency set to 10.0000Hz
+[INFO] [1792421830.626467467] [local_costmap.local_costmap]: Configuring
+[INFO] [1792421830.669482939] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792421830.679022097] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1792421830.698300737] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792421830.698327068] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1792421830.704923572] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792421830.792465867] [local_costmap.local_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792421830.792942792] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1792421830.795057080] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1792421830.797586159] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1792421830.798241610] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[INFO] [1792421830.806609305] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[INFO] [1792421830.809567675] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[INFO] [1792421830.809592258] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[INFO] [1792421830.812706388] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[INFO] [1792421830.812733585] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[INFO] [1792421830.814238286] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[INFO] [1792421830.814262709] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[INFO] [1792421830.815800458] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.400000 angular threshold.
+[INFO] [1792421830.815822227] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[INFO] [1792421830.815908370] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 14.000000 weight
+[INFO] [1792421830.815914975] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[INFO] [1792421830.815960408] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[INFO] [1792421830.816019748] [controller_server]: PathAngleCritic instantiated with 1 power and 2.000000 weight. Reversing not allowed.
+[INFO] [1792421830.816025167] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[INFO] [1792421830.816077285] [controller_server]: PreferForwardCritic instantiated with 1 power and 5.000000 weight.
+[INFO] [1792421830.816083359] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[INFO] [1792421830.817125248] [controller_server]: Optimizer reset
+[INFO] [1792421830.836464051] [MPPIController]: Configured MPPI Controller: FollowPath
+[INFO] [1792421830.837364555] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1792421831.939922488] [controller_server]: Activating
+[INFO] [1792421831.939951962] [local_costmap.local_costmap]: Activating
+[INFO] [1792421831.939962472] [local_costmap.local_costmap]: Checking transform
+[INFO] [1792421831.940110524] [local_costmap.local_costmap]: start
+[WARN] [1792421832.146967944] [controller_server]: Parameter controller_server.verbose not found
+[INFO] [1792421832.148296504] [controller_server]: Optimizer reset
+[INFO] [1792421832.148697840] [MPPIController]: Activated MPPI Controller: FollowPath
+[INFO] [1792421832.148716038] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1792421834.831043818] [controller_server]: Received FollowPath goal with checked TF completion
+[WARN] [1792421834.832324428] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[INFO] [1792421834.836908546] [controller_server]: Optimizer reset
+[INFO] [1792421835.935163127] [controller_server]: Passing new path to controller.
+[INFO] [1792421837.040810263] [controller_server]: Passing new path to controller.
+[INFO] [1792421838.134763410] [controller_server]: Passing new path to controller.
+[INFO] [1792421839.235895276] [controller_server]: Passing new path to controller.
+[INFO] [1792421840.336102036] [controller_server]: Passing new path to controller.
+[INFO] [1792421841.534697671] [controller_server]: Passing new path to controller.
+[INFO] [1792421842.634713620] [controller_server]: Passing new path to controller.
+[INFO] [1792421843.735139688] [controller_server]: Passing new path to controller.
+[INFO] [1792421844.835125614] [controller_server]: Passing new path to controller.
+[INFO] [1792421845.941968576] [controller_server]: Passing new path to controller.
+[INFO] [1792421847.035266065] [controller_server]: Passing new path to controller.
+[INFO] [1792421848.237823636] [controller_server]: Passing new path to controller.
+[INFO] [1792421849.334709018] [controller_server]: Passing new path to controller.
+[INFO] [1792421850.434706019] [controller_server]: Passing new path to controller.
+[INFO] [1792421851.634856868] [controller_server]: Passing new path to controller.
+[INFO] [1792421852.635029708] [controller_server]: Passing new path to controller.
+[INFO] [1792421853.837290165] [controller_server]: Passing new path to controller.
+[INFO] [1792421854.935817425] [controller_server]: Passing new path to controller.
+[INFO] [1792421856.134904319] [controller_server]: Passing new path to controller.
+[INFO] [1792421857.236000841] [controller_server]: Passing new path to controller.
+[INFO] [1792421858.334838709] [controller_server]: Passing new path to controller.
+[INFO] [1792421859.535082358] [controller_server]: Passing new path to controller.
+[INFO] [1792421860.540024649] [controller_server]: Passing new path to controller.
+[INFO] [1792421861.734703253] [controller_server]: Passing new path to controller.
+[INFO] [1792421862.839277781] [controller_server]: Passing new path to controller.
+[INFO] [1792421863.941291665] [controller_server]: Passing new path to controller.
+[INFO] [1792421865.034692971] [controller_server]: Passing new path to controller.
+[INFO] [1792421866.136115935] [controller_server]: Passing new path to controller.
+[INFO] [1792421867.238861078] [controller_server]: Passing new path to controller.
+[INFO] [1792421868.334837086] [controller_server]: Passing new path to controller.
+[INFO] [1792421869.534926550] [controller_server]: Passing new path to controller.
+[INFO] [1792421870.638028652] [controller_server]: Passing new path to controller.
+[INFO] [1792421871.735367109] [controller_server]: Passing new path to controller.
+[INFO] [1792421872.934919081] [controller_server]: Passing new path to controller.
+[INFO] [1792421874.034930173] [controller_server]: Passing new path to controller.
+[INFO] [1792421875.134832581] [controller_server]: Passing new path to controller.
+[INFO] [1792421876.234695930] [controller_server]: Passing new path to controller.
+[INFO] [1792421877.434875898] [controller_server]: Passing new path to controller.
+[INFO] [1792421878.535105080] [controller_server]: Passing new path to controller.
+[INFO] [1792421879.737855709] [controller_server]: Passing new path to controller.
+[INFO] [1792421880.834705473] [controller_server]: Passing new path to controller.
+[INFO] [1792421881.934704363] [controller_server]: Passing new path to controller.
+[INFO] [1792421883.035036614] [controller_server]: Passing new path to controller.
+[INFO] [1792421884.234951675] [controller_server]: Passing new path to controller.
+[INFO] [1792421885.235414149] [controller_server]: Passing new path to controller.
+[INFO] [1792421886.334787790] [controller_server]: Passing new path to controller.
+[INFO] [1792421887.435658735] [controller_server]: Passing new path to controller.
+[INFO] [1792421888.534732567] [controller_server]: Passing new path to controller.
+[INFO] [1792421889.734699152] [controller_server]: Passing new path to controller.
+[INFO] [1792421890.835290216] [controller_server]: Passing new path to controller.
+[INFO] [1792421891.935372710] [controller_server]: Passing new path to controller.
+[INFO] [1792421893.034738878] [controller_server]: Passing new path to controller.
+[INFO] [1792421894.136109747] [controller_server]: Passing new path to controller.
+[INFO] [1792421895.234802208] [controller_server]: Passing new path to controller.
+[INFO] [1792421896.335412646] [controller_server]: Passing new path to controller.
+[INFO] [1792421897.534851765] [controller_server]: Passing new path to controller.
+[INFO] [1792421898.534702535] [controller_server]: Passing new path to controller.
+[INFO] [1792421899.634978417] [controller_server]: Passing new path to controller.
+[INFO] [1792421900.735240814] [controller_server]: Passing new path to controller.
+[INFO] [1792421901.835257884] [controller_server]: Passing new path to controller.
+[INFO] [1792421903.035736961] [controller_server]: Passing new path to controller.
+[INFO] [1792421904.134691816] [controller_server]: Passing new path to controller.
+[INFO] [1792421905.235347542] [controller_server]: Passing new path to controller.
+[INFO] [1792421906.434700098] [controller_server]: Passing new path to controller.
+[INFO] [1792421907.434693556] [controller_server]: Passing new path to controller.
+[INFO] [1792421908.636802370] [controller_server]: Passing new path to controller.
+[INFO] [1792421909.843744101] [controller_server]: Passing new path to controller.
+[INFO] [1792421910.935407611] [controller_server]: Passing new path to controller.
+[INFO] [1792421912.041994507] [controller_server]: Passing new path to controller.
+[INFO] [1792421913.135897458] [controller_server]: Passing new path to controller.
+[INFO] [1792421914.334716412] [controller_server]: Passing new path to controller.
+[INFO] [1792421915.435797875] [controller_server]: Passing new path to controller.
+[INFO] [1792421916.434695237] [controller_server]: Passing new path to controller.
+[INFO] [1792421917.535538397] [controller_server]: Passing new path to controller.
+[INFO] [1792421918.634987929] [controller_server]: Passing new path to controller.
+[INFO] [1792421919.735782246] [controller_server]: Passing new path to controller.
+[INFO] [1792421920.935055420] [controller_server]: Passing new path to controller.
+[INFO] [1792421922.035106937] [controller_server]: Passing new path to controller.
+[INFO] [1792421923.136243818] [controller_server]: Passing new path to controller.
+[INFO] [1792421924.234792090] [controller_server]: Passing new path to controller.
+[INFO] [1792421925.234878183] [controller_server]: Passing new path to controller.
+[INFO] [1792421926.335084168] [controller_server]: Passing new path to controller.
+[INFO] [1792421927.435439844] [controller_server]: Passing new path to controller.
+[INFO] [1792421928.536002181] [controller_server]: Passing new path to controller.
+[INFO] [1792421929.734868383] [controller_server]: Passing new path to controller.
+[INFO] [1792421930.835034765] [controller_server]: Passing new path to controller.
+[INFO] [1792421931.836780925] [controller_server]: Passing new path to controller.
+[INFO] [1792421933.035464526] [controller_server]: Passing new path to controller.
+[INFO] [1792421934.135187663] [controller_server]: Passing new path to controller.
+[INFO] [1792421935.340025819] [controller_server]: Passing new path to controller.
+[INFO] [1792421936.440052866] [controller_server]: Passing new path to controller.
+[INFO] [1792421937.534929968] [controller_server]: Passing new path to controller.
+[INFO] [1792421938.642761182] [controller_server]: Passing new path to controller.
+[INFO] [1792421939.834693623] [controller_server]: Passing new path to controller.
+[INFO] [1792421940.938688874] [controller_server]: Passing new path to controller.
+[INFO] [1792421942.134720032] [controller_server]: Passing new path to controller.
+[INFO] [1792421943.234818550] [controller_server]: Passing new path to controller.
+[INFO] [1792421944.334945646] [controller_server]: Passing new path to controller.
+[INFO] [1792421945.434717261] [controller_server]: Passing new path to controller.
+[INFO] [1792421946.444747847] [controller_server]: Passing new path to controller.
+[INFO] [1792421947.544748418] [controller_server]: Passing new path to controller.
+[INFO] [1792421948.635162024] [controller_server]: Passing new path to controller.
+[INFO] [1792421949.836989373] [controller_server]: Passing new path to controller.
+[INFO] [1792421950.834694037] [controller_server]: Passing new path to controller.
+[INFO] [1792421952.036342888] [controller_server]: Passing new path to controller.
+[INFO] [1792421953.135110488] [controller_server]: Passing new path to controller.
+[INFO] [1792421954.235333040] [controller_server]: Passing new path to controller.
+[INFO] [1792421955.335818510] [controller_server]: Passing new path to controller.
+[INFO] [1792421956.448866268] [controller_server]: Passing new path to controller.
+[INFO] [1792421957.535577540] [controller_server]: Passing new path to controller.
+[INFO] [1792421958.638113404] [controller_server]: Passing new path to controller.
+[INFO] [1792421959.834961192] [controller_server]: Passing new path to controller.
+[INFO] [1792421960.835256476] [controller_server]: Passing new path to controller.
+[INFO] [1792421961.936154785] [controller_server]: Passing new path to controller.
+[INFO] [1792421963.146598663] [controller_server]: Passing new path to controller.
+[INFO] [1792421964.234712399] [controller_server]: Passing new path to controller.
+[INFO] [1792421965.335221485] [controller_server]: Passing new path to controller.
+[INFO] [1792421966.439507952] [controller_server]: Passing new path to controller.
+[INFO] [1792421967.534738506] [controller_server]: Passing new path to controller.
+[INFO] [1792421968.637301603] [controller_server]: Passing new path to controller.
+[INFO] [1792421969.734747480] [controller_server]: Passing new path to controller.
+[INFO] [1792421970.937001487] [controller_server]: Passing new path to controller.
+[INFO] [1792421971.935207115] [controller_server]: Passing new path to controller.
+[INFO] [1792421973.141472587] [controller_server]: Passing new path to controller.
+[INFO] [1792421974.136107896] [controller_server]: Passing new path to controller.
+[WARN] [1792421974.743736788] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792421974.837253147] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792421975.337444810] [controller_server]: Passing new path to controller.
+[INFO] [1792421976.538825778] [controller_server]: Passing new path to controller.
+[WARN] [1792421977.553134549] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792421977.553243749] [controller_server]: Passing new path to controller.
+[WARN] [1792421977.667307836] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792421977.779129862] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792421977.916321879] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792421978.018784708] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792421978.126751330] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[WARN] [1792421978.182281760] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[INFO] [1792421978.735637414] [controller_server]: Passing new path to controller.
+[INFO] [1792421979.839332014] [controller_server]: Passing new path to controller.
+[INFO] [1792421981.034752286] [controller_server]: Passing new path to controller.
+[INFO] [1792421982.138514583] [controller_server]: Passing new path to controller.
+[INFO] [1792421983.335725994] [controller_server]: Passing new path to controller.
+[INFO] [1792421984.434720672] [controller_server]: Passing new path to controller.
+[INFO] [1792421985.544010089] [controller_server]: Passing new path to controller.
+[INFO] [1792421986.634736162] [controller_server]: Passing new path to controller.
+[INFO] [1792421987.634695549] [controller_server]: Passing new path to controller.
+[INFO] [1792421988.735535113] [controller_server]: Passing new path to controller.
+[INFO] [1792421989.934811114] [controller_server]: Passing new path to controller.
+[INFO] [1792421991.143036196] [controller_server]: Passing new path to controller.
+[INFO] [1792421991.949141774] [controller_server]: Reached goal with valid TF
+[INFO] [1792421994.216490861] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792421994.216561496] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1792421994.216614117] [controller_server]: Deactivating
+[INFO] [1792421994.216683082] [MPPIController]: Deactivated MPPI Controller: FollowPath
+[INFO] [1792421994.216699980] [local_costmap.local_costmap]: Deactivating
+[INFO] [1792421994.352381522] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1792421994.367519050] [controller_server]: Cleaning up
+[INFO] [1792421994.367597138] [MPPIController]: Cleaned up MPPI Controller: FollowPath
+[INFO] [1792421994.447969115] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1792421994.691328640] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

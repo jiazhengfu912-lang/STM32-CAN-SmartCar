@@ -1,0 +1,126 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found slam_toolbox: 2.6.10 (/opt/ros/humble/share/slam_toolbox/cmake)
+-- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.4 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+-- Found Eigen3: TRUE (found version "3.4.0") 
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Setting assimp_DIR to: '/opt/ros/humble/share/rviz_assimp_vendor/cmake/../../../opt/rviz_assimp_vendor/lib/cmake/assimp-4.1'
+-- Setting OGRE_DIR to: '/opt/ros/humble/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+-- Found OGRE
+--   static     : OFF
+--   components : HLMS;MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+--   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+--   media      : /opt/ros/humble/opt/rviz_ogre_vendor/share/OGRE/Media
+-- OGRE_LIBRARIES: OgreHLMS;OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+-- OGRE_LIBRARY_DIRS: /opt/ros/humble/opt/rviz_ogre_vendor/lib
+-- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+-- OGRE_PLUGIN_DIR: /opt/ros/humble/opt/rviz_ogre_vendor/lib/OGRE
+-- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+-- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+-- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+-- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+-- Could not find freeimage library
+-- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.11") 
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+-- Found X11: /usr/include   
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: serialization 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jiazhengfu/Projects/STM32-CAN-SmartCar/out/exploration-speed-20261021/replay_build
+[ 50%] Building CXX object CMakeFiles/replay.dir/replay.cpp.o
+[100%] Linking CXX executable replay
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `main':
+replay.cpp:(.text+0x2e2): undefined reference to `typeinfo for karto::Sensor'
+/usr/bin/ld: replay.cpp:(.text+0x2e9): undefined reference to `typeinfo for karto::Object'
+/usr/bin/ld: replay.cpp:(.text+0x30e): undefined reference to `karto::SensorManager::GetInstance()'
+/usr/bin/ld: replay.cpp:(.text+0x57c): undefined reference to `mapper_utils::SMapper::SMapper()'
+/usr/bin/ld: replay.cpp:(.text+0x595): undefined reference to `mapper_utils::SMapper::configure(std::shared_ptr<rclcpp::Node> const&)'
+/usr/bin/ld: replay.cpp:(.text+0x5a4): undefined reference to `mapper_utils::SMapper::getMapper()'
+/usr/bin/ld: replay.cpp:(.text+0x5cc): undefined reference to `karto::Mapper::SetScanSolver(karto::ScanSolver*)'
+/usr/bin/ld: replay.cpp:(.text+0x682): undefined reference to `karto::Mapper::AddListener(karto::MapperListener*)'
+/usr/bin/ld: replay.cpp:(.text+0x7bd): undefined reference to `typeinfo for karto::Object'
+/usr/bin/ld: replay.cpp:(.text+0xc1e): undefined reference to `mapper_utils::SMapper::getOccupancyGrid(double const&)'
+/usr/bin/ld: replay.cpp:(.text+0xec1): undefined reference to `karto::Mapper::RemoveListener(karto::MapperListener*)'
+/usr/bin/ld: replay.cpp:(.text+0xf8b): undefined reference to `mapper_utils::SMapper::~SMapper()'
+/usr/bin/ld: replay.cpp:(.text+0x129b): undefined reference to `mapper_utils::SMapper::~SMapper()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `tbb::detail::d1::execution_slot(tbb::detail::d1::execution_data const&)':
+replay.cpp:(.text._ZN3tbb6detail2d114execution_slotERKNS1_14execution_dataE[_ZN3tbb6detail2d114execution_slotERKNS1_14execution_dataE]+0x18): undefined reference to `tbb::detail::r1::execution_slot(tbb::detail::d1::execution_data const*)'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `tbb::detail::d1::current_thread_index()':
+replay.cpp:(.text._ZN3tbb6detail2d120current_thread_indexEv[_ZN3tbb6detail2d120current_thread_indexEv]+0x12): undefined reference to `tbb::detail::r1::execution_slot(tbb::detail::d1::execution_data const*)'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::ParameterManager::~ParameterManager()':
+replay.cpp:(.text._ZN5karto16ParameterManagerD2Ev[_ZN5karto16ParameterManagerD5Ev]+0x2a): undefined reference to `karto::ParameterManager::Clear()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::AbstractParameter::AbstractParameter(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, karto::ParameterManager*)':
+replay.cpp:(.text._ZN5karto17AbstractParameterC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPNS_16ParameterManagerE[_ZN5karto17AbstractParameterC5ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPNS_16ParameterManagerE]+0x68): undefined reference to `karto::ParameterManager::Add(karto::AbstractParameter*)'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::AbstractParameter::AbstractParameter(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, karto::ParameterManager*)':
+replay.cpp:(.text._ZN5karto17AbstractParameterC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES8_PNS_16ParameterManagerE[_ZN5karto17AbstractParameterC5ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES8_PNS_16ParameterManagerE]+0x73): undefined reference to `karto::ParameterManager::Add(karto::AbstractParameter*)'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::LaserRangeScan::LaserRangeScan(karto::Name const&, std::vector<double, std::allocator<double> > const&)':
+replay.cpp:(.text._ZN5karto14LaserRangeScanC2ERKNS_4NameERKSt6vectorIdSaIdEE[_ZN5karto14LaserRangeScanC5ERKNS_4NameERKSt6vectorIdSaIdEE]+0x37): undefined reference to `karto::SensorData::SensorData(karto::Name const&)'
+/usr/bin/ld: replay.cpp:(.text._ZN5karto14LaserRangeScanC2ERKNS_4NameERKSt6vectorIdSaIdEE[_ZN5karto14LaserRangeScanC5ERKNS_4NameERKSt6vectorIdSaIdEE]+0x104): undefined reference to `karto::SensorData::~SensorData()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::LaserRangeScan::~LaserRangeScan()':
+replay.cpp:(.text._ZN5karto14LaserRangeScanD2Ev[_ZN5karto14LaserRangeScanD5Ev]+0x5c): undefined reference to `karto::SensorData::~SensorData()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::LaserRangeScan::GetLaserRangeFinder() const':
+replay.cpp:(.text._ZNK5karto14LaserRangeScan19GetLaserRangeFinderEv[_ZNK5karto14LaserRangeScan19GetLaserRangeFinderEv]+0x12): undefined reference to `karto::SensorManager::GetInstance()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::DatasetInfo::DatasetInfo()':
+replay.cpp:(.text._ZN5karto11DatasetInfoC2Ev[_ZN5karto11DatasetInfoC5Ev]+0x34): undefined reference to `karto::Object::Object()'
+/usr/bin/ld: replay.cpp:(.text._ZN5karto11DatasetInfoC2Ev[_ZN5karto11DatasetInfoC5Ev]+0x501): undefined reference to `karto::Object::~Object()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::DatasetInfo::~DatasetInfo()':
+replay.cpp:(.text._ZN5karto11DatasetInfoD2Ev[_ZN5karto11DatasetInfoD5Ev]+0x2a): undefined reference to `karto::Object::~Object()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::Dataset::Clear()':
+replay.cpp:(.text._ZN5karto7Dataset5ClearEv[_ZN5karto7Dataset5ClearEv]+0x37): undefined reference to `karto::SensorManager::GetInstance()'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::LaserRangeFinder* karto::SensorManager::GetSensorByName<karto::LaserRangeFinder>(karto::Name const&)':
+replay.cpp:(.text._ZN5karto13SensorManager15GetSensorByNameINS_16LaserRangeFinderEEEPT_RKNS_4NameE[_ZN5karto13SensorManager15GetSensorByNameINS_16LaserRangeFinderEEEPT_RKNS_4NameE]+0x3c): undefined reference to `typeinfo for karto::LaserRangeFinder'
+/usr/bin/ld: replay.cpp:(.text._ZN5karto13SensorManager15GetSensorByNameINS_16LaserRangeFinderEEEPT_RKNS_4NameE[_ZN5karto13SensorManager15GetSensorByNameINS_16LaserRangeFinderEEEPT_RKNS_4NameE]+0x43): undefined reference to `typeinfo for karto::Sensor'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `boost::serialization::extended_type_info_typeid<karto::Object>::extended_type_info_typeid()':
+replay.cpp:(.text._ZN5boost13serialization25extended_type_info_typeidIN5karto6ObjectEEC2Ev[_ZN5boost13serialization25extended_type_info_typeidIN5karto6ObjectEEC5Ev]+0x4a): undefined reference to `typeinfo for karto::Object'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `boost::serialization::extended_type_info_typeid<karto::Sensor>::extended_type_info_typeid()':
+replay.cpp:(.text._ZN5boost13serialization25extended_type_info_typeidIN5karto6SensorEEC2Ev[_ZN5boost13serialization25extended_type_info_typeidIN5karto6SensorEEC5Ev]+0x4a): undefined reference to `typeinfo for karto::Sensor'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o:(.data.rel.ro._ZTIN5karto11DatasetInfoE[_ZTIN5karto11DatasetInfoE]+0x10): undefined reference to `typeinfo for karto::Object'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o:(.data.rel.ro._ZTIN5karto14LaserRangeScanE[_ZTIN5karto14LaserRangeScanE]+0x10): undefined reference to `typeinfo for karto::SensorData'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::Object const* boost::serialization::smart_cast_impl::pointer<karto::Object const*>::polymorphic::cast<karto::NonCopyable const>(karto::NonCopyable const*)':
+replay.cpp:(.text._ZN5boost13serialization15smart_cast_impl7pointerIPKN5karto6ObjectEE11polymorphic4castIKNS3_11NonCopyableEEES6_PT_[_ZN5boost13serialization15smart_cast_impl7pointerIPKN5karto6ObjectEE11polymorphic4castIKNS3_11NonCopyableEEES6_PT_]+0x31): undefined reference to `typeinfo for karto::Object'
+/usr/bin/ld: CMakeFiles/replay.dir/replay.cpp.o: in function `karto::DatasetInfo const* boost::serialization::smart_cast_impl::pointer<karto::DatasetInfo const*>::polymorphic::cast<karto::Object const>(karto::Object const*)':
+replay.cpp:(.text._ZN5boost13serialization15smart_cast_impl7pointerIPKN5karto11DatasetInfoEE11polymorphic4castIKNS3_6ObjectEEES6_PT_[_ZN5boost13serialization15smart_cast_impl7pointerIPKN5karto11DatasetInfoEE11polymorphic4castIKNS3_6ObjectEEES6_PT_]+0x38): undefined reference to `typeinfo for karto::Object'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/replay.dir/build.make:314: replay] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/replay.dir/all] Error 2
+gmake: *** [Makefile:101: all] Error 2

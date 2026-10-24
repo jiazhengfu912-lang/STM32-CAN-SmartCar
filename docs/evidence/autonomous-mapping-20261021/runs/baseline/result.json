@@ -1,0 +1,73 @@
+{
+  "result": "PASS",
+  "case": "baseline",
+  "scope": "SIMULATION_ONLY",
+  "domain_id": 144,
+  "partition": "smartcar-explore-0207927b1cc348e88c893697c8945036",
+  "checks": {
+    "map_received": true,
+    "no_manual_movement": true,
+    "no_exploration_node": true
+  },
+  "source_sha256": {
+    "ros2_ws/src/smartcar_slam/scripts/explore.py": "9586ea73e2cff744f7a29df7a26c66834fc21bf122fc213c6bd856d071d6c5d4",
+    "ros2_ws/src/smartcar_slam/scripts/frontier_core.py": "b563dfc96f8a232fb0762a9254eeb8ebee0deab8f79402d2edd863db6410704a",
+    "ros2_ws/src/smartcar_nav2/launch/navigation.launch.py": "c1c55fdab55bbbc6011dc90273a83e4a8a7b380569d2a730a20a1f65b3214e0b",
+    "ros2_ws/src/smartcar_nav2/launch/exploration.launch.py": "a1a4809915122127c20b98edf16e719fcfd355d4ede27fc8fd03c1bf0ac06e3c",
+    "ros2_ws/src/smartcar_nav2/scripts/navigation_gate.py": "45d775c0ffc5ea0d93e41816aff1e0a4f7a3f0032dfa1a46bf755b14f6e0214b",
+    "ros2_ws/src/smartcar_nav2/scripts/gate_core.py": "20542c3de00e0d488ee7adbe00ee0d420fc0aa4483bfe0a6b55d38b0626a1356",
+    "ros2_ws/src/smartcar_nav2/config/nav2.yaml": "6a5816941d4122a3d1ba862ecbcd32d1b1af6013fddff4fef73d1035198cddb9",
+    "ros2_ws/src/smartcar_slam/config/slam.yaml": "46df8388b28828c643ee57df703d550bdc3a1683a15e7994076f0ccc6c3ad262",
+    "ros2_ws/tools/verify_exploration.py": "310466d585a54e15ecdb8409c91b40342f500f325c4d4e18fcf200e51ac06fc2"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_slam",
+    "mapping.launch.py",
+    "world:=office_loop",
+    "headless:=true",
+    "rviz:=false"
+  ],
+  "travel_m": 3.946756984829699e-10,
+  "map_initial": {
+    "wall_s": 4.555239869000047,
+    "known": 2107,
+    "free": 1948,
+    "occupied": 159,
+    "resolution": 0.05000000074505806,
+    "width": 238,
+    "height": 92
+  },
+  "map_final": {
+    "wall_s": 24.553979653000056,
+    "known": 2107,
+    "free": 1948,
+    "occupied": 159,
+    "resolution": 0.05000000074505806,
+    "width": 238,
+    "height": 92
+  },
+  "shutdown": {
+    "process_group": 14069,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "duration_wall_s": 24.789238096999952,
+  "raw_sha256": {
+    "launch.log": "e4551e2e8973135a4470b037381a44e5fda2c9889624bd56dac09e8b198eddfd",
+    "odom.csv": "9dec5988ba497de36d5e7c83f92e7850a9d189e202363d854aa8395963daae09",
+    "verifier_events.jsonl": "279812b7128299ea12eaca2d1fd23b0babfa33a1900a2d0eb413fded6c600d60",
+    "maps.csv": "9406a4946a250f766376d487929551820ea7b25a3fba32b1421e38292b5ea5f1",
+    "ros_logs/parameter_bridge_14074_1792581239183.log": "63621661a60c2b09c35c0ba22863790f2c17677747dab332331630c0d9dbc340",
+    "ros_logs/async_slam_toolbox_node_14080_1792581239114.log": "57f77927506097088e691f297028005a04ef984562e591b90582e8658f05d020",
+    "ros_logs/python3_14076_1792581239241.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/robot_state_publisher_14072_1792581239074.log": "648d9a475bd0bbf341bf9a7dee8127d54115c14dd5128977609e9dfe033e051e",
+    "ros_logs/python3_14044_1792581238686.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ros_logs/parameter_bridge_14078_1792581239190.log": "9b87dd7c40d28a6db759b9833e731dd79745e29343d6a1adff65ab9290218680",
+    "ros_logs/2026-10-21-19-13-58-952427-ubuntu2204-14069/launch.log": "bed32fc2e2d8a0f3cb9153d2f34d128d26f021dff1d4a935fd7094741b45a72f"
+  }
+}

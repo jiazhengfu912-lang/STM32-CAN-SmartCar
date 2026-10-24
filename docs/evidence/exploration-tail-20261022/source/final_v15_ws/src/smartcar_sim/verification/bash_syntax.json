@@ -1,0 +1,23 @@
+{
+  "scope": "BASH_SYNTAX_ONLY_USING_EXISTING_WSL_NOT_TARGET_ROS",
+  "checks": [
+    {
+      "script": "check_environment.bash",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。\r\n"
+    },
+    {
+      "script": "install_dependencies.bash",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。\r\n"
+    },
+    {
+      "script": "sim_env.bash",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。\r\n"
+    }
+  ]
+}

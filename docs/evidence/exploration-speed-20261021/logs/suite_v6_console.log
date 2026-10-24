@@ -1,0 +1,408 @@
+{
+  "status": "COMPLETE",
+  "pid": 58439,
+  "started_utc": "2026-10-22T03:18:55.258154+00:00",
+  "runs": [
+    {
+      "name": "after_discovery_r1",
+      "suffix": "v6-discovery-r1",
+      "returncode": 0,
+      "runtime_result": "PASS",
+      "folder": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-speed-20261021-v6-discovery-r1",
+      "metrics": {
+        "result": "PASS",
+        "reason": "NO_REACHABLE_FRONTIERS_PARTIAL",
+        "complete": false,
+        "stop_verified": true,
+        "goals": 8,
+        "succeeded": 7,
+        "navigation_failures": 1,
+        "travel_m": 30.856923884951055,
+        "angular_travel_rad": 35.134668079001436,
+        "idle_sim_s": 20.979000000000003,
+        "turn_only_sim_s": 48.791000000000054,
+        "duration_wall_s": 373.529688204002,
+        "end_sim_s": 266.251,
+        "observed_fraction_final": 0.9967629159652984,
+        "reference_area_m2": 38.61500000000001,
+        "milestones": {
+          "0.8": {
+            "sim_s": 33.89,
+            "wall_s": 50.160141644999385
+          },
+          "0.9": {
+            "sim_s": 122.209,
+            "wall_s": 170.1668173020007
+          },
+          "0.95": {
+            "sim_s": 123.76,
+            "wall_s": 172.19266300399977
+          }
+        },
+        "map_geometry_proxy": {
+          "occupied_cells": 2599,
+          "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+          "surface_distance_median_m": 0.0151541723166944,
+          "surface_distance_p95_m": 0.0651540560876371,
+          "occupied_support_fraction_within_015m": 1.0,
+          "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+        },
+        "milestone_map_geometry_proxy": {
+          "0.8": {
+            "occupied_cells": 1395,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.033745728323783905,
+            "surface_distance_p95_m": 0.05874574322494519,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.9": {
+            "occupied_cells": 1723,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.027350081872523455,
+            "surface_distance_p95_m": 0.055470998706937114,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.95": {
+            "occupied_cells": 1798,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.027350081872523455,
+            "surface_distance_p95_m": 0.055470998706937114,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          }
+        },
+        "passive_pose_diagnostics": {
+          "odom": {
+            "received_samples": 20749,
+            "missing_samples": 4,
+            "median_position_error_m": 0.924517901150588,
+            "p95_position_error_m": 2.58002160630613,
+            "max_position_error_m": 2.60964729349963,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          },
+          "slam": {
+            "received_samples": 20749,
+            "missing_samples": 42,
+            "median_position_error_m": 0.011035826010138758,
+            "p95_position_error_m": 0.028905563420757143,
+            "max_position_error_m": 0.03645348714744591,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          }
+        },
+        "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage"
+      },
+      "quality_gate": {
+        "coverage95_reached": true,
+        "final_coverage": true,
+        "map_p95": true,
+        "map_support": true,
+        "stopped_and_saved": true
+      }
+    },
+    {
+      "name": "after_discovery_r2",
+      "suffix": "v6-discovery-r2",
+      "returncode": 0,
+      "runtime_result": "PASS",
+      "folder": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-speed-20261021-v6-discovery-r2",
+      "metrics": {
+        "result": "PASS",
+        "reason": "NO_REACHABLE_FRONTIERS_PARTIAL",
+        "complete": false,
+        "stop_verified": true,
+        "goals": 12,
+        "succeeded": 12,
+        "navigation_failures": 0,
+        "travel_m": 54.0680075811877,
+        "angular_travel_rad": 55.79826365767531,
+        "idle_sim_s": 26.37300000000004,
+        "turn_only_sim_s": 62.39800000000009,
+        "duration_wall_s": 665.3252295130005,
+        "end_sim_s": 427.068,
+        "observed_fraction_final": 0.9967629159652984,
+        "reference_area_m2": 38.61500000000001,
+        "milestones": {
+          "0.8": {
+            "sim_s": 27.766,
+            "wall_s": 42.14580633500009
+          },
+          "0.9": {
+            "sim_s": 102.013,
+            "wall_s": 148.15443157700065
+          },
+          "0.95": {
+            "sim_s": 105.09,
+            "wall_s": 152.1683961100025
+          }
+        },
+        "map_geometry_proxy": {
+          "occupied_cells": 2559,
+          "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+          "surface_distance_median_m": 0.0140830832721182,
+          "surface_distance_p95_m": 0.06408308401717626,
+          "occupied_support_fraction_within_015m": 1.0,
+          "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+        },
+        "milestone_map_geometry_proxy": {
+          "0.8": {
+            "occupied_cells": 1086,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.025107394518846957,
+            "surface_distance_p95_m": 0.05292084609931891,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.9": {
+            "occupied_cells": 1636,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.0251073490703055,
+            "surface_distance_p95_m": 0.06984303497705673,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.95": {
+            "occupied_cells": 1759,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.025107289465660723,
+            "surface_distance_p95_m": 0.06984303497705673,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          }
+        },
+        "passive_pose_diagnostics": {
+          "odom": {
+            "received_samples": 37056,
+            "missing_samples": 4,
+            "median_position_error_m": 0.8699258105924622,
+            "p95_position_error_m": 3.0789499156434097,
+            "max_position_error_m": 3.1799052709853144,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          },
+          "slam": {
+            "received_samples": 37056,
+            "missing_samples": 44,
+            "median_position_error_m": 0.010948551377374395,
+            "p95_position_error_m": 0.02854898379191525,
+            "max_position_error_m": 0.05448827537135999,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          }
+        },
+        "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage"
+      },
+      "quality_gate": {
+        "coverage95_reached": true,
+        "final_coverage": true,
+        "map_p95": true,
+        "map_support": true,
+        "stopped_and_saved": true
+      }
+    },
+    {
+      "name": "before_office",
+      "suffix": "before-office",
+      "returncode": 0,
+      "runtime_result": "PASS",
+      "folder": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-speed-20261021-before-office",
+      "metrics": {
+        "result": "PASS",
+        "reason": "NO_REACHABLE_FRONTIERS_PARTIAL",
+        "complete": false,
+        "stop_verified": true,
+        "goals": 35,
+        "succeeded": 34,
+        "navigation_failures": 1,
+        "travel_m": 35.72978303628754,
+        "angular_travel_rad": 126.71521306144525,
+        "idle_sim_s": 123.49100000000011,
+        "turn_only_sim_s": 284.5659999999997,
+        "duration_wall_s": 1374.360825697,
+        "end_sim_s": 752.538,
+        "observed_fraction_final": 0.9319837435779464,
+        "reference_area_m2": 65.20500000000001,
+        "milestones": {
+          "0.8": {
+            "sim_s": 359.171,
+            "wall_s": 646.3992154960033
+          },
+          "0.9": {
+            "sim_s": 436.323,
+            "wall_s": 784.3570251990022
+          },
+          "0.95": {
+            "sim_s": 442.327,
+            "wall_s": 796.348433086001
+          }
+        },
+        "map_geometry_proxy": {
+          "occupied_cells": 6011,
+          "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+          "surface_distance_median_m": 0.12887075965378286,
+          "surface_distance_p95_m": 1.0706588777683486,
+          "occupied_support_fraction_within_015m": 0.5200465812676759,
+          "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+        },
+        "milestone_map_geometry_proxy": {
+          "0.8": {
+            "occupied_cells": 2302,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.028217656158197532,
+            "surface_distance_p95_m": 0.07146582967522869,
+            "occupied_support_fraction_within_015m": 1.0,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.9": {
+            "occupied_cells": 3024,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.02853420981284826,
+            "surface_distance_p95_m": 0.07146575814965513,
+            "occupied_support_fraction_within_015m": 0.9993386243386243,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.95": {
+            "occupied_cells": 2966,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.02853421577331279,
+            "surface_distance_p95_m": 0.07146582967522869,
+            "occupied_support_fraction_within_015m": 0.9986513823331086,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          }
+        },
+        "passive_pose_diagnostics": {
+          "odom": {
+            "received_samples": 75365,
+            "missing_samples": 3,
+            "median_position_error_m": 1.1548147841054321,
+            "p95_position_error_m": 4.43228023484338,
+            "max_position_error_m": 4.570202929630591,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          },
+          "slam": {
+            "received_samples": 75365,
+            "missing_samples": 93,
+            "median_position_error_m": 0.04163787957102694,
+            "p95_position_error_m": 0.2856318342760608,
+            "max_position_error_m": 2.015678428797593,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          }
+        },
+        "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage"
+      }
+    },
+    {
+      "name": "after_office",
+      "suffix": "v6-office",
+      "returncode": 0,
+      "runtime_result": "PASS",
+      "folder": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-speed-20261021-v6-office",
+      "metrics": {
+        "result": "PASS",
+        "reason": "NO_REACHABLE_FRONTIERS_PARTIAL",
+        "complete": false,
+        "stop_verified": true,
+        "goals": 24,
+        "succeeded": 23,
+        "navigation_failures": 1,
+        "travel_m": 94.03989848676385,
+        "angular_travel_rad": 78.03345471714341,
+        "idle_sim_s": 27.90099999999995,
+        "turn_only_sim_s": 100.51600000000039,
+        "duration_wall_s": 1351.0200882950012,
+        "end_sim_s": 712.894,
+        "observed_fraction_final": 1.0,
+        "reference_area_m2": 65.20500000000001,
+        "milestones": {
+          "0.8": {
+            "sim_s": 86.662,
+            "wall_s": 158.16142047200265
+          },
+          "0.9": {
+            "sim_s": 100.744,
+            "wall_s": 184.12794817699978
+          },
+          "0.95": {
+            "sim_s": 114.972,
+            "wall_s": 212.1800427449998
+          }
+        },
+        "map_geometry_proxy": {
+          "occupied_cells": 4108,
+          "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+          "surface_distance_median_m": 0.02576585111497494,
+          "surface_distance_p95_m": 0.075765851860033,
+          "occupied_support_fraction_within_015m": 1.0,
+          "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+        },
+        "milestone_map_geometry_proxy": {
+          "0.8": {
+            "occupied_cells": 2505,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.037229264930345354,
+            "surface_distance_p95_m": 0.16222930963382892,
+            "occupied_support_fraction_within_015m": 0.9465069860279441,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.9": {
+            "occupied_cells": 3025,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.037229264930345354,
+            "surface_distance_p95_m": 0.18722917775855236,
+            "occupied_support_fraction_within_015m": 0.9391735537190082,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          },
+          "0.95": {
+            "occupied_cells": 3358,
+            "reference": "SDF surfaces, initial map/world axes, no fitted alignment",
+            "surface_distance_median_m": 0.04750617724976251,
+            "surface_distance_p95_m": 0.1642468824327824,
+            "occupied_support_fraction_within_015m": 0.9466944609886837,
+            "scope": "OFFLINE_SIMULATION_GEOMETRY_PROXY_NOT_HARDWARE_OR_FULL_MAP_ACCURACY_ACCEPTANCE"
+          }
+        },
+        "passive_pose_diagnostics": {
+          "odom": {
+            "received_samples": 74198,
+            "missing_samples": 4,
+            "median_position_error_m": 1.3033197292998426,
+            "p95_position_error_m": 4.715622182338805,
+            "max_position_error_m": 4.93686480433089,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          },
+          "slam": {
+            "received_samples": 74198,
+            "missing_samples": 62,
+            "median_position_error_m": 0.02231541832356965,
+            "p95_position_error_m": 0.18911687812548444,
+            "max_position_error_m": 0.3260637643002935,
+            "scope": "Near-time passive pose samples; no interpolation or fitted alignment"
+          }
+        },
+        "metric_scope": "Observed free fraction of fixed SDF reachable center-space; offline only, not physical accuracy or all-space coverage"
+      },
+      "quality_gate": {
+        "coverage95_reached": true,
+        "final_coverage": true,
+        "map_p95": true,
+        "map_support": true,
+        "stopped_and_saved": true
+      }
+    },
+    {
+      "name": "watchdog",
+      "suffix": "watchdog",
+      "returncode": 0,
+      "runtime_result": "PASS",
+      "folder": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-speed-20261021-watchdog"
+    },
+    {
+      "name": "complete_room",
+      "suffix": "complete-room",
+      "returncode": 0,
+      "runtime_result": "PASS",
+      "folder": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/verification_runs/exploration-speed-20261021-complete-room"
+    }
+  ],
+  "active": null,
+  "ended_utc": "2026-10-22T04:22:59.251276+00:00"
+}

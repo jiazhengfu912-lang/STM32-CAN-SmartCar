@@ -1,0 +1,111 @@
+{
+  "result": "FAIL",
+  "scope": "SIMULATION_ONLY",
+  "started_utc": "2026-10-22T11:40:35.749179+00:00",
+  "domain_id": 228,
+  "ros_localhost_only": 1,
+  "ign_partition": "smartcar-verify-40dfdc78de6d429f9bf056eafa8c988a",
+  "goal": {
+    "frame": "map",
+    "x_m": 1.5,
+    "y_m": 0.0,
+    "yaw_rad": 0.0
+  },
+  "checks": {},
+  "lifecycle_states": {
+    "map_server": "active",
+    "amcl": "active",
+    "smoother_server": "inactive",
+    "behavior_server": "inactive",
+    "waypoint_follower": "unconfigured",
+    "velocity_smoother": "unconfigured",
+    "bt_navigator": "unconfigured",
+    "planner_server": "inactive",
+    "controller_server": "inactive"
+  },
+  "error": "60 秒启动窗口内未全部就绪；见 result.json/readiness 和 launch.log。",
+  "firmware": {
+    "pi_exercised": false,
+    "pi_changed": false,
+    "algorithm_changed": false,
+    "version": 131,
+    "p_i_before_after": "P right reverse .45 -> .45, others .30 -> .30; I steady .010 -> .010, start .030 -> .030 per 10 ms motor-rpm error; not exercised in Gazebo"
+  },
+  "not_verified": [
+    "STM32 hardware/PI",
+    "physical vehicle",
+    "obstacle avoidance",
+    "recovery behaviors",
+    "multi-goal navigation",
+    "arbitrary localization"
+  ],
+  "measurement": "Gazebo-generated ROS odometry, not external physical ground truth",
+  "verifier_sha256": "205139ef991c76bb5e7d02fe0cac1fba5e4589cbcc5bda4f7ed028cbfdc8d705",
+  "map_override": {
+    "yaml": "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/final_v13_discovery_r1/mission/map.yaml",
+    "yaml_sha256": "dade90b05872a17b284255edcba88526de187bcd5bef467ba95fe59436f7ddc6",
+    "image_sha256": "d8d1d74f990783febcb17cb0539537dd090afc5ed3372cf9c938295464f8d319"
+  },
+  "launch_command": [
+    "ros2",
+    "launch",
+    "smartcar_nav2",
+    "navigation.launch.py",
+    "headless:=true",
+    "rviz:=false",
+    "world:=discovery_lab",
+    "map:=/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-tail-20261022/runs/final_v13_discovery_r1/mission/map.yaml"
+  ],
+  "readiness": {
+    "map_server_active": true,
+    "amcl_active": true,
+    "controller_server_active": false,
+    "smoother_server_active": false,
+    "planner_server_active": false,
+    "behavior_server_active": false,
+    "bt_navigator_active": false,
+    "waypoint_follower_active": false,
+    "velocity_smoother_active": false,
+    "scan_fresh": true,
+    "odom_fresh": true,
+    "gate_fresh": true,
+    "clock_progress_fresh": true,
+    "map_received": true,
+    "clock_advancing": true,
+    "action_server_ready": false,
+    "single_publishers": true,
+    "tf_map_odom": 1,
+    "tf_odom_base_footprint": 1,
+    "tf_base_footprint_laser_frame": 1,
+    "gate_ready": true
+  },
+  "shutdown": {
+    "process_group": 118762,
+    "signals": [
+      "SIGINT"
+    ],
+    "remaining_pids": [],
+    "returncode": 0
+  },
+  "sample_counts": {
+    "odom.csv": 2622,
+    "safe_cmd_vel.csv": 1116,
+    "safety_status.csv": 201,
+    "clock.csv": 52438,
+    "feedback.csv": 0
+  },
+  "duration_wall_s": 71.94541533300071,
+  "plots": [
+    "velocity.png",
+    "velocity.svg",
+    "trajectory.png",
+    "trajectory.svg"
+  ],
+  "raw_sha256": {
+    "odom.csv": "1494dabe0fc765d78c363ac15d200ccbfb1365deaeed409ad8fb20b872714f64",
+    "safe_cmd_vel.csv": "65c37a716da07e37c70b4ae5d3d9af57c8a1d40bcee2a1b9bc61ed939e1e513e",
+    "safety_status.csv": "5f4319387f8a81faf85a045b84ffcb18514598b41ea07ed0e0fa5acecaeeaeb7",
+    "clock.csv": "f5386908ae2d09636f617d765b8aba18638e2591a75980d3835bf0f2f6f781d3",
+    "feedback.csv": "54b819bde72f820f1e0c63d2b8479787f6232c640259a4ba3cf1dbff2a2a552e"
+  }
+}

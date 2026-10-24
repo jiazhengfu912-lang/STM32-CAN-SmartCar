@@ -1,0 +1,20 @@
+{
+  "revision": "smartcar_sim_humble_v1",
+  "target": {"ubuntu": "22.04", "ros": "humble", "gazebo": "fortress"},
+  "wheel": {"diameter_m": 0.065, "width_m": 0.027, "track_m": 0.252, "mass_kg_ESTIMATED": 0.08, "friction_ESTIMATED": 0.8},
+  "chassis": {"mass_kg_ESTIMATED": 3.0, "com_relative_to_axle_m_ESTIMATED": [0.06, 0, 0.07], "inertia_box_m_ESTIMATED": [0.24, 0.22, 0.16]},
+  "caster": {"pivot_x_m": 0.17, "pivot_y_m": 0.078, "pivot_height_m_ESTIMATED": 0.045, "trail_m_INFERRED": 0.017, "wheel_diameter_m": 0.04, "wheel_width_m": 0.0225, "wheel_mass_kg_ESTIMATED": 0.04, "fork_mass_kg_ESTIMATED": 0.02, "friction_ESTIMATED": 0.6},
+  "lidar": {"model": "SLAMTEC RPLIDAR C1", "range_min_m": 0.05, "range_max_m_white_target": 12.0, "range_max_m_black_target_reference_only": 6.0, "scan_hz": 10.0, "samples_per_scan": 500, "noise_stddev_m_ESTIMATED": 0.01, "mount_xyz_relative_to_axle_m": [0.093, 0, 0.1545], "scan_height_above_mount_m_ESTIMATED": 0.033, "case_size_m_ESTIMATED": [0.06, 0.06, 0.045], "mass_kg_ESTIMATED": 0.11},
+  "camera": {"model": "USB UVC 1080P 2.8mm low-distortion, user-selected", "lens_focal_length_mm": 2.8, "width": 1920, "height": 1080, "fps_ESTIMATED": 15.0, "horizontal_fov_rad_ESTIMATED": 1.5707963267948966, "near_m": 0.03, "far_m": 20.0, "optical_center_xyz_relative_to_axle_m": [0.197, 0, 0.1335], "mass_kg_ESTIMATED": 0.08},
+  "control": {"timeout_s": 0.3, "max_linear_mps": 0.3, "max_angular_radps": 1.5, "keyboard_linear_mps": 0.15, "keyboard_forward_mps": 0.3, "keyboard_angular_radps": 0.8},
+  "assumptions": [
+    "Wheel centers retain V7: CAD X=+-126mm, hence track252mm. Width27mm is user-confirmed; original CAD assumed26mm.",
+    "Rigid frame mass, COM, inertias and friction are estimates, not weighed or identified from experiments.",
+    "Caster mounting height59mm and wheel40x22.5mm follow user drawing.17mm trail is inferred. Pivot height and internal fork are simplified.",
+    "C1 scan uses nominal10Hz,500samples,0.05..12m. Ideal simulated rays do not reproduce black-target6m limit, sunlight, real reflectivity or2.5D output.",
+    "C1 case60x60x45mm and scan-plane offset33mm are provisional envelopes. Exact manufacturer mounting holes are not designed here.",
+    "Camera FOV90deg and15fps are placeholders.2.8mm focal length does not determine FOV without sensor size or calibration. Ideal pinhole images do not prove real lens distortion.",
+    "Camera body36x36x11mm,total height45mm,base38x25mm follow user drawing. Actual USB plug and wire routing are not modeled.",
+    "Simulation controller is an ideal differential drive, not the STM32 M2006/C610 PI/current-control implementation."
+  ]
+}

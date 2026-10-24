@@ -1,0 +1,52 @@
+[INFO] [1792839130.814961521] [planner_server]: 
+	planner_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792839130.828975256] [planner_server]: Creating
+[INFO] [1792839130.938295088] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792839130.939219871] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792839130.939825692] [global_costmap.global_costmap]: Destroying
+[INFO] [1792839131.054378948] [global_costmap.global_costmap]: 
+	global_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792839131.054851328] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [1792839137.380795371] [planner_server]: Configuring
+[INFO] [1792839137.380890723] [global_costmap.global_costmap]: Configuring
+[INFO] [1792839137.412445628] [global_costmap.global_costmap]: Using plugin "static_layer"
+[INFO] [1792839137.428469896] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[INFO] [1792839137.436848125] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[INFO] [1792839137.436896877] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[INFO] [1792839137.444559504] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[INFO] [1792839137.452966374] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [1792839137.453034769] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[INFO] [1792839137.461327959] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1792839137.540794974] [global_costmap.global_costmap]: SmartCar: TF and scan filters share one callback executor
+[INFO] [1792839137.541594363] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[INFO] [1792839137.541639110] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[INFO] [1792839137.541983099] [planner_server]: Planner Server has GridBased  planners available.
+[INFO] [1792839137.543055289] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[INFO] [1792839138.566578175] [planner_server]: Activating
+[INFO] [1792839138.566622616] [global_costmap.global_costmap]: Activating
+[INFO] [1792839138.566635059] [global_costmap.global_costmap]: Checking transform
+[INFO] [1792839138.566727378] [global_costmap.global_costmap]: start
+[INFO] [1792839139.570738212] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[INFO] [1792839139.573980698] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[INFO] [1792839145.569451836] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[INFO] [1792839147.569082134] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[INFO] [1792839149.567759007] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[INFO] [1792839159.568238531] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 79 X 79 at 0.050000 m/pix
+[INFO] [1792839176.340456858] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1792839176.340594114] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[INFO] [1792839176.340660948] [planner_server]: Deactivating
+[INFO] [1792839176.340701169] [global_costmap.global_costmap]: Deactivating
+[INFO] [1792839176.568587010] [planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[INFO] [1792839176.568634692] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[INFO] [1792839176.613875298] [planner_server]: Cleaning up
+[INFO] [1792839176.753579346] [global_costmap.global_costmap]: Cleaning up
+[INFO] [1792839176.771708066] [planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[INFO] [1792839176.771818977] [planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[INFO] [1792839176.827703074] [planner_server]: Destroying bond (planner_server) to lifecycle manager.

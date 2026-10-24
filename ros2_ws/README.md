@@ -1,5 +1,7 @@
 # SmartCar ROS 2 上层工作空间
 
+Frontier交接、近静止时间与覆盖吞吐的当前v17验证见[说明](../docs/EXPLORATION_HANDOFF.md)和[本轮结果](../docs/evidence/exploration-handoff-20261024/final_conclusion.md)。
+
 自主探索当前的补盲策略、实际 Nav2 路径比较与终止原因见 [尾段优化说明](../docs/EXPLORATION_TAIL.md)，原始逐轮结果见 [本轮证据](../docs/evidence/exploration-tail-20261022/README.md)。
 
 这里包含小车的 Gazebo 仿真、二维 SLAM 和 Nav2 导航。底层 STM32、ESP32、CAN 与控制台工程保留在仓库原目录；本工作空间中的仿真节点通过 ROS 话题控制 Gazebo，不能据此宣称已经接通实车。

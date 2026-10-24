@@ -1,0 +1,294 @@
+{
+  "links": {
+    "base_link": {
+      "xyz": [
+        0,
+        0,
+        0.0325
+      ],
+      "mass": 3.0,
+      "com": [
+        0.06,
+        0,
+        0.07
+      ],
+      "inertia": [
+        0.0185,
+        0.0208,
+        0.0265
+      ]
+    },
+    "left_wheel_link": {
+      "xyz": [
+        0,
+        0.126,
+        0.0325
+      ],
+      "mass": 0.08,
+      "com": [
+        0,
+        0,
+        0
+      ],
+      "inertia": [
+        2.5985000000000003e-05,
+        4.2250000000000004e-05,
+        2.5985000000000003e-05
+      ],
+      "friction": 0.8
+    },
+    "right_wheel_link": {
+      "xyz": [
+        0,
+        -0.126,
+        0.0325
+      ],
+      "mass": 0.08,
+      "com": [
+        0,
+        0,
+        0
+      ],
+      "inertia": [
+        2.5985000000000003e-05,
+        4.2250000000000004e-05,
+        2.5985000000000003e-05
+      ],
+      "friction": 0.8
+    },
+    "left_caster_swivel": {
+      "xyz": [
+        0.17,
+        0.078,
+        0.045
+      ],
+      "mass": 0.02,
+      "com": [
+        0,
+        0,
+        -0.01
+      ],
+      "inertia": [
+        4.166666666666667e-06,
+        4.166666666666667e-06,
+        3e-06
+      ]
+    },
+    "left_caster_wheel": {
+      "xyz": [
+        0.15300000000000002,
+        0.078,
+        0.02
+      ],
+      "mass": 0.04,
+      "com": [
+        0,
+        0,
+        0
+      ],
+      "inertia": [
+        5.687499999999999e-06,
+        8.000000000000001e-06,
+        5.687499999999999e-06
+      ],
+      "friction": 0.6
+    },
+    "right_caster_swivel": {
+      "xyz": [
+        0.17,
+        -0.078,
+        0.045
+      ],
+      "mass": 0.02,
+      "com": [
+        0,
+        0,
+        -0.01
+      ],
+      "inertia": [
+        4.166666666666667e-06,
+        4.166666666666667e-06,
+        3e-06
+      ]
+    },
+    "right_caster_wheel": {
+      "xyz": [
+        0.15300000000000002,
+        -0.078,
+        0.02
+      ],
+      "mass": 0.04,
+      "com": [
+        0,
+        0,
+        0
+      ],
+      "inertia": [
+        5.687499999999999e-06,
+        8.000000000000001e-06,
+        5.687499999999999e-06
+      ],
+      "friction": 0.6
+    },
+    "lidar_link": {
+      "xyz": [
+        0.093,
+        0,
+        0.187
+      ],
+      "mass": 0.11,
+      "com": [
+        0,
+        0,
+        0.0225
+      ],
+      "inertia": [
+        5.156249999999999e-05,
+        5.156249999999999e-05,
+        6.599999999999999e-05
+      ]
+    },
+    "laser_frame": {
+      "xyz": [
+        0.093,
+        0,
+        0.22
+      ],
+      "mass": 0
+    },
+    "camera_link": {
+      "xyz": [
+        0.197,
+        0,
+        0.166
+      ],
+      "mass": 0.08,
+      "com": [
+        -0.0145,
+        0,
+        0
+      ],
+      "inertia": [
+        2.3126666666666667e-05,
+        1.7666666666666668e-05,
+        1.3793333333333334e-05
+      ]
+    },
+    "camera_optical_frame": {
+      "xyz": [
+        0.197,
+        0,
+        0.166
+      ],
+      "mass": 0,
+      "rpy": [
+        -1.5707963267948966,
+        0,
+        -1.5707963267948966
+      ]
+    }
+  },
+  "joints": [
+    {
+      "name": "left_wheel_joint",
+      "parent": "base_link",
+      "child": "left_wheel_link",
+      "type": "continuous",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "damping": 0.001
+    },
+    {
+      "name": "right_wheel_joint",
+      "parent": "base_link",
+      "child": "right_wheel_link",
+      "type": "continuous",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "damping": 0.001
+    },
+    {
+      "name": "left_caster_swivel_joint",
+      "parent": "base_link",
+      "child": "left_caster_swivel",
+      "type": "continuous",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "damping": 0.0005
+    },
+    {
+      "name": "left_caster_roll_joint",
+      "parent": "left_caster_swivel",
+      "child": "left_caster_wheel",
+      "type": "continuous",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "damping": 0.0001
+    },
+    {
+      "name": "right_caster_swivel_joint",
+      "parent": "base_link",
+      "child": "right_caster_swivel",
+      "type": "continuous",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "damping": 0.0005
+    },
+    {
+      "name": "right_caster_roll_joint",
+      "parent": "right_caster_swivel",
+      "child": "right_caster_wheel",
+      "type": "continuous",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "damping": 0.0001
+    },
+    {
+      "name": "lidar_mount_joint",
+      "parent": "base_link",
+      "child": "lidar_link",
+      "type": "fixed"
+    },
+    {
+      "name": "laser_frame_joint",
+      "parent": "lidar_link",
+      "child": "laser_frame",
+      "type": "fixed"
+    },
+    {
+      "name": "camera_mount_joint",
+      "parent": "base_link",
+      "child": "camera_link",
+      "type": "fixed"
+    },
+    {
+      "name": "camera_optical_joint",
+      "parent": "camera_link",
+      "child": "camera_optical_frame",
+      "type": "fixed",
+      "rpy": [
+        -1.5707963267948966,
+        0,
+        -1.5707963267948966
+      ]
+    }
+  ]
+}

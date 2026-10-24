@@ -33,6 +33,7 @@ from frontier_core import select_frontiers, dilate, visible_unknown_cells, targe
 from exploration_memory import ViewpointMemory, EmptyConfirmation, navigation_failure
 from route_planner import RoutePlanner
 from readiness_core import LifecycleReadiness
+from handoff_core import assigned_target_known
 
 
 class Explorer(Node):
@@ -45,7 +46,7 @@ class Explorer(Node):
         self.folder.mkdir(parents=True,exist_ok=False)
         self.max_sim=float(self.declare_parameter('max_sim_seconds',900.).value)
         if not math.isfinite(self.max_sim) or self.max_sim<=0:raise ValueError('max_sim_seconds须为有限正数')
-        self.wall_start=time.monotonic();self.sim_start=None;self.map_msg=None;self.map_wall=None
+        self.wall_start=time.monotonic();self.sim_start=None;self.map_msg=None;self.map_wall=None;self.map_sim=None
         self.status='WAITING';self.reason=None;self.gate={};self.gate_wall=None
         self.goal=None;self.sending=None;self.result=None;self.cancel_future=None
         self.goal_wall=None;self.goal_sim=None;self.goals=[];self.excluded=[];self.failures=0
@@ -53,7 +54,7 @@ class Explorer(Node):
         self.await_map_version=None
         self.odom_window=deque();self.safe=(0.,0.);self.safe_wall=None
         self.stop_sent=False;self.stop_deadline=None;self.save_future=None;self.save_phase=None;self.save_deadline=None
-        self.stop_verified=False;self.last_status=0.;self.streams={};self.last_plan=0.
+        self.stop_verified=False;self.last_status=0.;self.streams={};self.search_retry_wall=0.;self.tick_previous=None
         self.resume_deadline=None
         self.memory=ViewpointMemory();self.pending_memory=None;self.last_search_details={}
         self.search_pool=ThreadPoolExecutor(max_workers=1);self.search_future=None;self.search_context=None
@@ -78,7 +79,7 @@ class Explorer(Node):
         self.create_service(Trigger,'/exploration/finish',self.finish_service)
         # 任务存活和墙钟预算不能随Gazebo暂停或低实时系数一起停摆。
         self.create_timer(.2,self.tick,clock=RclpyClock(clock_type=ClockType.STEADY_TIME))
-        self.event('session_started',scope='SIMULATION_ONLY',prior_map_loaded=False,algorithm='v15 fresh lifecycle readiness / unchanged v14 observation and route policy + RPP / SLAM Toolbox')
+        self.event('session_started',scope='SIMULATION_ONLY',prior_map_loaded=False,algorithm='v17 fresh-map frontier search / equivalent ray and region acceleration / event-driven handoff / batch geometry cache + RPP / SLAM Toolbox')
         self.write_summary()
 
     def sim(self):
@@ -113,7 +114,7 @@ class Explorer(Node):
             not all(math.isfinite(v) for v in [msg.info.origin.position.x,msg.info.origin.position.y,q.x,q.y,q.z,q.w]) or
             abs(q.x)+abs(q.y)+abs(q.z)>1.e-6 or abs(abs(q.w)-1)>1.e-6):
             self.map_wall=None;return
-        initial=self.map_msg is None;self.map_msg=msg;self.map_wall=time.monotonic();self.map_version+=1
+        initial=self.map_msg is None;self.map_msg=msg;self.map_wall=time.monotonic();self.map_sim=self.sim();self.map_version+=1
         a=np.asarray(msg.data);self.row('map_updates',['sim_s','width','height','resolution','free','occupied','unknown'],
             [self.sim(),msg.info.width,msg.info.height,msg.info.resolution,int(((a>=0)&(a<=20)).sum()),int((a>=65).sum()),int((a<0).sum())])
         if initial:self.map_snapshot('map_initial');self.event('first_online_map',known_cells=int((a>=0).sum()))
@@ -138,7 +139,7 @@ class Explorer(Node):
         if self.status=='RESUMING' and not self.gate.get('stop_latched'):
             self.status='WAITING';self.next_sim=self.sim()+3.;self.event('resume_confirmed')
         if self.gate.get('stop_latched') and self.reason is None and self.status not in ['PAUSED','RESUMING']:
-            self.status='PAUSED';self.cancel();self.route.cancel();self.search_future=None;self.empty.clear();self.event('external_stop_paused')
+            self.status='PAUSED';self.cancel();self.route.cancel();self.discard_search('external_stop');self.empty.clear();self.event('external_stop_paused')
 
     def latch(self,enabled):
         """只在用户显式恢复时解除锁存；自动结束和故障只请求锁存停车。"""
@@ -154,7 +155,7 @@ class Explorer(Node):
         if self.reason is not None:
             response.success=False;response.message='任务正在结束或已保存；重新启动须使用新目录';return response
         if request.data:
-            self.status='PAUSED';self.cancel();self.route.cancel();self.search_future=None;self.empty.clear();self.latch(True);self.event('user_paused')
+            self.status='PAUSED';self.cancel();self.route.cancel();self.discard_search('user_pause');self.empty.clear();self.latch(True);self.event('user_paused')
         else:
             if self.goal is not None or self.sending is not None or self.result is not None:
                 self.cancel();self.latch(True)
@@ -175,7 +176,7 @@ class Explorer(Node):
     def finish(self,reason):
         """完成、受阻、预算耗尽和故障均有终止原因，不把部分地图说成完全建图。"""
         if self.reason is not None:return
-        self.reason=reason;self.status='STOPPING';self.stop_deadline=time.monotonic()+30.;self.cancel();self.route.cancel();self.search_future=None
+        self.reason=reason;self.status='STOPPING';self.stop_deadline=time.monotonic()+30.;self.cancel();self.route.cancel();self.discard_search('mission_stopping')
         self.event('mission_stopping',reason=reason)
 
     def write_summary(self,error=None):
@@ -183,7 +184,7 @@ class Explorer(Node):
         report={'state':self.status,'reason':self.reason,'complete':self.reason=='NO_FRONTIERS' and self.status=='DONE',
                 'stop_verified':self.stop_verified,'scope':'SIMULATION_ONLY','prior_map_loaded':False,
                 'goals':self.goals,'navigation_failures':self.failures,'duration_wall_s':time.monotonic()-self.wall_start,
-                'termination_details':self.last_search_details,'exploration_algorithm':'v15 fresh lifecycle readiness / unchanged v14 observation and route policy',
+                'termination_details':self.last_search_details,'exploration_algorithm':'v17 fresh-map frontier search / equivalent ray and region acceleration / event-driven handoff / batch geometry cache',
                 'wait_reason':self.wait_reason,'navigation_readiness':self.lifecycle_ready.snapshot(time.monotonic()),
                 'firmware_source_version':131,'pi_changed':False,'pi_exercised':False,
                 'not_verified':['physical vehicle','all unseen spaces','unreachable rooms','arbitrary environments']}
@@ -222,6 +223,7 @@ class Explorer(Node):
                     self.lifecycle_futures[name]=client.call_async(GetState.Request());self.lifecycle_ready.requested(name,now)
         ready=self.lifecycle_ready.ready(now)
         if not ready:self.waiting('LIFECYCLE_NOT_FRESH_ACTIVE',now,**self.lifecycle_ready.snapshot(now))
+        elif self.wait_reason=='LIFECYCLE_NOT_FRESH_ACTIVE':self.wait_reason=None
         return ready
 
     def waiting(self, reason, now, **details):
@@ -272,10 +274,38 @@ class Explorer(Node):
     def empty_search(self, details, sim):
         """分别确认冷却、视点耗尽、规划受阻和起点异常，不把过滤结果冒充全图完成。"""
         self.last_search_details=details;reason=details['reason']
+        self.search_retry_wall=time.monotonic()+1.
         if self.empty.observe(reason,sim,self.map_version):
             reasons={'NO_FRONTIERS':'NO_FRONTIERS','ROBOT_NOT_IN_SAFE_SPACE':'START_POSE_UNSAFE_PARTIAL',
                      'NO_SAFE_KNOWN_SPACE':'NO_SAFE_KNOWN_SPACE_PARTIAL'}
             self.finish(reasons.get(reason,reason+'_PARTIAL'))
+
+    def discard_search(self, reason):
+        """暂停、失败和过期只丢弃纯计算结果，不把旧结果带入下一导航任务。"""
+        if self.search_future is not None:
+            self.search_future.cancel();self.event('frontier_preparation_discarded',reason=reason)
+        self.search_future=None;self.search_context=None
+
+    def start_search(self, robot, yaw, sim, source_goal=None):
+        """快照地图后在单个后台工作线程搜索；不提前发送任何Nav2动作。"""
+        msg=self.map_msg;grid=np.asarray(msg.data).reshape(msg.info.height,msg.info.width).copy()
+        origin=(msg.info.origin.position.x,msg.info.origin.position.y);res=msg.info.resolution
+        self.search_context={'grid':grid,'resolution':res,'origin':origin,'version':self.map_version,
+                             'robot':robot,'yaw':yaw,'sim_s':sim,'wall_s':time.monotonic(),'source_goal':source_goal}
+        self.search_future=self.search_pool.submit(select_frontiers,grid,res,origin,robot,robot_yaw=yaw)
+        self.event('frontier_search_started',source_goal=source_goal,map_version=self.map_version,robot=robot)
+
+
+    def pipeline_phase(self):
+        """记录真实状态机阶段供离线归因，不用速度阈值反推规划CPU时间。"""
+        if self.reason is not None or self.status in ['PAUSED','RESUMING','DONE','ERROR']:return self.status
+        if self.goal is not None or self.sending is not None:return 'NAVIGATING'
+        if self.await_map_version is not None:return 'OBSERVATION_MAP_WAIT'
+        if self.route.busy:return 'NAV2_ROUTE_QUERY'
+        if self.route.done:return 'READY_TO_SEND'
+        if self.search_future is not None:return 'FRONTIER_SEARCH'
+        if self.wait_reason is not None:return 'READINESS_WAIT'
+        return 'WAITING'
 
     def launch_target(self, target, now, sim):
         """发目标前再核对最新地图安全圆和观测价值；保留原Nav2到达容差及速度边界。"""
@@ -299,7 +329,7 @@ class Explorer(Node):
         cells=np.asarray(target['visible_cells']);yy,xx=np.divmod(cells,source.shape[1])
         target['observation_world']=[list(p) for p in zip(source_origin[0]+(xx+.5)*source_res,source_origin[1]+(yy+.5)*source_res)]
         target['target_observation_world']=wanted
-        self.goals.append({**target,'sent_sim_s':sim,'action_status':None})
+        self.goals.append({**target,'sent_sim_s':sim,'sent_map_version':self.map_version,'action_status':None})
         self.wait_reason=None
         self.goal_wall=now;self.goal_sim=sim;self.status='EXPLORING';self.empty.clear()
         self.sending=self.navigator.send_goal_async(request);self.event('goal_sent',target=target);self.write_summary()
@@ -333,7 +363,7 @@ class Explorer(Node):
                 handle=self.sending.result();self.sending=None
                 if handle is None or not handle.accepted:
                     self.failures+=int(navigation_failure(self.goals[-1],6));self.goals[-1]['action_status']=6;self.pending_memory=(self.goals[-1],6)
-                    self.event('goal_rejected');self.next_sim=sim+3.
+                    self.event('goal_rejected');self.discard_search('goal_rejected');self.next_sim=sim+3.
                 else:
                     self.goal=handle;self.result=handle.get_result_async()
                     if self.status=='PAUSED' or self.reason is not None:self.cancel()
@@ -342,11 +372,20 @@ class Explorer(Node):
                 self.pending_memory=(self.goals[-1],status)
                 if self.reason is None:self.failures+=int(navigation_failure(self.goals[-1],status,self.status=='PAUSED'))
                 self.event('goal_result',status=status)
+                if status!=4:self.discard_search('navigation_not_successful')
                 if status==5 and self.cancel_future is None and self.reason is None:
                     self.status='PAUSED';self.empty.clear();self.latch(True);self.event('external_cancel_paused')
-                self.goal=None;self.result=None;self.cancel_future=None;self.next_sim=sim+.2
-                # 使用到达之后的新地图再选目标，替代每个目标固定空等3秒。
+                self.goal=None;self.result=None;self.cancel_future=None;self.next_sim=sim
+                # 指定格已有新图观测证据时复用，否则继续等到达后的新地图。
                 self.await_map_version=self.map_version;self.write_summary()
+                target=self.goals[-1];msg=self.map_msg
+                if (status==4 and not target.get('timed_out') and msg is not None and self.map_wall is not None and
+                    self.map_version>target['sent_map_version'] and self.map_sim is not None and 0.<=sim-self.map_sim<=1.):
+                    grid=np.asarray(msg.data).reshape(msg.info.height,msg.info.width)
+                    origin=(msg.info.origin.position.x,msg.info.origin.position.y)
+                    if assigned_target_known(grid,msg.info.resolution,origin,target['target_observation_world']):
+                        self.await_map_version=None
+                        self.event('observation_already_current',map_version=self.map_version,map_age_sim_s=sim-self.map_sim)
             if self.status in ['DONE','ERROR']:return
             if self.reason is not None:self.saving(now);return
             if self.status=='PAUSED':return
@@ -361,14 +400,16 @@ class Explorer(Node):
                 if now-self.wall_start>120:self.finish('STARTUP_FAILED_PARTIAL')
                 return
             if self.map_wall is None or now-self.map_wall>10 or now-self.gate_wall>1.5:
-                self.status='PAUSED';self.cancel();self.route.cancel();self.search_future=None;self.empty.clear();self.latch(True)
+                self.status='PAUSED';self.cancel();self.route.cancel();self.discard_search('stale_input');self.empty.clear();self.latch(True)
                 self.event('input_stale_paused');self.write_summary();return
             if self.goal is not None:
                 if (sim-self.goal_sim>120 or now-self.goal_wall>600) and self.cancel_future is None:
                     self.goals[-1]['timed_out']=True;self.cancel()
                     self.failures+=int(navigation_failure(self.goals[-1],5));self.event('goal_timeout_cancel')
+                if self.cancel_future is None:
+                    self.navigation_ready(now)
                 return
-            if self.sending is not None or sim<self.next_sim or now-self.last_plan<1.:return
+            if self.sending is not None or sim<self.next_sim:return
             if self.await_map_version is not None:
                 if self.map_version<=self.await_map_version:return
                 self.await_map_version=None
@@ -387,7 +428,7 @@ class Explorer(Node):
             yaw=math.atan2(2*(q.w*q.z+q.x*q.y),1-2*(q.y*q.y+q.z*q.z))
             if self.route.busy:return
             if self.route.done:
-                self.route.done=False;self.last_plan=now
+                self.route.done=False
                 if self.route.abandoned:return
                 if self.route.target is not None:
                     self.empty.candidates(planned=True)
@@ -397,19 +438,19 @@ class Explorer(Node):
                 else:self.empty_search({**self.last_search_details,'reason':self.route.reason},sim)
                 return
             if self.search_future is None:
-                msg=self.map_msg;grid=np.asarray(msg.data).reshape(msg.info.height,msg.info.width).copy()
-                origin=(msg.info.origin.position.x,msg.info.origin.position.y);res=msg.info.resolution
-                self.search_context=(grid,res,origin,self.map_version,robot,yaw)
-                self.search_future=self.search_pool.submit(select_frontiers,grid,res,origin,robot,robot_yaw=yaw)
-                self.last_plan=now;return
+                if now>=self.search_retry_wall:self.start_search(robot,yaw,sim)
+                return
             if not self.search_future.done():return
-            candidates,details=self.search_future.result();self.search_future=None
-            grid,res,origin,version,start,start_yaw=self.search_context
+            context=self.search_context
+            candidates,details=self.search_future.result();self.search_future=None;self.search_context=None
+            grid,res,origin,version,start,start_yaw=[context[key] for key in ['grid','resolution','origin','version','robot','yaw']]
+            self.event('frontier_search_finished',source_goal=context['source_goal'],
+                       elapsed_wall_s=now-context['wall_s'],elapsed_sim_s=sim-context['sim_s'],candidates=len(candidates))
             candidates,memory=self.memory.filter(candidates,grid,res,origin,sim)
             details.update(memory);details['available_candidates']=len(candidates)
             if not candidates and details['reason']=='CANDIDATES':
                 details['reason']='VIEWPOINTS_COOLDOWN' if memory['cooling_views'] else 'VIEWPOINTS_EXHAUSTED'
-            self.last_search_details=details;self.last_plan=now;self.event('frontier_search',robot=start,**details)
+            self.last_search_details=details;self.event('frontier_search',robot=start,**details)
             if not candidates:self.empty_search(details,sim);return
             self.empty.candidates()
             if not self.route.begin(candidates,start,start_yaw,grid,res,origin,version):
@@ -420,6 +461,11 @@ class Explorer(Node):
             self.latch(True);self.event('error',error=str(exc));self.write_summary(str(exc))
         finally:
             self.heartbeat_pub.publish(Empty())
+            self.row('pipeline',['sim_s','state','phase','goal_index','map_version','search_busy','route_busy','wait_reason','tick_interval_wall_s'],
+                [sim,self.status,self.pipeline_phase(),len(self.goals)-1,self.map_version,
+                 self.search_future is not None,self.route.busy,self.wait_reason,
+                 None if self.tick_previous is None else now-self.tick_previous])
+            self.tick_previous=now
             if now-self.last_status>1.:
                 msg=String();msg.data=json.dumps({'state':self.status,'reason':self.reason,'goals':len(self.goals),
                     'failures':self.failures,'stop_verified':self.stop_verified,'output_dir':str(self.folder)})

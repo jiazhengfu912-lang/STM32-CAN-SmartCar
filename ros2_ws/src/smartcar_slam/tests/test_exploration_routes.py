@@ -8,6 +8,60 @@ from frontier_core import select_frontiers,visible_unknown_cells,assign_observat
 from exploration_memory import ViewpointMemory,EmptyConfirmation,navigation_failure
 from route_core import path_cost,rank_routes,shortlist,open_visit_order,stopping_approach,information_gain,information_visit_order
 from readiness_core import LifecycleReadiness
+from handoff_core import assigned_target_known
+
+
+def test_bounded_region_search_matches_full_distances_without_crossing_wall():
+    """半径内保持完整广搜的距离与连通性，边界外不继续扩张；隔墙近点仍不可达。"""
+    from frontier_core import reachable_distances
+    safe=np.ones((30,30),dtype=bool);safe[:,10]=False;safe[20,10]=True
+    full,_=reachable_distances(safe,(5,5));limited,_=reachable_distances(safe,(5,5),max_steps=8)
+    within=(full>=0)&(full<=8)
+    assert np.array_equal(limited[within],full[within])
+    assert (limited[~within]==-1).all()
+    assert limited[5,9]==4 and limited[13,5]==8 and limited[14,5]==-1 and limited[5,11]==-1
+
+
+def test_extra_map_wait_is_avoidable_only_when_every_assigned_cell_is_known():
+    """任一指定目标仍未知、越界或目标为空都不能用已有地图免除下一帧等待。"""
+    grid=np.zeros((50,60),dtype=np.int16);grid[20,25]=-1
+    wanted=[(.775,.775),(1.275,1.025)]
+    assert not assigned_target_known(grid,.05,(0.,0.),wanted)
+    grid[20,25]=100
+    assert assigned_target_known(grid,.05,(0.,0.),wanted)
+    assert not assigned_target_known(grid,.05,(0.,0.),wanted+[(5.,5.)])
+    assert not assigned_target_known(grid,.05,(0.,0.),[])
+
+
+
+
+
+
+
+
+
+
+def test_cached_endpoint_still_checks_each_paths_early_stopping_clearance(monkeypatch):
+    """同终点可复用射线结果，但第二条贴障停车末段仍必须独立拒绝。"""
+    from types import SimpleNamespace as Item
+    import route_planner as planner
+    grid=np.zeros((100,100),dtype=np.int16);grid[40:60,40:60]=100;grid[50,90]=-1
+    target={'x':3.475,'y':2.525,'visible_cells':[5090],'target_visible_cells':[5090]}
+    checks=[];records=[];events=[];original=planner.visible_unknown_cells
+    def visible(*args,**kwargs):
+        """计数真实射线调用，保留原算法以检查障碍和指定目标。"""
+        checks.append(1);return original(*args,**kwargs)
+    monkeypatch.setattr(planner,'visible_unknown_cells',visible)
+    obj=Item(retired=False,grid=grid,resolution=.05,origin=(0.,0.),start_yaw=0.,costmap=None,
+             safe_observer=(grid==0)&~dilate(grid!=0,8.),endpoint_checks={},edge=(None,0),candidates=[target],
+             record=lambda cost,*unused:records.append(cost),advance=lambda:None,
+             node=Item(event=lambda *args,**kw:events.append((args,kw))))
+    for xs in [np.linspace(4.475,3.475,41),np.linspace(3.025,3.475,19)]:
+        points=[Item(pose=Item(position=Item(x=float(x),y=2.525))) for x in xs]
+        response=Item(status=4,result=Item(path=Item(poses=points),planning_time=Item(sec=0,nanosec=0)))
+        planner.RoutePlanner.received(obj,Item(result=lambda:response))
+    assert not events and len(checks)==1
+    assert records[0] is not None and records[1] is None
 
 
 def test_lifecycle_active_evidence_expires_without_a_fresh_response():

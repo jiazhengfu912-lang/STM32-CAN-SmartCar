@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from report_exploration_speed import evaluate,reference_points
 from plot_exploration import read,line
 
-TITLE=('Exploration recovery v15 / route performance v14 / baseline v6 as labeled | SIMULATION ONLY | firmware source v131\n'
+TITLE=('Exploration algorithm versions as labeled | SIMULATION ONLY | firmware source v131\n'
        'P right reverse .45 -> .45, others .30 -> .30; I steady .010 -> .010, start .030 -> .030 / 10 ms\n'
        'PI NOT exercised; target visibility / regional Nav2 open order; NavFn / RPP and motion limits unchanged')
 plt.rcParams['path.simplify']=False
@@ -31,7 +31,9 @@ ALGORITHMS={
     'v12':'assigned-target visibility / original legal margin + actual stopping approach',
     'v13':'assigned-target visibility / task-aware memory / area gain / regional Nav2 open order',
     'v14':'v13 observation fixes + information completion order within near-minimum Nav2 travel budget',
-    'v15':'fresh lifecycle readiness + explicit resume reset; unchanged v14 observation and route policy'}
+    'v15':'fresh lifecycle readiness + explicit resume reset; unchanged v14 observation and route policy',
+    'v16':'bounded approach frontier preparation / event-driven handoff / per-batch geometry cache',
+    'v17':'fresh-map candidates / equivalent ray templates and bounded regions / event-driven handoff'}
 
 
 def geometry_distance(x,y,geometry):
@@ -108,7 +110,7 @@ def map_values(data,x,y):
 def save(fig,folder,name):
     """保存全部采样点的PNG和SVG，图上明确PI与算法及仿真边界。"""
     version='v6' if name.startswith('before_') else ('v8' if name.startswith('after_') else None)
-    matched=re.search(r'(?:final_|pilot_|watchdog_|complete_)(v\d+)',name)
+    matched=re.search(r'(?:before_|final_|pilot_|watchdog_|complete_)(v\d+)',name)
     if matched:version=matched.group(1)
     title=TITLE
     if version:

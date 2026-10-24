@@ -1,5 +1,6 @@
 """仅从在线栅格和当前位姿选择安全、可达的未知区观察点，不读取场景真值。"""
 from collections import deque
+from functools import lru_cache
 import math
 import numpy as np
 
@@ -16,12 +17,13 @@ def dilate(mask, radius):
     return out
 
 
-def reachable_distances(safe, start):
+def reachable_distances(safe, start, max_steps=None):
     """同样四邻接安全广搜，使用原生列表避免逐栅格NumPy标量开销阻塞任务心跳。"""
     h,w=safe.shape;allowed=safe.ravel().tolist();distance=[-1]*(h*w);parent=[-1]*(h*w)
     first=start[0]*w+start[1];distance[first]=0;queue=deque([first])
     while queue:
         cell=queue.popleft();y,x=divmod(cell,w)
+        if max_steps is not None and distance[cell]>=max_steps:continue
         neighbors=[]
         if y:neighbors.append(cell-w)
         if y+1<h:neighbors.append(cell+w)
@@ -48,14 +50,23 @@ def path_headings(safe, parent, start, goal, resolution):
     return math.atan2(first_y-sy,first_x-sx),math.atan2(gy-last_y,gx-last_x)
 
 
-def predicted_gain(grid, resolution, origin, point, radius=3., rays=72):
-    """仅从当前地图射线估计未知区观测面积，已知墙体遮挡后的未知区不计收益。"""
+@lru_cache(maxsize=8)
+def gain_ray_template(resolution, radius, rays):
+    """只缓存与地图内容无关的射线偏移，保持原运算顺序和半格采样。"""
     angles=np.arange(rays)*2*math.pi/rays;step=resolution/2
     ranges=np.arange(step,radius+step/2,step)
-    xs=np.floor((point[0]+np.cos(angles[:,None])*ranges-origin[0])/resolution).astype(int)
-    ys=np.floor((point[1]+np.sin(angles[:,None])*ranges-origin[1])/resolution).astype(int)
+    dx=np.cos(angles[:,None])*ranges;dy=np.sin(angles[:,None])*ranges
+    for array in [ranges,dx,dy]:array.setflags(write=False)
+    return step,ranges,dx,dy
+
+
+def predicted_gain(grid, resolution, origin, point, radius=3., rays=72):
+    """仅从当前地图射线估计未知区观测面积，已知墙体遮挡后的未知区不计收益。"""
+    step,ranges,dx,dy=gain_ray_template(resolution,radius,rays)
+    xs=np.floor((point[0]+dx-origin[0])/resolution).astype(int)
+    ys=np.floor((point[1]+dy-origin[1])/resolution).astype(int)
     h,w=grid.shape;inside=(xs>=0)&(xs<w)&(ys>=0)&(ys<h)
-    values=grid[np.clip(ys,0,h-1),np.clip(xs,0,w-1)]
+    values=grid[np.minimum(np.maximum(ys,0),h-1),np.minimum(np.maximum(xs,0),w-1)]
     blocked=np.maximum.accumulate((~inside)|(values>20),axis=1)
     return float((((values<0)&~blocked)*ranges).sum())*step*2*math.pi/rays
 
@@ -130,7 +141,7 @@ def assign_observation_regions(candidates, safe, resolution, radius=3.):
     remaining=set(range(len(candidates)));regions=0
     for index,target in enumerate(candidates):
         if index not in remaining:continue
-        distances,_=reachable_distances(safe,tuple(target['cell']))
+        distances,_=reachable_distances(safe,tuple(target['cell']),max_steps=int(math.ceil(radius/resolution)))
         members=[i for i in remaining if distances[tuple(candidates[i]['cell'])]>=0 and
                  distances[tuple(candidates[i]['cell'])]*resolution<=radius]
         for i in members:candidates[i]['observation_region']=regions

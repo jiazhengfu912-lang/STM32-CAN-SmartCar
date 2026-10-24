@@ -24,6 +24,9 @@ class RoutePlanner:
         if self.busy or self.retired or not self.client.server_is_ready() or not self.costmap_client.service_is_ready():return False
         self.batch+=1;self.busy=True;self.done=False;self.abandoned=False;self.target=None;self.reason=None
         self.robot=robot;self.yaw=yaw;self.grid=grid;self.resolution=resolution;self.origin=origin;self.version=version
+        # 同批只读地图的安全膨胀只算一次；具体路径的停车末段仍逐条检查。
+        free=(grid>=0)&(grid<=20);self.safe_observer=free&~dilate(~free,.4/resolution)
+        self.endpoint_checks={};self.started_wall=time.monotonic();self.started_sim=self.node.sim()
         self.candidates=shortlist(candidates,8)
         self.costs=[None]*len(self.candidates);self.edges={};self.queue=[];self.pairs=False
         self.deadline=time.monotonic()+10.;self.handle=None
@@ -48,7 +51,8 @@ class RoutePlanner:
         self.reason=reason or self.reason or ('CANDIDATES' if self.target else 'NAV2_UNREACHABLE_FRONTIERS')
         self.node.event('planning_batch_finished',batch=self.batch,reason=self.reason,
                         candidates=len(self.candidates),valid_paths=sum(x is not None for x in self.costs),
-                        pair_paths=len(self.edges),selected=self.target)
+                        pair_paths=len(self.edges),selected=self.target,
+                        elapsed_wall_s=time.monotonic()-self.started_wall,elapsed_sim_s=self.node.sim()-self.started_sim)
 
     def costmap_ready(self, future):
         """从实际全局代价图获取膨胀代价，保存原值和时间戳，不用SLAM占据值冒充。"""
@@ -118,20 +122,22 @@ class RoutePlanner:
             self.node.event('planning_error',batch=self.batch,error=str(exc));self.finish('NAV2_PLANNING_ERROR')
 
     def received(self, future):
-        """验证返回终点仍有观察价值，并保留完整路径、结果和实际规划CPU时间。"""
+        """验证返回终点仍有观察价值，并保留完整路径、结果和Nav2报告的规划时长。"""
         try:
             if self.retired:return
             response=future.result();result=response.result;points=[(p.pose.position.x,p.pose.position.y) for p in result.path.poses]
             cost=path_cost(points,self.start_yaw,self.costmap) if response.status==4 else None
             if cost is not None:
                 end=points[-1];ix=int((end[0]-self.origin[0])/self.resolution);iy=int((end[1]-self.origin[1])/self.resolution)
-                safe=(self.grid>=0)&(self.grid<=20)&~dilate(~((self.grid>=0)&(self.grid<=20)),.4/self.resolution)
-                visible=visible_unknown_cells(self.grid,self.resolution,self.origin,end)
                 target=self.candidates[self.edge[1]]
-                approach=stopping_approach(points,(target['x'],target['y']),safe,self.resolution,self.origin)
-                if not (0<=ix<self.grid.shape[1] and 0<=iy<self.grid.shape[0] and safe[iy,ix]
-                        and approach and set(visible)&set(target.get('target_visible_cells',target['visible_cells']))
-                        and math.dist(end,(target['x'],target['y']))<=.15):cost=None
+                key=(self.edge[1],*end)
+                if key not in self.endpoint_checks:
+                    visible=visible_unknown_cells(self.grid,self.resolution,self.origin,end)
+                    self.endpoint_checks[key]=bool(0<=ix<self.grid.shape[1] and 0<=iy<self.grid.shape[0] and self.safe_observer[iy,ix]
+                        and set(visible)&set(target.get('target_visible_cells',target['visible_cells']))
+                        and math.dist(end,(target['x'],target['y']))<=.15)
+                approach=stopping_approach(points,(target['x'],target['y']),self.safe_observer,self.resolution,self.origin)
+                if not (self.endpoint_checks[key] and approach):cost=None
                 else:cost['stop_approach_points']=approach
             elapsed=result.planning_time.sec+result.planning_time.nanosec/1.e9
             self.record(cost,points,elapsed,response.status);self.handle=None;self.advance()

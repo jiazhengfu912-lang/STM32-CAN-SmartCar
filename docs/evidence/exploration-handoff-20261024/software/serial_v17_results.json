@@ -1,0 +1,86 @@
+[
+  {
+    "name": "final_v17_discovery",
+    "command": [
+      "/usr/bin/python3",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_exploration.py",
+      "--output",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-handoff-20261024/runs/final_v17_discovery",
+      "--world",
+      "discovery_lab",
+      "--domain-id",
+      "88",
+      "--case",
+      "autonomous",
+      "--max-sim-seconds",
+      "900",
+      "--timeout",
+      "2600",
+      "--record-pose"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "final_v17_office",
+    "command": [
+      "/usr/bin/python3",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_exploration.py",
+      "--output",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-handoff-20261024/runs/final_v17_office",
+      "--world",
+      "office_loop",
+      "--domain-id",
+      "89",
+      "--case",
+      "autonomous",
+      "--max-sim-seconds",
+      "900",
+      "--timeout",
+      "2600",
+      "--record-pose"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "watchdog_v17",
+    "command": [
+      "/usr/bin/python3",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_exploration.py",
+      "--output",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-handoff-20261024/runs/watchdog_v17",
+      "--world",
+      "discovery_lab",
+      "--domain-id",
+      "90",
+      "--case",
+      "watchdog",
+      "--max-sim-seconds",
+      "180",
+      "--timeout",
+      "600",
+      "--record-pose"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "complete_v17",
+    "command": [
+      "/usr/bin/python3",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/ros2_ws/tools/verify_exploration.py",
+      "--output",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-handoff-20261024/runs/complete_v17",
+      "--world",
+      "/home/jiazhengfu/Projects/STM32-CAN-SmartCar/docs/evidence/exploration-speed-20261021/runs/complete_room/source/world.sdf",
+      "--domain-id",
+      "91",
+      "--case",
+      "complete",
+      "--max-sim-seconds",
+      "180",
+      "--timeout",
+      "600",
+      "--record-pose"
+    ],
+    "returncode": 0
+  }
+]

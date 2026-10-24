@@ -1,0 +1,25 @@
+{
+  "status": "Preliminary fixed-threshold regression; retain full v16 run, hold future runs",
+  "before_v15_discovery": {
+    "0.95": 159.764,
+    "0.98": 253.803,
+    "interval_sim_s": 94.039
+  },
+  "final_v16_discovery": {
+    "0.95": 168.533,
+    "0.98": 399.831,
+    "interval_sim_s": 231.298
+  },
+  "action": "Hold scheduling parent only; current simulation continues unchanged to natural termination; no implicit resume, no source edits during current motion",
+  "hypothesis": "Short-lived prepared candidate subset/old predicted gains may distort visit choice; requires diagnostic comparison, not a proven sole cause",
+  "final_v16_discovery_result": {
+    "functional": "PASS",
+    "reason": "NAV2_UNREACHABLE_FRONTIERS_PARTIAL",
+    "complete": false,
+    "end_sim_s": 614.945,
+    "travel_m": 76.6586330603328
+  },
+  "office_record": "Office had started before scheduling parent was held; 4 goals and 7.336144891639557 m independent odom displacement recorded. Stopping queue was followed by verifier FAIL/Python object conversion error and INTERRUPTED_PARTIAL. This was not a no-goal startup failure; no final map, no full-route performance interpretation or unique root-cause claim.",
+  "kind": "Derived operational note, not raw experiment result",
+  "original_baseline_build_mismatch": "Original isolated baseline build type empty vs v16/v17 RelWithDebInfo; developer comparison only. Final v17 comparison uses repeated matched-build v15 scenes."
+}

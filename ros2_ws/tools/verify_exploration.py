@@ -60,7 +60,7 @@ def verify(a,ws):
     frozen=a.output/'source';frozen.mkdir()
     snapshots=a.output/'map_snapshots';snapshots.mkdir()
     sources=[ws/'src/smartcar_slam/scripts'/n for n in
-             ['explore.py','frontier_core.py','exploration_memory.py','route_core.py','route_planner.py','readiness_core.py']
+             ['explore.py','frontier_core.py','exploration_memory.py','route_core.py','route_planner.py','readiness_core.py','handoff_core.py']
              if (ws/'src/smartcar_slam/scripts'/n).is_file()]
     sources +=[ws/'src/smartcar_nav2/launch'/n for n in ['navigation.launch.py','exploration.launch.py']]
     sources +=[ws/'src/smartcar_nav2/scripts'/n for n in ['navigation_gate.py','gate_core.py']]

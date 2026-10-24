@@ -5,7 +5,7 @@ install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
 install(FILES README.md LICENSE DESTINATION share/${PROJECT_NAME})
 install(PROGRAMS scripts/save_map.py scripts/check_slam.py scripts/explore.py DESTINATION lib/${PROJECT_NAME})
 install(FILES scripts/map_validation.py scripts/frontier_core.py scripts/exploration_memory.py
-  scripts/route_core.py scripts/route_planner.py scripts/readiness_core.py DESTINATION lib/${PROJECT_NAME})
+  scripts/route_core.py scripts/route_planner.py scripts/readiness_core.py scripts/handoff_core.py DESTINATION lib/${PROJECT_NAME})
 if(BUILD_TESTING)
   find_package(ament_cmake_pytest REQUIRED)
   ament_add_pytest_test(map_validation tests/test_map_validation.py)
